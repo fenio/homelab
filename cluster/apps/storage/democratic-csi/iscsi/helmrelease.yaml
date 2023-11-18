@@ -1,0 +1,80 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: iscsi
+  namespace: storage 
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: democratic-csi
+      sourceRef:
+        kind: HelmRepository
+        name: democratic-csi
+        namespace: flux-system 
+  valuesFrom:
+  - kind: Secret
+    name: truenas-api-key
+    valuesKey: values.yaml
+    optional: false
+#    targetPath: "driver.config.httpConnection" # Adjust the path according to where the token is used in your values
+  values:
+    csiDriver:
+      name: "iscsi"
+    storageClasses:
+    - name: iscsi
+      defaultClass: true
+      reclaimPolicy: Delete
+      volumeBindingMode: Immediate
+      allowVolumeExpansion: true
+      parameters:
+        fsType: ext4
+        detachedVolumesFromSnapshots: "false"
+      mountOptions: []
+      secrets:
+        provisioner-secret:
+        controller-publish-secret:
+        node-stage-secret:
+        node-publish-secret:
+        controller-expand-secret:
+  #  volumeSnapshotClasses:
+  #  - name: iscsi
+  #    parameters:
+  #      detachedSnapshots: "true"
+    driver:
+      config:
+        driver: freenas-api-iscsi
+        instance_id:
+        httpConnection:
+          protocol: http
+          host: 10.10.20.100
+          port: 80
+          allowInsecure: true
+        zfs:
+          datasetParentName: storage/k8s/iscsi/v
+          detachedSnapshotsDatasetParentName: storage/k8s/iscsi/s
+          zvolCompression:
+          zvolDedup:
+          zvolEnableReservation: false
+          zvolBlocksize:
+        iscsi:
+          targetPortal: "10.10.20.100:3260"
+          interface:
+          namePrefix: csi-
+          nameSuffix: "-clustera"
+          targetGroups:
+            - targetGroupPortalGroup: 11
+              targetGroupInitiatorGroup: 14
+              targetGroupAuthType: None
+              targetGroupAuthGroup:
+          extentInsecureTpc: true
+          extentXenCompat: false
+          extentDisablePhysicalBlocksize: true
+          extentBlocksize: 512
+          extentRpm: "SSD"
+          extentAvailThreshold: 0
+    node:
+      kubeletHostPath: /var/lib/k0s/kubelet
+  
+
+
