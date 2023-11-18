@@ -4,7 +4,7 @@ metadata:
   annotations:
     metadata.weave.works/description: This is the Weave GitOps Dashboard.  It provides
       a simple way to get insights into your GitOps workloads.
-  name: ww-gitops
+  name: weaveworks
   namespace: flux-system
 spec:
   chart:
@@ -12,7 +12,7 @@ spec:
       chart: weave-gitops
       sourceRef:
         kind: HelmRepository
-        name: ww-gitops
+        name: weaveworks
   interval: 1h0m0s
   valuesFrom:
     - kind: Secret
