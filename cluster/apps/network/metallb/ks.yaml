@@ -7,7 +7,7 @@ metadata:
   labels:
     substitution.flux.home/enabled: "true"
 spec:
-  path: ./cluster/apps/metallb-system/metallb/app
+  path: ./cluster/apps/metallb/metallb/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -16,7 +16,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: metallb
-      namespace: metallb-system
+      namespace: metallb
   interval: 30m
   retryInterval: 1m
   timeout: 3m
@@ -31,7 +31,7 @@ metadata:
 spec:
   dependsOn:
     - name: apps-metallb
-  path: ./cluster/apps/metallb-system/metallb/config
+  path: ./cluster/apps/metallb/metallb/config
   prune: true
   sourceRef:
     kind: GitRepository
