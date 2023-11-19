@@ -1,4 +1,11 @@
-# My homelab.
+# k0s based homelab powered by flux
+
+<details open>
+  <summary>Rationale</summary>
+
+Reasons I've decided to make that weird repo.
+
+</details>
 
 ## HW provisioning made with https://github.com/fenio/dumb-provisioner
 <details>
