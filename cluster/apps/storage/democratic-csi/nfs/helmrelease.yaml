@@ -43,7 +43,7 @@ spec:
         instance_id:
         httpConnection:
           protocol: http
-          host: 10.10.20.100
+          host: ${CONFIG_TRUENAS_IP}
           port: 80
           allowInsecure: true
           apiKey: ${TRUENAS_API_KEY}
