@@ -14,13 +14,8 @@ spec:
         kind: HelmRepository
         name: weaveworks
   interval: 1h0m0s
-  valuesFrom:
-    - kind: Secret
-      name: ww-gitops-admin-password
-      valuesKey: values.yaml
-      optional: false
   values:
     adminUser:
       create: true
       username: admin
-
+      passwordHash: ${WW_ADMIN_PASSWORD}
