@@ -3,9 +3,16 @@
 <details open>
   <summary>Rationale</summary>
 
-Reasons I've decided to make that weird repo.
+The Flux approach I'm using here is heavily based on https://github.com/onedr0p/flux-cluster-template
+But his approach uses k3s and he provision it using ansible.
+I didn't need that **part** of his repo so I created mine.
+I'm using k0s instead of k3s and I'm provisioning machines using my https://github.com/fenio/dumb-provisioner
+But kudos for Flux part goes to onedr0p anyway.
+He did excellent job wrt to that.
 
 </details>
+
+
 
 ## HW provisioning made with https://github.com/fenio/dumb-provisioner
 <details>
