@@ -4,26 +4,7 @@
 
 ## k0s install with k0sctl
 
-```
-❯ ~ ssh 10.10.20.99 -l root 'cat /etc/debian_version; uptime'
-12.2
- 13:55:42 up 49 min,  0 user,  load average: 0.00, 0.00, 0.00
-
-
-❯ ~ ssh 10.10.20.101 -l root 'cat /etc/debian_version; uptime'
-12.2
- 13:55:49 up 46 min,  0 user,  load average: 0.00, 0.00, 0.00
-
-
-❯ ~ ssh 10.10.20.102 -l root 'cat /etc/debian_version; uptime'
-12.2
- 13:55:53 up 38 min,  0 user,  load average: 0.00, 0.00, 0.00
-
-
-❯ ~ ssh 10.10.20.103 -l root 'cat /etc/debian_version; uptime'
-12.2
- 13:55:58 up 38 min,  0 user,  load average: 0.08, 0.02, 0.01
-
+```sh
 ❯ ~ cat k0sctl.yaml
 apiVersion: k0sctl.k0sproject.io/v1beta1
 kind: Cluster
@@ -56,7 +37,7 @@ spec:
       keyPath: ~/.ssh/id_rsa
     role: worker
   k0s:
-    version: 1.28.2+k0s.0
+    version: 1.28.3+k0s.0
     dynamicConfig: false
 
 ❯ ~ k0sctl apply --config k0sctl.yaml
@@ -129,24 +110,40 @@ INFO [ssh] 10.10.20.103:22: waiting for node to become ready
 INFO ==> Running phase: Release exclusive host lock
 INFO ==> Running phase: Disconnect from hosts
 INFO ==> Finished in 1m25s
-INFO k0s cluster version v1.28.2+k0s.0 is now installed
+INFO k0s cluster version v1.28.3+k0s.0 is now installed
 ```
 
 [☸ lab:default]
-❯ ~ kg nodes
+❯ ~ kubectl get nodes
 NAME    STATUS   ROLES    AGE     VERSION
 node1   Ready    <none>   2d21h   v1.28.3+k0s
 node2   Ready    <none>   2d21h   v1.28.3+k0s
 node3   Ready    <none>   2d21h   v1.28.3+k0s
 
-## Flux bootstrap
+## Flux
 
-```console
+### Install Flux
 
-❯ ~ export GITHUB_USER=fenio
+```sh
+kubectl apply --server-side --kustomize ./cluster/bootstrap/flux
+```
 
-❯ ~ export GITHUB_TOKEN=uSeYoUrOwN
+### Apply Cluster Configuration
 
+_These cannot be applied with `kubectl` in the regular fashion due to be encrypted with sops_
+
+```sh
+sops --decrypt cluster/bootstrap/flux/age-key.sops.yaml | kubectl apply -f -
+sops --decrypt cluster/bootstrap/flux/github-deploy-key.sops.yaml | kubectl apply -f -
+sops --decrypt cluster/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f -
+kubectl apply -f cluster/flux/vars/cluster-settings.yaml
+```
+
+### Kick off Flux applying this repository
+
+```sh
+kubectl apply --server-side --kustomize ./cluster/flux/config
+```
 
 
 ## AGE / SOPS secrets
