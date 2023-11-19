@@ -1,20 +1,21 @@
 # k0s based homelab powered by flux
 
 <details open>
-  <summary>Rationale</summary>
+  <summary>Introduction</summary>
 
 The Flux approach I'm using here is heavily based on https://github.com/onedr0p/flux-cluster-template
-But his approach uses k3s and he provision it using ansible.
-I didn't need that **part** of his repo so I created mine.
+But Devin's approach uses k3s and a lot of ansible based automation to proviision actual cluster.
+I didn't need that **part** of his repo so grabbed some stuff from his repo and I created mine.
 I'm using k0s instead of k3s and I'm provisioning machines using my https://github.com/fenio/dumb-provisioner
+And since I'm using k0s and k0sctl I dropped his ansible machinery to configure k8s cluster.
 But kudos for Flux part goes to onedr0p anyway.
 He did excellent job wrt to that.
 
 </details>
 
+My assumption is that you've got few machines capable of being part of k8s cluster.
+In my case 3 Wyse 5070 terminals and https://github.com/fenio/ugly-nas
 
-
-## HW provisioning made with https://github.com/fenio/dumb-provisioner
 <details>
   <summary>Click me</summary>
   
