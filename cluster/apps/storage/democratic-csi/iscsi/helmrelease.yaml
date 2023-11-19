@@ -12,12 +12,6 @@ spec:
         kind: HelmRepository
         name: democratic-csi
         namespace: flux-system 
-  valuesFrom:
-  - kind: Secret
-    name: truenas-api-key
-    valuesKey: values.yaml
-    optional: false
-#    targetPath: "driver.config.httpConnection" # Adjust the path according to where the token is used in your values
   values:
     csiDriver:
       name: "iscsi"
@@ -50,6 +44,7 @@ spec:
           host: 10.10.20.100
           port: 80
           allowInsecure: true
+          apiKey: ${TRUENAS_API_KEY}
         zfs:
           datasetParentName: storage/k8s/iscsi/v
           detachedSnapshotsDatasetParentName: storage/k8s/iscsi/s
