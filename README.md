@@ -1,6 +1,9 @@
 # My homelab.
 
 ## HW provisioning made with https://github.com/fenio/dumb-provisioner
+<details>
+  <summary>Click me</summary>
+  
 
 ## k0s install with k0sctl
 
@@ -121,6 +124,7 @@ node1   Ready    <none>   2d21h   v1.28.3+k0s
 node2   Ready    <none>   2d21h   v1.28.3+k0s
 node3   Ready    <none>   2d21h   v1.28.3+k0s
 ```
+</details>
 
 ## Flux
 
