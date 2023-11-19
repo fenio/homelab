@@ -113,12 +113,14 @@ INFO ==> Finished in 1m25s
 INFO k0s cluster version v1.28.3+k0s.0 is now installed
 ```
 
+```sh
 [☸ lab:default]
 ❯ ~ kubectl get nodes
 NAME    STATUS   ROLES    AGE     VERSION
 node1   Ready    <none>   2d21h   v1.28.3+k0s
 node2   Ready    <none>   2d21h   v1.28.3+k0s
 node3   Ready    <none>   2d21h   v1.28.3+k0s
+```
 
 ## Flux
 
