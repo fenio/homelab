@@ -4,7 +4,7 @@
   <summary>Introduction</summary>
 
 The Flux approach I'm using here is heavily based on https://github.com/onedr0p/flux-cluster-template
-But Devin's approach uses k3s and a lot of ansible based automation to proviision actual cluster.
+But Devin's approach uses k3s and a lot of ansible based automation to provision actual cluster.
 I didn't need that **part** of his repo so grabbed some stuff from his repo and I created mine.
 I'm using k0s instead of k3s and I'm provisioning machines using my https://github.com/fenio/dumb-provisioner
 And since I'm using k0s and k0sctl I dropped his ansible machinery to configure k8s cluster.
