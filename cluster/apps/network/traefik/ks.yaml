@@ -6,7 +6,7 @@ metadata:
   name: traefik
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/network/external-dns/app
+  path: ./cluster/apps/network/traefik/app
   sourceRef:
     kind: GitRepository
     name: homelab
