@@ -9,11 +9,10 @@ spec:
   path: ./kubernetes/apps/network/external-dns/app
   sourceRef:
     kind: GitRepository
-    name: homelab-ops
+    name: homelab
   prune: true
   wait: false
   interval: 30m
   retryInterval: 1m
   timeout: 5m
-  dependsOn:
-    - name: security-external-secrets
+

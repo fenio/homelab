@@ -9,7 +9,7 @@ spec:
   path: ./cluster/apps/network/cert-manager/app
   sourceRef:
     kind: GitRepository
-    name: homelab-ops
+    name: homelab
   prune: true
   wait: true
   interval: 30m
@@ -26,7 +26,7 @@ spec:
   path: ./cluster/apps/network/cert-manager/issuers
   sourceRef:
     kind: GitRepository
-    name: homelab-ops
+    name: homelab
   prune: true
   wait: false
   interval: 30m
