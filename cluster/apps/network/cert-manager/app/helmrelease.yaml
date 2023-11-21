@@ -28,27 +28,4 @@ spec:
     keepHistory: false
   values:
     installCRDs: true
-    webhook:
-      resources:
-        requests:
-          cpu: 10m
-          memory: 50Mi
-        limits:
-          memory: 50Mi
-    cainjector:
-      resources:
-        requests:
-          cpu: 15m
-          memory: 120Mi
-        limits:
-          memory: 300Mi
-    resources:
-      requests:
-        cpu: 10m
-        memory: 50Mi
-      limits:
-        memory: 150Mi
-    prometheus:
-      enabled: true
-      servicemonitor:
-        enabled: true
+
