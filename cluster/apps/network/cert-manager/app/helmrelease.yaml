@@ -5,37 +5,37 @@ metadata:
   name: cert-manager
   namespace: network
 spec:
-  interval: 15m
   chart:
     spec:
       chart: cert-manager
-      version: v1.13.2
       sourceRef:
         kind: HelmRepository
         name: jetstack
         namespace: flux-system
-  values:
-    installCRDs: true
-    startupapicheck.timeout: '5m'
-    resources:
-      requests:
-        cpu: 10m
-        memory: 50Mi
-      limits:
-        memory: 150Mi
-    prometheus:
-      enabled: true
-      servicemonitor:
-        enabled: true
-  maxHistory: 3
+      version: v1.13.2
   install:
     createNamespace: true
     remediation:
       retries: 3
+  interval: 15m
+  maxHistory: 3
+  uninstall:
+    keepHistory: false
   upgrade:
     cleanupOnFail: true
     remediation:
       retries: 3
-  uninstall:
-    keepHistory: false
+  values:
+    installCRDs: true
+    prometheus:
+      enabled: true
+      servicemonitor:
+        enabled: true
+    resources:
+      limits:
+        memory: 150Mi
+      requests:
+        cpu: 10m
+        memory: 50Mi
+    startupapicheck.timeout: 5m
 
