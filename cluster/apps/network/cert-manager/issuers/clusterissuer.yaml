@@ -12,8 +12,14 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
-    - http01:
-        ingress: {}
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: certmanager-cloudflare-secret
+              key: ${SECRET_TOKEN}
+        selector:
+          dnsZones:
+            - ${SECRET_DOMAIN}
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/cert-manager.io/clusterissuer_v1.json
 apiVersion: cert-manager.io/v1
@@ -28,5 +34,11 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
-    - http01:
-        ingress: {}
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: certmanager-cloudflare-token
+              key: ${SECRET_TOKEN}
+        selector:
+          dnsZones:
+            - ${SECRET_DOMAIN}
