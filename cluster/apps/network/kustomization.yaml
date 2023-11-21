@@ -4,4 +4,5 @@ resources:
   - ./namespace.yaml
   - ./metallb/ks.yaml
   - ./cert-manager/ks.yaml
+  - ./external-dns/ks.yaml
   - ./traefik/ks.yaml
