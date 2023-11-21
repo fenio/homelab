@@ -1,0 +1,39 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: network
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: traefik
+      version: v1.13.2
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    ports:
+      websecure:
+        tls:
+          enabled: true
+    additionalArguments:
+      - --providers.kubernetesingress.ingressendpoint.ip=91.192.196.156
+    deployment:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
