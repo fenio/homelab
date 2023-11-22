@@ -5,5 +5,9 @@ kind: Kustomization
 resources:
   - ./bitnami.yaml
   - ./bjw-s.yaml
+  - ./democratic-csi.yaml
   - ./external-dns.yaml
+  - ./jetstack.yaml
+  - ./metallb.yaml
+  - ./traefik.yaml
   - ./weaveworks.yaml
