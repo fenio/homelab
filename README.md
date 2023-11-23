@@ -3,10 +3,10 @@
 <details open>
   <summary>Introduction</summary>
 
-The Flux approach I'm using here is heavily based on https://github.com/onedr0p/flux-cluster-template
+The Flux approach I'm using here is heavily based on [flux-cluster-template](https://github.com/onedr0p/flux-cluster-template)
 But Devin's approach uses k3s and a lot of ansible based automation to provision actual cluster.
 I didn't need that **part** of his repo so grabbed some stuff from his repo and I created mine.
-I'm using k0s instead of k3s and I'm provisioning machines using my https://github.com/fenio/dumb-provisioner
+I'm using k0s instead of k3s and I'm provisioning machines using my [dumb provisioner](https://github.com/fenio/dumb-provisioner)
 And since I'm using k0s and k0sctl I dropped his ansible machinery to configure k8s cluster.
 But kudos for Flux part goes to onedr0p anyway.
 He did excellent job wrt to that.
@@ -16,12 +16,12 @@ He did excellent job wrt to that.
 My assumption is that you've got few machines capable of being part of k8s cluster.
 In my case 3 Wyse 5070 terminals and https://github.com/fenio/ugly-nas
 
-<details>
-  <summary>Click me</summary>
-  
 
 ## k0s install with k0sctl
 
+<details>
+  <summary>Click me</summary>
+  
 ```sh
 ❯ ~ cat k0sctl.yaml
 apiVersion: k0sctl.k0sproject.io/v1beta1
