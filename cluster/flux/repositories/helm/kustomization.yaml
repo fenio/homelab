@@ -9,5 +9,6 @@ resources:
   - ./external-dns.yaml
   - ./jetstack.yaml
   - ./metallb.yaml
+  - ./netdata.yaml
   - ./traefik.yaml
   - ./weaveworks.yaml
