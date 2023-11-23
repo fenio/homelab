@@ -10,5 +10,6 @@ resources:
   - ./jetstack.yaml
   - ./metallb.yaml
   - ./netdata.yaml
+  - ./prometheus.yaml
   - ./traefik.yaml
   - ./weaveworks.yaml
