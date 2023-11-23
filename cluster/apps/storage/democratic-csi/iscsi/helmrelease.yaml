@@ -53,7 +53,7 @@ spec:
           zvolEnableReservation: false
           zvolBlocksize:
         iscsi:
-          targetPortal: "{CONFIG_TRUENAS_IP}:3260"
+          targetPortal: "${CONFIG_TRUENAS_IP}:3260"
           interface:
           namePrefix: csi-
           nameSuffix: "-clustera"
