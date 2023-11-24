@@ -16,7 +16,7 @@ spec:
   retryInterval: 1m
   timeout: 5m
   dependsOn:
-    - name: democratic-csi-iscsi
+    - name: iscsi
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ishioni/CRDs-catalog/main/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
