@@ -27,8 +27,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    crds:
-      create: true
     replicaCount: 3
     resources:
       requests:
