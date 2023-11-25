@@ -1,0 +1,104 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ishioni/CRDs-catalog/main/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: transmission
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    controllers:
+      main:
+        type: statefulset
+        statefulset:
+          volumeClaimTemplates:
+            - name: config
+              mountPath: /config
+              storageClass: truenas-ssd-nvmeof
+              accessMode: ReadWriteOnce
+              size: 100M
+        pod:
+          securityContext:
+            runAsUser: ${CONFIG_APP_UID}
+            runAsGroup: &gid ${CONFIG_MEDIA_UID}
+            fsGroup: *gid
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/transmission
+              tag: "4.0.4"
+            probes:
+              liveness: &probes
+                enabled: false
+              readiness: *probes
+              startup:
+                enabled: false
+            env:
+              TZ: Europe/Warsaw
+              TRANSMISSION__BLOCKLIST_URL: "https://mirror.codebucket.de/transmission/blocklist.p2p.gz"
+              TRANSMISSION__DOWNLOAD_DIR: "/media"
+              TRANSMISSION__INCOMPLETE_DIR_ENABLED: false
+              TRANSMISSION__RPC_PORT: &port 9091
+              TRANSMISSION__PEER_PORT: &peerport 51413
+              TRANSMISSION__RATIO_LIMIT_ENABLED: true
+              TRANSMISSION__RATIO_LIMIT: 3
+              TRANSMISSION__SPEED_LIMIT_UP_ENABLED: true
+              TRANSMISSION__SPEED_LIMIT_UP: 100000
+              TRANSMISSION__IDLE_SEEDING_LIMIT_ENABLED: true
+              TRANSMISSION__IDLE_SEEDING_LIMIT: 1440
+              TRANSMISSION__UTP_ENABLED: false
+              TRANSMISSION__UMASK: 7
+              TRANSMISSION__MESSAGE_LEVEL: 3
+              # For changing webui
+              # TRANSMISSION_WEB_HOME: "/app/web"
+            resources:
+              requests:
+                cpu: 50m
+                memory: 500Mi
+              limits:
+                memory: 2000Mi
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+    persistence:
+      downloads:
+        enabled: true
+        existingClaim: media
+        globalMounts:
+          - path: /media
+            subPath: Downloads
+
+    ingress:
+      main:
+        enabled: true
+        className: public
+        annotations:
+        hosts:
+          - host: &host "torrent.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - secretName: *host
+            hosts:
+              - *host
