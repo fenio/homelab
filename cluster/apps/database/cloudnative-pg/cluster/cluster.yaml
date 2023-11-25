@@ -8,6 +8,7 @@ spec:
   instances: 3
   imageName: ghcr.io/cloudnative-pg/postgresql:16.0-10
   primaryUpdateStrategy: unsupervised
+  enableSuperuserAccess: true
   storage:
     size: 20Gi
     storageClass: iscsi
