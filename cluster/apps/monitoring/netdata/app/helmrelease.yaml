@@ -31,8 +31,8 @@ spec:
       enabled: true
       annotations:
         kubernetes.io/ingress.class: "traefik"
-        cert-manager.io/cluster-issuer: "letsencrypt-prod"
-      hosts: 
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+      hosts:
         - netdata.${SECRET_DOMAIN}
       tls:
         - secretName: netdata-tls
