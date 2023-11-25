@@ -30,4 +30,5 @@ spec:
     crds:
       enabled: true
     fullnameOverride: prometheus
-
+    grafana:
+      enabled: false
