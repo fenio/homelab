@@ -38,12 +38,18 @@ spec:
               accessMode: ReadWriteOnce
               size: 5Gi
         initContainers:
-          01-init-db:
+          init-db:
             image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 15.5
               pullPolicy: IfNotPresent
-        pod:
+            env:
+              INIT_POSTGRES_HOST: "postgres-rw.database.svc.cluster.local"
+#              INIT_POSTGRES_SUPER_PASS: "lUnGQ3hAoKFDoUXLdaJOypT4nT5NBb2FzXQtRlpsHq19svrEV083PNZTEVNMAL4o"
+              INIT_POSTGRES_USER: "kemal"
+              INIT_POSTGRES_PASS: "kemal"
+              INIT_POSTGRES_DBNAME: radarr_main radarr_log
+#            envFrom:
           securityContext:
             runAsUser: ${CONFIG_APP_UID}
             runAsGroup: &gid ${CONFIG_MEDIA_UID}
@@ -63,6 +69,8 @@ spec:
               RADARR__APPLICATION_URL: "https://movies.${SECRET_DOMAIN}"
               RADARR__LOG_LEVEL: info
               RADARR__THEME: dark
+              RADARR__POSTGRES_MAIN_DB: radarr_main
+              RADARR__POSTGRES_LOG_DB: radarr_log
             probes:
               liveness: &probes
                 enabled: true
