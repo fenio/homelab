@@ -13,7 +13,8 @@ spec:
       name: letsencrypt-production
     solvers:
       - http01:
-          ingress: {}
+          ingress:
+            ingressClassName: traefik
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/cert-manager.io/clusterissuer_v1.json
 apiVersion: cert-manager.io/v1
@@ -29,4 +30,5 @@ spec:
       name: letsencrypt-staging
     solvers:
       - http01:
-          ingress: {}
+          ingress:
+            ingressClassName: traefik
