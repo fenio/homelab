@@ -34,7 +34,7 @@ spec:
           volumeClaimTemplates:
             - name: config
               mountPath: /config
-              storageClass: truenas-hdd-nfs
+              storageClass: iscsi
               accessMode: ReadWriteOnce
               size: 5Gi
         initContainers:

@@ -29,7 +29,7 @@ spec:
           volumeClaimTemplates:
             - name: config
               mountPath: /config
-              storageClass: truenas-ssd-nvmeof
+              storageClass: iscsi
               accessMode: ReadWriteOnce
               size: 100M
         pod:
