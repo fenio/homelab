@@ -15,7 +15,28 @@ spec:
         name: weaveworks
   interval: 1h0m0s
   values:
-    adminUser:
+    ingress:
+      enabled: true
+      annotations:
+        hajimari.io/enable: "true"
+        hajimari.io/appName: Weave Gitops
+        hajimari.io/icon: simple-icons:git
+        hajimari.io/group: infrastructure
+        kubernetes.io/ingress.class: "traefik"
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+      enabled: true
+      hosts:
+        - host: &host "indexer.${SECRET_DOMAIN}"
+          paths:
+            - path: /
+              service:
+                name: main
+                port: http
+      tls:
+        - secretName: *host
+          hosts:
+            - *host
+   adminUser:
       create: true
       username: admin
       passwordHash: ${WW_ADMIN_PASSWORD}
