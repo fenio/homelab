@@ -87,6 +87,10 @@ spec:
         annotations:
           kubernetes.io/ingress.class: "traefik"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/enable: "true"
+          hajimari.io/appName: Transmission
+          hajimari.io/icon: mdi:cloud-download
+          hajimari.io/group: media
         hosts:
           - host: &host "torrent.${SECRET_DOMAIN}"
             paths:
