@@ -32,12 +32,6 @@ spec:
               storageClass: iscsi
               accessMode: ReadWriteOnce
               size: 100M
-#        pod:
-#          securityContext:
-#            runAsUser: ${CONFIG_APP_UID}
-#            runAsGroup: &gid ${CONFIG_MEDIA_UID}
-#            fsGroup: *gid
-#            fsGroupChangePolicy: OnRootMismatch
         containers:
           main:
             image:
@@ -93,7 +87,6 @@ spec:
         annotations:
           kubernetes.io/ingress.class: "traefik"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-        annotations:
         hosts:
           - host: &host "torrent.${SECRET_DOMAIN}"
             paths:
