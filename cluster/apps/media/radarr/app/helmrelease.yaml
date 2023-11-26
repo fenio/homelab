@@ -38,7 +38,7 @@ spec:
               accessMode: ReadWriteOnce
               size: 5Gi
         initContainers:
-          init-db:
+          01-init-db:
             image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 15.5
@@ -49,7 +49,6 @@ spec:
               INIT_POSTGRES_USER: "radarr"
               INIT_POSTGRES_PASS: "${RADARR_PG_PASSWORD}"
               INIT_POSTGRES_DBNAME: radarr_main radarr_log
-#            envFrom:
           securityContext:
             runAsUser: ${CONFIG_APP_UID}
             runAsGroup: &gid ${CONFIG_MEDIA_UID}
