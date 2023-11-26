@@ -43,6 +43,12 @@ spec:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 15.5
               pullPolicy: IfNotPresent
+            env:
+              INIT_POSTGRES_HOST: "postgres-rw.database.svc.cluster.local"
+              INIT_POSTGRES_SUPER_PASS: "${SECRET_PG_PASSWORD}"
+              INIT_POSTGRES_USER: "sonarr"
+              INIT_POSTGRES_PASS: "${SONARR_PG_PASSWORD}"
+              INIT_POSTGRES_DBNAME: sonarr_main sonarr_log
         pod:
           securityContext:
             runAsUser: ${CONFIG_APP_UID}
