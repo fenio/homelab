@@ -42,10 +42,10 @@ spec:
               tag: 15.5
               pullPolicy: IfNotPresent
             env:
-              INIT_POSTGRES_HOST: "postgres-rw.database.svc.cluster.local"
+              INIT_POSTGRES_HOST: &dbHost "postgres-rw.database.svc.cluster.local"
               INIT_POSTGRES_SUPER_PASS: "${SECRET_PG_PASSWORD}"
-              INIT_POSTGRES_USER: "prowlarr"
-              INIT_POSTGRES_PASS: "${PROWLARR_PG_PASSWORD}"
+              INIT_POSTGRES_USER: &dbUser "prowlarr"
+              INIT_POSTGRES_PASS: &dbPass "${PROWLARR_PG_PASSWORD}"
               INIT_POSTGRES_DBNAME: prowlarr_main prowlarr_log
         containers:
           main:
@@ -59,6 +59,13 @@ spec:
               PROWLARR__LOG_LEVEL: info
               PROWLARR__AUTHENTICATION_METHOD: External
               PROWLARR__THEME: dark
+              PROWLARR__API_KEY: "${PROWLARR_API_KEY}"
+              PROWLARR__POSTGRES_HOST: *dbHost
+              PROWLARR__POSTGRES_PORT: "5432"
+              PROWLARR__POSTGRES_USER: *dbUser
+              PROWLARR__POSTGRES_PASSWORD: *dbPass
+              PROWLARR__POSTGRES_MAIN_DB: prowlarr_main
+              PROWLARR__POSTGRES_LOG_DB: prowlarr_log
             probes:
               liveness: &probes
                 enabled: true
@@ -80,12 +87,6 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 300Mi
-#        pod:
-#          securityContext:
-#            runAsUser: &uid ${CONFIG_APP_UID}
-#            runAsGroup: *uid
-#            fsGroup: *uid
-#            fsGroupChangePolicy: OnRootMismatch
     persistence:
       config:
         enabled: true
@@ -99,6 +100,9 @@ spec:
             port: *port
     ingress:
       main:
+        annotations:
+          kubernetes.io/ingress.class: "traefik"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         enabled: true
         hosts:
           - host: &host "indexer.${SECRET_DOMAIN}"

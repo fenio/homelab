@@ -65,6 +65,7 @@ spec:
               TRANSMISSION__UTP_ENABLED: false
               TRANSMISSION__UMASK: 7
               TRANSMISSION__MESSAGE_LEVEL: 3
+              TRANSMISSION__RPC_PASSWORD: "${TRANSMISSION_RPC_PASSWORD}"
               # For changing webui
               # TRANSMISSION_WEB_HOME: "/app/web"
             resources:
@@ -89,6 +90,9 @@ spec:
     ingress:
       main:
         enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "traefik"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         annotations:
         hosts:
           - host: &host "torrent.${SECRET_DOMAIN}"
