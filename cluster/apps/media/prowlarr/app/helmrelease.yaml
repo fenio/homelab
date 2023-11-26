@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/ishioni/CRDs-catalog/main/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -56,7 +55,7 @@ spec:
             env:
               TZ: Europe/Warsaw
               PROWLARR__INSTANCE_NAME: Prowlarr
-              PROWLARR__PORT: &port 8083
+              PROWLARR__PORT: &port 9696
               PROWLARR__LOG_LEVEL: info
               PROWLARR__AUTHENTICATION_METHOD: External
               PROWLARR__THEME: dark
@@ -81,12 +80,12 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 300Mi
-        pod:
-          securityContext:
-            runAsUser: &uid ${CONFIG_APP_UID}
-            runAsGroup: *uid
-            fsGroup: *uid
-            fsGroupChangePolicy: OnRootMismatch
+#        pod:
+#          securityContext:
+#            runAsUser: &uid ${CONFIG_APP_UID}
+#            runAsGroup: *uid
+#            fsGroup: *uid
+#            fsGroupChangePolicy: OnRootMismatch
     persistence:
       config:
         enabled: true

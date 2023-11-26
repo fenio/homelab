@@ -32,12 +32,12 @@ spec:
               storageClass: iscsi
               accessMode: ReadWriteOnce
               size: 100M
-        pod:
-          securityContext:
-            runAsUser: ${CONFIG_APP_UID}
-            runAsGroup: &gid ${CONFIG_MEDIA_UID}
-            fsGroup: *gid
-            fsGroupChangePolicy: OnRootMismatch
+#        pod:
+#          securityContext:
+#            runAsUser: ${CONFIG_APP_UID}
+#            runAsGroup: &gid ${CONFIG_MEDIA_UID}
+#            fsGroup: *gid
+#            fsGroupChangePolicy: OnRootMismatch
         containers:
           main:
             image:
