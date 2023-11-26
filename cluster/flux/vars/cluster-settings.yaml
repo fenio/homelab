@@ -5,3 +5,4 @@ metadata:
   namespace: flux-system
 data:
   CONFIG_TRUENAS_IP: 10.10.20.100
+  CONFIG_APP_UID: 568
