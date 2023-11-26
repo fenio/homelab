@@ -43,17 +43,11 @@ spec:
               tag: 15.5
               pullPolicy: IfNotPresent
             env:
-              INIT_POSTGRES_HOST: "postgres-rw.database.svc.cluster.local"
+              INIT_POSTGRES_HOST: &dbHost "postgres-rw.database.svc.cluster.local"
               INIT_POSTGRES_SUPER_PASS: "${SECRET_PG_PASSWORD}"
-              INIT_POSTGRES_USER: "radarr"
-              INIT_POSTGRES_PASS: "${RADARR_PG_PASSWORD}"
+              INIT_POSTGRES_USER: &dbUser "radarr"
+              INIT_POSTGRES_PASS: &dbPass "${RADARR_PG_PASSWORD}"
               INIT_POSTGRES_DBNAME: radarr_main radarr_log
-#        pod:
-#          securityContext:
-#            runAsUser: ${CONFIG_APP_UID}
-#            runAsGroup: &gid ${CONFIG_MEDIA_UID}
-#            fsGroup: *gid
-#            fsGroupChangePolicy: OnRootMismatch
         containers:
           main:
             image:
@@ -70,6 +64,11 @@ spec:
               RADARR__THEME: dark
               RADARR__POSTGRES_MAIN_DB: radarr_main
               RADARR__POSTGRES_LOG_DB: radarr_log
+              RADARR__API_KEY: "{$RADARR_API_KEY}"
+              RADARR__POSTGRES_HOST: *dbHost
+              RADARR__POSTGRES_PORT: "5432"
+              RADARR__POSTGRES_USER: *dbUser
+              RADARR__POSTGRES_PASSWORD: *dbPass
             probes:
               liveness: &probes
                 enabled: true
@@ -105,6 +104,9 @@ spec:
             retain: true
     ingress:
       main:
+        annotations:
+          kubernetes.io/ingress.class: "traefik"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         enabled: true
         hosts:
           - host: &host "movies.${SECRET_DOMAIN}"

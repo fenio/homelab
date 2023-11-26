@@ -44,17 +44,11 @@ spec:
               tag: 15.5
               pullPolicy: IfNotPresent
             env:
-              INIT_POSTGRES_HOST: "postgres-rw.database.svc.cluster.local"
+              INIT_POSTGRES_HOST: &dbHost "postgres-rw.database.svc.cluster.local"
               INIT_POSTGRES_SUPER_PASS: "${SECRET_PG_PASSWORD}"
-              INIT_POSTGRES_USER: "sonarr"
-              INIT_POSTGRES_PASS: "${SONARR_PG_PASSWORD}"
+              INIT_POSTGRES_USER: &dbUser "sonarr"
+              INIT_POSTGRES_PASS: &dbPass "${SONARR_PG_PASSWORD}"
               INIT_POSTGRES_DBNAME: sonarr_main sonarr_log
-#        pod:
-#          securityContext:
-#            runAsUser: ${CONFIG_APP_UID}
-#            runAsGroup: &gid ${CONFIG_MEDIA_UID}
-#            fsGroup: *gid
-#            fsGroupChangePolicy: OnRootMismatch
         containers:
           main:
             image:
@@ -68,6 +62,13 @@ spec:
               SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
               SONARR__LOG_LEVEL: info
               SONARR__THEME: dark
+              SONARR__API_KEY: "{$SONARR_API_KEY}"
+              SONARR__POSTGRES_HOST: *dbHost
+              SONARR__POSTGRES_PORT: "5432"
+              SONARR__POSTGRES_USER: *dbUser
+              SONARR__POSTGRES_PASSWORD: *dbPass
+              SONARR__POSTGRES_MAIN_DB: sonarr_main
+              SONARR__POSTGRES_LOG_DB: sonarr_log
             probes:
               liveness: &probes
                 enabled: true
@@ -103,6 +104,9 @@ spec:
             retain: true
     ingress:
       main:
+        annotations:
+          kubernetes.io/ingress.class: "traefik"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         enabled: true
         hosts:
           - host: &host "tv.${SECRET_DOMAIN}"
