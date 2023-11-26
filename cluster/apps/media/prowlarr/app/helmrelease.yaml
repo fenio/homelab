@@ -31,7 +31,7 @@ spec:
       main:
         type: statefulset
         initContainers:
-          init-db:
+          01-init-db:
             image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 15.5
