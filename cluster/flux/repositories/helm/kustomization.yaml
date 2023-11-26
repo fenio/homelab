@@ -8,9 +8,11 @@ resources:
   - ./cloudnative-pg.yaml
   - ./democratic-csi.yaml
   - ./external-dns.yaml
+  - ./hajimari.yaml
   - ./jetstack.yaml
   - ./metallb.yaml
   - ./netdata.yaml
   - ./prometheus.yaml
+  - ./reloader.yaml
   - ./traefik.yaml
   - ./weaveworks.yaml
