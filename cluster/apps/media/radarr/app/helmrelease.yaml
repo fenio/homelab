@@ -48,12 +48,12 @@ spec:
               INIT_POSTGRES_USER: "radarr"
               INIT_POSTGRES_PASS: "${RADARR_PG_PASSWORD}"
               INIT_POSTGRES_DBNAME: radarr_main radarr_log
-        pod:
-          securityContext:
-            runAsUser: ${CONFIG_APP_UID}
-            runAsGroup: &gid ${CONFIG_MEDIA_UID}
-            fsGroup: *gid
-            fsGroupChangePolicy: OnRootMismatch
+#        pod:
+#          securityContext:
+#            runAsUser: ${CONFIG_APP_UID}
+#            runAsGroup: &gid ${CONFIG_MEDIA_UID}
+#            fsGroup: *gid
+#            fsGroupChangePolicy: OnRootMismatch
         containers:
           main:
             image:
@@ -62,7 +62,7 @@ spec:
             env:
               TZ: Europe/Warsaw
               RADARR__INSTANCE_NAME: Radarr
-              RADARR__PORT: &port 80
+              RADARR__PORT: &port 7878
               RADARR__AUTHENTICATION_METHOD: External
               RADARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
               RADARR__APPLICATION_URL: "https://movies.${SECRET_DOMAIN}"

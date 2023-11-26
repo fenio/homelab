@@ -49,12 +49,12 @@ spec:
               INIT_POSTGRES_USER: "sonarr"
               INIT_POSTGRES_PASS: "${SONARR_PG_PASSWORD}"
               INIT_POSTGRES_DBNAME: sonarr_main sonarr_log
-        pod:
-          securityContext:
-            runAsUser: ${CONFIG_APP_UID}
-            runAsGroup: &gid ${CONFIG_MEDIA_UID}
-            fsGroup: *gid
-            fsGroupChangePolicy: OnRootMismatch
+#        pod:
+#          securityContext:
+#            runAsUser: ${CONFIG_APP_UID}
+#            runAsGroup: &gid ${CONFIG_MEDIA_UID}
+#            fsGroup: *gid
+#            fsGroupChangePolicy: OnRootMismatch
         containers:
           main:
             image:
@@ -63,7 +63,7 @@ spec:
             env:
               TZ: Europe/Warsaw
               SONARR__INSTANCE_NAME: Sonarr
-              SONARR__PORT: &port 80
+              SONARR__PORT: &port 8989
               SONARR__AUTHENTICATION_METHOD: External
               SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
               SONARR__LOG_LEVEL: info
