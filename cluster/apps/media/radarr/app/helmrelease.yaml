@@ -33,7 +33,7 @@ spec:
           volumeClaimTemplates:
             - name: config
               mountPath: /config
-              storageClassName: iscsi
+              storageClassName: nfs
               accessMode: ReadWriteOnce
               size: 5Gi
         initContainers:
