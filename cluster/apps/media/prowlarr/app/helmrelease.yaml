@@ -38,16 +38,16 @@ spec:
               pullPolicy: IfNotPresent
             env:
               INIT_POSTGRES_HOST: "postgres-rw.database.svc.cluster.local"
-#              INIT_POSTGRES_SUPER_PASS: "lUnGQ3hAoKFDoUXLdaJOypT4nT5NBb2FzXQtRlpsHq19svrEV083PNZTEVNMAL4o"
-#              INIT_POSTGRES_USER: "kemal"
-#              INIT_POSTGRES_PASS: "kemal"
-#              INIT_POSTGRES_DBNAME: radarr_main radarr_log
-        pod:
-          securityContext:
-            runAsUser: &uid ${CONFIG_APP_UID}
-            runAsGroup: *uid
-            fsGroup: *uid
-            fsGroupChangePolicy: OnRootMismatch
+              INIT_POSTGRES_SUPER_PASS: "${SECRET_PG_PASSWORD}"
+              INIT_POSTGRES_USER: "prowlarr"
+              INIT_POSTGRES_PASS: "${PROWLARR_PG_PASSWORD}"
+              INIT_POSTGRES_DBNAME: prowlarr_main prowlarr_log
+#        pod:
+#          securityContext:
+#            runAsUser: &uid ${CONFIG_APP_UID}
+#            runAsGroup: *uid
+#            fsGroup: *uid
+#            fsGroupChangePolicy: OnRootMismatch
         containers:
           main:
             image:
