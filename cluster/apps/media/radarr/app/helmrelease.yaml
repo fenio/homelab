@@ -64,7 +64,7 @@ spec:
               RADARR__THEME: dark
               RADARR__POSTGRES_MAIN_DB: radarr_main
               RADARR__POSTGRES_LOG_DB: radarr_log
-              RADARR__API_KEY: "{$RADARR_API_KEY}"
+              RADARR__API_KEY: "${RADARR_API_KEY}"
               RADARR__POSTGRES_HOST: *dbHost
               RADARR__POSTGRES_PORT: "5432"
               RADARR__POSTGRES_USER: *dbUser
