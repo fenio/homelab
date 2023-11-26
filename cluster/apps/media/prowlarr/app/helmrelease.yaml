@@ -100,7 +100,6 @@ spec:
     ingress:
       main:
         enabled: true
-        className: public
         hosts:
           - host: &host "indexer.${SECRET_DOMAIN}"
             paths:
