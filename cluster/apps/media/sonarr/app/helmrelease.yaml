@@ -34,7 +34,7 @@ spec:
           volumeClaimTemplates:
             - name: config
               mountPath: /config
-              storageClass: iscsi
+              storageClassName: iscsi
               accessMode: ReadWriteOnce
               size: 5Gi
         initContainers:
