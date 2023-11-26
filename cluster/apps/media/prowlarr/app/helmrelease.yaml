@@ -42,12 +42,12 @@ spec:
               INIT_POSTGRES_USER: "prowlarr"
               INIT_POSTGRES_PASS: "${PROWLARR_PG_PASSWORD}"
               INIT_POSTGRES_DBNAME: prowlarr_main prowlarr_log
-#        pod:
-#          securityContext:
-#            runAsUser: &uid ${CONFIG_APP_UID}
-#            runAsGroup: *uid
-#            fsGroup: *uid
-#            fsGroupChangePolicy: OnRootMismatch
+        pod:
+          securityContext:
+            runAsUser: &uid ${CONFIG_APP_UID}
+            runAsGroup: *uid
+            fsGroup: *uid
+            fsGroupChangePolicy: OnRootMismatch
         containers:
           main:
             image:
