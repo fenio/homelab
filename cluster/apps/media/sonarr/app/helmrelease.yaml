@@ -62,7 +62,7 @@ spec:
               SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
               SONARR__LOG_LEVEL: info
               SONARR__THEME: dark
-              SONARR__API_KEY: "{$SONARR_API_KEY}"
+              SONARR__API_KEY: "${SONARR_API_KEY}"
               SONARR__POSTGRES_HOST: *dbHost
               SONARR__POSTGRES_PORT: "5432"
               SONARR__POSTGRES_USER: *dbUser
