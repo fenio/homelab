@@ -56,7 +56,7 @@ spec:
             env:
               TZ: Europe/Warsaw
               PROWLARR__INSTANCE_NAME: Prowlarr
-              PROWLARR__PORT: &port 80
+              PROWLARR__PORT: &port 8083
               PROWLARR__LOG_LEVEL: info
               PROWLARR__AUTHENTICATION_METHOD: External
               PROWLARR__THEME: dark
