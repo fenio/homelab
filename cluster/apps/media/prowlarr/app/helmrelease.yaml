@@ -103,6 +103,10 @@ spec:
         annotations:
           kubernetes.io/ingress.class: "traefik"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/enable: "true"
+          hajimari.io/appName: Prowlarr
+          hajimari.io/icon: mdi:cloud-search
+          hajimari.io/group: media
         enabled: true
         hosts:
           - host: &host "indexer.${SECRET_DOMAIN}"
