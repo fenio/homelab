@@ -30,8 +30,14 @@ spec:
     controllers:
       main:
         type: statefulset
+        volumeClaimTemplates:
+          - name: config
+            mountPath: /config
+            storageClass: iscsi
+            accessMode: ReadWriteOnce
+            size: 5Gi
         initContainers:
-          01-init-db:
+          init-db:
             image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 15.5
