@@ -36,6 +36,8 @@ spec:
               storageClass: nfs
               accessMode: ReadWriteOnce
               size: 5Gi
+        annotations:
+          secret.reloader.stakater.com/reload: cluster-secrets
         initContainers:
           init-db:
             image:
