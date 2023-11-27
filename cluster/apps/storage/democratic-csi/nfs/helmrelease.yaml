@@ -2,16 +2,16 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: nfs
-  namespace: storage 
+  namespace: storage
 spec:
-  interval: 1h
+  interval: 5m
   chart:
     spec:
       chart: democratic-csi
       sourceRef:
         kind: HelmRepository
         name: democratic-csi
-        namespace: flux-system 
+        namespace: flux-system
   values:
     csiDriver:
       name: "nfs"
@@ -66,5 +66,3 @@ spec:
           shareMapallGroup: ""
     node:
       kubeletHostPath: /var/lib/k0s/kubelet
-  
-

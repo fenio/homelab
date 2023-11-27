@@ -12,7 +12,7 @@ spec:
         kind: HelmRepository
         name: metallb
         namespace: flux-system
-  interval: 1h0m0s
+  interval: 5m
   maxHistory: 3
   install:
     createNamespace: true
