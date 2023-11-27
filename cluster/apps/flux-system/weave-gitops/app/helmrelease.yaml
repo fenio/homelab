@@ -47,8 +47,6 @@ spec:
         - hosts:
             - *host
           secretName: *host
-    networkPolicy:
-      create: false
     rbac:
       create: true
       impersonationResourceNames: ["admin"]
