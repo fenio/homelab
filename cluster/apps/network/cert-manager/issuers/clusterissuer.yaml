@@ -17,7 +17,7 @@ spec:
 #            ingressClassName: traefik
       - dns01:
           cloudflare:
-            apiToken: ${CF_API_TOKEN}
+            api-token: ${CF_API_TOKEN}
         selector:
           dnsZones:
             - ${SECRET_DOMAIN}
@@ -40,7 +40,7 @@ spec:
 #            ingressClassName: traefik
       - dns01:
           cloudflare:
-            apiToken: ${CF_API_TOKEN}
+            api-token: ${CF_API_TOKEN}
         selector:
           dnsZones:
             - ${SECRET_DOMAIN}
