@@ -1,20 +1,34 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  annotations:
-    metadata.weave.works/description: This is the Weave GitOps Dashboard.  It provides
-      a simple way to get insights into your GitOps workloads.
-  name: weaveworks
+  name: weave-gitops
   namespace: flux-system
 spec:
+  interval: 15m
   chart:
     spec:
       chart: weave-gitops
+      version: 4.0.35
       sourceRef:
         kind: HelmRepository
         name: weaveworks
-  interval: 1h0m0s
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
+    adminUser:
+      create: true
+      username: admin
+      passwordHash: ${WW_ADMIN_PASSWORD}
     ingress:
       enabled: true
       annotations:
@@ -24,19 +38,17 @@ spec:
         hajimari.io/group: infrastructure
         kubernetes.io/ingress.class: "traefik"
         cert-manager.io/cluster-issuer: "letsencrypt-production"
-      enabled: true
       hosts:
         - host: &host "ww.${SECRET_DOMAIN}"
           paths:
             - path: /
-              service:
-                name: main
-                port: http
+              pathType: Prefix
       tls:
-        - secretName: *host
-          hosts:
+        - hosts:
             - *host
-   adminUser:
+          secretName: *host
+    networkPolicy:
+      create: false
+    rbac:
       create: true
-      username: admin
-      passwordHash: ${WW_ADMIN_PASSWORD}
+      impersonationResourceNames: ["admin"]
