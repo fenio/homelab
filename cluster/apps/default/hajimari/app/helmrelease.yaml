@@ -59,7 +59,7 @@ spec:
               url: https://news.ycombinator.com
             - name: Anandtech
               url: https://www.anandtech.com
-            - name: Moronix
+            - name: Phoronix
               url: https://www.phoronix.com
         - group: Social
           bookmarks:
