@@ -10,7 +10,6 @@ spec:
     name: homelab
   prune: true
   wait: true
-  interval: 30m
+  interval: 5m
   retryInterval: 1m
   timeout: 5m
-

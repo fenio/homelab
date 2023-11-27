@@ -6,7 +6,7 @@ metadata:
   name: homelab
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 5m
   url: ssh://git@github.com/fenio/homelab
   ref:
     branch: main
@@ -25,7 +25,7 @@ metadata:
   name: cluster
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 5m
   path: ./cluster/flux
   prune: true
   wait: false
