@@ -13,15 +13,21 @@ He did excellent job wrt to that.
 
 </details>
 
+<details>
+  <summary>Hardware provisioning</summary>
+
+![lab](https://github.com/fenio/dumb-provisioner/blob/main/IMG_0891.jpeg)
+
 My assumption is that you've got few machines capable of being part of k8s cluster.
 In my case 3 Wyse 5070 terminals and https://github.com/fenio/ugly-nas
 
+</details>
 
 ## k0s install with k0sctl
 
 <details>
   <summary>Click me</summary>
-  
+
 ```sh
 ❯ ~ cat k0sctl.yaml
 apiVersion: k0sctl.k0sproject.io/v1beta1
@@ -55,7 +61,7 @@ spec:
       keyPath: ~/.ssh/id_rsa
     role: worker
   k0s:
-    version: 1.28.3+k0s.0
+    version: 1.28.4+k0s.0
     dynamicConfig: false
 
 ❯ ~ k0sctl apply --config k0sctl.yaml
@@ -95,10 +101,10 @@ INFO ==> Running phase: Validate hosts
 INFO ==> Running phase: Gather k0s facts
 INFO ==> Running phase: Validate facts
 INFO ==> Running phase: Download k0s on hosts
-INFO [ssh] 10.10.20.101:22: downloading k0s v1.28.3+k0s.0
-INFO [ssh] 10.10.20.103:22: downloading k0s v1.28.3+k0s.0
-INFO [ssh] 10.10.20.102:22: downloading k0s v1.28.3+k0s.0
-INFO [ssh] 10.10.20.99:22: downloading k0s v1.28.3+k0s.0
+INFO [ssh] 10.10.20.101:22: downloading k0s v1.28.4+k0s.0
+INFO [ssh] 10.10.20.103:22: downloading k0s v1.28.4+k0s.0
+INFO [ssh] 10.10.20.102:22: downloading k0s v1.28.4+k0s.0
+INFO [ssh] 10.10.20.99:22: downloading k0s v1.28.4+k0s.0
 INFO ==> Running phase: Install k0s binaries on hosts
 INFO ==> Running phase: Configure k0s
 WARN [ssh] 10.10.20.99:22: generating default configuration
@@ -128,16 +134,16 @@ INFO [ssh] 10.10.20.103:22: waiting for node to become ready
 INFO ==> Running phase: Release exclusive host lock
 INFO ==> Running phase: Disconnect from hosts
 INFO ==> Finished in 1m25s
-INFO k0s cluster version v1.28.3+k0s.0 is now installed
+INFO k0s cluster version v1.28.4+k0s.0 is now installed
 ```
 
 ```sh
 [☸ lab:default]
 ❯ ~ kubectl get nodes
 NAME    STATUS   ROLES    AGE     VERSION
-node1   Ready    <none>   2d21h   v1.28.3+k0s
-node2   Ready    <none>   2d21h   v1.28.3+k0s
-node3   Ready    <none>   2d21h   v1.28.3+k0s
+node1   Ready    <none>   2d21h   v1.28.4+k0s
+node2   Ready    <none>   2d21h   v1.28.4+k0s
+node3   Ready    <none>   2d21h   v1.28.4+k0s
 ```
 </details>
 
