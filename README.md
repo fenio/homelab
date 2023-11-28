@@ -11,10 +11,17 @@ This is home to my personal Kubernetes lab cluster. [Flux](https://github.com/fl
 <details>
   <summary><h2 style="display: inline-block; margin: 0;">Hardware provisioning</h2></summary>
 
+This is my lab.
+
 ![lab](https://github.com/fenio/dumb-provisioner/blob/main/IMG_0891.jpeg)
 
-My assumption is that you've got few machines capable of being part of k8s cluster.
-In my case 3 Wyse 5070 terminals and https://github.com/fenio/ugly-nas
+## 🔧 Hardware
+
+| Device                       | Count | OS Disk Size   | Data Disk Size          | Ram  | Operating System | Purpose               |
+| ---------------------------- | ----- | -------------- | ----------------------- | ---- | ---------------- | --------------------- |
+| Mikrotik RB4011iGS+5HacQ2HnD | 1     |                |                         |      | RouterOS 7.12    | router                |
+| Dell Wyse 5070               | 3     | 16GB           | 128GB                   | 12GB | Debian 12        | node                  |
+| Odroid H3+                   | 1     | 64GB           | 8x480GB SSD             | 32GB | TrueNAS Scale    | k8s storage / master  |
 
 </details>
 
