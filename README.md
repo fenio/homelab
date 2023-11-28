@@ -3,9 +3,9 @@
 <details open>
   <summary>Introduction</summary>
 
-The Flux approach I'm using here is heavily based on [flux-cluster-template](https://github.com/onedr0p/flux-cluster-template)
+The Flux approach I'm using here is heavily based on [flux-cluster-template](https://github.com/onedr0p/flux-cluster-template).
 But Devin's approach uses k3s and a lot of ansible based automation to provision actual cluster.
-I didn't need that **part** of his repo so I grabbed some stuff from his repo and I created mine.
+I didn't need that **part** of his repo so I grabbed some stuff from it and I created mine.
 I'm using k0s instead of k3s and I'm provisioning machines using my [dumb provisioner](https://github.com/fenio/dumb-provisioner)
 And since I'm using k0s and k0sctl I dropped his ansible machinery to configure k8s cluster.
 But kudos for Flux part goes to onedr0p anyway.
@@ -14,7 +14,7 @@ He did excellent job wrt to that.
 </details>
 
 <details>
-  <summary>Hardware provisioning (CLICK ME!)</summary>
+  <summary><h2 style="display: inline-block; margin: 0;">Hardware provisioning</h2></summary>
 
 ![lab](https://github.com/fenio/dumb-provisioner/blob/main/IMG_0891.jpeg)
 
