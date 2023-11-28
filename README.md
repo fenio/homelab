@@ -14,7 +14,7 @@ He did excellent job wrt to that.
 </details>
 
 <details>
-  <summary>## Hardware provisioning</summary>
+  <summary>Hardware provisioning (CLICK ME!)</summary>
 
 ![lab](https://github.com/fenio/dumb-provisioner/blob/main/IMG_0891.jpeg)
 
@@ -23,10 +23,11 @@ In my case 3 Wyse 5070 terminals and https://github.com/fenio/ugly-nas
 
 </details>
 
-## k0s install with k0sctl
-
 <details>
-  <summary>Click me</summary>
+  <summary>Kubernetes installation using k0s(ctl) (CLICK ME!)</summary>
+
+k0sctl allow to **greatly** simplify k8s install. Belowe is my configuration file which basically allows me to install whole cluster within minutes.
+
 
 ```sh
 ❯ ~ cat k0sctl.yaml
@@ -63,7 +64,11 @@ spec:
   k0s:
     version: 1.28.4+k0s.0
     dynamicConfig: false
+```
 
+Once you've got such configuration you just have to run the following command:
+
+```sh
 ❯ ~ k0sctl apply --config k0sctl.yaml
 
 ⠀⣿⣿⡇⠀⠀⢀⣴⣾⣿⠟⠁⢸⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀█████████ █████████ ███
@@ -136,6 +141,8 @@ INFO ==> Running phase: Disconnect from hosts
 INFO ==> Finished in 1m25s
 INFO k0s cluster version v1.28.4+k0s.0 is now installed
 ```
+
+And after 1m25s you should end up with working cluster:
 
 ```sh
 [☸ lab:default]
