@@ -1,15 +1,10 @@
 # k0s based homelab powered by flux
 
 <details open>
-  <summary>Introduction</summary>
+<summary>## 📖 Overview</summary>
 
-The Flux approach I'm using here is heavily based on [flux-cluster-template](https://github.com/onedr0p/flux-cluster-template).
-But Devin's approach uses k3s and a lot of ansible based automation to provision actual cluster.
-I didn't need that **part** of his repo so I grabbed some stuff from it and I created mine.
-I'm using k0s instead of k3s and I'm provisioning machines using my [dumb provisioner](https://github.com/fenio/dumb-provisioner)
-And since I'm using k0s and k0sctl I dropped his ansible machinery to configure k8s cluster.
-But kudos for Flux part goes to onedr0p anyway.
-He did excellent job wrt to that.
+This is home to my personal Kubernetes lab cluster. [Flux](https://github.com/fluxcd/flux2) watches this Git repository and makes the changes to my cluster based on the manifests in the [cluster](./cluster/) directory.
+[Renovate](https://github.com/renovatebot/renovate) also watches this Git repository and creates pull requests when it finds updates to Docker images, Helm charts, and other dependencies.
 
 </details>
 
