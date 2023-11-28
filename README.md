@@ -17,18 +17,18 @@ This is my lab.
 
 ## 🔧 Hardware
 
-| Device                       | Count | OS Disk Size   | Data Disk Size          | Ram  | Operating System | Purpose               |
-| ---------------------------- | ----- | -------------- | ----------------------- | ---- | ---------------- | --------------------- |
-| Mikrotik RB4011iGS+5HacQ2HnD | 1     |                |                         |      | RouterOS 7.12    | router                |
-| Dell Wyse 5070               | 3     | 16GB           | 128GB                   | 12GB | Debian 12        | node                  |
-| Odroid H3+                   | 1     | 64GB           | 8x480GB SSD             | 32GB | TrueNAS Scale    | k8s storage / master  |
+| Device                       | Count | OS Disk Size   | Data Disk Size     | Ram  | Operating System | Purpose               |
+| ---------------------------- | ----- | -------------- | ------------------ | ---- | ---------------- | --------------------- |
+| Mikrotik RB4011iGS+5HacQ2HnD | 1     | 512MB          |                    | 1GB  | RouterOS 7.12    | router                |
+| Dell Wyse 5070               | 3     | 16GB           | 128GB              | 12GB | Debian 12        | node(s)               |
+| Odroid H3+                   | 1     | 64GB           | 8x480GB SSD        | 32GB | TrueNAS Scale    | k8s storage / master  |
 
 </details>
 
 <details>
-  <summary>Kubernetes installation using k0s(ctl) (CLICK ME!)</summary>
+  <summary><h2 style="display: inline-block; margin: 0;">Kubernetes installation using k0s(ctl)</h2></summary>
 
-k0sctl allow to **greatly** simplify k8s install. Belowe is my configuration file which basically allows me to install whole cluster within minutes.
+k0sctl allows to **greatly** simplify k8s install. Below is my configuration file which basically allows me to install whole cluster within minutes.
 
 
 ```sh
