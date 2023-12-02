@@ -6,6 +6,14 @@
 This is home to my personal Kubernetes lab cluster. [Flux](https://github.com/fluxcd/flux2) watches this Git repository and makes the changes to my cluster based on the manifests in the [cluster](./cluster/) directory.
 [Renovate](https://github.com/renovatebot/renovate) also watches this Git repository and creates pull requests when it finds updates to Docker images, Helm charts, and other dependencies.
 
+The whole setup is heavily based on [onedr0p's template]https://github.com/onedr0p/flux-cluster-template but I didn't really want to use his ansible machinery for HW provisioning and k8s install so I grabbed just some stuff from him and I tackled these parts on my way.
+
+So for HW provisioning go to https://github.com/fenio/homelab#hardware-provisioning
+
+And for k8s install go to https://github.com/fenio/homelab#kubernetes-installation-using-k0sctl
+
+And if you have working k8s cluster and you just want to start using Flux to deploy workloads on it then simply move to https://github.com/fenio/homelab#flux section.
+
 </details>
 
 <details>
