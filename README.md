@@ -11,9 +11,13 @@ This is home to my personal Kubernetes lab cluster. [Flux](https://github.com/fl
 <details>
   <summary><h2 style="display: inline-block; margin: 0;">Hardware provisioning</h2></summary>
 
-This is my lab.
+Few words about my HW setup. Here's a picture of it:
 
 ![lab](https://github.com/fenio/dumb-provisioner/blob/main/IMG_0891.jpeg)
+
+NAS runs TrueNAS Scale and it's installed manually as I don't expect it to be reinstalled too often.
+Dell Wyse terminals is a different story. I'm reinstalling them from time to time so I had to figure out some way to do it easily.
+That's how [dumb provisioner](https://github.com/fenio/dumb-provisioner/) was born.
 
 ## 🔧 Hardware
 
