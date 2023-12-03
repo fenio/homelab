@@ -42,4 +42,4 @@ spec:
         enabled: true
     logs:
       access:
-        enabled: false
+        enabled: true
