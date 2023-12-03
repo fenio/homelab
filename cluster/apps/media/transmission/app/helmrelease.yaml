@@ -75,7 +75,6 @@ spec:
             port: *port
       utptcp:
         controller: main
-        type: LoadBalancer
         externalTrafficPolicy: Local
         ports:
           utptcp:
