@@ -75,7 +75,7 @@ spec:
             port: *port
       utptcp:
         controller: main
-        externalTrafficPolicy: Local
+#        externalTrafficPolicy: Local
         ports:
           utptcp:
             enabled: true
