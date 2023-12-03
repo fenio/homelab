@@ -90,7 +90,6 @@ spec:
         globalMounts:
           - path: /media
             subPath: Downloads
-
     ingress:
       main:
         enabled: true
