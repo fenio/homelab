@@ -37,3 +37,6 @@ spec:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/path: "/metrics"
+    ingressRoute:
+      dashboard:
+        enabled: true
