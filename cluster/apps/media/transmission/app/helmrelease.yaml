@@ -73,6 +73,16 @@ spec:
         ports:
           http:
             port: *port
+      utptcp:
+        controller: main
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        ports:
+          utptcp:
+            enabled: true
+            port: *peerport
+            protocol: TCP
+            targetPort: *peerport
     persistence:
       downloads:
         enabled: true
