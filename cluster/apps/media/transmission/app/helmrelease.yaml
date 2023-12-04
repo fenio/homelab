@@ -74,7 +74,7 @@ spec:
           http:
             port: *port
       utptcp:
-        type: NodePort
+        type: LoadBalancer
         controller: main
         ports:
           utptcp:
