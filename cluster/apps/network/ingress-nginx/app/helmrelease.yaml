@@ -31,6 +31,6 @@ spec:
       replicaCount: 2
       service:
         externalIPs:
-          - 91.192.196.156
+          - ${EXTERNAL_IP}
       metrics:
         enabled: true
