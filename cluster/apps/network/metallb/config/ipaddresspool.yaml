@@ -5,4 +5,4 @@ metadata:
   namespace: network
 spec:
   addresses:
-  - ${EXTERNAL_IP}
+  - 10.10.20.110/32
