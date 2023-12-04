@@ -30,6 +30,7 @@ spec:
     controller:
       replicaCount: 2
       service:
-        externalIPs: 91.192.196.156
+        externalIPs:
+          - 91.192.196.156
       metrics:
         enabled: true
