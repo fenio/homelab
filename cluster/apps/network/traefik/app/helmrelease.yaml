@@ -32,7 +32,7 @@ spec:
         tls:
           enabled: true
     additionalArguments:
-      - --providers.kubernetesingress.ingressendpoint.ip=91.192.196.156
+      - --providers.kubernetesingress.ingressendpoint.ip=${EXTERNAL_IP}
     deployment:
       annotations:
         prometheus.io/scrape: "true"
