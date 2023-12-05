@@ -30,8 +30,8 @@ spec:
     controller:
       replicaCount: 2
       service:
-        loadBalancerIP: ${EXTERNAL_IP}
-#        externalIPs:
-#          - ${EXTERNAL_IP}
+#        loadBalancerIP: ${EXTERNAL_IP}
+        externalIPs:
+          - ${EXTERNAL_IP}
       metrics:
         enabled: true
