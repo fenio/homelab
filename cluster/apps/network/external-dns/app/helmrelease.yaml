@@ -29,7 +29,7 @@ spec:
   values:
     provider: cloudflare
     extraArgs:
-        default-targets: "${EXTERNAL_IP}"
+      default-targets: "${EXTERNAL_IP}"
     env:
       - name: CF_API_TOKEN
         valueFrom:
