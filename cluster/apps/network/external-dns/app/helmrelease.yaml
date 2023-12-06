@@ -28,7 +28,7 @@ spec:
     keepHistory: false
   values:
     provider: cloudflare
-      proxied: false
+      proxied: true
     extraArgs:
       - --default-targets="${EXTERNAL_IP}"
     env:
