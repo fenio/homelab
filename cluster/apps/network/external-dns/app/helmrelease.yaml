@@ -28,8 +28,8 @@ spec:
     keepHistory: false
   values:
     provider: cloudflare
-    args:
-        - "--default-targets=${EXTERNAL_IP}"
+    extraArgs:
+        default-targets: "${EXTERNAL_IP}"
     env:
       - name: CF_API_TOKEN
         valueFrom:
