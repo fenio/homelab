@@ -27,8 +27,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    provider: cloudflare
-      proxied: false
+    provider: linode
     extraArgs:
       - --default-targets=${EXTERNAL_IP}
     env:
@@ -42,3 +41,8 @@ spec:
           secretKeyRef:
             name: cluster-secrets
             key: CF_API_EMAIL
+      - name: LINODE_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: cluster-secrets
+            key: LINODE_TOKEN
