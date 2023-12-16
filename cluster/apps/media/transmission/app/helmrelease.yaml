@@ -46,7 +46,7 @@ spec:
             env:
               TZ: Europe/Warsaw
               TRANSMISSION__BLOCKLIST_URL: "https://mirror.codebucket.de/transmission/blocklist.p2p.gz"
-              TRANSMISSION__DOWNLOAD_DIR: "/media"
+              TRANSMISSION__DOWNLOAD_DIR: "/media/Downloads"
               TRANSMISSION__INCOMPLETE_DIR_ENABLED: false
               TRANSMISSION__RPC_PORT: &port 9091
               TRANSMISSION__PEER_PORT: &peerport 51413
