@@ -12,10 +12,10 @@ spec:
       name: letsencrypt-production
     solvers:
       - dns01:
-          cloudflare:
+          linode:
             apiTokenSecretRef:
               name: cluster-secrets
-              key: CF_API_TOKEN
+              key: LINODE_TOKEN
         selector:
           dnsZones:
             - ${SECRET_DOMAIN}
@@ -33,10 +33,10 @@ spec:
       name: letsencrypt-staging
     solvers:
       - dns01:
-          cloudflare:
+          linode:
             apiTokenSecretRef:
               name: cluster-secrets
-              key: CF_API_TOKEN
+              key: LINODE_TOKEN
         selector:
           dnsZones:
             - ${SECRET_DOMAIN}
