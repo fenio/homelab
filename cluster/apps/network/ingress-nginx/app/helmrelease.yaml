@@ -30,7 +30,9 @@ spec:
     controller:
       replicaCount: 2
       service:
-        externalIPs:
+#        externalIPs:
+#          - ${EXTERNAL_IP}
+        loadBalancerIP:
           - ${EXTERNAL_IP}
       config:
         block-user-agents: "GPTBot,~*GPTBot*,ChatGPT-User,~*ChatGPT-User*,Google-Extended,~*Google-Extended*,CCBot,~*CCBot*,Omgilibot,~*Omgilibot*,FacebookBot,~*FacebookBot*" # taken from https://github.com/superseriousbusiness/gotosocial/blob/main/internal/web/robots.go
