@@ -11,14 +11,9 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
-      - dns01:
-          linode:
-            apiTokenSecretRef:
-              name: cluster-secrets
-              key: LINODE_TOKEN
-        selector:
-          dnsZones:
-            - ${SECRET_DOMAIN}
+      - http01:
+          ingress:
+            class: nginx
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
