@@ -27,11 +27,6 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
-      - dns01:
-          linode:
-            apiTokenSecretRef:
-              name: cluster-secrets
-              key: LINODE_TOKEN
-        selector:
-          dnsZones:
-            - ${SECRET_DOMAIN}
+      - http01:
+          ingress:
+            class: nginx
