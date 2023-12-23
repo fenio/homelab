@@ -27,6 +27,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    api:
+      dashboard: true
     ports:
       websecure:
         tls:
