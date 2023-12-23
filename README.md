@@ -45,7 +45,7 @@ Obviously every host which is later part of the cluster needs to be accessible v
 
 
 ```sh
-❯ ~ cat k0sctl.yaml
+❯ ~ $ cat k0sctl.yaml
 apiVersion: k0sctl.k0sproject.io/v1beta1
 kind: Cluster
 metadata:
@@ -84,7 +84,7 @@ spec:
 Once you've got such configuration you just have to run the following command:
 
 ```sh
-❯ ~ k0sctl apply --config k0sctl.yaml
+❯ ~ $ k0sctl apply --config k0sctl.yaml
 
 ⠀⣿⣿⡇⠀⠀⢀⣴⣾⣿⠟⠁⢸⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀█████████ █████████ ███
 ⠀⣿⣿⡇⣠⣶⣿⡿⠋⠀⠀⠀⢸⣿⡇⠀⠀⠀⣠⠀⠀⢀⣠⡆⢸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀███          ███    ███
@@ -161,7 +161,7 @@ And after 1m25s you should end up with working cluster:
 
 ```sh
 [☸ lab:default]
-❯ ~ kubectl get nodes
+❯ ~ $ kubectl get nodes
 NAME    STATUS   ROLES    AGE     VERSION
 node1   Ready    <none>   2d21h   v1.28.4+k0s
 node2   Ready    <none>   2d21h   v1.28.4+k0s
@@ -174,8 +174,8 @@ node3   Ready    <none>   2d21h   v1.28.4+k0s
 ### Install Flux
 
 ```sh
-[☸ lab:default] [ main]
-❯ ~/homelab kubectl apply --server-side --kustomize ./cluster/bootstrap/flux
+[☸ lab:default]
+❯ ~/homelab $ kubectl apply --server-side --kustomize ./cluster/bootstrap/flux
 namespace/flux-system serverside-applied
 resourcequota/critical-pods serverside-applied
 customresourcedefinition.apiextensions.k8s.io/alerts.notification.toolkit.fluxcd.io serverside-applied
@@ -224,33 +224,33 @@ export SOPS_AGE_KEY_FILE=~/AGE/sops-key.txt
 ```
 
 ```sh
-[☸ lab:default] [ main]
-❯ ~/homelab sops --decrypt cluster/bootstrap/flux/age-key.sops.yaml | kubectl apply -f -
+[☸ lab:default]
+❯ ~/homelab $ sops --decrypt cluster/bootstrap/flux/age-key.sops.yaml | kubectl apply -f -
 secret/sops-age created
 
-[☸ lab:default] [ main]
-❯ ~/homelab sops --decrypt cluster/bootstrap/flux/github-deploy-key.sops.yaml | kubectl apply -f -
+[☸ lab:default]
+❯ ~/homelab $ sops --decrypt cluster/bootstrap/flux/github-deploy-key.sops.yaml | kubectl apply -f -
 secret/github-deploy-key created
 
-[☸ lab:default] [ main]
-❯ ~/homelab kubectl create namespace network
+[☸ lab:default]
+❯ ~/homelab $ kubectl create namespace network
 namespace/network created
 
-[☸ lab:default] [ main]
-❯ ~/homelab sops --decrypt cluster/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f -
+[☸ lab:default]
+❯ ~/homelab $ sops --decrypt cluster/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f -
 secret/cluster-secrets configured
 secret/cluster-secrets created
 
-[☸ lab:default] [ main]
-❯ ~/homelab kubectl apply -f cluster/flux/vars/cluster-settings.yaml
+[☸ lab:default]
+❯ ~/homelab $ kubectl apply -f cluster/flux/vars/cluster-settings.yaml
 configmap/cluster-settings created
 ```
 
 ### Kick off Flux applying this repository
 
 ```sh
-[☸ lab:default] [ main]
-❯ ~/homelab kubectl apply --server-side --kustomize ./cluster/flux/config
+[☸ lab:default]
+❯ ~/homelab $ kubectl apply --server-side --kustomize ./cluster/flux/config
 kustomization.kustomize.toolkit.fluxcd.io/cluster serverside-applied
 kustomization.kustomize.toolkit.fluxcd.io/flux serverside-applied
 gitrepository.source.toolkit.fluxcd.io/homelab serverside-applied
@@ -262,11 +262,11 @@ ocirepository.source.toolkit.fluxcd.io/flux-manifests serverside-applied
 
 ```
 [☸ lab:default]
-❯ ~ age-keygen -o sops-key.txt
+❯ ~ $ age-keygen -o sops-key.txt
 Public key: age1g8nxh9vntdtkjmsav07ytqetpuh2524a7e98f6a77rulu4rzvgwstyvhru
 
 [☸ lab:default]
-❯ ~ kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=sops-key.txt
+❯ ~ $ kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=sops-key.txt
 secret/sops-age created
 
 ```
