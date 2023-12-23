@@ -36,9 +36,8 @@ spec:
         hajimari.io/appName: Weave Gitops
         hajimari.io/icon: simple-icons:git
         hajimari.io/group: infrastructure
-        kubernetes.io/ingress.class: "traefik"
+#        kubernetes.io/ingress.class: "traefik"
         cert-manager.io/cluster-issuer: "letsencrypt-production"
-        acme.cert-manager.io/http01-edit-in-place: "true"
       hosts:
         - host: &host "ww.${SECRET_DOMAIN}"
           paths:
