@@ -24,16 +24,16 @@ Few words about my HW setup. Here's a picture of it:
 ![lab](https://github.com/fenio/dumb-provisioner/blob/main/IMG_0891.jpeg)
 
 NAS runs TrueNAS Scale and it's installed manually as I don't expect it to be reinstalled too often.
-Dell Wyse terminals is a different story. I'm reinstalling them from time to time so I had to figure out some way to do it easily.
+K8S related stuff like Dell Wyse terminals and master node which is running on NAS as a VM are being reinstalled from time to time so I had to figure out some way to do it easily.
 That's how [dumb provisioner](https://github.com/fenio/dumb-provisioner/) was born.
 
 ## 🔧 Hardware
 
-| Device                       | Count | OS Disk Size   | Data Disk Size     | Ram  | Operating System | Purpose               |
-| ---------------------------- | ----- | -------------- | ------------------ | ---- | ---------------- | --------------------- |
-| Mikrotik RB4011iGS+5HacQ2HnD | 1     | 512MB          |                    | 1GB  | RouterOS 7.12    | router                |
-| Dell Wyse 5070               | 3     | 16GB           | 128GB              | 12GB | Debian 12        | node(s)               |
-| Odroid H3+                   | 1     | 64GB           | 8x480GB SSD        | 32GB | TrueNAS Scale    | k8s storage / master  |
+| Device                       | Count | OS Disk Size   | Data Disk Size     | Ram  | Operating System      | Purpose                      |
+| ---------------------------- | ----- | -------------- | ------------------ | ---- | --------------------- | ---------------------------- |
+| Mikrotik RB4011iGS+5HacQ2HnD | 1     | 512MB          |                    | 1GB  | RouterOS 7.13         | router                       |
+| Dell Wyse 5070               | 3     | 16GB           | 128GB              | 12GB | Debian 12.4           | node(s)                      |
+| Odroid H3+                   | 1     | 64GB           | 8x480GB SSD        | 32GB | TrueNAS Scale 23.10.1 | k8s storage / master (in vm) |
 
 </details>
 
@@ -41,6 +41,7 @@ That's how [dumb provisioner](https://github.com/fenio/dumb-provisioner/) was bo
   <summary><h2 style="display: inline-block; margin: 0;">Kubernetes installation using k0s(ctl)</h2></summary>
 
 k0sctl allows to **greatly** simplify k8s install. Below is my configuration file which basically allows me to install whole cluster within minutes.
+Obviously every host which is later part of the cluster needs to be accessible via SSH.
 
 
 ```sh
@@ -173,24 +174,87 @@ node3   Ready    <none>   2d21h   v1.28.4+k0s
 ### Install Flux
 
 ```sh
-kubectl apply --server-side --kustomize ./cluster/bootstrap/flux
+[☸ lab:default] [ main]
+❯ ~/homelab kubectl apply --server-side --kustomize ./cluster/bootstrap/flux
+namespace/flux-system serverside-applied
+resourcequota/critical-pods serverside-applied
+customresourcedefinition.apiextensions.k8s.io/alerts.notification.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/buckets.source.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/gitrepositories.source.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/helmcharts.source.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/helmreleases.helm.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/helmrepositories.source.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/imagepolicies.image.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/imagerepositories.image.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/imageupdateautomations.image.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/kustomizations.kustomize.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/ocirepositories.source.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/providers.notification.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/receivers.notification.toolkit.fluxcd.io serverside-applied
+serviceaccount/helm-controller serverside-applied
+serviceaccount/image-automation-controller serverside-applied
+serviceaccount/image-reflector-controller serverside-applied
+serviceaccount/kustomize-controller serverside-applied
+serviceaccount/notification-controller serverside-applied
+serviceaccount/source-controller serverside-applied
+clusterrole.rbac.authorization.k8s.io/crd-controller serverside-applied
+clusterrole.rbac.authorization.k8s.io/flux-edit serverside-applied
+clusterrole.rbac.authorization.k8s.io/flux-view serverside-applied
+clusterrolebinding.rbac.authorization.k8s.io/cluster-reconciler serverside-applied
+clusterrolebinding.rbac.authorization.k8s.io/crd-controller serverside-applied
+service/notification-controller serverside-applied
+service/source-controller serverside-applied
+service/webhook-receiver serverside-applied
+deployment.apps/helm-controller serverside-applied
+deployment.apps/image-automation-controller serverside-applied
+deployment.apps/image-reflector-controller serverside-applied
+deployment.apps/kustomize-controller serverside-applied
+deployment.apps/notification-controller serverside-applied
+deployment.apps/source-controller serverside-applied
 ```
 
 ### Apply Cluster Configuration
 
 _These cannot be applied with `kubectl` in the regular fashion due to be encrypted with sops_
 
+**Make sure you've got SOPS configured so it can easily use your key file or point it to the correct file with something like this:**
+
 ```sh
-sops --decrypt cluster/bootstrap/flux/age-key.sops.yaml | kubectl apply -f -
-sops --decrypt cluster/bootstrap/flux/github-deploy-key.sops.yaml | kubectl apply -f -
-sops --decrypt cluster/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f -
-kubectl apply -f cluster/flux/vars/cluster-settings.yaml
+export SOPS_AGE_KEY_FILE=~/AGE/sops-key.txt
+```
+
+```sh
+[☸ lab:default] [ main]
+❯ ~/homelab sops --decrypt cluster/bootstrap/flux/age-key.sops.yaml | kubectl apply -f -
+secret/sops-age created
+
+[☸ lab:default] [ main]
+❯ ~/homelab sops --decrypt cluster/bootstrap/flux/github-deploy-key.sops.yaml | kubectl apply -f -
+secret/github-deploy-key created
+
+[☸ lab:default] [ main]
+❯ ~/homelab kubectl create namespace network
+namespace/network created
+
+[☸ lab:default] [ main]
+❯ ~/homelab sops --decrypt cluster/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f -
+secret/cluster-secrets configured
+secret/cluster-secrets created
+
+[☸ lab:default] [ main]
+❯ ~/homelab kubectl apply -f cluster/flux/vars/cluster-settings.yaml
+configmap/cluster-settings created
 ```
 
 ### Kick off Flux applying this repository
 
 ```sh
-kubectl apply --server-side --kustomize ./cluster/flux/config
+[☸ lab:default] [ main]
+❯ ~/homelab kubectl apply --server-side --kustomize ./cluster/flux/config
+kustomization.kustomize.toolkit.fluxcd.io/cluster serverside-applied
+kustomization.kustomize.toolkit.fluxcd.io/flux serverside-applied
+gitrepository.source.toolkit.fluxcd.io/homelab serverside-applied
+ocirepository.source.toolkit.fluxcd.io/flux-manifests serverside-applied
 ```
 
 
