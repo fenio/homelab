@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./netdata/ks.yaml
+  - ./weave-gitops/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
