@@ -25,6 +25,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    fullnameOverride: flux-webui
     adminUser:
       create: true
       username: admin
@@ -39,7 +40,7 @@ spec:
         kubernetes.io/ingress.class: "traefik"
         cert-manager.io/cluster-issuer: "letsencrypt-production"
       hosts:
-        - host: &host "ww.${SECRET_DOMAIN}"
+        - host: &host "flux.${SECRET_DOMAIN}"
           paths:
             - path: /
               pathType: Prefix
