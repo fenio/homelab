@@ -4,7 +4,7 @@ metadata:
   name: flux-webui
   namespace: flux-system
 spec:
-  path: ./cluster/apps/observability/flux-webui/app
+  path: ./cluster/apps/monitor/flux-webui/app
   sourceRef:
     kind: GitRepository
     name: homelab
