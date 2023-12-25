@@ -28,3 +28,9 @@ spec:
     grafana:
       ingress:
         enabled: true
+        hosts:
+          - g.0f.ee
+        tls:
+          - secretName: grafana-tls
+            hosts:
+            - g.0f.ee
