@@ -1,10 +1,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: weave-gitops
+  name: flux-webui
   namespace: flux-system
 spec:
-  path: ./cluster/apps/monitoring/weave-gitops/app
+  path: ./cluster/apps/observability/flux-webui/app
   sourceRef:
     kind: GitRepository
     name: homelab
