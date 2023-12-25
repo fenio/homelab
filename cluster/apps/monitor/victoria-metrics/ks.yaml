@@ -4,7 +4,7 @@ metadata:
   name: victoria-metrics
   namespace: flux-system
 spec:
-  path: ./cluster/apps/observability/victoria-metrics/app
+  path: ./cluster/apps/monitor/victoria-metrics/app
   sourceRef:
     kind: GitRepository
     name: homelab
