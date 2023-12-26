@@ -30,8 +30,8 @@ spec:
       ingress:
         enabled: true
         hosts:
-          - g.0f.ee
+          - g.${SECRET_DOMAIN}
         tls:
           - secretName: grafana-tls
             hosts:
-            - g.0f.ee
+            - g.${SECRET_DOMAIN}
