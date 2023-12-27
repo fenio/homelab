@@ -11,6 +11,7 @@ resources:
   - ./external-dns.yaml
   - ./grafana.yaml
   - ./hajimari.yaml
+  - ./homepage.yaml
   - ./metallb.yaml
   - ./prometheus.yaml
   - ./reloader.yaml
