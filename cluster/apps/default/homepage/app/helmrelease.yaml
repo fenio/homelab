@@ -1,0 +1,101 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ishioni/CRDs-catalog/main/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: homepage
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: homepage
+      sourceRef:
+        kind: HelmRepository
+        name: homepage
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    config:
+      bookmarks:
+        - Developer:
+            - Github:
+                - abbr: GH
+                  href: https://github.com/
+      services:
+        - My First Group:
+            - My First Service:
+                href: http://localhost/
+                description: Homepage is awesome
+
+        - My Second Group:
+            - My Second Service:
+                href: http://localhost/
+                description: Homepage is the best
+
+        - My Third Group:
+            - My Third Service:
+                href: http://localhost/
+                description: Homepage is 😎
+      widgets:
+        # show the kubernetes widget, with the cluster summary and individual nodes
+        - kubernetes:
+            cluster:
+              show: true
+              cpu: true
+              memory: true
+              showLabel: true
+              label: "cluster"
+            nodes:
+              show: true
+              cpu: true
+              memory: true
+              showLabel: true
+        - search:
+            provider: duckduckgo
+            target: _blank
+      kubernetes:
+        mode: cluster
+      settings:
+
+    # The service account is necessary to allow discovery of other services
+    serviceAccount:
+      create: true
+      name: homepage
+
+    # This enables the service account to access the necessary resources
+    enableRbac: true
+
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          # Example annotations to add Homepage to your Homepage!
+          kubernetes.io/ingress.class: "traefik"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: "Homepage"
+          gethomepage.dev/description: "Dynamically Detected Homepage"
+          gethomepage.dev/group: "Dynamic"
+          gethomepage.dev/icon: "homepage.png"
+        hosts:
+          - host: &host h.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+            tls:
+              - hosts:
+                  - *host
+                secretName: *host
+        podAnnotations:
+          configmap.reloader.stakater.com/reload: hajimari-settings
