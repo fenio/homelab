@@ -55,9 +55,15 @@ spec:
                   type: truenas
                   url: https://10.10.20.100/
                   key: ${TRUENAS_API_KEY}
-            - My Third Service:
-                href: http://localhost/
-                description: Homepage is 😎
+            - Mikrotik:
+                href: http://10.10.10.1:680
+                icon: mikrotik.png
+                description: Router
+                widget:
+                  type: mikrotik
+                  url: http://10.10.10.1:680
+                  username: admin
+                  password: ${MIKROTIK_PASSWORD}
       widgets:
         # show the kubernetes widget, with the cluster summary and individual nodes
         - kubernetes:
