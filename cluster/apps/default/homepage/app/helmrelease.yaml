@@ -46,7 +46,15 @@ spec:
                 href: http://localhost/
                 description: Homepage is the best
 
-        - My Third Group:
+        - Infrastructure:
+            - TrueNAS:
+                href: https://10.10.20.100/
+                icon: truenas.png
+                description: NAS
+                widget:
+                  type: truenas
+                  url: https://10.10.20.100/
+                  key: ${TRUENAS_API_KEY}
             - My Third Service:
                 href: http://localhost/
                 description: Homepage is 😎
