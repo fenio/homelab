@@ -109,4 +109,4 @@ spec:
                   - *host
                 secretName: *host
         podAnnotations:
-          configmap.reloader.stakater.com/reload: hajimari-settings
+          configmap.reloader.stakater.com/reload: homepage
