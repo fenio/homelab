@@ -26,6 +26,9 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    image:
+      repository: ghcr.io/benphelps/homepage
+      tag: v0.8.4
     config:
       bookmarks:
         - Developer:
