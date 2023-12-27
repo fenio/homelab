@@ -99,7 +99,6 @@ spec:
       main:
         enabled: true
         annotations:
-          # Example annotations to add Homepage to your Homepage!
           kubernetes.io/ingress.class: "traefik"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           gethomepage.dev/enabled: "true"
