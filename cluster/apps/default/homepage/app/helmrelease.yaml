@@ -40,12 +40,10 @@ spec:
             - My First Service:
                 href: http://localhost/
                 description: Homepage is awesome
-
         - My Second Group:
             - My Second Service:
                 href: http://localhost/
                 description: Homepage is the best
-
         - Infrastructure:
             - TrueNAS:
                 href: https://10.10.20.100/
@@ -106,9 +104,9 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-          tls:
-            - hosts:
-                - *host
-              secretName: *host
+        tls:
+          - hosts:
+            - *host
+            secretName: *host
         podAnnotations:
           configmap.reloader.stakater.com/reload: homepage
