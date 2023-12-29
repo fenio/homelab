@@ -86,15 +86,10 @@ spec:
       settings:
         title: Dashboard
         background: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
-
-    # The service account is necessary to allow discovery of other services
     serviceAccount:
       create: true
       name: homepage
-
-    # This enables the service account to access the necessary resources
     enableRbac: true
-
     ingress:
       main:
         enabled: true
@@ -107,7 +102,7 @@ spec:
           gethomepage.dev/group: "Dynamic"
           gethomepage.dev/icon: "homepage.png"
         hosts:
-          - host: &host h.${SECRET_DOMAIN}
+          - host: &host "h.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
