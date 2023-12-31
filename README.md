@@ -79,12 +79,18 @@ spec:
   k0s:
     version: 1.28.4+k0s.0
     dynamicConfig: false
+    config:
+      spec:
+        network:
+          provider: custom
+          kubeProxy:
+            disabled: true
 ```
 
 Once you've got such configuration you just have to run the following command:
 
 ```sh
-❯ ~ $ k0sctl apply --config k0sctl.yaml
+❯ ~ $ k0sctl apply --config k0sctl.yaml --no-wait
 
 ⠀⣿⣿⡇⠀⠀⢀⣴⣾⣿⠟⠁⢸⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀█████████ █████████ ███
 ⠀⣿⣿⡇⣠⣶⣿⡿⠋⠀⠀⠀⢸⣿⡇⠀⠀⠀⣠⠀⠀⢀⣠⡆⢸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀███          ███    ███
