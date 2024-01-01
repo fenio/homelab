@@ -18,3 +18,4 @@ spec:
   dependsOn:
     - name: cloudnative-pg
     - name: nfs
+    - name: ingress-nginx
