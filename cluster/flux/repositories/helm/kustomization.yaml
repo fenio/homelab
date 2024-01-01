@@ -16,6 +16,7 @@ resources:
   - ./metallb.yaml
   - ./metrics-server.yaml
   - ./prometheus.yaml
+  - ./reflector.yaml
   - ./reloader.yaml
   - ./traefik.yaml
   - ./victoriametrics.yaml
