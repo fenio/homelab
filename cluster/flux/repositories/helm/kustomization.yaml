@@ -12,6 +12,7 @@ resources:
   - ./grafana.yaml
   - ./hajimari.yaml
   - ./homepage.yaml
+  - ./ingress-nginx.yaml
   - ./metallb.yaml
   - ./metrics-server.yaml
   - ./prometheus.yaml
