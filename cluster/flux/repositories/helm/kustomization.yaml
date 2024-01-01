@@ -13,6 +13,7 @@ resources:
   - ./hajimari.yaml
   - ./homepage.yaml
   - ./metallb.yaml
+  - ./metrics-server.yaml
   - ./prometheus.yaml
   - ./reloader.yaml
   - ./traefik.yaml
