@@ -7,9 +7,6 @@ metadata:
   annotations:
     replicator.v1.mittwald.de/replication-allowed: "true"
     replicator.v1.mittwald.de/replication-allowed-namespaces: "media"
-  commonAnnotations:
-    replicator.v1.mittwald.de/replication-allowed: "true"
-    replicator.v1.mittwald.de/replication-allowed-namespaces: "media"
   inheritedMetadata:
     annotations:
       replicator.v1.mittwald.de/replication-allowed: "true"
