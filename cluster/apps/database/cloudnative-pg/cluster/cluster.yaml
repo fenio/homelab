@@ -9,6 +9,8 @@ spec:
   imageName: ghcr.io/cloudnative-pg/postgresql:16.0-10
   primaryUpdateStrategy: unsupervised
   enableSuperuserAccess: true
+  superuserSecret:
+    name: pg-password
   storage:
     size: 20Gi
     storageClass: iscsi
