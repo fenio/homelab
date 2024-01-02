@@ -3,9 +3,9 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: reflector
+  name: replicator
   namespace: flux-system
 spec:
   interval: 1h
-  url: https://emberstack.github.io/helm-charts
+  url: https://helm.mittwald.de
   timeout: 3m
