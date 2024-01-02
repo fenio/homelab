@@ -3,10 +3,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: reflector
+  name: replicator
   namespace: flux-system
 spec:
-  path: ./cluster/apps/kube-system/reflector/app
+  path: ./cluster/apps/kube-system/replicator/app
   sourceRef:
     kind: GitRepository
     name: homelab
