@@ -8,11 +8,11 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: replicator
+      chart: kubernetes-replicator
       version: 2.9.2
       sourceRef:
         kind: HelmRepository
-        name: kubernetes-replicator
+        name: replicator
         namespace: flux-system
   maxHistory: 3
   install:
