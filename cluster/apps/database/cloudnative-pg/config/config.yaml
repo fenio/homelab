@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: cnpg-controller-manager-config
-  namespace: database
-data:
-  INHERITED_ANNOTATIONS: replicator.v1.mittwald.de/replicate-to
