@@ -4,6 +4,19 @@ kind: Cluster
 metadata:
   name: postgres
   namespace: database
+  annotations:
+    replicator.v1.mittwald.de/replication-allowed: "true"
+    replicator.v1.mittwald.de/replication-allowed-namespaces: "media"
+  commonAnnotations:
+    replicator.v1.mittwald.de/replication-allowed: "true"
+    replicator.v1.mittwald.de/replication-allowed-namespaces: "media"
+inheritedMetadata:
+  annotations:
+    replicator.v1.mittwald.de/replication-allowed: "true"
+    replicator.v1.mittwald.de/replication-allowed-namespaces: "media"
+  commonAnnotations:
+    replicator.v1.mittwald.de/replication-allowed: "true"
+    replicator.v1.mittwald.de/replication-allowed-namespaces: "media"
 spec:
   instances: 3
   imageName: ghcr.io/cloudnative-pg/postgresql:16.0-10
