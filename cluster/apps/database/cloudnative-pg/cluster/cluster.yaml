@@ -5,8 +5,7 @@ metadata:
   name: postgres
   namespace: database
   annotations:
-    replicator.v1.mittwald.de/replication-allowed: "true"
-    replicator.v1.mittwald.de/replication-allowed-namespaces: "media"
+    replicator.v1.mittwald.de/replicate-to: "media"
 spec:
   instances: 3
   imageName: ghcr.io/cloudnative-pg/postgresql:16.0-10
