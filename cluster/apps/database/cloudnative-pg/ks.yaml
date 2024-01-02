@@ -35,4 +35,22 @@ spec:
   retryInterval: 1m
   timeout: 5m
   dependsOn:
+    - name: cloudnative-pg-config
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cloudnative-pg-config
+  namespace: flux-system
+spec:
+  path: ./cluster/apps/database/cloudnative-pg/config
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab
+  wait: true
+  interval: 5m
+  retryInterval: 1m
+  timeout: 5m
+  dependsOn:
     - name: cloudnative-pg
