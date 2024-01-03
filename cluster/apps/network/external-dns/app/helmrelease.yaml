@@ -44,5 +44,5 @@ spec:
       - name: LINODE_TOKEN
         valueFrom:
           secretKeyRef:
-            name: cluster-secrets
+            name: dns-credentials
             key: LINODE_TOKEN
