@@ -100,11 +100,6 @@ spec:
               values: |2
                 bgpControlPlane:
                   enabled: true
-                bgp:
-                  enabled: false
-                  announce:
-                    loadbalancerIP: true
-                    podCIDR: false
                 kubeProxyReplacement: "strict"
                 k8sServiceHost: 10.10.20.99
                 k8sServicePort: 6443
