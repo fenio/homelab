@@ -124,7 +124,6 @@ spec:
 Once you've got such configuration you just have to run the following command:
 
 ```sh
-❯ ~ $ k0sctl apply --config k0sctl.yaml --no-wait
 
 ⠀⣿⣿⡇⠀⠀⢀⣴⣾⣿⠟⠁⢸⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀█████████ █████████ ███
 ⠀⣿⣿⡇⣠⣶⣿⡿⠋⠀⠀⠀⢸⣿⡇⠀⠀⠀⣠⠀⠀⢀⣠⡆⢸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀███          ███    ███
@@ -137,37 +136,35 @@ By continuing to use k0sctl you agree to these terms:
 https://k0sproject.io/licenses/eula
 INFO ==> Running phase: Connect to hosts
 INFO [ssh] 10.10.20.99:22: connected
-INFO [ssh] 10.10.20.103:22: connected
-INFO [ssh] 10.10.20.101:22: connected
 INFO [ssh] 10.10.20.102:22: connected
+INFO [ssh] 10.10.20.101:22: connected
+INFO [ssh] 10.10.20.103:22: connected
 INFO ==> Running phase: Detect host operating systems
-INFO [ssh] 10.10.20.102:22: is running Debian GNU/Linux 12 (bookworm)
 INFO [ssh] 10.10.20.99:22: is running Debian GNU/Linux 12 (bookworm)
-INFO [ssh] 10.10.20.103:22: is running Debian GNU/Linux 12 (bookworm)
 INFO [ssh] 10.10.20.101:22: is running Debian GNU/Linux 12 (bookworm)
+INFO [ssh] 10.10.20.102:22: is running Debian GNU/Linux 12 (bookworm)
+INFO [ssh] 10.10.20.103:22: is running Debian GNU/Linux 12 (bookworm)
 INFO ==> Running phase: Acquire exclusive host lock
 INFO ==> Running phase: Prepare hosts
-INFO [ssh] 10.10.20.99:22: installing packages (curl)
 INFO ==> Running phase: Gather host facts
-INFO [ssh] 10.10.20.99:22: using master as hostname
-INFO [ssh] 10.10.20.99:22: discovered ens3 as private interface
 INFO [ssh] 10.10.20.103:22: using node3 as hostname
 INFO [ssh] 10.10.20.102:22: using node2 as hostname
+INFO [ssh] 10.10.20.99:22: using master as hostname
 INFO [ssh] 10.10.20.101:22: using node1 as hostname
-INFO [ssh] 10.10.20.101:22: discovered enp1s0 as private interface
-INFO [ssh] 10.10.20.102:22: discovered enp1s0 as private interface
 INFO [ssh] 10.10.20.103:22: discovered enp1s0 as private interface
+INFO [ssh] 10.10.20.102:22: discovered enp1s0 as private interface
+INFO [ssh] 10.10.20.101:22: discovered enp1s0 as private interface
+INFO [ssh] 10.10.20.99:22: discovered ens3 as private interface
 INFO ==> Running phase: Validate hosts
 INFO ==> Running phase: Gather k0s facts
 INFO ==> Running phase: Validate facts
 INFO ==> Running phase: Download k0s on hosts
 INFO [ssh] 10.10.20.101:22: downloading k0s v1.28.4+k0s.0
-INFO [ssh] 10.10.20.103:22: downloading k0s v1.28.4+k0s.0
 INFO [ssh] 10.10.20.102:22: downloading k0s v1.28.4+k0s.0
+INFO [ssh] 10.10.20.103:22: downloading k0s v1.28.4+k0s.0
 INFO [ssh] 10.10.20.99:22: downloading k0s v1.28.4+k0s.0
 INFO ==> Running phase: Install k0s binaries on hosts
 INFO ==> Running phase: Configure k0s
-WARN [ssh] 10.10.20.99:22: generating default configuration
 INFO [ssh] 10.10.20.99:22: validating configuration
 INFO [ssh] 10.10.20.99:22: configuration was changed, installing new configuration
 INFO ==> Running phase: Initialize the k0s cluster
@@ -179,33 +176,53 @@ INFO [ssh] 10.10.20.101:22: validating api connection to https://10.10.20.99:644
 INFO [ssh] 10.10.20.102:22: validating api connection to https://10.10.20.99:6443
 INFO [ssh] 10.10.20.103:22: validating api connection to https://10.10.20.99:6443
 INFO [ssh] 10.10.20.99:22: generating token
+INFO [ssh] 10.10.20.103:22: writing join token
 INFO [ssh] 10.10.20.101:22: writing join token
 INFO [ssh] 10.10.20.102:22: writing join token
-INFO [ssh] 10.10.20.103:22: writing join token
 INFO [ssh] 10.10.20.102:22: installing k0s worker
 INFO [ssh] 10.10.20.101:22: installing k0s worker
 INFO [ssh] 10.10.20.103:22: installing k0s worker
 INFO [ssh] 10.10.20.102:22: starting service
 INFO [ssh] 10.10.20.101:22: starting service
 INFO [ssh] 10.10.20.103:22: starting service
-INFO [ssh] 10.10.20.102:22: waiting for node to become ready
 INFO [ssh] 10.10.20.101:22: waiting for node to become ready
 INFO [ssh] 10.10.20.103:22: waiting for node to become ready
+INFO [ssh] 10.10.20.102:22: waiting for node to become ready
 INFO ==> Running phase: Release exclusive host lock
 INFO ==> Running phase: Disconnect from hosts
-INFO ==> Finished in 1m25s
+INFO ==> Finished in 1m39s
 INFO k0s cluster version v1.28.4+k0s.0 is now installed
 ```
 
-And after 1m25s you should end up with working cluster:
+And after less than 2 minutes you should end up with working cluster with Cilium as a CNI:
 
 ```sh
+❯ ~ k0sctl kubeconfig > ~/.kube/config
+
 [☸ lab:default]
-❯ ~ $ kubectl get nodes
+❯ ~ kubectl get nodes
 NAME    STATUS   ROLES    AGE     VERSION
-node1   Ready    <none>   2d21h   v1.28.4+k0s
-node2   Ready    <none>   2d21h   v1.28.4+k0s
-node3   Ready    <none>   2d21h   v1.28.4+k0s
+node1   Ready    <none>   2m10s   v1.28.4+k0s
+node2   Ready    <none>   2m16s   v1.28.4+k0s
+node3   Ready    <none>   2m16s   v1.28.4+k0s
+
+[☸ lab:default]
+❯ ~ cilium status
+    /¯¯\
+ /¯¯\__/¯¯\    Cilium:             OK
+ \__/¯¯\__/    Operator:           OK
+ /¯¯\__/¯¯\    Envoy DaemonSet:    disabled (using embedded mode)
+ \__/¯¯\__/    Hubble Relay:       disabled
+    \__/       ClusterMesh:        disabled
+
+Deployment             cilium-operator    Desired: 1, Ready: 1/1, Available: 1/1
+DaemonSet              cilium             Desired: 3, Ready: 3/3, Available: 3/3
+Containers:            cilium-operator    Running: 1
+                       cilium             Running: 3
+Cluster Pods:          5/5 managed by Cilium
+Helm chart version:    1.14.4
+Image versions         cilium             quay.io/cilium/cilium:v1.14.4@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e: 3
+                       cilium-operator    quay.io/cilium/operator-generic:v1.14.4@sha256:f0f05e4ba3bb1fe0e4b91144fa4fea637701aba02e6c00b23bd03b4a7e1dfd55: 1
 ```
 </details>
 
@@ -265,27 +282,17 @@ export SOPS_AGE_KEY_FILE=~/AGE/sops-key.txt
 
 ```sh
 [☸ lab:default]
-❯ ~/homelab $ sops --decrypt cluster/bootstrap/flux/age-key.sops.yaml | kubectl apply -f -
-secret/sops-age created
-
-[☸ lab:default]
-❯ ~/homelab $ sops --decrypt cluster/bootstrap/flux/github-deploy-key.sops.yaml | kubectl apply -f -
-secret/github-deploy-key created
-
-[☸ lab:default]
-❯ ~/homelab $ kubectl create namespace network
-namespace/network created
-
-[☸ lab:default]
 ❯ ~/homelab $ sops --decrypt cluster/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f -
-secret/cluster-secrets configured
 secret/cluster-secrets created
+secret/dns-credentials created
+secret/pg-credentials created
+secret/sops-age created
+secret/github-deploy-key created
 
 [☸ lab:default]
 ❯ ~/homelab $ kubectl apply -f cluster/flux/vars/cluster-settings.yaml
 configmap/cluster-settings created
 ```
-
 ### Kick off Flux applying this repository
 
 ```sh
@@ -297,6 +304,57 @@ gitrepository.source.toolkit.fluxcd.io/homelab serverside-applied
 ocirepository.source.toolkit.fluxcd.io/flux-manifests serverside-applied
 ```
 
+All of the above in one shot using init.sh:
+
+```sh
+[☸ lab:default] [ main]
+❯ ~/homelab ./init.sh
+namespace/flux-system serverside-applied
+resourcequota/critical-pods serverside-applied
+customresourcedefinition.apiextensions.k8s.io/alerts.notification.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/buckets.source.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/gitrepositories.source.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/helmcharts.source.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/helmreleases.helm.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/helmrepositories.source.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/imagepolicies.image.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/imagerepositories.image.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/imageupdateautomations.image.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/kustomizations.kustomize.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/ocirepositories.source.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/providers.notification.toolkit.fluxcd.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/receivers.notification.toolkit.fluxcd.io serverside-applied
+serviceaccount/helm-controller serverside-applied
+serviceaccount/image-automation-controller serverside-applied
+serviceaccount/image-reflector-controller serverside-applied
+serviceaccount/kustomize-controller serverside-applied
+serviceaccount/notification-controller serverside-applied
+serviceaccount/source-controller serverside-applied
+clusterrole.rbac.authorization.k8s.io/crd-controller serverside-applied
+clusterrole.rbac.authorization.k8s.io/flux-edit serverside-applied
+clusterrole.rbac.authorization.k8s.io/flux-view serverside-applied
+clusterrolebinding.rbac.authorization.k8s.io/cluster-reconciler serverside-applied
+clusterrolebinding.rbac.authorization.k8s.io/crd-controller serverside-applied
+service/notification-controller serverside-applied
+service/source-controller serverside-applied
+service/webhook-receiver serverside-applied
+deployment.apps/helm-controller serverside-applied
+deployment.apps/image-automation-controller serverside-applied
+deployment.apps/image-reflector-controller serverside-applied
+deployment.apps/kustomize-controller serverside-applied
+deployment.apps/notification-controller serverside-applied
+deployment.apps/source-controller serverside-applied
+secret/cluster-secrets created
+secret/dns-credentials created
+secret/pg-credentials created
+secret/sops-age created
+secret/github-deploy-key created
+configmap/cluster-settings created
+kustomization.kustomize.toolkit.fluxcd.io/cluster serverside-applied
+kustomization.kustomize.toolkit.fluxcd.io/flux serverside-applied
+gitrepository.source.toolkit.fluxcd.io/homelab serverside-applied
+ocirepository.source.toolkit.fluxcd.io/flux-manifests serverside-applied
+```
 
 ## AGE / SOPS secrets
 
