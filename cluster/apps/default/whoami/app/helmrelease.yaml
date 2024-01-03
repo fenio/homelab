@@ -35,7 +35,7 @@ spec:
         enabled: true
         className: public
         hosts:
-          - host: whoami.${SECRET_DOMAIN}
+          - host: &host whoami.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
