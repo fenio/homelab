@@ -16,6 +16,7 @@ spec:
   timeout: 5m
   dependsOn:
     - name: iscsi
+    - name: replicator
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization

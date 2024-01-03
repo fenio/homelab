@@ -1,8 +1,0 @@
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: pool
-  namespace: network
-spec:
-  addresses:
-  - 10.10.20.110/32
