@@ -58,6 +58,8 @@ spec:
       port: 22
       keyPath: ~/.ssh/id_rsa
     role: controller
+    installFlags:
+    - --disable-components=metrics-server
   - ssh:
       address: 10.10.20.101
       user: root
@@ -85,6 +87,38 @@ spec:
           provider: custom
           kubeProxy:
             disabled: true
+        extensions:
+          helm:
+            repositories:
+            - name: cilium
+              url: https://helm.cilium.io
+            charts:
+            - name: cilium
+              chartname: cilium/cilium
+              version: "1.14.4"
+              namespace: kube-system
+              values: |2
+                bgpControlPlane:
+                  enabled: true
+                bgp:
+                  enabled: false
+                  announce:
+                    loadbalancerIP: true
+                    podCIDR: false
+                kubeProxyReplacement: "strict"
+                k8sServiceHost: 10.10.20.99
+                k8sServicePort: 6443
+                global:
+                  encryption:
+                    enabled: true
+                    nodeEncryption: true
+                operator:
+                  replicas: 1
+                ipam:
+                  mode: "kubernetes"
+                  operator:
+                    clusterPoolIPv4PodCIDR: "10.20.0.0/16"
+                    clusterPoolIPv4MaskSize: 24
 ```
 
 Once you've got such configuration you just have to run the following command:
