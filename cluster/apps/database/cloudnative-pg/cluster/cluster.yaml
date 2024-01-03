@@ -10,7 +10,7 @@ spec:
   primaryUpdateStrategy: unsupervised
   enableSuperuserAccess: true
   superuserSecret:
-    name: pg-password
+    name: pg-credentials
   storage:
     size: 20Gi
     storageClass: iscsi
