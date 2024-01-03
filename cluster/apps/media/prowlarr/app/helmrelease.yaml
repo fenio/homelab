@@ -47,6 +47,13 @@ spec:
               INIT_POSTGRES_USER: &dbUser "prowlarr"
               INIT_POSTGRES_PASS: &dbPass "${PROWLARR_PG_PASSWORD}"
               INIT_POSTGRES_DBNAME: prowlarr_main prowlarr_log
+            resources:
+              requests:
+                cpu: 50m
+                memory: 100Mi
+              limits:
+                cpu: 200m
+                memory: 300Mi
         containers:
           main:
             image:
@@ -86,6 +93,7 @@ spec:
                 cpu: 50m
                 memory: 100Mi
               limits:
+                cpu: 200m
                 memory: 300Mi
     persistence:
       config:
