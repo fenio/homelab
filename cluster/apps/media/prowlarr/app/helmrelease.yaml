@@ -103,10 +103,13 @@ spec:
         annotations:
           kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-          hajimari.io/enable: "true"
-          hajimari.io/appName: Prowlarr
-          hajimari.io/icon: mdi:cloud-search
-          hajimari.io/group: media
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/name: Prowlarr
+          gethomepage.dev/icon: prowlarr.svg
+          gethomepage.dev/widget.type: prowlarr
+          gethomepage.dev/widget.url: http://prowlarr.media
+          gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_PROWLARR_TOKEN}}"
         enabled: true
         hosts:
           - host: &host "indexer.${SECRET_DOMAIN}"
