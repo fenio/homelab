@@ -66,7 +66,7 @@ spec:
               PROWLARR__LOG_LEVEL: info
               PROWLARR__AUTHENTICATION_METHOD: External
               PROWLARR__THEME: dark
-              PROWLARR__API_KEY: "${PROWLARR_API_KEY}"
+              PROWLARR__API_KEY: &API_KEY "${PROWLARR_API_KEY}"
               PROWLARR__POSTGRES_HOST: *dbHost
               PROWLARR__POSTGRES_PORT: "5432"
               PROWLARR__POSTGRES_USER: *dbUser
@@ -112,12 +112,12 @@ spec:
           kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Downloads
+          gethomepage.dev/group: Media
           gethomepage.dev/name: Prowlarr
           gethomepage.dev/icon: prowlarr.svg
           gethomepage.dev/widget.type: prowlarr
           gethomepage.dev/widget.url: http://prowlarr.media
-          gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_PROWLARR_TOKEN}}"
+          gethomepage.dev/widget.key: *API_KEY
         enabled: true
         hosts:
           - host: &host "indexer.${SECRET_DOMAIN}"
