@@ -15,6 +15,7 @@ resources:
   - ./ingress-nginx.yaml
   - ./metallb.yaml
   - ./metrics-server.yaml
+  - ./pgadmin.yaml
   - ./prometheus.yaml
   - ./reloader.yaml
   - ./replicator.yaml
