@@ -81,6 +81,6 @@ spec:
           memory: 35Mi
       extraEnvs:
         - name: TEMPLATE_NAME
-          value: lost-in-space
+          value: matrix
         - name: SHOW_DETAILS
           value: "false"
