@@ -4,8 +4,8 @@ metadata:
   name: pgadmin
 spec:
   interval: 15m
-  driftDetection:
-    mode: enabled
+#  driftDetection:
+#    mode: enabled
   chart:
     spec:
       chart: pgadmin4
