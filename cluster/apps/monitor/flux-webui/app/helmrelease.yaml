@@ -33,10 +33,10 @@ spec:
     ingress:
       enabled: true
       annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/appName: Weave Gitops
-        hajimari.io/icon: simple-icons:git
-        hajimari.io/group: infrastructure
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/group: Infrastructure
+        gethomepage.dev/name: Flux
+        gethomepage.dev/icon: git.svg
         kubernetes.io/ingress.class: "nginx"
         cert-manager.io/cluster-issuer: "letsencrypt-production"
       hosts:
