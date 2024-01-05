@@ -53,11 +53,11 @@ data:
                   service_name: Radarr # service name for that widget
     - Automation:
         - Home Assistant:
-            href: http://10.10.100.102:8123
+            href: http://10.10.10.102:8123
             icon: home-assistant.svg
             widget:
               type: homeassistant
-              url: http://10.10.100.102:8123
+              url: http://10.10.10.102:8123
               key: {{HOMEPAGE_VAR_HASS_TOKEN}}
     - Infrastructure:
         - TrueNAS:
