@@ -82,7 +82,7 @@ data:
     background: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
     theme: dark
     color: slate
-    headerStyle: boxed
+#    headerStyle: boxed
     layout:
       Calendar:
         style: columns
@@ -115,7 +115,7 @@ data:
         expanded: true
         memory: true
     - search:
-        provider: [brave, bing]
+        provider: duckduckgo
         focus: false
         target: _blank
     - kubernetes:
@@ -124,6 +124,7 @@ data:
           memory: true
           show: true
           showLabel: true
+          label: cluster
         nodes:
           cpu: true
           memory: true
@@ -131,6 +132,8 @@ data:
           showLabel: true
     - openmeteo:
         label: Home
+        latitude: 49.82245
+        longitude: 19.04686
         units: metric
         cache: 5
     - datetime:
