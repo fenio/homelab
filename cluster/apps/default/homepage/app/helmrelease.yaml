@@ -1,109 +1,70 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/ishioni/CRDs-catalog/main/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: homepage
-  namespace: default
 spec:
-  interval: 15m
   chart:
     spec:
-      chart: homepage
+      chart: app-template
+      version: 2.4.0
       sourceRef:
         kind: HelmRepository
-        name: homepage
+        name: bjw-s
         namespace: flux-system
-  maxHistory: 3
-  install:
-    createNamespace: true
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
+  interval: 30m
   values:
-    image:
-      repository: ghcr.io/gethomepage/homepage
-      tag: v0.8.4
-    config:
-      bookmarks:
-        - Developer:
-            - Github:
-                - abbr: GH
-                  href: https://github.com/
-      services:
-        - My First Group:
-            - My First Service:
-                href: http://localhost/
-                description: Homepage is awesome
-        - Media:
-        - Infrastructure:
-            - TrueNAS:
-                href: https://10.10.20.100/
-                icon: truenas.png
-                description: NAS
-                widget:
-                  type: truenas
-                  url: https://10.10.20.100/
-                  key: ${TRUENAS_API_KEY}
-            - Mikrotik:
-                href: http://10.10.10.1:680
-                icon: mikrotik.png
-                description: Router
-                widget:
-                  type: mikrotik
-                  url: http://10.10.10.1:680
-                  username: admin
-                  password: ${MIKROTIK_PASSWORD}
-      widgets:
-        # show the kubernetes widget, with the cluster summary and individual nodes
-        - kubernetes:
-            cluster:
-              show: true
-              cpu: true
-              memory: true
-              showLabel: true
-              label: "cluster"
-            nodes:
-              show: true
-              cpu: true
-              memory: true
-              showLabel: true
-        - search:
-            provider: duckduckgo
-            target: _blank
-      kubernetes:
-        mode: cluster
-      settings:
-        title: Dashboard
-        background: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
-    serviceAccount:
-      create: true
-      name: homepage
-    enableRbac: true
+    controllers:
+      main:
+        annotations:
+          configmap.reloader.stakater.com/reload: &configmap homepage
+        strategy: RollingUpdate
+        containers:
+          main:
+            image:
+              repository: ghcr.io/gethomepage/homepage
+              tag: v0.8.4
+            env:
+              TZ: ${CONFIG_TIMEZONE}
+              # LOG_LEVEL: debug
+    service:
+      main:
+        ports:
+          http:
+            enabled: true
+            port: 3000
     ingress:
       main:
         enabled: true
+        className: public
         annotations:
           kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "Homepage"
-          gethomepage.dev/description: "Dynamically Detected Homepage"
-          gethomepage.dev/group: "Dynamic"
-          gethomepage.dev/icon: "homepage.png"
         hosts:
-          - host: &host "h.${SECRET_DOMAIN}"
+          - host: &host h.${SECRET_DOMAIN}
             paths:
               - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-            - *host
-            secretName: *host
-        podAnnotations:
-          configmap.reloader.stakater.com/reload: homepage
+                service:
+                  name: main
+                  port: http
+        tls: [hosts: [*host]]
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: *configmap
+        globalMounts:
+          - subPath: bookmarks.yaml
+            path: /app/config/bookmarks.yaml
+          - subPath: docker.yaml
+            path: /app/config/docker.yaml
+          - subPath: kubernetes.yaml
+            path: /app/config/kubernetes.yaml
+          - subPath: services.yaml
+            path: /app/config/services.yaml
+          - subPath: settings.yaml
+            path: /app/config/settings.yaml
+          - subPath: widgets.yaml
+            path: /app/config/widgets.yaml
+    serviceAccount:
+      create: true
