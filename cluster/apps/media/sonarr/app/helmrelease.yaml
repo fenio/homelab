@@ -67,7 +67,7 @@ spec:
               SONARR__PORT: &port 80
               SONARR__AUTHENTICATION_METHOD: External
               SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
-              SONARR__LOG_LEVEL: info
+              SONARR__LOG_LEVEL: trace
               SONARR__THEME: dark
               SONARR__API_KEY: &API_KEY "${SONARR_API_KEY}"
               SONARR__POSTGRES_HOST: *dbHost
