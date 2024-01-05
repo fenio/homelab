@@ -104,10 +104,6 @@ spec:
           gethomepage.dev/widget.type: transmission
           gethomepage.dev/widget.url: http://transmission.media
           gethomepage.dev/widget.key: *API_KEY
-          hajimari.io/enable: "true"
-          hajimari.io/appName: Transmission
-          hajimari.io/icon: mdi:cloud-download
-          hajimari.io/group: media
         hosts:
           - host: &host "torrent.${SECRET_DOMAIN}"
             paths:
