@@ -81,7 +81,7 @@ spec:
                   httpGet:
                     path: /ping
                     port: *port
-                  initialDelaySeconds: 0
+                  initialDelaySeconds: 20
                   periodSeconds: 10
                   timeoutSeconds: 1
                   failureThreshold: 3
@@ -105,7 +105,8 @@ spec:
       main:
         ports:
           http:
-            port: *port
+            port: 80
+            targetPort: *port
     ingress:
       main:
         annotations:
