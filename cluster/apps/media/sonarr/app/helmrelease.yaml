@@ -102,7 +102,7 @@ spec:
       main:
         ports:
           http:
-            port: *port
+            port: 80
     persistence:
       media:
         enabled: true
