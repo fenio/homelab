@@ -49,13 +49,13 @@ spec:
               INIT_POSTGRES_USER: &dbUser "sonarr"
               INIT_POSTGRES_PASS: &dbPass "${SONARR_PG_PASSWORD}"
               INIT_POSTGRES_DBNAME: sonarr_main sonarr_log
-#            resources:
-#              requests:
-#                cpu: 50m
-#                memory: 100Mi
-#              limits:
-#                cpu: 200m
-#                memory: 300Mi
+            resources:
+              requests:
+                cpu: 50m
+                memory: 100Mi
+              limits:
+                cpu: 200m
+                memory: 300Mi
         containers:
           main:
             image:
@@ -91,13 +91,13 @@ spec:
               readiness: *probes
               startup:
                 enabled: false
-#           resources:
-#              requests:
-#                cpu: 100m
-#                memory: 200Mi
-#              limits:
-#                cpu: 300m
-#                memory: 800Mi
+            resources:
+              requests:
+                cpu: 100m
+                memory: 200Mi
+              limits:
+                cpu: 300m
+                memory: 800Mi
     service:
       main:
         ports:
