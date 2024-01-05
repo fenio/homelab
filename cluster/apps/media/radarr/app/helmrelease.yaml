@@ -93,13 +93,13 @@ spec:
               readiness: *probes
               startup:
                 enabled: false
-              resources:
-                requests:
-                  cpu: 50m
-                  memory: 200Mi
-                limits:
-                  cpu: 200m
-                  memory: 500Mi
+            resources:
+              requests:
+                cpu: 50m
+                memory: 200Mi
+              limits:
+                cpu: 200m
+                memory: 500Mi
     service:
       main:
         ports:
