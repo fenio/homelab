@@ -117,7 +117,7 @@ spec:
           gethomepage.dev/name: Prowlarr
           gethomepage.dev/icon: prowlarr.svg
           gethomepage.dev/widget.type: prowlarr
-          gethomepage.dev/widget.url: https://prowlarr.media
+          gethomepage.dev/widget.url: http://prowlarr.media
           gethomepage.dev/widget.key: *API_KEY
         enabled: true
         hosts:
