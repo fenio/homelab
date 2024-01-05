@@ -73,7 +73,7 @@ spec:
               RADARR__THEME: dark
               RADARR__POSTGRES_MAIN_DB: radarr_main
               RADARR__POSTGRES_LOG_DB: radarr_log
-              RADARR__API_KEY: "${RADARR_API_KEY}"
+              RADARR__API_KEY: &API_KEY "${RADARR_API_KEY}"
               RADARR__POSTGRES_HOST: *dbHost
               RADARR__POSTGRES_PORT: "5432"
               RADARR__POSTGRES_USER: *dbUser
@@ -117,10 +117,13 @@ spec:
         annotations:
           kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-          hajimari.io/enable: "true"
-          hajimari.io/appName: Radarr
-          hajimari.io/icon: filmstrip
-          hajimari.io/group: media
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Media
+          gethomepage.dev/name: Radarr
+          gethomepage.dev/icon: Radarr.svg
+          gethomepage.dev/widget.type: Radarr
+          gethomepage.dev/widget.url: http://radarr.media
+          gethomepage.dev/widget.key: *API_KEY
         enabled: true
         hosts:
           - host: &host "movies.${SECRET_DOMAIN}"
