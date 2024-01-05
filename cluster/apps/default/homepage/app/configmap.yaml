@@ -58,7 +58,7 @@ data:
             widget:
               type: homeassistant
               url: http://10.10.10.102:8123
-              key: {{HOMEPAGE_VAR_HASS_TOKEN}}
+              key: {$HA_TOKEN}
     - Infrastructure:
         - TrueNAS:
             href: https://10.10.20.100/

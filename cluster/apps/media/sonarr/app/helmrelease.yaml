@@ -69,7 +69,7 @@ spec:
               SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
               SONARR__LOG_LEVEL: info
               SONARR__THEME: dark
-              SONARR__API_KEY: "${SONARR_API_KEY}"
+              SONARR__API_KEY: &API_KEY "${SONARR_API_KEY}"
               SONARR__POSTGRES_HOST: *dbHost
               SONARR__POSTGRES_PORT: "5432"
               SONARR__POSTGRES_USER: *dbUser
@@ -115,10 +115,13 @@ spec:
         annotations:
           kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-          hajimari.io/enable: "true"
-          hajimari.io/appName: Sonarr
-          hajimari.io/icon: mdi:television-box
-          hajimari.io/group: media
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Media
+          gethomepage.dev/name: Sonarr
+          gethomepage.dev/icon: sonarr.svg
+          gethomepage.dev/widget.type: sonarr
+          gethomepage.dev/widget.url: http://sonarr.media
+          gethomepage.dev/widget.key: *API_KEY
         enabled: true
         hosts:
           - host: &host "tv.${SECRET_DOMAIN}"
