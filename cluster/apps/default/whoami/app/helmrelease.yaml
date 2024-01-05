@@ -44,4 +44,7 @@ spec:
                 service:
                   name: main
                   port: http
-        tls: [hosts: [*host]]
+        tls:
+          - secretName: *host
+            hosts:
+              - *host
