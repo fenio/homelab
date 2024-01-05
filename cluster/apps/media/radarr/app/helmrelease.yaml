@@ -120,8 +120,8 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Media
           gethomepage.dev/name: Radarr
-          gethomepage.dev/icon: Radarr.svg
-          gethomepage.dev/widget.type: Radarr
+          gethomepage.dev/icon: radarr.svg
+          gethomepage.dev/widget.type: radarr
           gethomepage.dev/widget.url: http://radarr.media
           gethomepage.dev/widget.key: *API_KEY
         enabled: true
