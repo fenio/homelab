@@ -64,7 +64,7 @@ spec:
             env:
               TZ: Europe/Warsaw
               SONARR__INSTANCE_NAME: Sonarr
-              SONARR__PORT: &port 80
+              SONARR__PORT: &port 81
               SONARR__AUTHENTICATION_METHOD: External
               SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
               SONARR__LOG_LEVEL: trace
