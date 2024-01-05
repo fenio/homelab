@@ -29,10 +29,10 @@ spec:
     grafana:
       ingress:
         annotations:
-          hajimari.io/enable: "true"
-          hajimari.io/appName: Grafana
-          hajimari.io/icon: simple-icons:grafana
-          hajimari.io/group: infrastructure
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Infrastructure
+          gethomepage.dev/name: Grafana
+          gethomepage.dev/icon: grafana.svg
           kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         enabled: true
