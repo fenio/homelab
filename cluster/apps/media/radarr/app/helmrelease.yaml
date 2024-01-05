@@ -122,7 +122,7 @@ spec:
           gethomepage.dev/name: Radarr
           gethomepage.dev/icon: radarr.svg
           gethomepage.dev/widget.type: radarr
-          gethomepage.dev/widget.url: http://radarr.media
+          gethomepage.dev/widget.url: https://radarr.media
           gethomepage.dev/widget.key: *API_KEY
         enabled: true
         hosts:
