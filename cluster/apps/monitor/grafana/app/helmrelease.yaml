@@ -48,14 +48,7 @@ spec:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
       hosts:
         - &host g.${SECRET_DOMAIN}
-          - path: /
-            service:
-              name: main
-              port: http
-      tls:
-        - secretName: *host
-          hosts:
-            - *host
+      tls: [hosts: [*host]]
     grafana.ini:
       analytics:
         check_for_updates: false
