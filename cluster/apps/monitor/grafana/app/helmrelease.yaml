@@ -24,7 +24,14 @@ spec:
           INIT_POSTGRES_SUPER_PASS: "${SECRET_PG_PASSWORD}"
           INIT_POSTGRES_USER: &dbUser "grafana"
           INIT_POSTGRES_PASS: &dbPass "${GRAFANA_PG_PASSWORD}"
-          INIT_POSTGRES_DBNAME: grafana
+          INIT_POSTGRES_DBNAME: &dbname grafana
+    env:
+      GF_DATABASE_NAME: *dbname
+      GF_DATABASE_HOST: *dbHost
+      GF_DATABASE_USER: *dbUser
+      GF_DATABASE_PASSWORD: *dbPass
+      GF_DATABASE_SSL_MODE: disable
+      GF_DATABASE_TYPE: postgres
     rbac:
       pspEnabled: false
     persistence:
@@ -48,7 +55,7 @@ spec:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
       hosts:
         - &host g.${SECRET_DOMAIN}
-#      tls: [hosts: [*host]]
+      tls: [hosts: [*host]]
     grafana.ini:
       analytics:
         check_for_updates: false
