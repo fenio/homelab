@@ -89,10 +89,10 @@ data:
     theme: dark
     color: slate
     headerStyle: boxedWidgets
-    layout:
-      Media:
-        style: row
-        columns: 4
+#    layout:
+#      Media:
+#        style: row
+#        columns: 4
   widgets.yaml: |
     - resources:
         backend: kubernetes
