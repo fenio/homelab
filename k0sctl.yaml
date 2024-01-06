@@ -12,6 +12,7 @@ spec:
     role: controller
     installFlags:
     - --disable-components=metrics-server
+    - --enable-metrics-scraper
   - ssh:
       address: 10.10.20.101
       user: root
