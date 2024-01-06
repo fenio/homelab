@@ -90,30 +90,9 @@ data:
     color: slate
     headerStyle: boxedWidgets
     layout:
-#      Calendar:
-#        style: columns
-#      Automation:
-#        style: columns
       Media:
         style: row
         columns: 4
-#      Selfhosted:
-#        style: row
-#        columns: 2
-#      Security:
-#        style: row
-#        columns: 2
-#      Downloads:
-#        style: row
-#        columns: 3
-#      Games:
-#        style: row
-#      Infrastructure:
-#        style: row
-#        columns: 3
-#      Monitoring:
-#        style: row
-#        columns: 3
   widgets.yaml: |
     - resources:
         backend: kubernetes
