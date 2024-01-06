@@ -26,12 +26,18 @@ spec:
           INIT_POSTGRES_PASS: &dbPass "${GRAFANA_PG_PASSWORD}"
           INIT_POSTGRES_DBNAME: &dbname grafana
     env:
-      GF_DATABASE_NAME: *dbname
-      GF_DATABASE_HOST: *dbHost
-      GF_DATABASE_USER: *dbUser
-      GF_DATABASE_PASSWORD: *dbPass
-      GF_DATABASE_SSL_MODE: disable
-      GF_DATABASE_TYPE: postgres
+      - name: GF_DATABASE_NAME
+        value: *dbname
+      - name: GF_DATABASE_HOST
+        value: *dbHost
+      - name: GF_DATABASE_USER
+        value: *dbUser
+      - name: GF_DATABASE_PASSWORD
+        value: *dbPass
+      - name: GF_DATABASE_SSL_MODE
+        value: disable
+      - name: GF_DATABASE_TYPE
+        value: postgres
     rbac:
       pspEnabled: false
     persistence:
