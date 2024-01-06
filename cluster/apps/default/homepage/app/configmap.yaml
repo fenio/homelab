@@ -58,7 +58,7 @@ data:
             widget:
               type: homeassistant
               url: http://10.10.10.102:8123
-              key: {$HA_TOKEN}
+              key: ${HA_TOKEN}
     - Infrastructure:
         - TrueNAS:
             href: https://10.10.20.100
@@ -83,7 +83,7 @@ data:
             description: NAS
             widget:
               type: diskstation
-              url: https://10.10.10.100:5000
+              url: https://10.10.10.100:5001
               username: fenio
               password: ${SYNOLOGY_PASSWORD}
   settings.yaml: |
