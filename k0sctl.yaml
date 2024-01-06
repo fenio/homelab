@@ -48,16 +48,21 @@ spec:
             charts:
             - name: cilium
               chartname: cilium/cilium
-              version: "1.14.4"
+              version: "1.14.5"
               namespace: kube-system
               values: |2
                 bgpControlPlane:
                   enabled: true
                 bgp:
                   enabled: false
-                  announce:
-                    loadbalancerIP: true
-                    podCIDR: false
+                bpf:
+                  masquerade: true
+                containerRuntime:
+                  integration: containerd
+                  socketPath: /var/run/k0s/containerd.sock
+                loadBalancer:
+                  algorithm: maglev
+                  mode: dsr
                 kubeProxyReplacement: "strict"
                 k8sServiceHost: 10.10.20.99
                 k8sServicePort: 6443
