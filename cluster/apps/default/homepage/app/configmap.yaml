@@ -6,9 +6,6 @@ metadata:
   namespace: default
 data:
   bookmarks.yaml: |
-    - Media:
-        - YouTube:
-            - href: https://youtube.com/feed/subscriptions
     - Tech:
         - HackerNews:
             - href: https://news.ycombinator.com
@@ -92,14 +89,14 @@ data:
     theme: dark
     color: slate
     headerStyle: boxedWidgets
-#    layout:
+    layout:
 #      Calendar:
 #        style: columns
 #      Automation:
 #        style: columns
-#      Media:
-#        style: columns
-#        columns: 3
+      Media:
+        style: row
+        columns: 4
 #      Selfhosted:
 #        style: row
 #        columns: 2
