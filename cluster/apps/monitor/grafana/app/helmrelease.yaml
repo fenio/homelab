@@ -182,6 +182,10 @@ spec:
         flux-logs:
           url: https://raw.githubusercontent.com/fluxcd/flux2-monitoring-example/main/monitoring/configs/dashboards/logs.json
           datasource: Prometheus
+        flux-external:
+          genId: 16714
+          revision: 1
+          datasource: Prometheus
       kubernetes:
         api-server:
           # renovate: depName="Kubernetes / System / API Server"
