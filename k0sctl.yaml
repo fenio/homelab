@@ -69,8 +69,8 @@ spec:
                   operator:
                     clusterPoolIPv4PodCIDR: 10.20.0.0/16
                     clusterPoolIPv4MaskSize: 24
-#                bpf:
-#                  masquerade: true
+                bpf:
+                  masquerade: true
 #                containerRuntime:
 #                  integration: containerd
 #                  socketPath: /var/run/k0s/containerd.sock
