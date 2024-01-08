@@ -115,7 +115,7 @@ spec:
           - name: Alertmanager
             type: alertmanager
             access: proxy
-            url: http://alertmanager.monitor.svc.cluster.local:9093
+            url: http://vm-alertmanager.monitor.svc.cluster.local:9093
             jsonData:
               implementation: prometheus
     dashboardProviders:
@@ -183,7 +183,7 @@ spec:
           url: https://raw.githubusercontent.com/fluxcd/flux2-monitoring-example/main/monitoring/configs/dashboards/logs.json
           datasource: Prometheus
         flux-external:
-          genId: 16714
+          gnetId: 16714
           revision: 1
           datasource: Prometheus
       kubernetes:
@@ -223,6 +223,10 @@ spec:
           revision: 14
           datasource: Prometheus
       networking:
+        ingress-nginx-external:
+          gnetId: 14314
+          revision: 2
+          datasource: Prometheus
         ingress-nginx:
           url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.json
           datasource: Prometheus
