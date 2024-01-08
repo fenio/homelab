@@ -63,8 +63,8 @@ spec:
         - &host "g.${SECRET_DOMAIN}"
       tls:
         - hosts:
-            - *host
-          secretName: *host
+            - "g.${SECRET_DOMAIN}"  # replace with your actual domain
+          secretName: "g-${SECRET_DOMAIN}-tls"
     grafana.ini:
       analytics:
         check_for_updates: false
