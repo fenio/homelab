@@ -14,4 +14,5 @@ spec:
   retryInterval: 1m
   timeout: 5m
   dependsOn:
-    - name: cloudnative-pg
+    - name: cloudnative-pg-cluster
+    - name: ingress-nginx

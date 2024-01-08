@@ -17,4 +17,4 @@ spec:
   timeout: 5m
   dependsOn:
     - name: ingress-nginx
-    - name: cloudnative-pg
+    - name: cloudnative-pg-cluster
