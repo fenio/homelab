@@ -37,6 +37,7 @@ spec:
       GF_DATABASE_PASSWORD: *dbPass
       GF_DATABASE_SSL_MODE: disable
       GF_DATABASE_TYPE: postgres
+      GF_SECURITY_ADMIN_USER: admin
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD}
     rbac:
       pspEnabled: false
