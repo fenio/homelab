@@ -61,6 +61,11 @@ spec:
           "http_user_agent": "$http_user_agent"}
       metrics:
         enabled: true
+        serviceMonitor:
+          enabled: true
+          namespace: networking
+          namespaceSelector:
+            any: true
       resources:
         requests:
           cpu: 50m
