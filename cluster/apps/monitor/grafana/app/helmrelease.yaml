@@ -180,7 +180,6 @@ spec:
             allowUiUpdates: true
             options:
               path: /var/lib/grafana/dashboards/vm
-
     dashboards:
       flux:
         flux-cluster:
