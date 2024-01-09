@@ -27,7 +27,7 @@ spec:
   values:
     victoria-metrics-operator:
       operator:
-      disable_prometheus_converter: false
+        disable_prometheus_converter: false
     fullnameOverride: vm
     grafana:
       enabled: false
