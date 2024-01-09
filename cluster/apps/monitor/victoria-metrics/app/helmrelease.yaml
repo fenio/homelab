@@ -37,6 +37,13 @@ spec:
     vmagent:
       ingress:
         enabled: true
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Infrastructure
+          gethomepage.dev/name: VM Agent
+          gethomepage.dev/icon: si:victoriametrics
+          kubernetes.io/ingress.class: "nginx"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
           - agent.${SECRET_DOMAIN}
         tls:
