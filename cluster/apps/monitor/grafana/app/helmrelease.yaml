@@ -171,6 +171,16 @@ spec:
             allowUiUpdates: true
             options:
               path: /var/lib/grafana/dashboards/system
+           - name: "vm"
+            orgId: 1
+            folder: "VictoriaMetrics"
+            type: file
+            disableDeletion: false
+            editable: true
+            allowUiUpdates: true
+            options:
+              path: /var/lib/grafana/dashboards/vm
+
     dashboards:
       flux:
         flux-cluster:
@@ -251,5 +261,10 @@ spec:
           # renovate: depName="Node Exporter Full"
         node-exporter-full:
           gnetId: 1860
+          revision: 31
+          datasource: Prometheus
+      vm:
+        single:
+          gnetId: 10229
           revision: 31
           datasource: Prometheus
