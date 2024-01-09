@@ -25,9 +25,21 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    victoria-metrics-operator:
+      operator:
+      disable_prometheus_converter: false
     fullnameOverride: vm
     grafana:
       enabled: false
     coreDns:
       spec:
         jobLabel: "jobLabel"
+    vmagent:
+      ingress:
+        enabled: true
+        hosts:
+          - agent.${SECRET_DOMAIN}
+        tls:
+          - hosts:
+              - "agent.${SECRET_DOMAIN}"  # replace with your actual domain
+            secretName: "agent-${SECRET_DOMAIN}-tls"
