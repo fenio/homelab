@@ -41,7 +41,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Infrastructure
           gethomepage.dev/name: VM Agent
-          gethomepage.dev/icon: si:victoriametrics
+          gethomepage.dev/icon: si-621773
           kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
