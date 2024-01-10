@@ -4,3 +4,4 @@ resources:
   - ./helmrelease.yaml
   - ./prometheus-crds.yaml
   - ./flux.yaml
+  - ./k0s.yaml
