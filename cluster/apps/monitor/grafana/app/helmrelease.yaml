@@ -171,7 +171,7 @@ spec:
             allowUiUpdates: true
             options:
               path: /var/lib/grafana/dashboards/system
-          - name: "vm"
+          - name: "victoria-metrics"
             orgId: 1
             folder: "VM"
             type: file
