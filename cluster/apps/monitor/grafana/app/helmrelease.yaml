@@ -262,7 +262,7 @@ spec:
           gnetId: 1860
           revision: 31
           datasource: Prometheus
-      vm:
+      victoria-metrics:
         single:
           gnetId: 10229
           revision: 31
