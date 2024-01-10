@@ -173,7 +173,7 @@ spec:
               path: /var/lib/grafana/dashboards/system
           - name: "vm"
             orgId: 1
-            folder: "VictoriaMetrics"
+            folder: "VM"
             type: file
             disableDeletion: false
             editable: true
@@ -186,7 +186,7 @@ spec:
           url: https://raw.githubusercontent.com/fluxcd/flux2-monitoring-example/main/monitoring/configs/dashboards/cluster.json
           datasource: Prometheus
         flux-control-plane:
-          url: https://raw.githubusercontent.com/fluxcd/flux2-monitoring-example/main/monitoring/configs/dashboards/cluster-plane.json
+          url: https://raw.githubusercontent.com/fluxcd/flux2-monitoring-example/main/monitoring/configs/dashboards/control-plane.json
           datasource: Prometheus
         flux-logs:
           url: https://raw.githubusercontent.com/fluxcd/flux2-monitoring-example/main/monitoring/configs/dashboards/logs.json
@@ -244,7 +244,7 @@ spec:
           datasource: Prometheus
         external-dns:
           # renovate: depName="External-DNS"
-          gnetId: 35038
+          gnetId: 15038
           revision: 3
           datasource: Prometheus
       storage:
