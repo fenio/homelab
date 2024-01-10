@@ -28,6 +28,8 @@ spec:
     keepHistory: false
   values:
     provider: linode
+    serviceMonitor:
+      enabled: true
     extraArgs:
       - --default-targets=${EXTERNAL_IP}
     env:
