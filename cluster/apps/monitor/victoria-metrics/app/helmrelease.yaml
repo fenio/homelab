@@ -38,7 +38,7 @@ spec:
       spec:
         global:
           externalLabels:
-            cluster: ''
+            cluster: "lab"
       ingress:
         enabled: true
         annotations:
