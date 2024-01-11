@@ -21,6 +21,8 @@ spec:
       shared_buffers: 128MB
   monitoring:
     enablePodMonitor: true
+    podMonitorMetricRelabelings:
+      - honorLabels: true
   resources:
     requests:
       cpu: 100m
