@@ -34,11 +34,16 @@ spec:
     coreDns:
       spec:
         jobLabel: "jobLabel"
+    kubeControllerManager:
+      enabled: false
+    kubeEtcd:
+      enabled: false
+    kubeScheduler:
+      enabled: false
     vmagent:
       spec:
-        global:
-          external_labels:
-            cluster: "lab"
+        externalLabels:
+          cluster: lab
       ingress:
         enabled: true
         annotations:
