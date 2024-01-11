@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - ./cluster.yaml
   - ./prometheusrule.yaml
+  - ./podmonitor.yaml
