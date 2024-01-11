@@ -267,3 +267,7 @@ spec:
           gnetId: 10229
           revision: 31
           datasource: Prometheus
+        vmagent:
+          gnetId: 12683
+          revision: 14
+          datasource: Prometheus
