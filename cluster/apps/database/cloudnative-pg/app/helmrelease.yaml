@@ -27,6 +27,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    crds:
+      create: true
     replicaCount: 3
     resources:
       requests:
@@ -34,5 +36,3 @@ spec:
         memory: 150Mi
       limits:
         memory: 200Mi
-    monitoring:
-      enablePodMonitor: true
