@@ -22,9 +22,9 @@ spec:
   monitoring:
     enablePodMonitor: true
     podMonitorMetricRelabelings:
-      - { sourceLabels: ["cluster"]
-          regex: 'cluster-name'
-          targetLabel: cluster
+      - { sourceLabels: ["cluster"],
+          regex: 'cluster-name',
+          targetLabel: cluster,
           replacement: 'postgres' }
   resources:
     requests:
