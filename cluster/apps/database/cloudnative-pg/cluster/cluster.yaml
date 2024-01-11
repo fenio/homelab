@@ -19,9 +19,6 @@ spec:
       max_connections: "300"
       work_mem: 64MB
       shared_buffers: 128MB
-  monitoring:
-    enablePodMonitor: true
-    honorLabels: true
   resources:
     requests:
       cpu: 100m
