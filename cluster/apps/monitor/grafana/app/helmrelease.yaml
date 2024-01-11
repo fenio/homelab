@@ -133,7 +133,7 @@ spec:
           - name: "storage"
             disableDeletion: false
             editable: true
-            folder: "Storage"
+            folder: "Postgres"
             options:
               path: /var/lib/grafana/dashboards/database
             orgId: 1
@@ -173,7 +173,7 @@ spec:
               path: /var/lib/grafana/dashboards/system
           - name: "victoria-metrics"
             orgId: 1
-            folder: "VM-Dashboards"
+            folder: "VicoriaMetrics"
             type: file
             disableDeletion: false
             editable: true
@@ -182,14 +182,8 @@ spec:
               path: /var/lib/grafana/dashboards/vm
     dashboards:
       flux:
-        flux-cluster:
-          url: https://raw.githubusercontent.com/fluxcd/flux2-monitoring-example/main/monitoring/configs/dashboards/cluster.json
-          datasource: Prometheus
         flux-control-plane:
           url: https://raw.githubusercontent.com/fluxcd/flux2-monitoring-example/main/monitoring/configs/dashboards/control-plane.json
-          datasource: Prometheus
-        flux-logs:
-          url: https://raw.githubusercontent.com/fluxcd/flux2-monitoring-example/main/monitoring/configs/dashboards/logs.json
           datasource: Prometheus
         flux-external:
           gnetId: 16714
