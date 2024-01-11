@@ -21,6 +21,9 @@ spec:
       shared_buffers: 128MB
   monitoring:
     enablePodMonitor: true
+    podMonitorMetricRelabelings:
+      - { sourceLabels: ["cluster"], targetLabel: cnpg_cluster, action: replace }
+      - { regex: cluster, action: labeldrop }
   resources:
     requests:
       cpu: 100m
