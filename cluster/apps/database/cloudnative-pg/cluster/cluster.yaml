@@ -22,8 +22,7 @@ spec:
   monitoring:
     enablePodMonitor: true
     podMonitorMetricRelabelings:
-      - { sourceLabels: ["cluster"], targetLabel: cnpg_cluster, action: replace }
-      - { regex: cluster, action: labeldrop }
+      - { sourceLabels: ["cnpg_cluster"], targetLabel: cluster, action: replace }
   resources:
     requests:
       cpu: 100m
