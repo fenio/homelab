@@ -35,6 +35,9 @@ spec:
       spec:
         jobLabel: "jobLabel"
     vmagent:
+      spec:
+        externalLabels:
+          cluster: ''
       ingress:
         enabled: true
         annotations:
