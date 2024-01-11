@@ -7,8 +7,8 @@ metadata:
   namespace: database
 spec:
   podMetricsEndpoints:
-    honorLabels: true
-    port: metrics
+    - honorLabels: true
+    - port: metrics
   selector:
     matchLabels:
       cnpg.io/cluster: postgres
