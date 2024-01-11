@@ -22,7 +22,7 @@ spec:
   monitoring:
     enablePodMonitor: true
     podMonitorMetricRelabelings:
-      - { sourceLabels: ["cnpg_cluster"], targetLabel: cluster }
+      - { sourceLabels: ["exported_cluster"], targetLabel: cluster }
   resources:
     requests:
       cpu: 100m
