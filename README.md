@@ -45,7 +45,7 @@ Obviously every host which is later part of the cluster needs to be accessible v
 
 
 ```sh
-❯ ~ $ cat k0sctl.yaml
+❯ ~/homelab cat k0sctl.yaml
 apiVersion: k0sctl.k0sproject.io/v1beta1
 kind: Cluster
 metadata:
@@ -58,8 +58,14 @@ spec:
       port: 22
       keyPath: ~/.ssh/id_rsa
     role: controller
+    files:
+    - name: Prometheus CRDs
+      src: prometheus-crds.yaml
+      dstDir: /var/lib/k0s/manifests/prometheus/
+      perm: 0600
     installFlags:
     - --disable-components=metrics-server
+    - --enable-metrics-scraper
   - ssh:
       address: 10.10.20.101
       user: root
@@ -79,7 +85,7 @@ spec:
       keyPath: ~/.ssh/id_rsa
     role: worker
   k0s:
-    version: 1.28.4+k0s.0
+    version: 1.28.5+k0s.0
     dynamicConfig: false
     config:
       spec:
@@ -95,25 +101,37 @@ spec:
             charts:
             - name: cilium
               chartname: cilium/cilium
-              version: "1.14.4"
+              version: "1.14.5"
               namespace: kube-system
               values: |2
                 bgpControlPlane:
                   enabled: true
-                kubeProxyReplacement: "strict"
+                bgp:
+                  enabled: false
+                kubeProxyReplacement: true
                 k8sServiceHost: 10.10.20.99
                 k8sServicePort: 6443
-                global:
-                  encryption:
-                    enabled: true
-                    nodeEncryption: true
+                encryption:
+                  enabled: true
+                  type: wireguard
+                  nodeEncryption: true
                 operator:
                   replicas: 1
+                  prometheus:
+                    enabled: true
+                    serviceMonitor:
+                      enabled: true
                 ipam:
-                  mode: "kubernetes"
+                  mode: kubernetes
                   operator:
-                    clusterPoolIPv4PodCIDR: "10.20.0.0/16"
+                    clusterPoolIPv4PodCIDR: 10.20.0.0/16
                     clusterPoolIPv4MaskSize: 24
+                bpf:
+                  masquerade: true
+                prometheus:
+                  enabled: true
+                  serviceMonitor:
+                    enabled: true
 ```
 
 Once you've got such configuration you just have to run the following command:
@@ -131,33 +149,36 @@ Anonymized telemetry of usage will be sent to the authors.
 By continuing to use k0sctl you agree to these terms:
 https://k0sproject.io/licenses/eula
 INFO ==> Running phase: Connect to hosts
-INFO [ssh] 10.10.20.103:22: connected
 INFO [ssh] 10.10.20.99:22: connected
-INFO [ssh] 10.10.20.101:22: connected
 INFO [ssh] 10.10.20.102:22: connected
+INFO [ssh] 10.10.20.103:22: connected
+INFO [ssh] 10.10.20.101:22: connected
 INFO ==> Running phase: Detect host operating systems
-INFO [ssh] 10.10.20.99:22: is running Debian GNU/Linux 12 (bookworm)
 INFO [ssh] 10.10.20.103:22: is running Debian GNU/Linux 12 (bookworm)
-INFO [ssh] 10.10.20.102:22: is running Debian GNU/Linux 12 (bookworm)
+INFO [ssh] 10.10.20.99:22: is running Debian GNU/Linux 12 (bookworm)
 INFO [ssh] 10.10.20.101:22: is running Debian GNU/Linux 12 (bookworm)
+INFO [ssh] 10.10.20.102:22: is running Debian GNU/Linux 12 (bookworm)
 INFO ==> Running phase: Acquire exclusive host lock
 INFO ==> Running phase: Prepare hosts
+INFO [ssh] 10.10.20.99:22: installing package curl
 INFO ==> Running phase: Gather host facts
 INFO [ssh] 10.10.20.102:22: using node2 as hostname
-INFO [ssh] 10.10.20.99:22: using master as hostname
 INFO [ssh] 10.10.20.103:22: using node3 as hostname
 INFO [ssh] 10.10.20.101:22: using node1 as hostname
-INFO [ssh] 10.10.20.102:22: discovered enp1s0 as private interface
+INFO [ssh] 10.10.20.99:22: using master as hostname
 INFO [ssh] 10.10.20.103:22: discovered enp1s0 as private interface
+INFO [ssh] 10.10.20.102:22: discovered enp1s0 as private interface
 INFO [ssh] 10.10.20.101:22: discovered enp1s0 as private interface
 INFO [ssh] 10.10.20.99:22: discovered ens3 as private interface
 INFO ==> Running phase: Validate hosts
 INFO ==> Running phase: Validate facts
 INFO ==> Running phase: Download k0s on hosts
-INFO [ssh] 10.10.20.101:22: downloading k0s v1.28.5+k0s.0
 INFO [ssh] 10.10.20.103:22: downloading k0s v1.28.5+k0s.0
+INFO [ssh] 10.10.20.101:22: downloading k0s v1.28.5+k0s.0
 INFO [ssh] 10.10.20.102:22: downloading k0s v1.28.5+k0s.0
 INFO [ssh] 10.10.20.99:22: downloading k0s v1.28.5+k0s.0
+INFO ==> Running phase: Upload files to hosts
+INFO [ssh] 10.10.20.99:22: uploading Prometheus CRDs
 INFO ==> Running phase: Install k0s binaries on hosts
 INFO [ssh] 10.10.20.99:22: validating configuration
 INFO ==> Running phase: Configure k0s
@@ -168,26 +189,26 @@ INFO [ssh] 10.10.20.99:22: waiting for the k0s service to start
 INFO [ssh] 10.10.20.99:22: waiting for kubernetes api to respond
 INFO ==> Running phase: Install workers
 INFO [ssh] 10.10.20.103:22: validating api connection to https://10.10.20.99:6443
-INFO [ssh] 10.10.20.102:22: validating api connection to https://10.10.20.99:6443
 INFO [ssh] 10.10.20.101:22: validating api connection to https://10.10.20.99:6443
+INFO [ssh] 10.10.20.102:22: validating api connection to https://10.10.20.99:6443
 INFO [ssh] 10.10.20.99:22: generating a join token for worker 1
 INFO [ssh] 10.10.20.99:22: generating a join token for worker 2
 INFO [ssh] 10.10.20.99:22: generating a join token for worker 3
 INFO [ssh] 10.10.20.101:22: writing join token
 INFO [ssh] 10.10.20.102:22: writing join token
 INFO [ssh] 10.10.20.103:22: writing join token
-INFO [ssh] 10.10.20.102:22: installing k0s worker
 INFO [ssh] 10.10.20.101:22: installing k0s worker
+INFO [ssh] 10.10.20.102:22: installing k0s worker
 INFO [ssh] 10.10.20.103:22: installing k0s worker
-INFO [ssh] 10.10.20.103:22: starting service
 INFO [ssh] 10.10.20.102:22: starting service
+INFO [ssh] 10.10.20.103:22: starting service
 INFO [ssh] 10.10.20.101:22: starting service
 INFO [ssh] 10.10.20.103:22: waiting for node to become ready
-INFO [ssh] 10.10.20.102:22: waiting for node to become ready
 INFO [ssh] 10.10.20.101:22: waiting for node to become ready
+INFO [ssh] 10.10.20.102:22: waiting for node to become ready
 INFO ==> Running phase: Release exclusive host lock
 INFO ==> Running phase: Disconnect from hosts
-INFO ==> Finished in 1m41s
+INFO ==> Finished in 1m42s
 INFO k0s cluster version v1.28.5+k0s.0 is now installed
 INFO Tip: To access the cluster you can now fetch the admin kubeconfig using:
 INFO      k0sctl kubeconfig
