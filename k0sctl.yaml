@@ -13,7 +13,7 @@ spec:
     files:
     - name: Prometheus CRDs
       src: prometheus-crds.yaml
-      dstDir: /var/lib/k0s/manifests
+      dstDir: /var/lib/k0s/manifests/prometheus/
       perm: 0600
     installFlags:
     - --disable-components=metrics-server
