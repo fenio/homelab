@@ -15,6 +15,9 @@ spec:
         kind: HelmRepository
         name: cloudnative-pg
         namespace: flux-system
+  dependsOn:
+    - name: iscsi
+      namespace: storage
   maxHistory: 3
   install:
     createNamespace: true
