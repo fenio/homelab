@@ -13,7 +13,8 @@ spec:
         name: grafana
         namespace: flux-system
   dependsOn:
-    - name: network/ingress-nginx
+    - name: ingress-nginx
+      namespace: network
   interval: 30m
   values:
     annotations:
