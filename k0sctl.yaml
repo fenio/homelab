@@ -71,7 +71,8 @@ spec:
                   replicas: 1
                   prometheus:
                     enabled: true
-                    serviceMonitor: enabled
+                    serviceMonitor:
+                      enabled: true
                 ipam:
                   mode: kubernetes
                   operator:
@@ -81,4 +82,5 @@ spec:
                   masquerade: true
                 prometheus:
                   enabled: true
-                  serviceMonitor: enabled
+                  serviceMonitor:
+                    enabled: true
