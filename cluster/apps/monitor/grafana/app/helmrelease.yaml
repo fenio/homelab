@@ -12,6 +12,8 @@ spec:
         kind: HelmRepository
         name: grafana
         namespace: flux-system
+  dependsOn:
+    - name: ingress-nginx
   interval: 30m
   values:
     annotations:
