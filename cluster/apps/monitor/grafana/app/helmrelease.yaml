@@ -231,6 +231,30 @@ spec:
           revision: 14
           datasource: Prometheus
       networking:
+        cilium-agent:
+          gnetId: 16611
+          revision: 1
+          datasource: Prometheus
+        cilium-operator:
+          gnetId: 16612
+          revision: 1
+          datasource: Prometheus
+        hubble:
+          gnetId: 16613
+          revision: 1
+          datasource: Prometheus
+        hubble-l7:
+          gnetId: 19423
+          revision: 1
+          datasource: Prometheus
+        hubble-dns:
+          gnetId: 19425
+          revision: 1
+          datasource: Prometheus
+        hubble-network:
+          gnetId: 19424
+          revision: 1
+          datasource: Prometheus
         ingress-nginx-external:
           gnetId: 14314
           revision: 2
