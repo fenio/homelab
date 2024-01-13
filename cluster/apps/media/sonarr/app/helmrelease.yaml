@@ -48,7 +48,7 @@ spec:
           init-db:
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: 15.5
+              tag: 16.1
               pullPolicy: IfNotPresent
             env:
               INIT_POSTGRES_HOST: &dbHost "postgres-rw.database.svc.cluster.local"
