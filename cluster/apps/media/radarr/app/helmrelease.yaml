@@ -14,6 +14,13 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+  dependsOn:
+    - name: cloudnative-pg
+      namespace: database
+    - name: ingress-nginx
+      namespace: network
+    - name: nfs
+      namespace: storage
   maxHistory: 3
   install:
     createNamespace: true
