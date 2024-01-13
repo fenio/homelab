@@ -56,6 +56,28 @@ spec:
               version: "1.14.5"
               namespace: kube-system
               values: |2
+                hubble:
+                  enabled: true
+                  metrics:
+                    enabled:
+                      - dns:query
+                      - drop
+                      - tcp
+                      - flow
+                      - port-distribution
+                      - icmp
+                      - http
+                    serviceMonitor:
+                      enabled: true
+                  relay:
+                    enabled: true
+                    rollOutPods: true
+                    prometheus:
+                      serviceMonitor:
+                        enabled: true
+                  ui:
+                    enabled: true
+                    rollOutPods: true
                 bgpControlPlane:
                   enabled: true
                 bgp:
