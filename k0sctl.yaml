@@ -10,6 +10,11 @@ spec:
       port: 22
       keyPath: ~/.ssh/id_rsa
     role: controller
+    files:
+    - name: Prometheus CRDs
+      src: prometheus-crds.yaml
+      dstDir: /var/lib/k0s/manifests
+      perm: 0600
     installFlags:
     - --disable-components=metrics-server
     - --enable-metrics-scraper
@@ -66,6 +71,7 @@ spec:
                   replicas: 1
                   prometheus:
                     enabled: true
+                    serviceMonitor: enabled
                 ipam:
                   mode: kubernetes
                   operator:
@@ -75,3 +81,4 @@ spec:
                   masquerade: true
                 prometheus:
                   enabled: true
+                  serviceMonitor: enabled
