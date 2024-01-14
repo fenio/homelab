@@ -96,16 +96,6 @@ spec:
   #  - name: iscsi
   #    parameters:
   #      detachedSnapshots: "true"
-    driver:
-      resources:
-        requests:
-          cpu: 50m
-          memory: 100Mi
-          ephemeral-storage: 1Gi
-        limits:
-          cpu: 100m
-          memory: 200Mi
-          ephemeral-storage: 5Gi
       config:
         driver: freenas-api-iscsi
         instance_id:
@@ -140,6 +130,16 @@ spec:
           extentAvailThreshold: 0
     node:
       kubeletHostPath: /var/lib/k0s/kubelet
+      driver:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+            ephemeral-storage: 1Gi
+          limits:
+            cpu: 100m
+            memory: 200Mi
+            ephemeral-storage: 5Gi
       driverRegistrar:
         resources:
           requests:
