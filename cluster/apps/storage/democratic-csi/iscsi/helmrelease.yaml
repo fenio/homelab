@@ -16,8 +16,6 @@ spec:
   values:
     controller:
       externalAttacher:
-        image:
-          pullPolicy: Always
         resources:
           requests:
             cpu: 50m
