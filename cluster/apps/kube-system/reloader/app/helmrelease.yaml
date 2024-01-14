@@ -28,6 +28,9 @@ spec:
   values:
     fullnameOverride: reloader
     resources:
+      requests:
+        cpu: 20m
+        memory: 30Mi
       limits:
         cpu: 50m
         memory: 50Mi
