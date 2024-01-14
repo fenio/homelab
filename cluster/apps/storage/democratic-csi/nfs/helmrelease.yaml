@@ -98,15 +98,6 @@ spec:
   #    parameters:
   #      detachedSnapshots: "true"
     driver:
-      resources:
-        requests:
-          cpu: 50m
-          memory: 100Mi
-          ephemeral-storage: 1Gi
-        limits:
-          cpu: 100m
-          memory: 200Mi
-          ephemeral-storage: 5Gi
       config:
         driver: freenas-api-nfs
         instance_id:
@@ -134,7 +125,16 @@ spec:
           shareMapallUser: ""
           shareMapallGroup: ""
     node:
-      kubeletHostPath: /var/lib/k0s/kubelet
+      driver:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+            ephemeral-storage: 1Gi
+          limits:
+            cpu: 100m
+            memory: 200Mi
+            ephemeral-storage: 5Gi
       driverRegistrar:
         resources:
           requests:
@@ -145,3 +145,4 @@ spec:
             cpu: 100m
             memory: 200Mi
             ephemeral-storage: 5Gi
+      kubeletHostPath: /var/lib/k0s/kubelet
