@@ -104,9 +104,11 @@ spec:
               requests:
                 cpu: 50m
                 memory: 200Mi
+                ephemeral-storage: 1Gi
               limits:
                 cpu: 200m
                 memory: 500Mi
+                ephemeral-storage: 5Gi
     service:
       main:
         ports:
