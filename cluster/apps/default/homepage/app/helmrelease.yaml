@@ -32,9 +32,11 @@ spec:
               requests:
                 cpu: 20m
                 memory: 100Mi
+                ephemeral-storage: 1Gi
               limits:
                 cpu: 50m
                 memory: 200Mi
+                ephemeral-storage: 5Gi
     service:
       main:
         ports:
