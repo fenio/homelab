@@ -54,17 +54,6 @@ spec:
             cpu: 100m
             memory: 200Mi
             ephemeral-storage: 5Gi
-    node:
-      driverRegistrar:
-        resources:
-          requests:
-            cpu: 50m
-            memory: 100Mi
-            ephemeral-storage: 1Gi
-          limits:
-            cpu: 100m
-            memory: 200Mi
-            ephemeral-storage: 5Gi
     csiProxy:
       resources:
         requests:
@@ -137,3 +126,13 @@ spec:
           shareMapallGroup: ""
     node:
       kubeletHostPath: /var/lib/k0s/kubelet
+      driverRegistrar:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+            ephemeral-storage: 1Gi
+          limits:
+            cpu: 100m
+            memory: 200Mi
+            ephemeral-storage: 5Gi
