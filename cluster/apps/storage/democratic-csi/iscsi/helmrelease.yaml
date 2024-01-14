@@ -96,6 +96,7 @@ spec:
   #  - name: iscsi
   #    parameters:
   #      detachedSnapshots: "true"
+    driver:
       config:
         driver: freenas-api-iscsi
         instance_id:
