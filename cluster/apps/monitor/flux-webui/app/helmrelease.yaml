@@ -52,11 +52,11 @@ spec:
       create: true
       impersonationResourceNames: ["admin"]
     resources:
-      limits:
+      requests:
         cpu: 50m
         memory: 80Mi
         ephemeral-storage: 1Gi
-      requests:
-        cpu: 200m
-        memory: 200Mi
+      limits:
+        cpu: 100m
+        memory: 120Mi
         ephemeral-storage: 5Gi
