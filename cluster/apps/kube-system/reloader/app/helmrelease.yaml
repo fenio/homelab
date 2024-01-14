@@ -28,13 +28,14 @@ spec:
   values:
     fullnameOverride: reloader
     readOnlyRootFileSystem: true
-    deployment:
-      resources:
-        requests:
-          cpu: 20m
-          memory: 30Mi
-        limits:
-          cpu: 50m
-          memory: 50Mi
-    image:
-      pullPolicy: Always
+    reloader:
+      deployment:
+        resources:
+          requests:
+            cpu: 20m
+            memory: 30Mi
+          limits:
+            cpu: 50m
+            memory: 50Mi
+      image:
+        pullPolicy: Always
