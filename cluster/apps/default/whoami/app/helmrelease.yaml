@@ -24,6 +24,13 @@ spec:
               tag: v1.10.1
             env:
               WHOAMI_PORT_NUMBER: &port 8080
+            resources:
+              requests:
+                cpu: 20m
+                memory: 50Mi
+              limits:
+                cpu: 50m
+                memory: 50Mi
     service:
       main:
         ports:
