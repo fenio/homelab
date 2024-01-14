@@ -42,6 +42,7 @@ spec:
             image:
               repository: ghcr.io/onedr0p/transmission
               tag: "4.0.5"
+              pullPolicy: Always
             probes:
               liveness: &probes
                 enabled: false

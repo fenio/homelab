@@ -49,7 +49,7 @@ spec:
             image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 16.1
-              pullPolicy: IfNotPresent
+              pullPolicy: Always
             env:
               INIT_POSTGRES_HOST: &dbHost "postgres-rw.database.svc.cluster.local"
               INIT_POSTGRES_SUPER_PASS: "${SECRET_PG_PASSWORD}"
@@ -68,6 +68,7 @@ spec:
             image:
               repository: ghcr.io/onedr0p/sonarr
               tag: 4.0.0.748
+              pullPolicy: Always
             env:
               TZ: Europe/Warsaw
               SONARR__INSTANCE_NAME: Sonarr

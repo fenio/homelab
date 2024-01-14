@@ -30,6 +30,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    image:
+      pullPolicy: Always
     crds:
       create: true
     replicaCount: 3
