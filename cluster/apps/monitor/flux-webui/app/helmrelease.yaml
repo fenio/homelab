@@ -51,3 +51,12 @@ spec:
     rbac:
       create: true
       impersonationResourceNames: ["admin"]
+    resources:
+      limits:
+        cpu: 50m
+        memory: 80Mi
+        ephemeral-storage: 1Gi
+      requests:
+        cpu: 200m
+        memory: 200Mi
+        ephemeral-storage: 5Gi
