@@ -13,6 +13,47 @@ spec:
         name: democratic-csi
         namespace: flux-system
   values:
+    controller:
+      externalAttacher:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+            ephemeral-storage: 1Gi
+          limits:
+            cpu: 100m
+            memory: 200Mi
+            ephemeral-storage: 5Gi
+      externalProvisioner:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+            ephemeral-storage: 1Gi
+          limits:
+            cpu: 100m
+            memory: 200Mi
+            ephemeral-storage: 5Gi
+      externalResizer:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+            ephemeral-storage: 1Gi
+          limits:
+            cpu: 100m
+            memory: 200Mi
+            ephemeral-storage: 5Gi
+      externalSnapshotter:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+            ephemeral-storage: 1Gi
+          limits:
+            cpu: 100m
+            memory: 200Mi
+            ephemeral-storage: 5Gi
     csiDriver:
       name: "nfs"
     storageClasses:
