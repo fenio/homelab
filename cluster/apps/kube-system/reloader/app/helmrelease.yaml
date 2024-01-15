@@ -32,10 +32,12 @@ spec:
       deployment:
         resources:
           requests:
-            cpu: 20m
+            cpu: 30m
             memory: 30Mi
+            ephemeral-storage: 1Gi
           limits:
-            cpu: 50m
+            cpu: 100m
             memory: 50Mi
+            ephemeral-storage: 5Gi
         image:
           pullPolicy: Always
