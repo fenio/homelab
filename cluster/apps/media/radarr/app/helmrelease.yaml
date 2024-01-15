@@ -103,9 +103,6 @@ spec:
               readiness: *probes
               startup:
                 enabled: false
-            securityContext:
-              readOnlyRootFilesystem: true
-              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 50m
