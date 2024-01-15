@@ -108,7 +108,7 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-#              capabilities: {drop: ["ALL"]}
+              capabilities: {drop: ["ALL"]}
     persistence:
       config:
         enabled: true
