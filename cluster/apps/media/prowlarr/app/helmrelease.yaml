@@ -106,9 +106,9 @@ spec:
                 memory: 300Mi
                 ephemeral-storage: 5Gi
             securityContext:
-              allowPrivilegeEscalation: false
+#              allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-#              capabilities: {drop: ["ALL"]}
+              capabilities: {drop: ["ALL"]}
     persistence:
       config:
         enabled: true
