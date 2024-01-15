@@ -102,9 +102,9 @@ spec:
               startup:
                 enabled: false
             securityContext:
-#              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-#              capabilities: {drop: ["ALL"]}
+              allowPrivilegeEscalation: false
+#              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 100m
