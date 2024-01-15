@@ -107,8 +107,8 @@ spec:
                 ephemeral-storage: 5Gi
             securityContext:
               allowPrivilegeEscalation: false
-#              readOnlyRootFilesystem: true
-              capabilities: {drop: ["ALL"]}
+              readOnlyRootFilesystem: true
+#              capabilities: {drop: ["ALL"]}
     persistence:
       config:
         enabled: true
