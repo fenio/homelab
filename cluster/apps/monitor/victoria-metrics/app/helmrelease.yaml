@@ -44,6 +44,15 @@ spec:
       spec:
         externalLabels:
           cluster: lab
+       resources:
+         requests:
+           cpu: 10m
+           memory: 200Mi
+           ephemeral-storage: 1Gi
+         limits:
+           cpu: 300m
+           memory: 500Mi
+           ephemeral-storage: 5Gi
       ingress:
         enabled: true
         annotations:
