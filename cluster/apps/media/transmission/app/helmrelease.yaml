@@ -68,6 +68,10 @@ spec:
               TRANSMISSION__RPC_PASSWORD: &API_KEY "${TRANSMISSION_RPC_PASSWORD}"
               # For changing webui
               # TRANSMISSION_WEB_HOME: "/app/web"
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 50m
