@@ -40,6 +40,17 @@ spec:
       enabled: false
     kubeScheduler:
       enabled: false
+    prometheus-node-exporter:
+      spec:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+            ephemeral-storage: 1Gi
+          limits:
+            cpu: 100m
+            memory: 200Mi
+            ephemeral-storage: 5Gi
     vmagent:
       spec:
         externalLabels:
