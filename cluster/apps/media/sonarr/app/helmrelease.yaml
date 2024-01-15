@@ -56,6 +56,9 @@ spec:
               INIT_POSTGRES_USER: &dbUser "sonarr"
               INIT_POSTGRES_PASS: &dbPass "${SONARR_PG_PASSWORD}"
               INIT_POSTGRES_DBNAME: sonarr_main sonarr_log
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 50m
@@ -103,7 +106,6 @@ spec:
                 enabled: false
             securityContext:
               allowPrivilegeEscalation: false
-#              readOnlyRootFilesystem: true
               capabilities: {drop: ["ALL"]}
             resources:
               requests:
