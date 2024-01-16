@@ -112,7 +112,7 @@ spec:
                 memory: 200Mi
                 ephemeral-storage: 1Gi
               limits:
-                memory: 800Mi
+                memory: 250Mi
                 ephemeral-storage: 5Gi
     service:
       main:
