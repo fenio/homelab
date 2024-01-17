@@ -4,6 +4,9 @@ kind: Cluster
 metadata:
   name: postgres
   namespace: database
+  labels:
+    app.kubernetes.io/name: postgres
+    app.kubernetes.io/instance: postgres-xyz
 spec:
   instances: 3
   imageName: ghcr.io/cloudnative-pg/postgresql:16.1-14
