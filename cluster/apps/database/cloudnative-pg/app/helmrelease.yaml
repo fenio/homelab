@@ -5,6 +5,9 @@ kind: HelmRelease
 metadata:
   name: cloudnative-pg
   namespace: database
+  labels:
+    app.kubernetes.io/name: postgres
+    app.kubernetes.io/instance: postgres-xyz
 spec:
   interval: 15m
   chart:
