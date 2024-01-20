@@ -43,18 +43,18 @@ spec:
     extraArgs:
       - --default-targets=${EXTERNAL_IP}
     env:
-#      - name: CF_API_TOKEN
-#        valueFrom:
-#          secretKeyRef:
-#            name: cluster-secrets
-#            key: CF_API_TOKEN
-#      - name: CF_API_EMAIL
-#        valueFrom:
-#          secretKeyRef:
-#            name: cluster-secrets
-#            key: CF_API_EMAIL
-      - name: LINODE_TOKEN
+      - name: CF_API_TOKEN
         valueFrom:
           secretKeyRef:
             name: dns-credentials
-            key: LINODE_TOKEN
+            key: CF_API_TOKEN
+      - name: CF_API_EMAIL
+        valueFrom:
+          secretKeyRef:
+            name: dns-credentials
+            key: CF_API_EMAIL
+#     - name: LINODE_TOKEN
+#        valueFrom:
+#          secretKeyRef:
+#            name: dns-credentials
+#            key: LINODE_TOKEN
