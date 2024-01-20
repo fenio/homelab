@@ -13,3 +13,5 @@ spec:
   interval: 5m
   retryInterval: 1m
   timeout: 5m
+  dependsOn:
+    - name: ingress-nginx
