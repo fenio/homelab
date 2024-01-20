@@ -7,7 +7,6 @@ spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: "${SECRET_EMAIL}"
-    preferredChain: "ISRG Root X1"
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
@@ -25,7 +24,6 @@ spec:
   acme:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     email: "${SECRET_EMAIL}"
-    preferredChain: "ISRG Root X1"
     privateKeySecretRef:
       name: letsencrypt-staging
       - dns01:
