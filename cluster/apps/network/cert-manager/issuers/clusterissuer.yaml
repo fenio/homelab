@@ -26,6 +26,7 @@ spec:
     email: "${CF_API_EMAIL}"
     privateKeySecretRef:
       name: letsencrypt-staging
+    solvers:
       - dns01:
           cloudflare:
             apiTokenSecretRef:
