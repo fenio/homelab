@@ -37,7 +37,7 @@ spec:
       limits:
         memory: 60Mi
         ephemeral-storage: 5Gi
-    provider: linode
+    provider: cloudflare
     serviceMonitor:
       enabled: true
     extraArgs:
