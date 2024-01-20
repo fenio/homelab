@@ -71,7 +71,7 @@ spec:
           main:
             image:
               repository: ghcr.io/onedr0p/sonarr
-              tag: 4.0.1.929
+              tag: 4.0.0.748
               pullPolicy: Always
             env:
               TZ: Europe/Warsaw
