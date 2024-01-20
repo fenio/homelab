@@ -13,6 +13,9 @@ spec:
         kind: HelmRepository
         name: weaveworks
         namespace: flux-system
+  dependsOn:
+    - name: ingress-nginx
+      namespace: network
   maxHistory: 3
   install:
     createNamespace: true
