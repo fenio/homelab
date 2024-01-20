@@ -41,6 +41,7 @@ spec:
             port: *port
     ingress:
       main:
+        className: public
         annotations:
           kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
