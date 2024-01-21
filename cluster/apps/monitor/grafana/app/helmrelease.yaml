@@ -57,13 +57,14 @@ spec:
     serviceAccount:
       autoMount: true
     ingress:
+      className: private
       enabled: true
       annotations:
         gethomepage.dev/enabled: "true"
         gethomepage.dev/group: Infrastructure
         gethomepage.dev/name: Grafana
         gethomepage.dev/icon: grafana.svg
-        kubernetes.io/ingress.class: "nginx"
+        kubernetes.io/ingress.class: "private"
         cert-manager.io/cluster-issuer: "letsencrypt-production"
       hosts:
         - &host "g.${SECRET_DOMAIN}"
