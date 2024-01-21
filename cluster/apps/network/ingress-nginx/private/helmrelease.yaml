@@ -30,7 +30,7 @@ spec:
       service:
         type: LoadBalancer
         annotations:
-          io.cilium/lb-ipam-ips: "10.10.20.111"
+          io.cilium/lb-ipam-ips: "10.10.20.109"
       ingressClassByName: true
       ingressClassResource:
         default: true
