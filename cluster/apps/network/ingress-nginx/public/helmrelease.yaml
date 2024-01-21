@@ -39,6 +39,7 @@ spec:
         default: false
         enabled: true
         name: public
+        controllerValue: "k8s.io/ingress-public"
       admissionWebhooks:
         objectSelector:
           matchExpressions:
