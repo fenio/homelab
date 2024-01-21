@@ -31,12 +31,20 @@ spec:
         type: LoadBalancer
         annotations:
           io.cilium/lb-ipam-ips: "10.10.20.110"
+      kind: Deployment
+      electionID: "ingress-public-leader"
       ingressClassByName: true
       ingressClassResource:
         default: false
         enabled: true
         name: public
         controllerValue: "k8s.io/ingress-public"
+      admissionWebhooks:
+        objectSelector:
+          matchExpressions:
+            - key: ingress-class
+              operator: In
+              values: ["public"]
       config:
         block-user-agents: "GPTBot,~*GPTBot*,ChatGPT-User,~*ChatGPT-User*,Google-Extended,~*Google-Extended*,CCBot,~*CCBot*,Omgilibot,~*Omgilibot*,FacebookBot,~*FacebookBot*" # taken from https://github.com/superseriousbusiness/gotosocial/blob/main/internal/web/robots.go
         client-body-buffer-size: "100M"
