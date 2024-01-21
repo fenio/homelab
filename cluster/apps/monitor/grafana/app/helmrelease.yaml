@@ -57,7 +57,7 @@ spec:
     serviceAccount:
       autoMount: true
     ingress:
-      className: private
+      ingressClassName: private
       enabled: true
       annotations:
         gethomepage.dev/enabled: "true"
