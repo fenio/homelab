@@ -34,10 +34,10 @@ spec:
       username: admin
       passwordHash: ${WW_ADMIN_PASSWORD}
     ingress:
-      className: public
+      className: private
       enabled: true
       annotations:
-        kubernetes.io/ingress.class: "public"
+        kubernetes.io/ingress.class: "private"
         gethomepage.dev/enabled: "true"
         gethomepage.dev/group: Infrastructure
         gethomepage.dev/name: Flux
