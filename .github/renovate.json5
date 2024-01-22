@@ -9,7 +9,6 @@
     "local>fenio/homelab//.github/renovate/grafanaDashboards.json5",
     "local>fenio/homelab//.github/renovate/groups.json5",
     "local>fenio/homelab//.github/renovate/managers.json5",
-    "local>fenio/homelab//.github/renovate/packageRules.json5",
   ],
   ignoreDeps: [
     "ghcr.io/fluxcd/helm-controller",
