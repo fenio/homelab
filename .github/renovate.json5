@@ -4,7 +4,6 @@
     "local>fenio/homelab//.github/renovate/automerge-github-actions.json",
     "local>fenio/homelab//.github/renovate/allowedVersions.json5",
     "local>fenio/homelab//.github/renovate/autoMerge.json5",
-    "local>fenio/homelab//.github/renovate/clusters.json5",
     "local>fenio/homelab//.github/renovate/commitMessage.json5",
     "local>fenio/homelab//.github/renovate/disabledDatasources.json5",
     "local>fenio/homelab//.github/renovate/grafanaDashboards.json5",
