@@ -1,11 +1,7 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: [
-    "github>fenio/renovate-config",
-    "github>fenio/renovate-config:automerge-github-actions",
-    "github>fenio/renovate-config:automerge-galaxy-collections",
-    "github>fenio/renovate-config:automerge-galaxy-roles",
-    "github>fenio/renovate-config:automerge-terraform-providers",
+    "local>fenio/homelab//.github/renovate/automerge-github-actions.json",
     "local>fenio/homelab//.github/renovate/allowedVersions.json5",
     "local>fenio/homelab//.github/renovate/autoMerge.json5",
     "local>fenio/homelab//.github/renovate/clusters.json5",
