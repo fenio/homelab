@@ -11,14 +11,6 @@
       separateMinorPatch: true,
     },
     {
-      description: "Immich group",
-      groupName: "Immich",
-      matchPackagePatterns: ["immich"],
-      matchDatasources: ["docker"],
-      group: {commitMessageTopic: "{{{groupName}}}"},
-      separateMinorPatch: true,
-    },
-    {
       description: "External-Sapshotter group",
       groupName: "External Snapshotter",
       matchPackagePatterns: [
@@ -27,20 +19,6 @@
       ],
       group: {commitMessageTopic: "{{{groupName}}}"},
       separateMinorPatch: true,
-    },
-    {
-      description: "1Password Connect and Sync images",
-      groupName: "1Password",
-      matchPackagePatterns: ["1password"],
-      matchDatasources: ["docker"],
-      group: {commitMessageTopic: "{{{groupName}}}"},
-      separateMinorPatch: true,
-    },
-    {
-      description: "Talos images",
-      groupName: "Talos",
-      matchPackagePatterns: ["talos-images","installer"],
-      group: {commitMessageTopic: "{{{groupName}}}"},
     },
   ],
 }
