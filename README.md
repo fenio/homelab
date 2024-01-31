@@ -85,7 +85,7 @@ spec:
       keyPath: ~/.ssh/id_rsa
     role: worker
   k0s:
-    version: 1.28.5+k0s.0
+    version: 1.29.1+k0s.0
     dynamicConfig: false
     config:
       spec:
@@ -173,10 +173,10 @@ INFO [ssh] 10.10.20.99:22: discovered ens3 as private interface
 INFO ==> Running phase: Validate hosts
 INFO ==> Running phase: Validate facts
 INFO ==> Running phase: Download k0s on hosts
-INFO [ssh] 10.10.20.103:22: downloading k0s v1.28.5+k0s.0
-INFO [ssh] 10.10.20.101:22: downloading k0s v1.28.5+k0s.0
-INFO [ssh] 10.10.20.102:22: downloading k0s v1.28.5+k0s.0
-INFO [ssh] 10.10.20.99:22: downloading k0s v1.28.5+k0s.0
+INFO [ssh] 10.10.20.103:22: downloading k0s v1.29.1+k0s.0
+INFO [ssh] 10.10.20.101:22: downloading k0s v1.29.1+k0s.0
+INFO [ssh] 10.10.20.102:22: downloading k0s v1.29.1+k0s.0
+INFO [ssh] 10.10.20.99:22: downloading k0s v1.29.1+k0s.0
 INFO ==> Running phase: Upload files to hosts
 INFO [ssh] 10.10.20.99:22: uploading Prometheus CRDs
 INFO ==> Running phase: Install k0s binaries on hosts
@@ -222,9 +222,9 @@ And after less than 2 minutes you should end up with working cluster with Cilium
 [☸ lab:default]
 ❯ ~ kubectl get nodes
 NAME    STATUS   ROLES    AGE     VERSION
-node1   Ready    <none>   2m10s   v1.28.5+k0s
-node2   Ready    <none>   2m16s   v1.28.5+k0s
-node3   Ready    <none>   2m16s   v1.28.5+k0s
+node1   Ready    <none>   2m10s   v1.29.1+k0s
+node2   Ready    <none>   2m16s   v1.29.1+k0s
+node3   Ready    <none>   2m16s   v1.29.1+k0s
 
 [☸ lab:default]
 ❯ ~ cilium status
@@ -253,7 +253,7 @@ We can get more info about CNI status by running `cilium status` from inside of 
 Defaulted container "cilium-agent" out of: cilium-agent, config (init), mount-cgroup (init), apply-sysctl-overwrites (init), mount-bpf-fs (init), clean-cilium-state (init), install-cni-binaries (init)
 # cilium status
 KVStore:                 Ok   Disabled
-Kubernetes:              Ok   1.28 (v1.28.5+k0s) [linux/amd64]
+Kubernetes:              Ok   1.29 (v1.29.1+k0s) [linux/amd64]
 Kubernetes APIs:         ["EndpointSliceOrEndpoint", "cilium/v2::CiliumClusterwideNetworkPolicy", "cilium/v2::CiliumEndpoint", "cilium/v2::CiliumNetworkPolicy", "cilium/v2::CiliumNode", "cilium/v2alpha1::CiliumCIDRGroup", "core/v1::Namespace", "core/v1::Pods", "core/v1::Service", "networking.k8s.io/v1::NetworkPolicy"]
 KubeProxyReplacement:    True   [enp1s0 10.10.20.101 (Direct Routing), cilium_wg0 ]
 Host firewall:           Disabled
