@@ -101,7 +101,7 @@ spec:
             charts:
             - name: cilium
               chartname: cilium/cilium
-              version: "1.14.5"
+              version: "1.15.0"
               namespace: kube-system
               values: |2
                 bgpControlPlane:
@@ -240,7 +240,7 @@ DaemonSet              cilium             Desired: 3, Ready: 3/3, Available: 3/3
 Containers:            cilium             Running: 3
                        cilium-operator    Running: 1
 Cluster Pods:          6/6 managed by Cilium
-Helm chart version:    1.14.5
+Helm chart version:    1.15.0
 Image versions         cilium             quay.io/cilium/cilium:v1.14.5@sha256:d3b287029755b6a47dee01420e2ea469469f1b174a2089c10af7e5e9289ef05b: 3
                        cilium-operator    quay.io/cilium/operator-generic:v1.14.5@sha256:303f9076bdc73b3fc32aaedee64a14f6f44c8bb08ee9e3956d443021103ebe7a: 1
 ```
@@ -258,7 +258,7 @@ Kubernetes APIs:         ["EndpointSliceOrEndpoint", "cilium/v2::CiliumClusterwi
 KubeProxyReplacement:    True   [enp1s0 10.10.20.101 (Direct Routing), cilium_wg0 ]
 Host firewall:           Disabled
 CNI Chaining:            none
-Cilium:                  Ok   1.14.5 (v1.14.5-85db28be)
+Cilium:                  Ok   1.15.0 (v1.15.0-2db45c46)
 NodeMonitor:             Listening for events on 4 CPUs with 64x4096 of shared memory
 Cilium health daemon:    Ok
 IPAM:                    IPv4: 4/254 allocated from 10.244.1.0/24,
