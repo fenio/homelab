@@ -35,17 +35,17 @@ spec:
             command: ['/bin/bash', '-c']
             args:
             - |
-              echo "port=${DNSMASQ_PORT}" > /etc/dnsmasq/dnsmasq.conf && \
-              echo "address=${DNSMASQ_ADDRESS}" >> /etc/dnsmasq/dnsmasq.conf && \
-              echo "user=${DNSMASQ_USER}" >> /etc/dnsmasq/dnsmasq.conf && \
-              echo "group=${DNSMASQ_GROUP}" >> /etc/dnsmasq/dnsmasq.conf && \
+              echo "port=${DNSMASQ__PORT}" > /etc/dnsmasq/dnsmasq.conf && \
+              echo "address=${DNSMASQ__ADDRESS}" >> /etc/dnsmasq/dnsmasq.conf && \
+              echo "user=${DNSMASQ__USER}" >> /etc/dnsmasq/dnsmasq.conf && \
+              echo "group=${DNSMASQ__GROUP}" >> /etc/dnsmasq/dnsmasq.conf && \
               echo "log-queries" >> /etc/dnsmasq/dnsmasq.conf && \
               cat /etc/dnsmasq/dnsmasq.conf
             env:
-              DNSMASQ_PORT: 9553
-              DNSMASQ_ADDRESS: "/${SECRET_DOMAIN}/10.10.20.109"
-              DNSMASQ_USER: nobody
-              DNSMASQ_GROUP: nobody
+              DNSMASQ__PORT: 9553
+              DNSMASQ__ADDRESS: "/${SECRET_DOMAIN}/10.10.20.109"
+              DNSMASQ__USER: nobody
+              DNSMASQ__GROUP: nobody
         containers:
           main:
             image:
