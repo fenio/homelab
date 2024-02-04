@@ -48,7 +48,6 @@ spec:
         enabled: true
         annotations:
           ingressClassName: private
-          kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
           - host: &host h.${SECRET_DOMAIN}
