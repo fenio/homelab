@@ -29,6 +29,23 @@ spec:
       replicaCount: 2
       service:
         type: LoadBalancer
+        ports:
+          - name: http
+            port: 80
+            targetPort: 80
+            protocol: TCP
+          - name: https
+            port: 443
+            targetPort: 443
+            protocol: TCP
+          - name: dns-tcp
+            port: 53
+            targetPort: 53
+            protocol: TCP
+          - name: dns-udp
+            port: 53
+            targetPort: 53
+            protocol: UDP
         annotations:
           io.cilium/lb-ipam-ips: "10.10.20.109"
       ingressClassByName: true
