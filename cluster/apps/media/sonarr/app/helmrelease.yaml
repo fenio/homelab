@@ -131,7 +131,6 @@ spec:
       main:
         annotations:
           ingressClassName: private
-          kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Media
