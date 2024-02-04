@@ -90,8 +90,8 @@ spec:
           memory: 200Mi
         limits:
           memory: 250Mi
-#      tcp:
-#        53: "network/dnsmasq:9553"
+    tcp:
+      53: "network/dnsmasq:9553"
 #      udp:
 #        53: network/dnsmasq:9553
     defaultBackend:
