@@ -121,7 +121,7 @@ spec:
             targetPort: *port
     ingress:
       main:
-        className: public
+        className: private
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           gethomepage.dev/enabled: "true"

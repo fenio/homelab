@@ -104,9 +104,9 @@ spec:
             subPath: Downloads
     ingress:
       main:
+        className: private
         enabled: true
         annotations:
-          ingressClassName: private
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Media
