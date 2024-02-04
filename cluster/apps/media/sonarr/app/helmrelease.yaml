@@ -129,8 +129,8 @@ spec:
             retain: true
     ingress:
       main:
+        className: private
         annotations:
-          ingressClassName: private
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Media
