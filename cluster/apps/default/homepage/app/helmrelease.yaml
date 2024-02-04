@@ -45,9 +45,9 @@ spec:
             port: 3000
     ingress:
       main:
+        className: private
         enabled: true
         annotations:
-          ingressClassName: private
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
           - host: &host h.${SECRET_DOMAIN}
