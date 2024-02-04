@@ -33,19 +33,19 @@ spec:
               repository: debian
               tag: bullseye-slim
             command: ['/bin/bash', '-c']
-            env:
-              DNSMASQ__PORT: &port 9553
-              DNSMASQ__ADDRESS: &address "/${SECRET_DOMAIN}/10.10.20.109"
-              DNSMASQ__USER: &user nobody
-              DNSMASQ__GROUP: &group nobody
             args:
             - |
-              echo port=*port > /etc/dnsmasq/dnsmasq.conf && \
+              echo port=\${DNSMASQ__PORT} > /etc/dnsmasq/dnsmasq.conf && \
               echo address=*address >> /etc/dnsmasq/dnsmasq.conf && \
               echo user=*user >> /etc/dnsmasq/dnsmasq.conf && \
               echo group=*group >> /etc/dnsmasq/dnsmasq.conf && \
               echo "log-queries" >> /etc/dnsmasq/dnsmasq.conf && \
               cat /etc/dnsmasq/dnsmasq.conf
+            env:
+              DNSMASQ__PORT: 9553
+              DNSMASQ__ADDRESS: "/${SECRET_DOMAIN}/10.10.20.109"
+              DNSMASQ__USER: nobody
+              DNSMASQ__GROUP: nobody
         containers:
           main:
             image:
