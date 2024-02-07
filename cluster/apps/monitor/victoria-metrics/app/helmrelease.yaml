@@ -90,6 +90,16 @@ spec:
               - "agent.${SECRET_DOMAIN}"  # replace with your actual domain
             secretName: "agent-${SECRET_DOMAIN}-tls"
     alertmanager:
+      spec:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+            ephemeral-storage: 1Gi
+          limits:
+            cpu: null
+            memory: 150Mi
+            ephemeral-storage: 2Gi
       ingress:
         ingressClassName: private
         enabled: true
