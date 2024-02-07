@@ -51,7 +51,7 @@ spec:
           limits:
             memory: 200Mi
             ephemeral-storage: 5Gi
-       driver:
+      driver:
         resources:
           requests:
             cpu: 50m
