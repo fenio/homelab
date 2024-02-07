@@ -51,6 +51,14 @@ spec:
             image:
               repository: docker.io/bfenski/dnsmasq
               tag: 2.89-1
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100Mi
+                ephemeral-storage: 1Gi
+              limits:
+                memory: 100Mi
+                ephemeral-storage: 5Gi
     persistence:
       config:
         enabled: true
