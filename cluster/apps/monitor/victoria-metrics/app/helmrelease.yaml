@@ -57,10 +57,10 @@ spec:
             cpu: 200m
             memory: 1G
             ephemeral-storage: 1Gi
-#          limits:
-#            cpu: null
-#            memory: 1500m
-#            ephemeral-storage: 20Gi
+          limits:
+            cpu: null
+            memory: 1.5G
+            ephemeral-storage: 5Gi
     vmagent:
       spec:
         externalLabels:
