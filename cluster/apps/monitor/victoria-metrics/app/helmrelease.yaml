@@ -51,15 +51,15 @@ spec:
             memory: 200Mi
             ephemeral-storage: 5Gi
     vmsingle:
-      spec:
-        resources:
-          requests:
-            cpu: 200m
-            memory: 1000m
+#      spec:
+#        resources:
+#          requests:
+#            cpu: 200m
+#            memory: 1000m
 #            ephemeral-storage: 10Gi
-          limits:
-            cpu: null
-            memory: 1500m
+#          limits:
+#            cpu: null
+#            memory: 1500m
 #            ephemeral-storage: 20Gi
     vmagent:
       spec:
