@@ -65,6 +65,8 @@ spec:
           memory: 100Mi
           ephemeral-storage: 2Gi
     prometheus-node-exporter:
+      image:
+        pullPolicy: Always
       resources:
         requests:
           cpu: 10m
