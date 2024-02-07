@@ -46,7 +46,6 @@ spec:
           kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         enabled: true
-        className: public
         hosts:
           - host: &host whoami.${SECRET_DOMAIN}
             paths:
