@@ -40,16 +40,24 @@ spec:
       enabled: false
     kubeScheduler:
       enabled: false
+    kube-state-metrics:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 100Mi
+          ephemeral-storage: 1Gi
+        limits:
+          memory: 100Mi
+          ephemeral-storage: 2Gi
     prometheus-node-exporter:
-      spec:
-        resources:
-          requests:
-            cpu: 10m
-            memory: 100Mi
-            ephemeral-storage: 1Gi
-          limits:
-            memory: 200Mi
-            ephemeral-storage: 5Gi
+      resources:
+        requests:
+          cpu: 10m
+          memory: 100Mi
+          ephemeral-storage: 1Gi
+        limits:
+          memory: 200Mi
+          ephemeral-storage: 5Gi
     vmsingle:
       spec:
         resources:
