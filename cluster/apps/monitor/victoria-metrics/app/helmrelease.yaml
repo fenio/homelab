@@ -26,9 +26,12 @@ spec:
     keepHistory: false
   values:
     env:
-      VM_VMSINGLEDEFAULT_CONFIGRELOADERCPU: null
-      VM_VMALERTDEFAULT_CONFIGRELOADERCPU: null
-      VM_VMAGENTDEFAULT_CONFIGRELOADERCPU: null
+      - name: VM_VMSINGLEDEFAULT_CONFIGRELOADERCPU
+        value: 10m
+      - name: VM_VMALERTDEFAULT_CONFIGRELOADERCPU
+        value: 10m
+      - name: VM_VMAGENTDEFAULT_CONFIGRELOADERCPU
+        value: 10m
     victoria-metrics-operator:
       resources:
         requests:
