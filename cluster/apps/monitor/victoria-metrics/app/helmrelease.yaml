@@ -69,18 +69,18 @@ spec:
           ephemeral-storage: 1Gi
         limits:
           memory: 200Mi
-          ephemeral-storage: 5Gi
+          ephemeral-storage: 2Gi
     vmsingle:
       spec:
         resources:
           requests:
-            cpu: 200m
-            memory: 1G
+            cpu: 400m
+            memory: 1.2G
             ephemeral-storage: 1Gi
           limits:
             cpu: null
-            memory: 1.5G
-            ephemeral-storage: 5Gi
+            memory: 1.4G
+            ephemeral-storage: 2Gi
     vmalert:
       spec:
         resources:
@@ -102,7 +102,7 @@ spec:
             ephemeral-storage: 1Gi
           limits:
             memory: 300Mi
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 2Gi
       ingress:
         ingressClassName: private
         enabled: true
