@@ -97,6 +97,14 @@ spec:
         plugins: /var/lib/grafana/plugins
         provisioning: /etc/grafana/provisioning
     sidecar:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 120Mi
+          ephemeral-storage: 1Gi
+        limits:
+          memory: 120Mi
+          ephemeral-storage: 2Gi
       datasources:
         enabled: true
         searchNamespace: ALL
