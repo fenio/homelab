@@ -53,13 +53,14 @@ spec:
     vmsingle:
       spec:
         resources:
-          cpu: 200m
-          memory: 1000m
-          ephemeral-storage: 1Gi
-        limits:
-          cpu: 0m
-          memory: 1500m
-          ephemeral-storage: 1Gi
+          requests:
+            cpu: 200m
+            memory: 1000m
+            ephemeral-storage: 1Gi
+          limits:
+            cpu: 0m
+            memory: 1500m
+            ephemeral-storage: 1Gi
     vmagent:
       spec:
         externalLabels:
