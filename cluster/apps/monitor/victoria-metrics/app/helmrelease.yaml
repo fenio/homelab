@@ -25,6 +25,10 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    env:
+      VM_VMSINGLEDEFAULT_CONFIGRELOADERCPU: null
+      VM_VMALERTDEFAULT_CONFIGRELOADERCPU: null
+      VM_VMAGENTDEFAULT_CONFIGRELOADERCPU: null
     victoria-metrics-operator:
       resources:
         requests:
