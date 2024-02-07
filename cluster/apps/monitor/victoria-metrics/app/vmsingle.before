@@ -1,0 +1,67 @@
+Name:             vmsingle-vm-6b666d5d6f-5ktpm
+Namespace:        monitor
+Priority:         0
+Service Account:  vmsingle-vm
+Node:             node2/10.10.20.102
+Start Time:       Wed, 07 Feb 2024 10:43:24 +0100
+Labels:           app.kubernetes.io/component=monitoring
+                  app.kubernetes.io/instance=vm
+                  app.kubernetes.io/name=vmsingle
+                  managed-by=vm-operator
+                  pod-template-hash=6b666d5d6f
+Annotations:      kubectl.kubernetes.io/restartedAt: 2024-02-07T10:17:12+01:00
+Status:           Running
+IP:               10.244.2.204
+IPs:
+  IP:           10.244.2.204
+Controlled By:  ReplicaSet/vmsingle-vm-6b666d5d6f
+Containers:
+  vmsingle:
+    Container ID:  containerd://f94066f433d241fce103847f170a6a81043a33b7b2798f89e861a1bb8dbc5fa4
+    Image:         victoriametrics/victoria-metrics:v1.97.1
+    Image ID:      docker.io/victoriametrics/victoria-metrics@sha256:f80693419f19bdddcf36a04619c6c38163cfa8d078d133159be54ec5e85a6cc9
+    Port:          8429/TCP
+    Host Port:     0/TCP
+    Args:
+      -httpListenAddr=:8429
+      -retentionPeriod=14
+      -storageDataPath=/victoria-metrics-data
+      -vmalert.proxyURL=http://vmalert-vm.monitor.svc:8080
+    State:          Running
+      Started:      Wed, 07 Feb 2024 10:43:36 +0100
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     1200m
+      memory:  1500Mi
+    Requests:
+      cpu:        150m
+      memory:     500Mi
+    Readiness:    http-get http://:8429/health delay=0s timeout=5s period=5s #success=1 #failure=10
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-kl9xk (ro)
+      /victoria-metrics-data from data (rw)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       True
+  ContainersReady             True
+  PodScheduled                True
+Volumes:
+  data:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  vmsingle-vm
+    ReadOnly:   false
+  kube-api-access-kl9xk:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
