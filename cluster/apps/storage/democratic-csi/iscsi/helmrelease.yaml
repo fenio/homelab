@@ -23,7 +23,7 @@ spec:
             ephemeral-storage: 1Gi
           limits:
             memory: 200Mi
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 2Gi
       externalProvisioner:
         resources:
           requests:
@@ -32,7 +32,7 @@ spec:
             ephemeral-storage: 1Gi
           limits:
             memory: 200Mi
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 2Gi
       externalResizer:
         resources:
           requests:
@@ -41,7 +41,7 @@ spec:
             ephemeral-storage: 1Gi
           limits:
             memory: 200Mi
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 2Gi
       externalSnapshotter:
         resources:
           requests:
@@ -50,7 +50,7 @@ spec:
             ephemeral-storage: 1Gi
           limits:
             memory: 200Mi
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 2Gi
       driver:
         resources:
           requests:
@@ -59,26 +59,18 @@ spec:
             ephemeral-storage: 1Gi
           limits:
             memory: 200Mi
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 2Gi
     csiProxy:
       resources:
         requests:
-          cpu: 50m
+          cpu: 10m
           memory: 100Mi
           ephemeral-storage: 1Gi
         limits:
-          memory: 200Mi
-          ephemeral-storage: 5Gi
+          memory: 150Mi
+          ephemeral-storage: 2Gi
     csiDriver:
       name: "iscsi"
-      resources:
-        requests:
-          cpu: 100m
-          memory: 100Mi
-          ephemeral-storage: 1Gi
-        limits:
-          memory: 200Mi
-          ephemeral-storage: 5Gi
     storageClasses:
     - name: iscsi
       defaultClass: true
@@ -134,21 +126,3 @@ spec:
           extentAvailThreshold: 0
     node:
       kubeletHostPath: /var/lib/k0s/kubelet
-      driver:
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
-            ephemeral-storage: 1Gi
-          limits:
-            memory: 200Mi
-            ephemeral-storage: 5Gi
-      driverRegistrar:
-        resources:
-          requests:
-            cpu: 50m
-            memory: 100Mi
-            ephemeral-storage: 1Gi
-          limits:
-            memory: 200Mi
-            ephemeral-storage: 5Gi
