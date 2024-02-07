@@ -84,8 +84,10 @@ spec:
         requests:
           cpu: 50m
           memory: 200Mi
+          ephemeral-storage: 1Gi
         limits:
           memory: 250Mi
+          ephemeral-storage: 2Gi
     defaultBackend:
       enabled: true
       image:
