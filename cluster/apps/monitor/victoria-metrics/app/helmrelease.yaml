@@ -50,7 +50,7 @@ spec:
           limits:
             memory: 200Mi
             ephemeral-storage: 5Gi
-    vmsingle:
+#    vmsingle:
 #      spec:
 #        resources:
 #          requests:
