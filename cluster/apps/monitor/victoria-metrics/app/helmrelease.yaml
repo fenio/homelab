@@ -77,6 +77,16 @@ spec:
             cpu: null
             memory: 1.5G
             ephemeral-storage: 5Gi
+    vmalert:
+      spec:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+            ephemeral-storage: 1Gi
+          limits:
+            memory: 100Mi
+            ephemeral-storage: 2Gi
     vmagent:
       spec:
         externalLabels:
