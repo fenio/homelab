@@ -25,14 +25,14 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    env:
-      - name: VM_VMSINGLEDEFAULT_CONFIGRELOADERCPU
-        value: 10m
-      - name: VM_VMALERTDEFAULT_CONFIGRELOADERCPU
-        value: 10m
-      - name: VM_VMAGENTDEFAULT_CONFIGRELOADERCPU
-        value: 10m
     victoria-metrics-operator:
+      env:
+        - name: VM_VMSINGLEDEFAULT_CONFIGRELOADERCPU
+          value: 10m
+        - name: VM_VMALERTDEFAULT_CONFIGRELOADERCPU
+          value: 10m
+        - name: VM_VMAGENTDEFAULT_CONFIGRELOADERCPU
+          value: 10m
       resources:
         requests:
           cpu: 20m
