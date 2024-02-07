@@ -36,3 +36,17 @@ spec:
         memory: 50Mi
       limits:
         memory: 150Mi
+    cainjector:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 100Mi
+        limits:
+          memory: 100Mi
+    webhook:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 100Mi
+        limits:
+          memory: 100Mi
