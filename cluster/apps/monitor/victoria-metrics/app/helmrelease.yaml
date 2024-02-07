@@ -60,7 +60,7 @@ spec:
           limits:
             cpu: null
             memory: 1500m
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 5Gi
     vmagent:
       spec:
         externalLabels:
