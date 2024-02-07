@@ -50,23 +50,23 @@ spec:
           limits:
             memory: 200Mi
             ephemeral-storage: 5Gi
-    vmsingle:
-      spec:
-        storage:
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 20Gi
-        resources:
-          requests:
-            cpu: 200m
-            memory: 1000m
-            ephemeral-storage: 10Gi
-          limits:
-            cpu: null
-            memory: 1500m
-            ephemeral-storage: 20Gi
+#    vmsingle:
+#      spec:
+#        storage:
+#          accessModes:
+#            - ReadWriteOnce
+#          resources:
+#            requests:
+#              storage: 20Gi
+#        resources:
+#          requests:
+#            cpu: 200m
+#            memory: 1000m
+#            ephemeral-storage: 10Gi
+#          limits:
+#            cpu: null
+#            memory: 1500m
+#            ephemeral-storage: 20Gi
     vmagent:
       spec:
         externalLabels:
