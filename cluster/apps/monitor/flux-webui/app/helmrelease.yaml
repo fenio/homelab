@@ -57,9 +57,9 @@ spec:
       impersonationResourceNames: ["admin"]
     resources:
       requests:
-        cpu: 300m
+        cpu: 100m
         memory: 80Mi
         ephemeral-storage: 1Gi
       limits:
         memory: 120Mi
-        ephemeral-storage: 5Gi
+        ephemeral-storage: 2Gi
