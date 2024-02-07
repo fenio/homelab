@@ -50,6 +50,15 @@ spec:
           limits:
             memory: 200Mi
             ephemeral-storage: 5Gi
+      driver:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+            ephemeral-storage: 1Gi
+          limits:
+            memory: 200Mi
+            ephemeral-storage: 2Gi
     csiProxy:
       resources:
         requests:
@@ -61,14 +70,6 @@ spec:
           ephemeral-storage: 5Gi
     csiDriver:
       name: "nfs"
-      resources:
-        requests:
-          cpu: 100m
-          memory: 100Mi
-          ephemeral-storage: 1Gi
-        limits:
-          memory: 200Mi
-          ephemeral-storage: 5Gi
     storageClasses:
     - name: nfs
       defaultClass: false
