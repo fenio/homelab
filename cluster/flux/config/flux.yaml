@@ -88,3 +88,28 @@ spec:
       target:
         kind: Deployment
         name: helm-controller
+--
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: k0s-pushgateway
+  namespace: k0s-system
+spec:
+  patches:
+    - patch: |
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: not-used
+        spec:
+          template:
+            spec:
+              containers:
+                - name: prometheus-pushgateway
+                  resources:
+                    limits:
+                      cpu: null
+                      memory: 500Mi
+  target:
+    kind: Deployment
+    name: k0s-pushgateway
