@@ -95,7 +95,7 @@ metadata:
   name: k0s-pushgateway
   namespace: flux-system
 spec:
-  patchesStrategicMerge:
+  patches:
     - target:
         group: apps
         version: v1
