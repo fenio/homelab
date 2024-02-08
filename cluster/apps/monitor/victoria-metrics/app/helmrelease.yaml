@@ -130,6 +130,7 @@ spec:
             secretName: "agent-${SECRET_DOMAIN}-tls"
     alertmanager:
       spec:
+        nameOverride: vm-alertmanager
         resources:
           requests:
             cpu: 10m
