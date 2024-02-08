@@ -100,8 +100,8 @@ spec:
             memory: 100Mi
             ephemeral-storage: 2Gi
     vmagent:
-      fullnameOverride: vm-agent
       spec:
+        fullnameOverride: vm-agent
         externalLabels:
           cluster: lab
         resources:
