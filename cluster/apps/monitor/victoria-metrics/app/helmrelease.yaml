@@ -26,8 +26,8 @@ spec:
     keepHistory: false
   values:
     victoria-metrics-operator:
+      nameOverride: operator
       spec:
-        nameOverride: operator
         env:
           - name: VM_VMSINGLEDEFAULT_CONFIGRELOADERCPU
             value: 10m
