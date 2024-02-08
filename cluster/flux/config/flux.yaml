@@ -93,23 +93,25 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: k0s-pushgateway
-  namespace: k0s-system
+  namespace: flux-system
 spec:
-  patches:
-    - patch: |
+  patchesStrategicMerge:
+    - target:
+        group: apps
+        version: v1
+        kind: Deployment
+        name: k0s-pushgateway
+        namespace: k0s-system  # Namespace where the deployment is located
+      patch: |-
         apiVersion: apps/v1
         kind: Deployment
         metadata:
-          name: not-used
+          name: k0s-pushgateway
         spec:
           template:
             spec:
               containers:
-                - name: prometheus-pushgateway
-                  resources:
-                    limits:
-                      cpu: null
-                      memory: 500Mi
-  target:
-    kind: Deployment
-    name: k0s-pushgateway
+              - name: prometheus-pushgateway
+                resources:
+                  limits:
+                    memory: "500Mi"
