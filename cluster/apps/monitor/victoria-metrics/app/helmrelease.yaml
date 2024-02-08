@@ -58,6 +58,7 @@ spec:
     kubeScheduler:
       enabled: false
     kube-state-metrics:
+      fullnameOverride: kube-state-metrics
       resources:
         requests:
           cpu: 10m
@@ -101,7 +102,6 @@ spec:
             ephemeral-storage: 2Gi
     vmagent:
       spec:
-        fullnameOverride: vm-agent
         externalLabels:
           cluster: lab
         resources:
