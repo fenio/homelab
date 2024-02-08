@@ -129,8 +129,8 @@ spec:
               - "agent.${SECRET_DOMAIN}"  # replace with your actual domain
             secretName: "agent-${SECRET_DOMAIN}-tls"
     alertmanager:
+      nameOverride: vm-alertmanager
       spec:
-        fullnameOverride: vm-alertmanager
         resources:
           requests:
             cpu: 10m
