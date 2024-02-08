@@ -27,7 +27,7 @@ spec:
   values:
     victoria-metrics-operator:
       spec:
-        fullnameOverride: operator
+        nameOverride: operator
         env:
           - name: VM_VMSINGLEDEFAULT_CONFIGRELOADERCPU
             value: 10m
