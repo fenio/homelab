@@ -67,6 +67,7 @@ spec:
           memory: 100Mi
           ephemeral-storage: 2Gi
     prometheus-node-exporter:
+      nameOverride: node-exporter
       image:
         pullPolicy: Always
       resources:
