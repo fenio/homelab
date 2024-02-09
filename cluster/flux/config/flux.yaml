@@ -95,6 +95,9 @@ metadata:
   name: k0s-pushgateway
   namespace: flux-system
 spec:
+  sourceRef:
+    kind: OCIRepository
+    name: flux-manifests
   patches:
     - target:
         group: apps
