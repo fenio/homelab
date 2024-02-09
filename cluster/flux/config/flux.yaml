@@ -89,37 +89,37 @@ spec:
         kind: Deployment
         name: helm-controller
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: k0s-pushgateway
-  namespace: k0s-system
-spec:
-  interval: 5m
-  path: ./
-  prune: true
-  wait: true
-  sourceRef:
-    kind: GitRepository
-    name: local-path-provisioner
-    namespace: flux-system
-  patches:
-    - target:
-        group: apps
-        version: v1
-        kind: Deployment
-        name: k0s-pushgateway
-        namespace: k0s-system  # Namespace where the deployment is located
-      patch: |-
-        apiVersion: apps/v1
-        kind: Deployment
-        metadata:
-          name: k0s-pushgateway
-        spec:
-          template:
-            spec:
-              containers:
-              - name: prometheus-pushgateway
-                resources:
-                  limits:
-                    memory: "500Mi"
+#apiVersion: kustomize.toolkit.fluxcd.io/v1
+#kind: Kustomization
+#metadata:
+#  name: k0s-pushgateway
+#  namespace: k0s-system
+#spec:
+#  interval: 5m
+#  path: ./
+#  prune: true
+#  wait: true
+#  sourceRef:
+#    kind: GitRepository
+#    name: local-path-provisioner
+#    namespace: flux-system
+#  patches:
+#    - target:
+#        group: apps
+#        version: v1
+#        kind: Deployment
+#        name: k0s-pushgateway
+#        namespace: k0s-system  # Namespace where the deployment is located
+#      patch: |-
+#        apiVersion: apps/v1
+#        kind: Deployment
+#        metadata:
+#          name: k0s-pushgateway
+#        spec:
+#          template:
+#            spec:
+#              containers:
+#              - name: prometheus-pushgateway
+#                resources:
+#                  limits:
+#                    memory: "500Mi"
