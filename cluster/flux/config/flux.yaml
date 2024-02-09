@@ -95,6 +95,10 @@ metadata:
   name: k0s-pushgateway
   namespace: flux-system
 spec:
+  interval: 5m
+  path: ./
+  prune: true
+  wait: true
   sourceRef:
     kind: OCIRepository
     name: flux-manifests
