@@ -5,4 +5,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
 patchesStrategicMerge:
-  - ./pushgateway.yaml
+  - ./k0s-pushgateway/ks.yaml
