@@ -101,7 +101,7 @@ spec:
   wait: true
   sourceRef:
     kind: GitRepository
-    name: homelab
+    name: local-path-provisioner
     namespace: flux-system
   patches:
     - target:
