@@ -102,6 +102,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: homelab
+    namespace: flux-system
   patches:
     - target:
         group: apps
