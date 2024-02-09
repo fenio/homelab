@@ -9,7 +9,7 @@ spec:
       user: root
       port: 22
       keyPath: ~/.ssh/id_rsa
-    role: controller
+    role: controller+worker
     files:
     - name: Prometheus CRDs
       src: prometheus-crds.yaml
@@ -17,7 +17,6 @@ spec:
       perm: 0600
     installFlags:
     - --disable-components=metrics-server
-    - --enable-metrics-scraper
   - ssh:
       address: 10.10.20.101
       user: root
