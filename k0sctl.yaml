@@ -9,7 +9,7 @@ spec:
       user: root
       port: 22
       keyPath: ~/.ssh/id_rsa
-    role: controller+worker
+    role: controller
     files:
     - name: Prometheus CRDs
       src: prometheus-crds.yaml
