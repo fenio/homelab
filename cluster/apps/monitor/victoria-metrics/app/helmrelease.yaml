@@ -34,6 +34,10 @@ spec:
           value: 10m
         - name: VM_VMAGENTDEFAULT_CONFIGRELOADERCPU
           value: 10m
+        - name: VM_VMALERTMANAGER_CONFIGRELOADERCPU
+          value: 10m
+        - name: VM_VMALERTMANAGER_CONFIGRELOADERMEMORY
+          value: 100Mi
       resources:
         requests:
           cpu: 20m
