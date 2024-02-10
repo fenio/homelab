@@ -30,10 +30,16 @@ spec:
       env:
         - name: VM_VMSINGLEDEFAULT_CONFIGRELOADERCPU
           value: 10m
+        - name: VM_VMSINGLEDEFAULT_CONFIGRELOADERMEMORY
+          value: 100Mi
         - name: VM_VMALERTDEFAULT_CONFIGRELOADERCPU
           value: 10m
+        - name: VM_VMALERTDEFAULT_CONFIGRELOADERMEMORY
+          value: 100Mi
         - name: VM_VMAGENTDEFAULT_CONFIGRELOADERCPU
           value: 10m
+        - name: VM_VMAGENTDEFAULT_CONFIGRELOADERMEMORY
+          value: 100Mi
         - name: VM_VMALERTMANAGER_CONFIGRELOADERCPU
           value: 10m
         - name: VM_VMALERTMANAGER_CONFIGRELOADERMEMORY
