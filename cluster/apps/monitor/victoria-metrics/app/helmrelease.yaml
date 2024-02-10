@@ -27,14 +27,13 @@ spec:
   values:
     victoria-metrics-operator:
       nameOverride: operator
-      spec:
-        env:
-          - name: VM_VMSINGLEDEFAULT_CONFIGRELOADERCPU
-            value: 10m
-          - name: VM_VMALERTDEFAULT_CONFIGRELOADERCPU
-            value: 10m
-          - name: VM_VMAGENTDEFAULT_CONFIGRELOADERCPU
-            value: 10m
+      env:
+        - name: VM_VMSINGLEDEFAULT_CONFIGRELOADERCPU
+          value: 10m
+        - name: VM_VMALERTDEFAULT_CONFIGRELOADERCPU
+          value: 10m
+        - name: VM_VMAGENTDEFAULT_CONFIGRELOADERCPU
+          value: 10m
       resources:
         requests:
           cpu: 20m
