@@ -2,6 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: "default-certificate"
+  namespace: network
 spec:
   dnsNames:
     - "${SECRET_DOMAIN}"
