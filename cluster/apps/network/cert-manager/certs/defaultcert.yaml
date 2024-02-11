@@ -11,3 +11,6 @@ spec:
     kind: ClusterIssuer
     group: cert-manager.io
   secretName: "default-certificate"
+  secretTemplate:
+    annotations:
+      replicator.v1.mittwald.de/replicate-to: "media,database"
