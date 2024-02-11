@@ -47,6 +47,7 @@ spec:
       main:
         className: private
         enabled: true
+        primary: true
         hosts:
           - host: &host h.${SECRET_DOMAIN}
             paths:
