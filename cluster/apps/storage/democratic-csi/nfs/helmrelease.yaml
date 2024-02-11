@@ -62,7 +62,7 @@ spec:
     csiProxy:
       resources:
         requests:
-          cpu: 50m
+          cpu: 40m
           memory: 100Mi
           ephemeral-storage: 1Gi
         limits:
@@ -123,7 +123,7 @@ spec:
       driver:
         resources:
           requests:
-            cpu: 100m
+            cpu: 40m
             memory: 100Mi
             ephemeral-storage: 1Gi
           limits:
@@ -132,7 +132,7 @@ spec:
       driverRegistrar:
         resources:
           requests:
-            cpu: 50m
+            cpu: 30m
             memory: 100Mi
             ephemeral-storage: 1Gi
           limits:
