@@ -13,4 +13,4 @@ spec:
   secretName: "default-certificate"
   secretTemplate:
     annotations:
-      replicator.v1.mittwald.de/replicate-to: "media,database"
+      replicator.v1.mittwald.de/replicate-to: "default,flux-system,media,database,monitor,network,storage"
