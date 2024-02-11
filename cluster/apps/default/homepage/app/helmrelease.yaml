@@ -56,10 +56,7 @@ spec:
                 service:
                   name: main
                   port: http
-        tls:
-          - secretName: *host
-            hosts:
-              - *host
+        tls: [hosts: [*host]]
     persistence:
       config:
         enabled: true
