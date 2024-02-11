@@ -4,6 +4,7 @@ metadata:
   name: "default-certificate"
   namespace: network
 spec:
+  commonName: "*.${SECRET_DOMAIN}"
   dnsNames:
     - "${SECRET_DOMAIN}"
     - "*.${SECRET_DOMAIN}"
