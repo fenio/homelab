@@ -35,7 +35,7 @@ spec:
       electionID: "ingress-public-leader"
       watchIngressWithoutClass: false
       extraArgs:
-        default-ssl-certificate: "default-certificate"
+        default-ssl-certificate: "network/default-certificate"
       ingressClassByName: true
       ingressClassResource:
         default: false
