@@ -132,11 +132,8 @@ spec:
           kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
-          - agent.${SECRET_DOMAIN}
-        tls:
-          - hosts:
-              - "agent.${SECRET_DOMAIN}"  # replace with your actual domain
-            secretName: "agent-${SECRET_DOMAIN}-tls"
+          - &host agent.${SECRET_DOMAIN}
+        tls: [hosts: [*host]]
     alertmanager:
       spec:
         resources:
@@ -159,8 +156,5 @@ spec:
           kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
-          - am.${SECRET_DOMAIN}
-        tls:
-          - hosts:
-              - "am.${SECRET_DOMAIN}"  # replace with your actual domain
-            secretName: "am-${SECRET_DOMAIN}-tls"
+          - &host am.${SECRET_DOMAIN}
+        tls: [hosts: [*host]]
