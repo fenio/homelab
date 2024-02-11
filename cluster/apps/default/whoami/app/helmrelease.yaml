@@ -59,7 +59,7 @@ spec:
         className: private
         enabled: true
         hosts:
-          - host: &host h.${SECRET_DOMAIN}
+          - host: &host whoami.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
