@@ -8,7 +8,6 @@ spec:
   chart:
     spec:
       chart: weave-gitops
-#      version: 4.0.36
       sourceRef:
         kind: HelmRepository
         name: weaveworks
@@ -37,12 +36,10 @@ spec:
       className: private
       enabled: true
       annotations:
-        kubernetes.io/ingress.class: "private"
         gethomepage.dev/enabled: "true"
         gethomepage.dev/group: Infrastructure
         gethomepage.dev/name: Flux
         gethomepage.dev/icon: git.svg
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
       hosts:
         - host: &host "flux.${SECRET_DOMAIN}"
           paths:
