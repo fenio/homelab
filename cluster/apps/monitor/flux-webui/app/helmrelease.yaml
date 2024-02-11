@@ -48,10 +48,7 @@ spec:
           paths:
             - path: /
               pathType: Prefix
-      tls:
-        - hosts:
-            - *host
-          secretName: *host
+      tls: [hosts: [*host]]
     rbac:
       create: true
       impersonationResourceNames: ["admin"]
