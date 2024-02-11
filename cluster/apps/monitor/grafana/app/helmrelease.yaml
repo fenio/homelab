@@ -76,10 +76,7 @@ spec:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
       hosts:
         - &host "g.${SECRET_DOMAIN}"
-      tls:
-        - hosts:
-            - "g.${SECRET_DOMAIN}"  # replace with your actual domain
-          secretName: "g-${SECRET_DOMAIN}-tls"
+      tls: [hosts: [*host]]
     grafana.ini:
       analytics:
         check_for_updates: false
