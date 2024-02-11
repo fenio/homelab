@@ -46,8 +46,20 @@ spec:
           kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         enabled: true
+        primary: true
         hosts:
           - host: &host whoami.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls: [hosts: [*host]]
+      secondary:
+        className: private
+        enabled: true
+        hosts:
+          - host: &host h.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
