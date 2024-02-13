@@ -20,8 +20,8 @@ spec:
         component: pushgateway
     spec:
       containers:
-      - name: []
-        image: []
+      - name: prometheus-pushgateway
+        image: quay.io/k0sproject/pushgateway-ttl:1.4.0-k0s.0
         resources:
           requests:
             cpu: 20m
