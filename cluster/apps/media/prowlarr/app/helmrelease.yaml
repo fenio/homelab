@@ -102,10 +102,10 @@ spec:
             resources:
               requests:
                 cpu: 50m
-                memory: 100Mi
+                memory: 125Mi
                 ephemeral-storage: 1Gi
               limits:
-                memory: 300Mi
+                memory: 150Mi
                 ephemeral-storage: 5Gi
     persistence:
       config:
