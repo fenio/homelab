@@ -20,6 +20,8 @@ spec:
         component: pushgateway
     spec:
       containers:
-      - resources:
+      - name: []
+        image: []
+        resources:
           requests:
             cpu: 20m
