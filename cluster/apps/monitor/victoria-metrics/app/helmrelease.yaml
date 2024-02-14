@@ -111,6 +111,9 @@ spec:
             ephemeral-storage: 2Gi
     vmagent:
       spec:
+        podMetadata:
+          labels:
+            app.kubernetes.io/name=prometheus
         externalLabels:
           cluster: lab
         resources:
