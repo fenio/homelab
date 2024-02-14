@@ -23,7 +23,7 @@ spec:
       - name: prometheus-pushgateway
         resources:
           requests:
-            cpu: 20m
+            cpu: 15m
             memory: 100Mi
           limits:
             memory: 100Mi
