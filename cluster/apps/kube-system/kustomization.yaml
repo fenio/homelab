@@ -6,3 +6,4 @@ resources:
   - ./namespace.yaml
   - ./replicator/ks.yaml
   - ./reloader/ks.yaml
+  - ./konnectivity-agent/konnectivity-agent.yaml
