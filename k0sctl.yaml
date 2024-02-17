@@ -74,9 +74,29 @@ spec:
                     prometheus:
                       serviceMonitor:
                         enabled: true
+                    resources:
+                      requests:
+                        cpu: 50m
+                        memory: 100Mi
+                      limits:
+                        memory: 100Mi
                   ui:
                     enabled: true
                     rollOutPods: true
+                    backend:
+                      resources:
+                        requests:
+                          cpu: 50m
+                          memory: 100Mi
+                        limits:
+                          memory: 100Mi
+                    frontend:
+                      resources:
+                        requests:
+                          cpu: 50m
+                          memory: 100Mi
+                        limits:
+                          memory: 100Mi
                 bgpControlPlane:
                   enabled: true
                 bgp:
@@ -94,6 +114,12 @@ spec:
                     enabled: true
                     serviceMonitor:
                       enabled: true
+                  resources:
+                    requests:
+                      cpu: 50m
+                      memory: 100Mi
+                    limits:
+                      memory: 100Mi
                 ipam:
                   mode: kubernetes
                   operator:
@@ -105,3 +131,9 @@ spec:
                   enabled: true
                   serviceMonitor:
                     enabled: true
+                resources:
+                  requests:
+                    cpu: 100m
+                    memory: 400Mi
+                  limits:
+                    memory: 400Mi
