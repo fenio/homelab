@@ -103,6 +103,8 @@ spec:
                         limits:
                           memory: 100Mi
                           ephemeral-storage: 2Gi
+                image:
+                  pullPolicy: "Always"
                 bgpControlPlane:
                   enabled: true
                 bgp:
