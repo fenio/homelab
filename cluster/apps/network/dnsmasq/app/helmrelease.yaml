@@ -46,6 +46,14 @@ spec:
               echo group=$DNSMASQ__GROUP >> /etc/dnsmasq/dnsmasq.conf && \
               echo "log-queries" >> /etc/dnsmasq/dnsmasq.conf && \
               cat /etc/dnsmasq/dnsmasq.conf
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100Mi
+                ephemeral-storage: 1Gi
+              limits:
+                memory: 100Mi
+                ephemeral-storage: 5Gi
         containers:
           main:
             image:
