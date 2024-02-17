@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       labels:
-        k8s-app: k0s-observability
+        k8s-app: konnectivity-agent
     spec:
       containers:
       - name: konnectivity-agent
