@@ -78,8 +78,10 @@ spec:
                       requests:
                         cpu: 50m
                         memory: 100Mi
+                        ephemeral-storage: 1Gi
                       limits:
                         memory: 100Mi
+                        ephemeral-storage: 2Gi
                   ui:
                     enabled: true
                     rollOutPods: true
@@ -88,15 +90,19 @@ spec:
                         requests:
                           cpu: 50m
                           memory: 100Mi
+                          ephemeral-storage: 1Gi
                         limits:
                           memory: 100Mi
+                          ephemeral-storage: 2Gi
                     frontend:
                       resources:
                         requests:
                           cpu: 50m
                           memory: 100Mi
+                          ephemeral-storage: 1Gi
                         limits:
                           memory: 100Mi
+                          ephemeral-storage: 2Gi
                 bgpControlPlane:
                   enabled: true
                 bgp:
@@ -118,8 +124,10 @@ spec:
                     requests:
                       cpu: 50m
                       memory: 100Mi
+                      ephemeral-storage: 1Gi
                     limits:
                       memory: 100Mi
+                      ephemeral-storage: 2Gi
                 ipam:
                   mode: kubernetes
                   operator:
@@ -135,5 +143,7 @@ spec:
                   requests:
                     cpu: 100m
                     memory: 400Mi
+                    ephemeral-storage: 1Gi
                   limits:
                     memory: 400Mi
+                    ephemeral-storage: 2Gi
