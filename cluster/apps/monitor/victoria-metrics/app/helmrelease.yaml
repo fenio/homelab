@@ -90,6 +90,8 @@ spec:
           ephemeral-storage: 2Gi
     vmsingle:
       spec:
+        image:
+          pullPolicy: Always
         resources:
           requests:
             cpu: 400m
@@ -101,6 +103,8 @@ spec:
             ephemeral-storage: 2Gi
     vmalert:
       spec:
+        image:
+          pullPolicy: Always
         resources:
           requests:
             cpu: 50m
@@ -111,6 +115,8 @@ spec:
             ephemeral-storage: 2Gi
     vmagent:
       spec:
+        image:
+          pullPolicy: Always
         externalLabels:
           cluster: lab
         resources:
@@ -136,6 +142,8 @@ spec:
         tls: [hosts: [*host]]
     alertmanager:
       spec:
+        image:
+          pullPolicy: Always
         resources:
           requests:
             cpu: 10m
