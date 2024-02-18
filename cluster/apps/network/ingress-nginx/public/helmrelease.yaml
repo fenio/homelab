@@ -103,8 +103,10 @@ spec:
         requests:
           cpu: 15m
           memory: 30Mi
+          ephemeral-storage: 1Gi
         limits:
           memory: 35Mi
+          ephemeral-storage: 2Gi
       extraEnvs:
         - name: TEMPLATE_NAME
           value: matrix
