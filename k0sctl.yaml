@@ -149,6 +149,25 @@ spec:
                   limits:
                     memory: 400Mi
                     ephemeral-storage: 2Gi
+                cgroup:
+                  autoMount:
+                    resources:
+                      requests:
+                        cpu: 100m
+                        memory: 100Mi
+                        ephemeral-storage: 1Gi
+                      limits:
+                        memory: 100Mi
+                        ephemeral-storage: 2Gi
+                cni:
+                  resources:
+                    requests:
+                      cpu: 100m
+                      memory: 100Mi
+                      ephemeral-storage: 1Gi
+                    limits:
+                      memory: 100Mi
+                      ephemeral-storage: 2Gi
                 initResources:
                   requests:
                     cpu: 100m
