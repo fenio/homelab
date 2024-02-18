@@ -27,6 +27,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    image:
+      pullPolicy: Always
     fullnameOverride: flux-webui
     adminUser:
       create: true
