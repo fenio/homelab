@@ -35,6 +35,8 @@ spec:
           dns: 53
         annotations:
           io.cilium/lb-ipam-ips: "10.10.20.109"
+      image:
+        pullPolicy: Always
       ingressClassByName: true
       extraArgs:
         default-ssl-certificate: "network/default-certificate"
@@ -102,6 +104,7 @@ spec:
       image:
         repository: ghcr.io/tarampampam/error-pages
         tag: 2.26.0
+        pullPolicy: Always
       replicaCount: 1
       resources:
         requests:

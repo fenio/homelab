@@ -36,6 +36,8 @@ spec:
       watchIngressWithoutClass: false
       extraArgs:
         default-ssl-certificate: "network/default-certificate"
+      image:
+        pullPolicy: Always
       ingressClassByName: true
       ingressClassResource:
         default: false
@@ -95,6 +97,7 @@ spec:
       image:
         repository: ghcr.io/tarampampam/error-pages
         tag: 2.26.0
+        pullPolicy: Always
       replicaCount: 1
       resources:
         requests:
