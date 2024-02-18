@@ -28,7 +28,7 @@ spec:
     controller:
       containerSecurityContext:
         allowPrivilegeEscalation: false
-        readOnlyRootFilesystem: true
+#        readOnlyRootFilesystem: true
         capabilities: {drop: ["ALL"]}
       replicaCount: 2
       service:
@@ -107,7 +107,7 @@ spec:
       enabled: true
       containerSecurityContext:
         allowPrivilegeEscalation: false
-        readOnlyRootFilesystem: true
+#        readOnlyRootFilesystem: true
         capabilities: {drop: ["ALL"]}
       image:
         repository: ghcr.io/tarampampam/error-pages
