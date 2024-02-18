@@ -16,7 +16,6 @@ spec:
   values:
     controller:
       externalAttacher:
-        imagePullPolicy: Always
         resources:
           requests:
             cpu: 10m
@@ -26,7 +25,6 @@ spec:
             memory: 200Mi
             ephemeral-storage: 2Gi
       externalProvisioner:
-        imagePullPolicy: Always
         resources:
           requests:
             cpu: 10m
@@ -36,7 +34,6 @@ spec:
             memory: 200Mi
             ephemeral-storage: 2Gi
       externalResizer:
-        imagePullPolicy: Always
         resources:
           requests:
             cpu: 10m
@@ -46,7 +43,6 @@ spec:
             memory: 200Mi
             ephemeral-storage: 2Gi
       externalSnapshotter:
-        imagePullPolicy: Always
         resources:
           requests:
             cpu: 10m
