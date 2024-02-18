@@ -19,6 +19,8 @@ spec:
     spec:
       containers:
       - name: konnectivity-agent
+        image:
+          pullPolicy: Always
         resources:
           requests:
             cpu: 15m
