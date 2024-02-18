@@ -26,8 +26,8 @@ spec:
     keepHistory: false
   values:
     controller:
-      containerSecurityContext:
-        allowPrivilegeEscalation: false
+#      containerSecurityContext:
+#        allowPrivilegeEscalation: false
 #        readOnlyRootFilesystem: true
 #        capabilities: {drop: ["ALL"]}
       replicaCount: 2
@@ -105,8 +105,8 @@ spec:
       "53": network/dnsmasq:9553
     defaultBackend:
       enabled: true
-      containerSecurityContext:
-        allowPrivilegeEscalation: false
+#      containerSecurityContext:
+#        allowPrivilegeEscalation: false
 #        readOnlyRootFilesystem: true
 #        capabilities: {drop: ["ALL"]}
       image:

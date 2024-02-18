@@ -26,8 +26,8 @@ spec:
     keepHistory: false
   values:
     controller:
-      containerSecurityContext:
-        allowPrivilegeEscalation: false
+#      containerSecurityContext:
+#        allowPrivilegeEscalation: false
 #        readOnlyRootFilesystem: true
 #        capabilities: {drop: ["ALL"]}
       replicaCount: 2
@@ -97,8 +97,8 @@ spec:
           memory: 250Mi
           ephemeral-storage: 2Gi
     defaultBackend:
-      containerSecurityContext:
-        allowPrivilegeEscalation: false
+#      containerSecurityContext:
+#        allowPrivilegeEscalation: false
 #        readOnlyRootFilesystem: true
 #        capabilities: {drop: ["ALL"]}
       enabled: true
