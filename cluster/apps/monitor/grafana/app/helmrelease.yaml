@@ -35,6 +35,18 @@ spec:
             value: &dbPass "${GRAFANA_PG_PASSWORD}"
           - name: INIT_POSTGRES_DBNAME
             value: &dbname grafana
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities: {drop: ["ALL"]}
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+            ephemeral-storage: 1Gi
+          limits:
+            memory: 300Mi
+            ephemeral-storage: 5Gi
     env:
       GF_DATABASE_NAME: *dbname
       GF_DATABASE_HOST: *dbHost
