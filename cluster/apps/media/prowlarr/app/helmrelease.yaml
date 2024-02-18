@@ -60,6 +60,10 @@ spec:
               limits:
                 memory: 300Mi
                 ephemeral-storage: 5Gi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
         containers:
           main:
             image:

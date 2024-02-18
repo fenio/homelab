@@ -57,6 +57,10 @@ spec:
               INIT_POSTGRES_USER: &dbUser "radarr"
               INIT_POSTGRES_PASS: &dbPass "${RADARR_PG_PASSWORD}"
               INIT_POSTGRES_DBNAME: radarr_main radarr_log
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 50m

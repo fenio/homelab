@@ -58,6 +58,7 @@ spec:
               INIT_POSTGRES_DBNAME: sonarr_main sonarr_log
             securityContext:
               allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
               capabilities: {drop: ["ALL"]}
             resources:
               requests:
