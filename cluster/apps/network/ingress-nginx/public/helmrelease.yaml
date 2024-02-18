@@ -28,7 +28,7 @@ spec:
     controller:
       containerSecurityContext:
         allowPrivilegeEscalation: false
-#        readOnlyRootFilesystem: true
+        readOnlyRootFilesystem: true
 #        capabilities: {drop: ["ALL"]}
       replicaCount: 2
       service:
@@ -99,7 +99,7 @@ spec:
     defaultBackend:
       containerSecurityContext:
         allowPrivilegeEscalation: false
-#        readOnlyRootFilesystem: true
+        readOnlyRootFilesystem: true
 #        capabilities: {drop: ["ALL"]}
       enabled: true
       image:
