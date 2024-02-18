@@ -29,7 +29,7 @@ spec:
       containerSecurityContext:
         allowPrivilegeEscalation: false
 #        readOnlyRootFilesystem: true
-        capabilities: {drop: ["ALL"]}
+#        capabilities: {drop: ["ALL"]}
       replicaCount: 2
       service:
         type: LoadBalancer
@@ -100,7 +100,7 @@ spec:
       containerSecurityContext:
         allowPrivilegeEscalation: false
 #        readOnlyRootFilesystem: true
-        capabilities: {drop: ["ALL"]}
+#        capabilities: {drop: ["ALL"]}
       enabled: true
       image:
         repository: ghcr.io/tarampampam/error-pages
