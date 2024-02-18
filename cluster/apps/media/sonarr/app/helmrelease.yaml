@@ -88,6 +88,7 @@ spec:
               SONARR__POSTGRES_PASSWORD: *dbPass
               SONARR__POSTGRES_MAIN_DB: sonarr_main
               SONARR__POSTGRES_LOG_DB: sonarr_log
+              COMPlus_EnableDiagnostics: "0"
             probes:
               liveness: &probes
                 enabled: true
@@ -105,6 +106,7 @@ spec:
                 enabled: false
             securityContext:
               allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
               capabilities: {drop: ["ALL"]}
             resources:
               requests:

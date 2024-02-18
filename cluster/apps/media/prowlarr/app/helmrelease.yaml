@@ -80,6 +80,7 @@ spec:
               PROWLARR__POSTGRES_PASSWORD: *dbPass
               PROWLARR__POSTGRES_MAIN_DB: prowlarr_main
               PROWLARR__POSTGRES_LOG_DB: prowlarr_log
+              COMPlus_EnableDiagnostics: "0"
             probes:
               liveness: &probes
                 enabled: true
@@ -97,7 +98,7 @@ spec:
                 enabled: false
             securityContext:
               allowPrivilegeEscalation: false
-#              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: true
               capabilities: {drop: ["ALL"]}
             resources:
               requests:
