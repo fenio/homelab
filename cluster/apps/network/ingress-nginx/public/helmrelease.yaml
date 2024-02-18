@@ -26,6 +26,10 @@ spec:
     keepHistory: false
   values:
     controller:
+      podSecurityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities: {drop: ["ALL"]}
       replicaCount: 2
       service:
         type: LoadBalancer
@@ -93,6 +97,10 @@ spec:
           memory: 250Mi
           ephemeral-storage: 2Gi
     defaultBackend:
+      podSecurityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities: {drop: ["ALL"]}
       enabled: true
       image:
         repository: ghcr.io/tarampampam/error-pages
