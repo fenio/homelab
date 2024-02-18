@@ -36,7 +36,11 @@ spec:
                 ephemeral-storage: 1Gi
               limits:
                 memory: 200Mi
-                ephemeral-storage: 5Gi
+                ephemeral-storage: 2Gi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
     service:
       main:
         ports:

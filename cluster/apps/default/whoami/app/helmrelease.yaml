@@ -33,6 +33,10 @@ spec:
               limits:
                 memory: 50Mi
                 ephemeral-storage: 5Gi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
     service:
       main:
         ports:
