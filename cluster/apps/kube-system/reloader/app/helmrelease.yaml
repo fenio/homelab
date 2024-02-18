@@ -33,10 +33,10 @@ spec:
         resources:
           requests:
             cpu: 30m
-            memory: 30Mi
+            memory: 50Mi
             ephemeral-storage: 1Gi
           limits:
-            memory: 50Mi
+            memory: 100Mi
             ephemeral-storage: 5Gi
         image:
           pullPolicy: Always
