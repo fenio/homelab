@@ -25,9 +25,13 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    image:
+      pullPolicy: Always
     resources:
       requests:
         cpu: 20m
         memory: 100Mi
+        ephemeral-storage: 1Gi
       limits:
         memory: 150Mi
+        ephemeral-storage: 2Gi
