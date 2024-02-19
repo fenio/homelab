@@ -27,7 +27,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    replicaCount: 2
+    replicaCount: 3
     podDisruptionBudget:
       enabled: true
     extraArgs:
@@ -47,7 +47,6 @@ spec:
         memory: 150Mi
         ephemeral-storage: 2Gi
     cainjector:
-      replicaCount: 2
       image:
         pullPolicy: "Always"
       resources:
@@ -59,7 +58,6 @@ spec:
           memory: 100Mi
           ephemeral-storage: 2Gi
     webhook:
-      replicaCount: 2
       image:
         pullPolicy: "Always"
       resources:
