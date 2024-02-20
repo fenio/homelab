@@ -7,4 +7,4 @@ metadata:
   namespace: flux-system
 spec:
   interval: 2h
-  url: https://charts.bitnami.com/bitnami
+  url: oci://registry-1.docker.io/bitnamicharts/external-dns
