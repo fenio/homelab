@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: external-dns
-      version: 0.14.0
+      version: 1.14.3
       sourceRef:
         kind: HelmRepository
         name: external-dns
@@ -27,7 +27,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    replicaCount: 2
     image:
       pullPolicy: Always
     resources:
