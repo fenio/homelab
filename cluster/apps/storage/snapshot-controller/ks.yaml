@@ -8,7 +8,7 @@ spec:
   targetNamespace: storage
   sourceRef:
     kind: GitRepository
-    name: homelab-ops
+    name: homelab
   prune: true
   wait: true
   interval: 10m
