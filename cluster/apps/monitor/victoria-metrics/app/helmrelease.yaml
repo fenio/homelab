@@ -153,6 +153,26 @@ spec:
             cpu: null
             memory: 150Mi
             ephemeral-storage: 2Gi
+        config:
+          global:
+            resolve_timeout: 5m
+          route:
+            group_by: ["alertname", "job"]
+            group_wait: 1m
+            group_interval: 10m
+            repeat_interval: 12h
+            receiver: "telegram"
+            routes:
+              - receiver: "telegram"
+          receivers:
+            - name: "telegram"
+              telegram_configs:
+                - parse_mode: "HTML"
+                  disable_notifications: false
+                  bot_token: ${TELEGRAM_TOKEN}
+                  chat_id: ${TELEGRAM_CHATID}
+                  send_resolved: true
+                  api_url: https://api.telegram.org         
       ingress:
         ingressClassName: private
         enabled: true
