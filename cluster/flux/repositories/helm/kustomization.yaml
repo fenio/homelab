@@ -19,6 +19,7 @@ resources:
   - ./prometheus.yaml
   - ./reloader.yaml
   - ./replicator.yaml
+  - ./snapshotter.yaml
   - ./traefik.yaml
   - ./victoriametrics.yaml
   - ./weaveworks.yaml
