@@ -37,7 +37,7 @@ spec:
         - name: VM_VMALERTDEFAULT_CONFIGRELOADERMEMORY
           value: 100Mi
         - name: VM_VMAGENTDEFAULT_CONFIGRELOADERCPU
-          value: 50m
+          value: 100m
         - name: VM_VMAGENTDEFAULT_CONFIGRELOADERMEMORY
           value: 100Mi
         - name: VM_VMALERTMANAGER_CONFIGRELOADERCPU
