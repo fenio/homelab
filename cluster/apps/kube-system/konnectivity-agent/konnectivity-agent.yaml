@@ -19,8 +19,6 @@ spec:
     spec:
       containers:
       - name: konnectivity-agent
-        image: quay.io/k0sproject/apiserver-network-proxy-agent:v0.1.4
-          pullPolicy: Always
         resources:
           requests:
             cpu: 15m
