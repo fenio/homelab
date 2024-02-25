@@ -54,6 +54,7 @@ spec:
             spec:
               containers:
                 - name: manager
+                  imagePullPolicy: Always
                   resources:
                     requests:
                       cpu: 80m
@@ -76,6 +77,7 @@ spec:
             spec:
               containers:
                 - name: manager
+                  imagePullPolicy: Always
                   resources:
                     requests:
                       cpu: 100m
