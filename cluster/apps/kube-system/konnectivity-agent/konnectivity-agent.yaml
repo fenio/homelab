@@ -28,3 +28,6 @@ spec:
           limits:
             memory: 100Mi
             ephemeral-storage: 2Gi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
