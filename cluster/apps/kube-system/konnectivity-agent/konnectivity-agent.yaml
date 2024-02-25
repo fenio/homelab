@@ -19,6 +19,7 @@ spec:
     spec:
       containers:
       - name: konnectivity-agent
+        imagePullPolicy: Always
         resources:
           requests:
             cpu: 15m
