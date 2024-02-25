@@ -32,10 +32,10 @@ spec:
     resources:
       requests:
         cpu: 10m
-        memory: 30Mi
+        memory: 50Mi
         ephemeral-storage: 1Gi
       limits:
-        memory: 60Mi
+        memory: 100Mi
         ephemeral-storage: 5Gi
     provider: cloudflare
     serviceMonitor:
