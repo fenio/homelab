@@ -122,7 +122,7 @@ spec:
           memory: 120Mi
           ephemeral-storage: 1Gi
         limits:
-          memory: 120Mi
+          memory: 150Mi
           ephemeral-storage: 2Gi
       datasources:
         enabled: true
