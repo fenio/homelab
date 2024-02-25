@@ -65,6 +65,7 @@ spec:
         memory: 200Mi
         ephemeral-storage: 2Gi
     downloadDashboards:
+      imagePullPolicy: Always
       resources:
         requests:
           cpu: 50m
