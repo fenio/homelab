@@ -19,3 +19,11 @@ spec:
   values:
     webhook:
       enabled: false
+    resources:
+      requests:
+        cpu: 50m
+        memory: 50Mi
+        ephemeral-storage: 1Gi
+      limits:
+        memory: 100Mi
+        ephemeral-storage: 5Gi
