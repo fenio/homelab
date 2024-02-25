@@ -62,7 +62,7 @@ spec:
                       ephemeral-storage: 1Gi
                     limits:
                       cpu: null
-                      memory: 180Mi
+                      memory: 250Mi
                       ephemeral-storage: 2Gi
       target:
         kind: Deployment
