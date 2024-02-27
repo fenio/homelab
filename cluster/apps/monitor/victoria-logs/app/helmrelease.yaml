@@ -26,6 +26,22 @@ spec:
     keepHistory: false
   values:
     fullnameOverride: vl
+    resources:
+      requests:
+        cpu: 20m
+        memory: 100Mi
+        ephemeral-storage: 1Gi
+      limits:
+        memory: 200Mi
+        ephemeral-storage: 2Gi
     fluent-bit:
       enabled: true
-
+      resources:
+        requests:
+          cpu: 20m
+          memory: 100Mi
+          ephemeral-storage: 1Gi
+        limits:
+          memory: 100Mi
+          ephemeral-storage: 2Gi
+        
