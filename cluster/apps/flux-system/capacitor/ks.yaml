@@ -4,7 +4,7 @@ metadata:
   name: capacitor
   namespace: flux-system
 spec:
-  path: ./cluster/apps/monitor/capacitor/app
+  path: ./cluster/apps/flux-system/capacitor/app
   sourceRef:
     kind: GitRepository
     name: homelab

@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./flux-webui/ks.yaml
-  - ./capacitor/ks.yaml
   - ./grafana/ks.yaml
   - ./metrics-server/ks.yaml
   - ./victoria-metrics/ks.yaml
