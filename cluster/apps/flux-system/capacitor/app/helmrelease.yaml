@@ -35,6 +35,7 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: {drop: ["ALL"]}
+            serviceAccountName: capacitor
     service:
       main:
         ports:
