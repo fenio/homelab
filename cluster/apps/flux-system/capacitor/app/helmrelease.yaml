@@ -21,7 +21,7 @@ spec:
           main:
             image:
               repository: ghcr.io/gimlet-io/capacitor
-              tag: v0.3.0
+              tag: v0.3.1
               pullPolicy: Always
             resources:
               requests:
