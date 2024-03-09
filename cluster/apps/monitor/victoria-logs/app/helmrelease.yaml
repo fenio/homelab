@@ -35,6 +35,13 @@ spec:
         limits:
           memory: 200Mi
           ephemeral-storage: 2Gi
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: private
+        hosts: 
+          - &host "l.${SECRET_DOMAIN}"
+        tls: [hosts: [*host]]
     fluent-bit:
       enabled: true
       resources:
