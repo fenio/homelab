@@ -27,3 +27,21 @@ spec:
     limits:
       memory: 1.2Gi
       ephemeral-storage: 5Gi
+  backup:
+    retentionPolicy: 7d
+    barmanObjectStore:
+      data:
+        compression: bzip2
+      wal:
+        compression: bzip2
+        maxParallel: 4
+      destinationPath: s3://pg-backup/
+      endpointURL: https://pgsql.eu-central-1.linodeobjects.com
+      serverName: postgres
+      s3Credentials:
+        accessKeyId:
+          name: pg-credentials
+          key: S3_ACCESS_KEY
+        secretAccessKey:
+          name: pg-credentials
+          key: S3_SECRET_KEY
