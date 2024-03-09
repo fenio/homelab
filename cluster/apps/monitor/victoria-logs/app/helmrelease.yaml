@@ -36,20 +36,17 @@ spec:
           memory: 200Mi
           ephemeral-storage: 2Gi
       ingress:
+        ingressClassName: private
         enabled: true
         annotations:
-          kubernetes.io/ingress.class: private
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Infrastructure
+          gethomepage.dev/name: VictoriaLogs
+          gethomepage.dev/icon: si-victoriametrics
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
-          - host: &host "l.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  name: main
-                  port: http
+          - &host l.${SECRET_DOMAIN}
         tls: [hosts: [*host]]
-#        hosts: 
-#          - &host "l.${SECRET_DOMAIN}"
-#        tls: [hosts: [*host]]
     fluent-bit:
       enabled: true
       resources:
