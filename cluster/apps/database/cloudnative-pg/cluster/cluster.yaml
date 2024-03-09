@@ -35,7 +35,7 @@ spec:
       wal:
         compression: bzip2
         maxParallel: 4
-      destinationPath: s3://pg-backup/
+      destinationPath: s3://pgsql/
       endpointURL: https://eu-central-1.linodeobjects.com
       serverName: postgres
       s3Credentials:
