@@ -39,7 +39,7 @@ spec:
                 ephemeral-storage: 2Gi
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: false
               capabilities: {drop: ["ALL"]}
     service:
       main:
