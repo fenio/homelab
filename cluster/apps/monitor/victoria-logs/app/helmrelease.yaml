@@ -39,9 +39,17 @@ spec:
         enabled: true
         annotations:
           kubernetes.io/ingress.class: private
-        hosts: 
-          - &host "l.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "l.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
         tls: [hosts: [*host]]
+#        hosts: 
+#          - &host "l.${SECRET_DOMAIN}"
+#        tls: [hosts: [*host]]
     fluent-bit:
       enabled: true
       resources:
