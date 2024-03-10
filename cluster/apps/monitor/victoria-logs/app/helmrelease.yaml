@@ -44,13 +44,16 @@ spec:
           gethomepage.dev/name: VictoriaLogs
           gethomepage.dev/icon: si-victoriametrics
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-        host:
-          - host: &host l.${SECRET_DOMAIN}
+        hosts:
+          - host: &host l.${SECRET_DOMAIN}  # Using the templating for dynamic domain
             paths:
               - path: /
-                service:
-                  name: main
-                  port: http            
+                pathType: ImplementationSpecific  # Ensure to specify the pathType if needed
+                backend:
+                  service:
+                    name: main
+                    port:
+                      number: 80
         tls: [hosts: [*host]]
     fluent-bit:
       enabled: true
