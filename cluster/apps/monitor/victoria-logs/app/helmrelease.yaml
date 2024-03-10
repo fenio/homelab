@@ -35,17 +35,17 @@ spec:
         limits:
           memory: 200Mi
           ephemeral-storage: 2Gi
-#      ingress:
-#        enabled: true
-#        annotations:
-#          gethomepage.dev/enabled: "true"
-#          gethomepage.dev/group: Infrastructure
-#          gethomepage.dev/name: VictoriaLogs
-#          gethomepage.dev/icon: si-victoriametrics
-#          cert-manager.io/cluster-issuer: "letsencrypt-production"
-#        hosts:
-#          - &host l.${SECRET_DOMAIN}
-#        tls: [hosts: [*host]]
+      ingress:
+        enabled: true
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Infrastructure
+          gethomepage.dev/name: VictoriaLogs
+          gethomepage.dev/icon: si-victoriametrics
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+        hosts:
+          - &host l.${SECRET_DOMAIN}
+        tls: [hosts: [*host]]
     fluent-bit:
       enabled: true
       resources:
