@@ -46,6 +46,11 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         host:
           - host: &host l.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http            
         tls: [hosts: [*host]]
     fluent-bit:
       enabled: true
