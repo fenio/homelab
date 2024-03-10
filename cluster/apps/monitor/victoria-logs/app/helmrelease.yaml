@@ -36,7 +36,6 @@ spec:
           memory: 200Mi
           ephemeral-storage: 2Gi
       ingress:
-        ingressClassName: private
         enabled: true
         annotations:
           gethomepage.dev/enabled: "true"
@@ -46,7 +45,7 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
           - &host l.${SECRET_DOMAIN}
-        tls: [hosts: [*host]]
+#        tls: [hosts: [*host]]
     fluent-bit:
       enabled: true
       resources:
