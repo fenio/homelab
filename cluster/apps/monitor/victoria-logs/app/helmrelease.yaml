@@ -45,10 +45,9 @@ spec:
           gethomepage.dev/icon: si-victoriametrics
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
-          - host: &host "l.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
+          - name: &host "l.${SECRET_DOMAIN}"
+            path: /
+            port: http
         tls: [hosts: [*host]]
     fluent-bit:
       enabled: true
