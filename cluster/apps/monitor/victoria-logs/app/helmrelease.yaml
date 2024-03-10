@@ -45,7 +45,7 @@ spec:
           gethomepage.dev/icon: si-victoriametrics
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         host:
-          - &host l.${SECRET_DOMAIN}
+          - host: &host l.${SECRET_DOMAIN}
         tls: [hosts: [*host]]
     fluent-bit:
       enabled: true
