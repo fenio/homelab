@@ -37,13 +37,14 @@ spec:
           ephemeral-storage: 2Gi
       ingress:
         enabled: true
+        ingressClassName: private
         annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Infrastructure
           gethomepage.dev/name: VictoriaLogs
           gethomepage.dev/icon: si-victoriametrics
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-        hosts:
+        host:
           - &host l.${SECRET_DOMAIN}
         tls: [hosts: [*host]]
     fluent-bit:
