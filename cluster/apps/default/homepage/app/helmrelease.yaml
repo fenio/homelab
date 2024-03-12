@@ -28,7 +28,6 @@ spec:
               pullPolicy: Always
             env:
               TZ: Europe/Warsaw
-              # LOG_LEVEL: debug
             resources:
               requests:
                 cpu: 20m
