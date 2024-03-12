@@ -43,6 +43,7 @@ spec:
               capabilities: {drop: ["ALL"]}
     service:
       main:
+        controller: main
         ports:
           http:
             enabled: true
