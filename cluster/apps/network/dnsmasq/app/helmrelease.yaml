@@ -76,6 +76,7 @@ spec:
             readOnly: false
     service:
       main:
+      controller: main
         type: ClusterIP
         ports:
           http:
