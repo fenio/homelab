@@ -119,6 +119,7 @@ spec:
                 ephemeral-storage: 5Gi
     service:
       main:
+        controller: main
         ports:
           http:
             port: 80
