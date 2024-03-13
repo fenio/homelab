@@ -76,7 +76,7 @@ spec:
             readOnly: false
     service:
       main:
-      controller: main
+        controller: main
         ports:
           http:
             port: 9553
