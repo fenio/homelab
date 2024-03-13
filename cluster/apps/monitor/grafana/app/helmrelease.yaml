@@ -257,7 +257,7 @@ spec:
         pods:
           # renovate: depName="Kubernetes / Views / Pods"
           gNetId: 15760
-          revision: 21
+          revision: 26
           datasource: Prometheus
         volumes:
           # renovate: depName="K8s / Storage / Volumes / Cluster"
