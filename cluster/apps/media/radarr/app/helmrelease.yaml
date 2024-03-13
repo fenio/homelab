@@ -39,7 +39,8 @@ spec:
         statefulset:
           volumeClaimTemplates:
             - name: config
-              mountPath: /config
+              globalMounts:
+                - path: /config
               storageClass: nfs
               accessMode: ReadWriteOnce
               size: 5Gi
