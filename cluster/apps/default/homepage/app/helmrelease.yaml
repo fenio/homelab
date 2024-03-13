@@ -57,7 +57,7 @@ spec:
               - path: /
                 service:
                   identifier: main
-                  port: 80
+                  port: http
         tls: [hosts: [*host]]
     persistence:
       config:
