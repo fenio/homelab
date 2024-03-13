@@ -39,6 +39,7 @@ spec:
       create: true
       name: "capacitor"
     service:
+      controller: main
       main:
         ports:
           http:
