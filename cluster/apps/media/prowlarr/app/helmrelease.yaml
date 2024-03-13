@@ -34,12 +34,14 @@ spec:
     controllers:
       main:
         type: statefulset
-        volumeClaimTemplates:
-          - name: config
-            mountPath: /config
-            storageClass: nfs
-            accessMode: ReadWriteOnce
-            size: 5Gi
+        statefulset:
+          volumeClaimTemplates:
+            - name: config
+              globalMounts:
+                - path: /config
+              storageClass: nfs
+              accessMode: ReadWriteOnce
+              size: 5Gi
         initContainers:
           init-db:
             image:
