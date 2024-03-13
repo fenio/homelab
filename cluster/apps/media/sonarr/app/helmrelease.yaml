@@ -126,11 +126,9 @@ spec:
             targetPort: *port
     persistence:
       media:
-        enabled: true
         existingClaim: media
         globalMounts:
           - path: /media
-            retain: true
     ingress:
       main:
         className: private
