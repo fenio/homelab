@@ -25,7 +25,7 @@ spec:
               pullPolicy: Always
             resources:
               requests:
-                cpu: 20m
+                cpu: 50m
                 memory: 100Mi
                 ephemeral-storage: 1Gi
               limits:
