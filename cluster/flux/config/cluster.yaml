@@ -17,25 +17,7 @@ spec:
     /*
     # include kubernetes directory
     !/cluster
----
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: GitRepository
-metadata:
-  name: truenas
-  namespace: flux-system
-spec:
-  interval: 5m
-  url: ssh://git@github.com/fenio/homelab
-  ref:
-    branch: main
-  secretRef:
-    name: github-deploy-key
-  ignore: |
-    # exclude all
-    /*
-    # include kubernetes directory
     !/truenas
-    !/cluster/flux
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
