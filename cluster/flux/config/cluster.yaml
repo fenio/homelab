@@ -59,7 +59,7 @@ spec:
   wait: false
   sourceRef:
     kind: GitRepository
-    name: truenas
+    name: homelab
   decryption:
     provider: sops
     secretRef:
