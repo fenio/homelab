@@ -86,12 +86,12 @@ spec:
   kubeConfig:
     secretRef:
       name: truenas-cluster
-  postBuild:
-    substituteFrom:
-      - kind: ConfigMap
-        name: cluster-settings
-        optional: false
-      - kind: Secret
-        name: cluster-secrets
-        optional: false
+  #postBuild:
+#    substituteFrom:
+#      - kind: ConfigMap
+#        name: cluster-settings
+#        optional: false
+#      - kind: Secret
+#        name: cluster-secrets
+#        optional: false
 
