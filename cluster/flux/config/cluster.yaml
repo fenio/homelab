@@ -84,7 +84,7 @@ spec:
       name: sops-age
   kubeConfig:
     secretRef:
-    name: truenas-cluster
+      name: truenas-cluster
   postBuild:
     substituteFrom:
       - kind: ConfigMap
