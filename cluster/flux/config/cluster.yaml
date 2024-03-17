@@ -71,7 +71,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  path: ./cluster/flux
+  path: ./truenas
   prune: true
   wait: false
   sourceRef:
@@ -84,12 +84,4 @@ spec:
   kubeConfig:
     secretRef:
       name: truenas-cluster
-  #postBuild:
-#    substituteFrom:
-#      - kind: ConfigMap
-#        name: cluster-settings
-#        optional: false
-#      - kind: Secret
-#        name: cluster-secrets
-#        optional: false
 
