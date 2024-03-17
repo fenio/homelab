@@ -111,7 +111,7 @@ spec:
 #        capabilities: {drop: ["ALL"]}
       image:
         repository: ghcr.io/tarampampam/error-pages
-        tag: 2.26.0
+        tag: 2.27.0
         pullPolicy: Always
       replicaCount: 2
       resources:
