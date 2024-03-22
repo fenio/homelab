@@ -39,7 +39,7 @@ spec:
       enabled: true
       className: private
       hosts:
-        - host: coroot.${SECRET_DOMAIN}
+        - host: &host coroot.${SECRET_DOMAIN}
           paths:
             - path: /
             - pathType: ImplementationSpecific
