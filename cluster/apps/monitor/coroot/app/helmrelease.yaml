@@ -42,3 +42,9 @@ spec:
             - path: /
             - pathType: ImplementationSpecific
       tls: [hosts: [*host]] 
+    prometheus:
+      enabled: false
+      kubeStateMetrics:
+        enabled: false
+      server:
+        enabled: false
