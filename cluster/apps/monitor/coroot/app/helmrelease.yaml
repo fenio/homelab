@@ -48,3 +48,10 @@ spec:
         enabled: false
       server:
         enabled: false
+    existingPrometheus:
+      enabled: true
+      service:
+        serviceName: vmsingle-vm
+        servicePort: 8429
+        serviceNamespace: monitor
+
