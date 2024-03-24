@@ -57,4 +57,5 @@ spec:
         serviceName: vmsingle-vm
         servicePort: 8429
         serviceNamespace: monitor
-
+      node-agent-podmonitor:
+        enabled: true

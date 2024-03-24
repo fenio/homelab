@@ -68,6 +68,8 @@ spec:
       enabled: false
     kube-state-metrics:
       fullnameOverride: kube-state-metrics
+      metricLabelsAllowlist:
+        - pods=[*]
       resources:
         requests:
           cpu: 10m
