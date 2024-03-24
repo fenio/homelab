@@ -36,6 +36,8 @@ spec:
     ingress:
       enabled: true
       className: private
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
       hosts:
         - host: &host coroot.${SECRET_DOMAIN}
           paths:
