@@ -41,6 +41,9 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
           - host: &host coroot.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
         tls: [hosts: [*host]] 
     prometheus:
       enabled: false
