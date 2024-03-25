@@ -67,6 +67,12 @@ spec:
     kubeScheduler:
       enabled: false
     kube-state-metrics:
+      vmServiceScrape:
+        spec:
+          honorLabels: true
+          metricRelabelConfigs:
+            - action: labeldrop
+              regex: (container_id|image_id)
       fullnameOverride: kube-state-metrics
       metricLabelsAllowlist:
         - pods=[*]
