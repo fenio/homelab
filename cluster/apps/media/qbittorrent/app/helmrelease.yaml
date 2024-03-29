@@ -100,11 +100,8 @@ spec:
             protocol: TCP
     ingress:
       app:
-        className: public
+        className: private
         annotations:
-          authentik.home.arpa/enabled: "true"
-          nginx.ingress.kubernetes.io/auth-signin: |-
-            https://${HOSTNAME}/outpost.goauthentik.io/start?rd=$escaped_request_uri
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Downloads
           gethomepage.dev/name: QBittorrent
@@ -112,7 +109,7 @@ spec:
           gethomepage.dev/widget.type: qbittorrent
           gethomepage.dev/widget.url: http://qbittorrent-app.downloads
         hosts:
-          - host: &host ${HOSTNAME}
+          - host: &host q.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
@@ -120,8 +117,6 @@ spec:
                   port: http
         tls: [hosts: [*host]]
     persistence:
-      config:
-        existingClaim: ${VOLSYNC_CLAIM}
       downloads:
         existingClaim: downloads-datastore
         globalMounts:
