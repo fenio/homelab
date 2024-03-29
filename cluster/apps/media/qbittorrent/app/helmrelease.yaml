@@ -117,11 +117,11 @@ spec:
                   port: http
         tls: [hosts: [*host]]
     persistence:
-      downloads:
-        existingClaim: downloads-datastore
+      media:
+        enabled: true
+        existingClaim: media
         globalMounts:
-          - path: /downloads
-            subPath: Downloads
+          - path: /media
       addons:
         type: emptyDir
         globalMounts:
