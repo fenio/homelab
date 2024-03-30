@@ -38,12 +38,12 @@ spec:
               QBT_Preferences__WebUI__LocalHostAuth: false
               QBT_Preferences__WebUI__RootFolder: /addons/VueTorrent
               QBT_Preferences__WebUI__UseUPNP: false
-              QBT_BitTorrent__Session__Interface: eth0
-              QBT_BitTorrent__Session__InterfaceAddress:
-                valueFrom:
-                  fieldRef:
-                    fieldPath: status.podIP
-              QBT_BitTorrent__Session__InterfaceName: eth0
+#              QBT_BitTorrent__Session__Interface: eth0
+#              QBT_BitTorrent__Session__InterfaceAddress:
+#                valueFrom:
+#                  fieldRef:
+#                    fieldPath: status.podIP
+#              QBT_BitTorrent__Session__InterfaceName: eth0
             probes:
               liveness: &probes
                 enabled: false
