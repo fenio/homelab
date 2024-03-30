@@ -18,9 +18,6 @@ spec:
     controllers:
       qbittorrent:
         type: statefulset
-        pod:
-          securityContext:
-            runAsNonRoot: true
         containers:
           app:
             image:
