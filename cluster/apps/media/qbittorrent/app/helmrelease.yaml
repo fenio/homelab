@@ -21,10 +21,6 @@ spec:
         pod:
           securityContext:
             runAsNonRoot: true
-            runAsUser: 568
-            runAsGroup: 2000
-            fsGroup: 2000
-            fsGroupChangePolicy: OnRootMismatch
         containers:
           app:
             image:
@@ -32,7 +28,7 @@ spec:
               tag: "4.6.4"
             env:
               TZ: ${CONFIG_TIMEZONE}
-              QBITTORRENT__PORT: &port 80
+              QBITTORRENT__PORT: &port 1080
               QBITTORRENT__BT_PORT: &bittorrentPort 50413
               QBT_Application__MemoryWorkingSetLimit:
                 valueFrom:
