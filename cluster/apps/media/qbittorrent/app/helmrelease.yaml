@@ -133,7 +133,7 @@ spec:
         enabled: true
         existingClaim: media
         globalMounts:
-          - path: /media
+          - path: /downloads
             subPath: Downloads
       addons:
         type: emptyDir
