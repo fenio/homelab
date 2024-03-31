@@ -2,9 +2,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: kube-system
 resources:
-  - ./namespace.yaml
-  - ./intel-device-plugin/ks.yaml
-  - ./replicator/ks.yaml
-  - ./reloader/ks.yaml
-  - ./konnectivity-agent/konnectivity-agent.yaml
+  - ./helmrelease.yaml
