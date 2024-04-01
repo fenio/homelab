@@ -100,9 +100,8 @@ spec:
           ephemeral-storage: 2Gi
     vmsingle:
       spec:
-        server:
-          extraArgs:
-            maxLabelsPerTimeseries: 50
+        extraArgs:
+          maxLabelsPerTimeseries: 50
         image:
           pullPolicy: Always
         resources:
