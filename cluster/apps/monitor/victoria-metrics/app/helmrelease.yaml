@@ -100,8 +100,6 @@ spec:
           ephemeral-storage: 2Gi
     vmsingle:
       spec:
-        extraArgs:
-          - maxLabelsPerTimeseries: "60"
         image:
           pullPolicy: Always
         resources:
@@ -127,6 +125,8 @@ spec:
             ephemeral-storage: 2Gi
     vmagent:
       spec:
+        extraArgs:
+          maxLabelsPerTimeseries: 60
         image:
           pullPolicy: Always
         externalLabels:
