@@ -27,7 +27,7 @@ spec:
       jellyfin:
         pod:
           securityContext:
-            runAsGroup: 105
+            runAsGroup: jellyfin
         containers:
           main:
             image:
