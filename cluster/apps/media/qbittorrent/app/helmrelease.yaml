@@ -134,7 +134,7 @@ spec:
         accessMode: ReadWriteOnce
         retain: true
         advancedMounts:
-          app:
+          qbittorrent:
             main:
               - path: /config
       downloads:
