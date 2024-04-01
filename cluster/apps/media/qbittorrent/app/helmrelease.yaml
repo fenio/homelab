@@ -119,7 +119,7 @@ spec:
           gethomepage.dev/name: QBittorrent
           gethomepage.dev/icon: qbittorrent.svg
           gethomepage.dev/widget.type: qbittorrent
-          gethomepage.dev/widget.url: http://qbittorrent-app.downloads
+          gethomepage.dev/widget.url: http://qbittorrent-app.media
         hosts:
           - host: &host q.${SECRET_DOMAIN}
             paths:
