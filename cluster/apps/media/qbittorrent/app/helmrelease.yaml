@@ -129,9 +129,14 @@ spec:
     persistence:
       config:
         enabled: true
-        type: emptyDir
-        globalMounts:
-          - path: /config
+        type: persistentVolumeClaim
+        size: 5Gi
+        accessMode: ReadWriteOnce
+        retain: true
+        advancedMounts:
+          jellyfin:
+            main:
+              - path: /config
       downloads:
         enabled: true
         existingClaim: media
