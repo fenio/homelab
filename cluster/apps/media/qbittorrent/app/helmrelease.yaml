@@ -134,7 +134,7 @@ spec:
         accessMode: ReadWriteOnce
         retain: true
         advancedMounts:
-          jellyfin:
+          app:
             main:
               - path: /config
       downloads:
