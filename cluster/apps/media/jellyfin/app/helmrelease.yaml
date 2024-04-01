@@ -73,7 +73,10 @@ spec:
     persistence:
       config:
         enabled: true
-        type: emptyDir
+        type: persistentVolumeClaim
+        size: 5Gi
+        accessMode: ReadWriteOnce
+        retain: true
         advancedMounts:
           jellyfin:
             main:
