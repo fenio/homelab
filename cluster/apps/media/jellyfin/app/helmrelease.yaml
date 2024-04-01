@@ -25,6 +25,9 @@ spec:
   values:
     controllers:
       jellyfin:
+        pod:
+          securityContext:
+            runAsGroup: 105
         containers:
           main:
             image:
