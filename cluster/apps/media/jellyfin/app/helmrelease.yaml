@@ -65,6 +65,14 @@ spec:
       main:
         enabled: true
         className: private
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/name: Jellyfin
+          gethomepage.dev/icon: jellyfin.svg
+          gethomepage.dev/widget.type: jellyfin
+          gethomepage.dev/widget.url: http://jellyfin.media:8096
+          gethomepage.dev/key: ${JELLYFIN_API_KEY}
         hosts:
           - host: &host j.${SECRET_DOMAIN}
             paths:
