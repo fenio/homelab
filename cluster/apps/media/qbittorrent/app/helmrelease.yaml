@@ -136,6 +136,7 @@ spec:
         retain: true
         globalMounts:
           - path: /config
+            readOnly: false
       downloads:
         enabled: true
         existingClaim: media
