@@ -134,10 +134,8 @@ spec:
         size: 5Gi
         accessMode: ReadWriteOnce
         retain: true
-        advancedMounts:
-          qbittorrent:
-            app:
-              - path: /config
+        globalMounts:
+          - path: /config
       downloads:
         enabled: true
         existingClaim: media
