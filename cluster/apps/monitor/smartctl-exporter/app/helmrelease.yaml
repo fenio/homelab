@@ -14,8 +14,8 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      type: daemonset
       smartctl-exporter:
+        type: daemonset
         containers:
           app:
             image:
