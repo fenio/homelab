@@ -18,6 +18,14 @@ spec:
     controllers:
       qbittorrent:
         type: statefulset
+        statefulset:
+          volumeClaimTemplates:
+            - name: config
+              globalMounts:
+                - path: /config
+              storageClass: nfs
+              accessMode: ReadWriteOnce
+              size: 5Gi
         containers:
           app:
             image:
@@ -129,14 +137,6 @@ spec:
                   port: http
         tls: [hosts: [*host]]
     persistence:
-      config:
-        enabled: true
-        size: 5Gi
-        accessMode: ReadWriteOnce
-        retain: true
-        globalMounts:
-          - path: /config
-            readOnly: false
       downloads:
         enabled: true
         existingClaim: media
