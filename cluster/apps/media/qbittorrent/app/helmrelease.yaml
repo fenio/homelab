@@ -131,12 +131,13 @@ spec:
     persistence:
       config:
         enabled: true
-        type: persistentVolumeClaim
         size: 5Gi
         accessMode: ReadWriteOnce
         retain: true
-        globalMounts:
-          - path: /config
+        advancedMounts:
+          qbittorrent:
+            app:
+              - path: /config
       downloads:
         enabled: true
         existingClaim: media
