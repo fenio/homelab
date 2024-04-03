@@ -77,7 +77,7 @@ spec:
         limits:
           memory: 2.5Gi
           ephemeral-storage: 2Gi
-    nodeagent:
+    node-agent:
       resources:
         requests:
           cpu: 200m
