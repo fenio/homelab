@@ -29,10 +29,10 @@ spec:
       resources:
         requests:
           cpu: 200m
-          memory: 500Mi
+          memory: 1Gi
           ephemeral-storage: 1Gi
         limits:
-          memory: 1Gi
+          memory: 1.2Gi
           ephemeral-storage: 2Gi
       ingress:
         enabled: true
@@ -45,6 +45,15 @@ spec:
               - path: /
                 pathType: Prefix
         tls: [hosts: [*host]] 
+    corootClusterAgent:
+       resources:
+        requests:
+          cpu: 50m
+          memory: 200Mi
+          ephemeral-storage: 1Gi
+        limits:
+          memory: 500Mi
+          ephemeral-storage: 2Gi
     prometheus:
       enabled: false
       kubeStateMetrics:
