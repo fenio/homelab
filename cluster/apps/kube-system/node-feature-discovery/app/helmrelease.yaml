@@ -14,3 +14,26 @@ spec:
         name: node-feature-discovery
         namespace: flux-system
   interval: 30m
+  values:
+    resources:
+      requests: 
+        cpu: 50m
+        memory: 100Mi
+      limits:
+        memory: 200Mi
+    worker:
+      resources:
+        requests: 
+          cpu: 50m
+          memory: 100Mi
+        limits:
+          memory: 200Mi
+    gc:
+      resources:
+        requests: 
+          cpu: 50m
+          memory: 100Mi
+        limits:
+          memory: 200Mi
+
+
