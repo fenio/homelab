@@ -107,11 +107,11 @@ spec:
         resources:
           requests:
             cpu: 400m
-            memory: 1.2G
+            memory: 1.5G
             ephemeral-storage: 1Gi
           limits:
             cpu: null
-            memory: 1.5G
+            memory: 1.8G
             ephemeral-storage: 2Gi
     vmalert:
       spec:

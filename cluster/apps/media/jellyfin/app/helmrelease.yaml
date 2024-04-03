@@ -39,11 +39,11 @@ spec:
               tag: 10.8.11
             resources:
               requests:
-                cpu: 15m
-                memory: 866Mi
+                cpu: 150m
+                memory: 800Mi
                 gpu.intel.com/i915: 1
               limits:
-                memory: 1390Mi
+                memory: 1Gi
                 gpu.intel.com/i915: 1
             probes:
               startup:
