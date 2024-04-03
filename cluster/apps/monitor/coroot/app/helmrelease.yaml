@@ -46,7 +46,7 @@ spec:
                 pathType: Prefix
         tls: [hosts: [*host]] 
     corootClusterAgent:
-       resources:
+      resources:
         requests:
           cpu: 50m
           memory: 200Mi
@@ -68,3 +68,14 @@ spec:
         serviceNamespace: monitor
       node-agent-podmonitor:
         enabled: true
+    clickhouse:
+      resources:
+        requests:
+          cpu: 500m
+          memory: 2.5Gi
+          ephemeral-storage: 1Gi
+        limits:
+          memory: 2.5Gi
+          ephemeral-storage: 2Gi
+
+      
