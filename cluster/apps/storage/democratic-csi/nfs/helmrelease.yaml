@@ -18,7 +18,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 100Mi
+            memory: 50Mi
             ephemeral-storage: 1Gi
           limits:
             memory: 150Mi
@@ -27,7 +27,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 100Mi
+            memory: 50Mi
             ephemeral-storage: 1Gi
           limits:
             memory: 150Mi
@@ -36,7 +36,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 100Mi
+            memory: 50Mi
             ephemeral-storage: 1Gi
           limits:
             memory: 150Mi
@@ -45,7 +45,7 @@ spec:
         resources:
           requests:
             cpu: 10m
-            memory: 100Mi
+            memory: 50Mi
             ephemeral-storage: 1Gi
           limits:
             memory: 200Mi
@@ -54,7 +54,7 @@ spec:
         resources:
           requests:
             cpu: 20m
-            memory: 100Mi
+            memory: 50Mi
             ephemeral-storage: 1Gi
           limits:
             memory: 200Mi
@@ -63,7 +63,7 @@ spec:
       resources:
         requests:
           cpu: 40m
-          memory: 100Mi
+          memory: 50Mi
           ephemeral-storage: 1Gi
         limits:
           memory: 200Mi
@@ -124,7 +124,7 @@ spec:
         resources:
           requests:
             cpu: 40m
-            memory: 100Mi
+            memory: 50Mi
             ephemeral-storage: 1Gi
           limits:
             memory: 200Mi
@@ -133,7 +133,7 @@ spec:
         resources:
           requests:
             cpu: 30m
-            memory: 100Mi
+            memory: 50Mi
             ephemeral-storage: 1Gi
           limits:
             memory: 200Mi
@@ -142,10 +142,9 @@ spec:
         resources:
           requests:
             cpu: 50m
-            memory: 100Mi
+            memory: 50Mi
             ephemeral-storage: 1Gi
           limits:
             memory: 200Mi
             ephemeral-storage: 5Gi
-
       kubeletHostPath: /var/lib/k0s/kubelet
