@@ -29,7 +29,7 @@ spec:
       resources:
         requests:
           cpu: 200m
-          memory: 1Gi
+          memory: 500Mi
           ephemeral-storage: 1Gi
         limits:
           memory: 1.2Gi
@@ -49,7 +49,7 @@ spec:
       resources:
         requests:
           cpu: 50m
-          memory: 200Mi
+          memory: 100Mi
           ephemeral-storage: 1Gi
         limits:
           memory: 500Mi
@@ -72,7 +72,7 @@ spec:
       resources:
         requests:
           cpu: 500m
-          memory: 2.5Gi
+          memory: 1.5Gi
           ephemeral-storage: 1Gi
         limits:
           memory: 2.5Gi
@@ -81,7 +81,7 @@ spec:
       resources:
         requests:
           cpu: 200m
-          memory: 1Gi
+          memory: 500Mi
           ephemeral-storage: 1Gi
         limits:
           cpu: 1200m
@@ -91,7 +91,7 @@ spec:
       resources:
         requests:
           cpu: 50m
-          memory: 400Mi
+          memory: 200Mi
         limits:
           cpu: 100m
           memory: 500Mi
