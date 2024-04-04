@@ -29,6 +29,14 @@ spec:
             securityContext:
               privileged: true
               runAsUser: 0
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100Mi
+                ephemeral-storage: 1Gi
+              limits:
+                memory: 200Mi
+                ephemeral-storage: 2Gi
             probes:
               liveness: &probes
                 enabled: true
