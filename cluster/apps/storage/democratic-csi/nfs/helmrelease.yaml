@@ -138,4 +138,14 @@ spec:
           limits:
             memory: 200Mi
             ephemeral-storage: 5Gi
+      cleanup:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+            ephemeral-storage: 1Gi
+          limits:
+            memory: 200Mi
+            ephemeral-storage: 5Gi
+
       kubeletHostPath: /var/lib/k0s/kubelet
