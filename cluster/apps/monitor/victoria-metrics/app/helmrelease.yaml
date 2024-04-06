@@ -115,6 +115,7 @@ spec:
             ephemeral-storage: 2Gi
     vmalert:
       spec:
+        replicaCount: 1
         image:
           pullPolicy: Always
         resources:
@@ -127,6 +128,7 @@ spec:
             ephemeral-storage: 2Gi
     vmagent:
       spec:
+        replicaCount: 1
         image:
           pullPolicy: Always
         externalLabels:
