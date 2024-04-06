@@ -35,7 +35,7 @@ spec:
                 ephemeral-storage: 5Gi
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: false
               capabilities: {drop: ["ALL"]}
     service:
       main:
