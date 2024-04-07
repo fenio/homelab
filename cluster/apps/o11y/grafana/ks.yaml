@@ -1,10 +1,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: victoria-metrics
+  name: grafana
   namespace: flux-system
 spec:
-  path: ./cluster/apps/monitor/victoria-metrics/app
+  path: ./cluster/apps/o11y/grafana/app
   sourceRef:
     kind: GitRepository
     name: homelab
@@ -14,4 +14,5 @@ spec:
   retryInterval: 1m
   timeout: 5m
   dependsOn:
-    - name: iscsi
+    - name: cloudnative-pg-cluster
+    - name: ingress-nginx

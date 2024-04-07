@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: coroot
-  namespace: monitor
+  namespace: o11y
 spec:
   interval: 15m
   chart:
@@ -65,7 +65,7 @@ spec:
       service:
         serviceName: vmsingle-vm
         servicePort: 8429
-        serviceNamespace: monitor
+        serviceNamespace: o11y
       node-agent-podmonitor:
         enabled: true
     clickhouse:

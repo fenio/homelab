@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: vm
-  namespace: monitor
+  namespace: o11y
 spec:
   interval: 15m
   chart:

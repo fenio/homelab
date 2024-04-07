@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: grafana
-  namespace: monitor
+  namespace: o11y
 spec:
   chart:
     spec:
@@ -149,12 +149,12 @@ spec:
           - name: Prometheus
             type: prometheus
             access: proxy
-            url: http://vmsingle-vm.monitor.svc.cluster.local:8429
+            url: http://vmsingle-vm.o11y.svc.cluster.local:8429
             isDefault: true
           - name: Alertmanager
             type: alertmanager
             access: proxy
-            url: http://vm-alertmanager.monitor.svc.cluster.local:9093
+            url: http://vm-alertmanager.o11y.svc.cluster.local:9093
             jsonData:
               implementation: prometheus
     dashboardProviders:

@@ -1,10 +1,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: flux-webui
+  name: coroot
   namespace: flux-system
 spec:
-  path: ./cluster/apps/monitor/flux-webui/app
+  path: ./cluster/apps/o11y/coroot/app
   sourceRef:
     kind: GitRepository
     name: homelab
@@ -13,5 +13,3 @@ spec:
   interval: 5m
   retryInterval: 1m
   timeout: 5m
-  dependsOn:
-    - name: ingress-nginx

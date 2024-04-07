@@ -1,10 +1,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: coroot
+  name: metrics-server
   namespace: flux-system
 spec:
-  path: ./cluster/apps/monitor/coroot/app
+  path: ./cluster/apps/o11y/metrics-server/app
   sourceRef:
     kind: GitRepository
     name: homelab

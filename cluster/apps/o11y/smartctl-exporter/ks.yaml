@@ -6,8 +6,8 @@ metadata:
   name: smartctl-exporter
   namespace: flux-system
 spec:
-  path: ./cluster/apps/monitor/smartctl-exporter/app
-  targetNamespace: monitor
+  path: ./cluster/apps/o11y/smartctl-exporter/app
+  targetNamespace: o11y
   sourceRef:
     kind: GitRepository
     name: homelab
