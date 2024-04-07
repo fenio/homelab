@@ -14,8 +14,8 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: &appname intel-device-plugin
-#  dependsOn:
-#    - name: kube-system-node-feature-discovery
+  dependsOn:
+    - name: node-feature-discovery
   prune: true
   wait: true
   interval: 10m
