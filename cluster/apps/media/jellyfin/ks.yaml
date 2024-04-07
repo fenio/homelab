@@ -17,4 +17,5 @@ spec:
   prune: true
   wait: false
   interval: 10m
-
+  dependsOn:
+    - name: iscsi
