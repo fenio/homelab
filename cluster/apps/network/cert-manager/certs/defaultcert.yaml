@@ -6,6 +6,7 @@ metadata:
 spec:
   dnsNames:
     - "*.${SECRET_DOMAIN}"
+    - "fenio.${SECRET_DOMAIN}"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
