@@ -15,3 +15,4 @@ spec:
   timeout: 5m
   dependsOn:
     - name: nfs
+    - name: victoria-metrics
