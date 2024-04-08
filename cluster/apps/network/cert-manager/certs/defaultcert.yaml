@@ -5,9 +5,7 @@ metadata:
   namespace: network
 spec:
   dnsNames:
-#    - "*.${SECRET_DOMAIN}"
-#    - "fenio.${SECRET_DOMAIN}"
-     - "test-letsencrypt.${SECRET_DOMAIN}"
+    - "*.${SECRET_DOMAIN}"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
