@@ -49,7 +49,6 @@ spec:
     service:
       app:
         controller: smartctl-exporter
-        type: LoadBalancer
         ports:
           http:
             port: 9633
