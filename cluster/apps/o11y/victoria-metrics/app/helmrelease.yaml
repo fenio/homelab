@@ -101,7 +101,7 @@ spec:
     vmsingle:
       spec:
         extraArgs:
-          maxLabelsPerTimeseries: "60"
+          maxLabelsPerTimeseries: "80"
         image:
           pullPolicy: Always
         resources:
