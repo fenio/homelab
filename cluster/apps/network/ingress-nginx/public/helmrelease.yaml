@@ -30,7 +30,7 @@ spec:
 #        allowPrivilegeEscalation: false
 #        readOnlyRootFilesystem: true
 #        capabilities: {drop: ["ALL"]}
-      replicaCount: 2
+      replicaCount: 1
       service:
         type: LoadBalancer
         annotations:
