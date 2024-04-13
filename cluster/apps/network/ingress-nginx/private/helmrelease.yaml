@@ -113,7 +113,7 @@ spec:
         repository: ghcr.io/tarampampam/error-pages
         tag: 2.27.0
         pullPolicy: Always
-      replicaCount: 2
+      replicaCount: 1
       resources:
         requests:
           cpu: 15m
