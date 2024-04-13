@@ -37,7 +37,7 @@ spec:
       pullPolicy: Always
     crds:
       create: true
-    replicaCount: 3
+    replicaCount: 1
     monitoring:
       podMonitorEnabled: true
     resources:

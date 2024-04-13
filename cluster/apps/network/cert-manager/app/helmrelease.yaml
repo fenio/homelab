@@ -27,7 +27,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    replicaCount: 3
+    replicaCount: 1
     podDisruptionBudget:
       enabled: true
     extraArgs:
