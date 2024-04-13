@@ -45,7 +45,7 @@ spec:
             enabled: true
             port: *port
     ingress:
-      main:
+      public:
         className: public
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
@@ -55,10 +55,10 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
-                  port: 80
+                  identifier: main
+                  port: 8080
         tls: [hosts: [*host]]
-      secondary:
+      private:
         className: private
         enabled: true
         hosts:
@@ -66,6 +66,6 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
-                  port: 80
+                  identifier: main
+                  port: 8080
         tls: [hosts: [*host]]
