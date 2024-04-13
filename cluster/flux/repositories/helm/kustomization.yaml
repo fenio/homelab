@@ -11,7 +11,6 @@ resources:
   - ./democratic-csi.yaml
   - ./external-dns.yaml
   - ./grafana.yaml
-  - ./hajimari.yaml
   - ./homepage.yaml
   - ./ingress-nginx.yaml
   - ./intel.yaml
@@ -23,6 +22,5 @@ resources:
   - ./reloader.yaml
   - ./replicator.yaml
   - ./snapshotter.yaml
-  - ./traefik.yaml
   - ./victoriametrics.yaml
   - ./weaveworks.yaml
