@@ -55,6 +55,6 @@ spec:
               - path: /
                 service:
                   identifier: main
-                  port: 80
+                  port: 9000
         tls: [hosts: [*host]]
 
