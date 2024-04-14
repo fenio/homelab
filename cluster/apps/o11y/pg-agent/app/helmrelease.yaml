@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: pg-agent
-  namespace: default
+  namespace: o11y
 spec:
   chart:
     spec:
