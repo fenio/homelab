@@ -28,16 +28,8 @@ spec:
               tag: latest
               pullPolicy: Always
             env:
-              - name: PGUSER
-                valueFrom:
-                  secretKeyRef:
-                    name: postgres.product-pg.credentials
-                    key: username
-              - name: PGPASSWORD
-                valueFrom:
-                  secretKeyRef:
-                    name: postgres.product-pg.credentials
-                    key: password
+              PGUSER: "postgres"
+              PGPASSWORD: "${SECRET_PG_PASSWORD}"
               - name: DSN
                 value: postgresql://$(PGUSER):$(PGPASSWORD)@/postgres-ro.database.svc.cluster.local:5432/postgres
             resources:
