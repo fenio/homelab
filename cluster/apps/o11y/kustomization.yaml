@@ -6,6 +6,7 @@ resources:
   - ./flux-webui/ks.yaml
   - ./grafana/ks.yaml
   - ./metrics-server/ks.yaml
+  - ./pg-agent/ks.yaml
   - ./smartctl-exporter/ks.yaml
   - ./victoria-metrics/ks.yaml
   - ./victoria-logs/ks.yaml
