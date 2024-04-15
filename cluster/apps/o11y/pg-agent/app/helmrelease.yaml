@@ -17,7 +17,7 @@ spec:
     defaultPodOptions:
       annotations:
         prometheus.io/scrape: 'true'
-        prometheus.io/port: '80'
+        prometheus.io/port: &port '8080'
     controllers:
       main:
         strategy: RollingUpdate
@@ -52,5 +52,5 @@ spec:
         ports:
           http:
             enabled: true
-            port: 80
+            port: *port
 
