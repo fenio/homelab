@@ -29,7 +29,7 @@ spec:
               pullPolicy: Always
             env:
               - name: LISTEN
-                value: 8080
+                value: ':8080'
               - name: PGUSER
                 value: "postgres"
               - name: PGPASSWORD 
