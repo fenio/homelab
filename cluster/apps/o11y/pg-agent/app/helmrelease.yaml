@@ -35,7 +35,7 @@ spec:
               - name: PGPASSWORD 
                 value: "${SECRET_PG_PASSWORD}"
               - name: DSN
-                value: postgresql://$(PGUSER):$(PGPASSWORD)@/postgres-ro.database.svc.cluster.local:5432/postgres
+                value: postgresql://$(PGUSER):$(PGPASSWORD)@postgres-ro.database.svc.cluster.local:5432/postgres
             resources:
               requests:
                 cpu: 20m
