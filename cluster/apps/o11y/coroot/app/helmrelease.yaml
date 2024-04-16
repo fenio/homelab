@@ -79,7 +79,7 @@ spec:
           ephemeral-storage: 2Gi
       securityContext:
         capabilities: 
-          add: ["CAP_IPC_LOCK"
+          add: ["CAP_IPC_LOCK"]
     node-agent:
       resources:
         requests:
