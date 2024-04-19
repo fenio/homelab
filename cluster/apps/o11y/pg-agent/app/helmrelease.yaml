@@ -44,10 +44,10 @@ spec:
               limits:
                 memory: 50Mi
                 ephemeral-storage: 5Gi
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
-              capabilities: {drop: ["ALL"]}
+#            securityContext:
+#              allowPrivilegeEscalation: false
+#              readOnlyRootFilesystem: false
+#              capabilities: {drop: ["ALL"]}
     service:
       main:
         controller: main
