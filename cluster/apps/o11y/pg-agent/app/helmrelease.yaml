@@ -17,7 +17,7 @@ spec:
     defaultPodOptions:
       annotations:
         prometheus.io/scrape: 'true'
-        prometheus.io/port: '80'
+        prometheus.io/port: '8080'
     controllers:
       main:
         strategy: RollingUpdate
@@ -28,8 +28,8 @@ spec:
               tag: latest
               pullPolicy: Always
             env:
-#              - name: LISTEN
-#                value: '0.0.0.0:8080'
+              - name: LISTEN
+                value: '0.0.0.0:8080'
               - name: PGUSER
                 value: "postgres"
               - name: PGPASSWORD 
@@ -44,16 +44,15 @@ spec:
               limits:
                 memory: 50Mi
                 ephemeral-storage: 5Gi
-#            securityContext:
-#              allowPrivilegeEscalation: false
-#              readOnlyRootFilesystem: false
-#              capabilities: {drop: ["ALL"]}
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              capabilities: {drop: ["ALL"]}
     service:
       main:
         controller: main
         ports:
           http:
             enabled: true
-            port: 80
-            targetPort: 8080
+            port: 8080
 
