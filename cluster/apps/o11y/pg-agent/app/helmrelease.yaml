@@ -28,8 +28,8 @@ spec:
               tag: latest
               pullPolicy: Always
             env:
-              - name: LISTEN
-                value: '0.0.0.0:8080'
+#              - name: LISTEN
+#                value: '0.0.0.0:8080'
               - name: PGUSER
                 value: "postgres"
               - name: PGPASSWORD 
