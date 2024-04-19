@@ -2,6 +2,7 @@ apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMServiceScrape
 metadata:
   name: pg-agent
+  namespace: o11y
 spec:
   discoveryRole: service
   endpoints:
