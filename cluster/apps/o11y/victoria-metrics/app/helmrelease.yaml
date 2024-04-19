@@ -113,6 +113,18 @@ spec:
             cpu: null
             memory: 1.8G
             ephemeral-storage: 2Gi
+      ingress:
+        ingressClassName: private
+        enabled: true
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Infrastructure
+          gethomepage.dev/name: VM 
+          gethomepage.dev/icon: si-victoriametrics
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+        hosts:
+          - &host vm.${SECRET_DOMAIN}
+        tls: [hosts: [*host]]
     vmalert:
       spec:
         replicaCount: 1
