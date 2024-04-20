@@ -48,4 +48,3 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: pg-agent
-      monitored-by: vm-operator
