@@ -145,6 +145,8 @@ spec:
           pullPolicy: Always
         externalLabels:
           cluster: lab
+        extraArgs:
+          promscrape.dropOriginalLabels: "false"
         resources:
           requests:
             cpu: 200m
