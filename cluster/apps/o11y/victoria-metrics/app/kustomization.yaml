@@ -5,3 +5,4 @@ resources:
   - ./flux.yaml
   - ./k0s.yaml
   - ./pg-agent.yaml
+  - ./pg-agent-vmpodscrape.yaml
