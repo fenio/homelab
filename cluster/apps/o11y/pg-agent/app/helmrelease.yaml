@@ -48,6 +48,10 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
               capabilities: {drop: ["ALL"]}
+            ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
     service:
       main:
         controller: main
