@@ -36,6 +36,7 @@ spec:
           main:
             image:
               repository: jellyfin/jellyfin
+              tag: latest
             resources:
               requests:
                 cpu: 500m
