@@ -37,7 +37,7 @@ spec:
       keyPath: ~/.ssh/id_rsa
     role: worker
   k0s:
-    version: 1.29.3+k0s.0
+    version: 1.29.4+k0s.0
     dynamicConfig: false
     config:
       spec:
@@ -53,7 +53,7 @@ spec:
             charts:
             - name: cilium
               chartname: cilium/cilium
-              version: "1.15.3"
+              version: "1.15.4"
               namespace: kube-system
               values: |2
                 hubble:
