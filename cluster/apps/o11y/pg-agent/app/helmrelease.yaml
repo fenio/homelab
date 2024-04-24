@@ -62,6 +62,7 @@ spec:
     serviceMonitor:
       main:
         enabled: true
+        serviceName: pg-agent
         endpoints:
           - port: http
             scheme: http
