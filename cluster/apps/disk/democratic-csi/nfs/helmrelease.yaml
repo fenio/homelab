@@ -103,8 +103,8 @@ spec:
           allowInsecure: true
           apiKey: ${TRUENAS_API_KEY}
         zfs:
-          datasetParentName: storage/k8s/nfs/v
-          detachedSnapshotsDatasetParentName: storage/k8s/nfs/s
+          datasetParentName: storage/nfs/v
+          detachedSnapshotsDatasetParentName: storage/nfs/s
           datasetEnableQuotas: true
           datasetEnableReservation: false
           datasetPermissionsMode: "0777"
