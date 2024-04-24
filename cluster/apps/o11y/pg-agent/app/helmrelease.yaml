@@ -14,10 +14,10 @@ spec:
         namespace: flux-system
   interval: 30m
   values:
-    defaultPodOptions:
-      annotations:
-        prometheus.io/scrape: 'true'
-        prometheus.io/port: '8080'
+#    defaultPodOptions:
+#      annotations:
+#        prometheus.io/scrape: 'true'
+#        prometheus.io/port: '8080'
     controllers:
       main:
         strategy: RollingUpdate
@@ -48,10 +48,10 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
               capabilities: {drop: ["ALL"]}
-            ports:
-            - containerPort: 8080
-              name: http
-              protocol: TCP
+#            ports:
+#            - containerPort: 8080
+#              name: http
+#              protocol: TCP
     service:
       main:
         controller: main
@@ -59,4 +59,12 @@ spec:
           http:
             enabled: true
             port: 8080
-
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s

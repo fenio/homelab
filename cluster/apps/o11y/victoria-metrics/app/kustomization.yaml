@@ -4,4 +4,4 @@ resources:
   - ./helmrelease.yaml
   - ./flux.yaml
   - ./k0s.yaml
-  - ./pg-agent.yaml
+#  - ./pg-agent.yaml
