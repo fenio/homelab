@@ -17,9 +17,9 @@ spec:
         namespace: flux-system
   dependsOn:
     - name: ingress-nginx
-      namespace: network
+      namespace: net
     - name: nfs
-      namespace: storage
+      namespace: disk
   install:
     remediation:
       retries: 5

@@ -1,0 +1,49 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+  namespace: db
+spec:
+  instances: 3
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.2
+  primaryUpdateStrategy: unsupervised
+  enableSuperuserAccess: true
+  superuserSecret:
+    name: pg-credentials
+  storage:
+    size: 20Gi
+    storageClass: nfs
+  postgresql:
+    parameters:
+      max_connections: "300"
+      work_mem: 64MB
+      shared_buffers: 128MB
+      pg_stat_statements.max: "10000"
+      pg_stat_statements.track: all
+  resources:
+    requests:
+      cpu: 100m
+      memory: 800Mi
+      ephemeral-storage: 1Gi
+    limits:
+      memory: 1.2Gi
+      ephemeral-storage: 5Gi
+  backup:
+    retentionPolicy: 7d
+    barmanObjectStore:
+      data:
+        compression: bzip2
+      wal:
+        compression: bzip2
+        maxParallel: 4
+      destinationPath: s3://pgsql/
+      endpointURL: https://eu-central-1.linodeobjects.com
+      serverName: postgres
+      s3Credentials:
+        accessKeyId:
+          name: pg-credentials
+          key: S3_ACCESS_KEY
+        secretAccessKey:
+          name: pg-credentials
+          key: S3_SECRET_KEY

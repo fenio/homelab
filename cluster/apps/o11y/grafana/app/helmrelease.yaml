@@ -14,9 +14,9 @@ spec:
         namespace: flux-system
   dependsOn:
     - name: ingress-nginx
-      namespace: network
+      namespace: net
     - name: cloudnative-pg
-      namespace: database
+      namespace: db
   interval: 30m
   values:
     annotations:
@@ -26,7 +26,7 @@ spec:
         image: ghcr.io/onedr0p/postgres-init:16.2
         env:
           - name: INIT_POSTGRES_HOST
-            value: &dbHost "postgres-rw.database.svc.cluster.local"
+            value: &dbHost "postgres-rw.db.svc.cluster.local"
           - name: INIT_POSTGRES_SUPER_PASS
             value: "${SECRET_PG_PASSWORD}"
           - name: INIT_POSTGRES_USER

@@ -16,11 +16,11 @@ spec:
         namespace: flux-system
   dependsOn:
     - name: cloudnative-pg
-      namespace: database
+      namespace: db
     - name: ingress-nginx
-      namespace: network
+      namespace: net
     - name: nfs
-      namespace: storage
+      namespace: disk
   maxHistory: 3
   install:
     createNamespace: true
@@ -53,7 +53,7 @@ spec:
               tag: 16.2
               pullPolicy: Always
             env:
-              INIT_POSTGRES_HOST: &dbHost "postgres-rw.database.svc.cluster.local"
+              INIT_POSTGRES_HOST: &dbHost "postgres-rw.db.svc.cluster.local"
               INIT_POSTGRES_SUPER_PASS: "${SECRET_PG_PASSWORD}"
               INIT_POSTGRES_USER: &dbUser "radarr"
               INIT_POSTGRES_PASS: &dbPass "${RADARR_PG_PASSWORD}"
