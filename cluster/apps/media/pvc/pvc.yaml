@@ -10,3 +10,4 @@ spec:
     requests:
       storage: 1000Gi
   storageClassName: nfs
+  persistentVolumeReclaimPolicy: Retain
