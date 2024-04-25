@@ -38,8 +38,8 @@ spec:
     crds:
       create: true
     replicaCount: 1
-    monitoring:
-      podMonitorEnabled: true
+#    monitoring:
+#      podMonitorEnabled: true
     resources:
       requests:
         cpu: 15m
