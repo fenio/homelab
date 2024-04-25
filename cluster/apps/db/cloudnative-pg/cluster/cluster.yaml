@@ -20,7 +20,7 @@ spec:
       work_mem: 64MB
       shared_buffers: 128MB
       pg_stat_statements.max: "10000"
-      pg_stat_statements.track: all
+      pg_stat_statements.track: top
 #  monitoring:
 #    enablePodMonitor: true
   resources:
