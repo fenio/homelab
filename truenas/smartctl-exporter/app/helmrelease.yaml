@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: smartctl-exporter
+  name: smartctl-exporter-nas
 spec:
   interval: 30m
   chart:
