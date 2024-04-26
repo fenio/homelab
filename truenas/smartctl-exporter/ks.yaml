@@ -6,8 +6,8 @@ metadata:
   name: smartctl-exporter
   namespace: flux-system
 spec:
-  path: ./cluster/apps/o11y/smartctl-exporter/app
-  targetNamespace: o11y
+  path: ./truenas/smartctl-exporter/app
+  targetNamespace: default
   sourceRef:
     kind: GitRepository
     name: homelab
