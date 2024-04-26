@@ -63,7 +63,7 @@ spec:
     serviceMonitor:
       main:
         enabled: true
-        serviceName: smartctl
+        serviceName: smartctl-exporter
         endpoints:
           - port: http
             scheme: http
