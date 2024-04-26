@@ -60,3 +60,13 @@ spec:
         globalMounts:
           - path: /host/dev
             readOnly: true
+    serviceMonitor:
+      main:
+        enabled: true
+        serviceName: smartctl
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
