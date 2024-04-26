@@ -296,6 +296,10 @@ spec:
         cnpg-dashboard:
           url: https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/v1.22.0/docs/src/samples/monitoring/grafana-dashboard.json
           datasource: Prometheus
+        smartctl-dashboard:
+          gnetId: 20204
+          revision: 1
+          datasource: Prometheus
       system:
         node-exporter:
           # renovate: depName="Node Exporter"
