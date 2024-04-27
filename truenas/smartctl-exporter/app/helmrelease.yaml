@@ -16,6 +16,8 @@ spec:
   kubeConfig:
     secretRef:
       name: truenas-cluster
+  targetNamespace: default
+  storageNamespace: default
   values:
     controllers:
       smartctl-exporter:
