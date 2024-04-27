@@ -6,13 +6,13 @@ metadata:
   name: smartctl-exporter
   namespace: flux-system
 spec:
-  path: ./truenas/smartctl-exporter/app
+  path: ./truenas/smartctl-exporter-nas/app
   sourceRef:
     kind: GitRepository
     name: homelab
   commonMetadata:
     labels:
-      app.kubernetes.io/name: smartctl-exporter
+      app.kubernetes.io/name: smartctl-exporter-nas
   prune: true
   wait: false
   interval: 10m
