@@ -6,7 +6,7 @@ metadata:
   name: smartctl-exporter-nas
   namespace: flux-system
 spec:
-  path: ./truenas/smartctl-exporter-nas/app
+  path: ./smartctl-exporter-nas/app
   sourceRef:
     kind: GitRepository
     name: homelab
