@@ -58,6 +58,7 @@ spec:
         ports:
           http:
             port: 9633
+            nodePort: 30000
     persistence:
       dev:
         type: hostPath
