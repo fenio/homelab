@@ -52,6 +52,7 @@ spec:
                     path: /
               readiness: *probes
     service:
+      type: NodePort
       app:
         controller: smartctl-exporter
         ports:
