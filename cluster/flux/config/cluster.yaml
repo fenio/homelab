@@ -81,7 +81,4 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
-  kubeConfig:
-    secretRef:
-      name: truenas-cluster
 
