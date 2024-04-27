@@ -7,7 +7,6 @@ metadata:
   namespace: flux-system
 spec:
   path: ./truenas/smartctl-exporter/app
-  targetNamespace: default
   sourceRef:
     kind: GitRepository
     name: homelab
