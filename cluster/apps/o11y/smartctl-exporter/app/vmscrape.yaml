@@ -6,7 +6,4 @@ spec:
   staticConfigs: [targets: ["10.10.20.100:30000"]]
   metricsPath: /metrics
   honorTimestamps: true
-  relabelings:
-    - action: replace
-      targetLabel: job
-      replacement: *name
+
