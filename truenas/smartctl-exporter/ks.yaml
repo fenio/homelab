@@ -10,6 +10,9 @@ spec:
   sourceRef:
     kind: GitRepository
     name: homelab
+  kubeConfig:
+    secretRef:
+      name: truenas-cluster
   commonMetadata:
     labels:
       app.kubernetes.io/name: smartctl-exporter
