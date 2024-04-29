@@ -36,6 +36,9 @@ spec:
               - 'operator.victoriametrics.com'
             resources:
               - vmsingles
+              - vmalertmanagers
+              - vmalerts
+              - vmagents
             verbs:
               - 'get'
               - 'list'
