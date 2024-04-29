@@ -39,4 +39,12 @@ spec:
               - 'get'
               - 'list'
               - 'watch'
-    
+    ingress:
+      enabled: true
+      ingressClassName: private
+      hosts:
+        - name: &host "r.${SECRET_DOMAIN}"
+          path: /
+          port: http
+      tls: [hosts: [*host]]
+
