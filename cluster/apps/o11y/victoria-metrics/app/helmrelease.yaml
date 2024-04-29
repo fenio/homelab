@@ -191,6 +191,10 @@ spec:
           repeat_interval: 12h
           receiver: "telegram"
           routes:
+            - receiver: "null"
+              matchers:
+                - alertname =~ "InfoInhibitor"
+              continue: false
             - receiver: "telegram"
         receivers:
           - name: "telegram"
