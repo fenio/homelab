@@ -29,6 +29,7 @@ spec:
             args:
               - --smartctl.path=/usr/sbin/smartctl
               - --smartctl.interval=600s
+              - --smartctl.rescan=30m
               - --web.listen-address=0.0.0.0:9633
               - --web.telemetry-path=/metrics
             securityContext:
