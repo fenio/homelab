@@ -27,6 +27,10 @@ spec:
   values:
     updater:
       enabled: false
+    recommender:
+      extraArgs:
+        storage: prometheus
+        prometheus-address: o11y/vmsingle-vm:8429
     admissionController:
       enabled: false
 
