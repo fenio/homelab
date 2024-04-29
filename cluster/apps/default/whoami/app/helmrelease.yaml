@@ -27,10 +27,11 @@ spec:
               WHOAMI_PORT_NUMBER: &port 8080
             resources:
               requests:
-                cpu: 20m
+                cpu: 15m
                 memory: 50Mi
                 ephemeral-storage: 1Gi
               limits:
+                cpu: 20m
                 memory: 50Mi
                 ephemeral-storage: 5Gi
             securityContext:
