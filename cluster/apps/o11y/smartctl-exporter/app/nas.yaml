@@ -28,8 +28,7 @@ spec:
               tag: v0.12.0
             args:
               - --smartctl.path=/usr/sbin/smartctl
-              - --smartctl.interval=600s
-              - --smartctl.rescan=30m
+              - --smartctl.interval=1h
               - --web.listen-address=0.0.0.0:9633
               - --web.telemetry-path=/metrics
             securityContext:
