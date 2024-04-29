@@ -197,6 +197,7 @@ spec:
               continue: false
             - receiver: "telegram"
         receivers:
+          - name: "null"
           - name: "telegram"
             telegram_configs:
               - parse_mode: "HTML"
