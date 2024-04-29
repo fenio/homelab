@@ -17,20 +17,22 @@ spec:
       externalAttacher:
         resources:
           requests:
-            cpu: 10m
-            memory: 50Mi
+            cpu: 15m
+            memory: 50M
             ephemeral-storage: 1Gi
           limits:
-            memory: 150Mi
+            cpu: 20m
+            memory: 100Mi
             ephemeral-storage: 5Gi
       externalProvisioner:
         resources:
           requests:
             cpu: 10m
-            memory: 50Mi
+            memory: 50M
             ephemeral-storage: 1Gi
           limits:
-            memory: 150Mi
+            cpu: 30m
+            memory: 100M
             ephemeral-storage: 5Gi
       externalResizer:
         resources:
@@ -39,16 +41,18 @@ spec:
             memory: 50Mi
             ephemeral-storage: 1Gi
           limits:
-            memory: 150Mi
+            cpu: 30m
+            memory: 100Mi
             ephemeral-storage: 5Gi
       externalSnapshotter:
         resources:
           requests:
             cpu: 10m
-            memory: 50Mi
+            memory: 30Mi
             ephemeral-storage: 1Gi
           limits:
-            memory: 200Mi
+            cpu: 20m
+            memory: 100Mi
             ephemeral-storage: 5Gi
       driver:
         resources:
