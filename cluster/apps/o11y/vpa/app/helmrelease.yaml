@@ -30,7 +30,7 @@ spec:
     recommender:
       extraArgs:
         storage: prometheus
-        prometheus-address: o11y/vmsingle-vm:8429
+        prometheus-address: http://vmsingle-vm.svc.cluster.local:8429
     admissionController:
       enabled: false
 
