@@ -25,10 +25,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    vpa:
-      enabled: true
-      updater:
-        enabled: false
     controller:
       rbac:
         extraRules:
