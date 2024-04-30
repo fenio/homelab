@@ -30,11 +30,13 @@ spec:
         extraRules:
           - apiGroups:
               - 'operator.victoriametrics.com'
+              - 'deviceplugin.intel.com'
             resources:
               - vmsingles
               - vmalertmanagers
               - vmalerts
               - vmagents
+              - gpudeviceplugins
             verbs:
               - 'get'
               - 'list'
