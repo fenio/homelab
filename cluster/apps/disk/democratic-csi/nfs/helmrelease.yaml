@@ -21,7 +21,7 @@ spec:
             memory: 50M
             ephemeral-storage: 1Gi
           limits:
-            cpu: 20m
+            cpu: 30m
             memory: 100Mi
             ephemeral-storage: 5Gi
       externalProvisioner:
