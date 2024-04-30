@@ -4,7 +4,7 @@ resources:
   - ./namespace.yaml
   - ./coroot/ks.yaml
   - ./flux-webui/ks.yaml
-  - ./goldilocks/ks.yaml
+#  - ./goldilocks/ks.yaml
   - ./grafana/ks.yaml
   - ./metrics-server/ks.yaml
   - ./pg-agent/ks.yaml
