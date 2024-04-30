@@ -21,7 +21,7 @@ spec:
             memory: 50M
             ephemeral-storage: 1Gi
           limits:
-            cpu: 100m
+            cpu: 200m
             memory: 100Mi
             ephemeral-storage: 5Gi
       externalProvisioner:
@@ -31,7 +31,7 @@ spec:
             memory: 50M
             ephemeral-storage: 1Gi
           limits:
-            cpu: 20m
+            cpu: 200m
             memory: 100M
             ephemeral-storage: 5Gi
       externalResizer:
@@ -41,7 +41,7 @@ spec:
             memory: 50Mi
             ephemeral-storage: 1Gi
           limits:
-            cpu: 20m
+            cpu: 200m
             memory: 100Mi
             ephemeral-storage: 5Gi
       externalSnapshotter:
@@ -51,7 +51,7 @@ spec:
             memory: 30Mi
             ephemeral-storage: 1Gi
           limits:
-            cpu: 20m
+            cpu: 200m
             memory: 100Mi
             ephemeral-storage: 5Gi
       driver:
@@ -61,7 +61,7 @@ spec:
             memory: 50Mi
             ephemeral-storage: 1Gi
           limits:
-            cpu: 20m
+            cpu: 200m
             memory: 100Mi
             ephemeral-storage: 2Gi
     csiProxy:
@@ -71,7 +71,7 @@ spec:
           memory: 100Mi
           ephemeral-storage: 1Gi
         limits:
-          cpu: 20m
+          cpu: 200m
           memory: 100Mi
           ephemeral-storage: 5Gi
     csiDriver:
@@ -133,7 +133,7 @@ spec:
             memory: 100Mi
             ephemeral-storage: 1Gi
           limits:
-            cpu: 40m
+            cpu: 200m
             memory: 200Mi
             ephemeral-storage: 5Gi
       driverRegistrar:
@@ -143,7 +143,7 @@ spec:
             memory: 100Mi
             ephemeral-storage: 1Gi
           limits:
-            cpu: 20m
+            cpu: 200m
             memory: 200Mi
             ephemeral-storage: 5Gi
       cleanup:
@@ -153,7 +153,7 @@ spec:
             memory: 100Mi
             ephemeral-storage: 1Gi
           limits:
-            cpu: 20m
+            cpu: 200m
             memory: 200Mi
             ephemeral-storage: 5Gi
       kubeletHostPath: /var/lib/k0s/kubelet
