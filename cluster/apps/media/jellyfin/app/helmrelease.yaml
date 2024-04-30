@@ -39,12 +39,12 @@ spec:
               tag: latest
             resources:
               requests:
-                cpu: 50m
-                memory: 200Mi
+                cpu: 10m
+                memory: 150Mi
 #                gpu.intel.com/i915: 1
               limits:
                 cpu: 200m
-                memory: 1Gi
+                memory: 500Mi
 #                gpu.intel.com/i915: 1
             probes:
               startup:
