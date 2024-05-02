@@ -39,7 +39,7 @@ spec:
                 valueFrom:
                   resourceFieldRef:
                     resource: limits.memory
-                    containerName: app
+                    containerName: qbittorrent
                     divisor: 1Mi
               QBT_Preferences__WebUI__AlternativeUIEnabled: true
               QBT_Preferences__WebUI__AuthSubnetWhitelistEnabled: true
