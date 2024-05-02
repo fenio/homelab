@@ -144,7 +144,7 @@ spec:
                       memory: 100Mi
                       ephemeral-storage: 1Gi
                     limits:
-                      cpu: 100m
+                      cpu: 500m
                       memory: 100Mi
                       ephemeral-storage: 2Gi
                 ipam:
@@ -164,7 +164,7 @@ spec:
                     memory: 400Mi
                     ephemeral-storage: 1Gi
                   limits:
-                    cpu: 500m
+                    cpu: 800m
                     memory: 400Mi
                     ephemeral-storage: 2Gi
                 cgroup:
@@ -175,6 +175,7 @@ spec:
                         memory: 100Mi
                         ephemeral-storage: 1Gi
                       limits:
+                        cpu: 500m
                         memory: 100Mi
                         ephemeral-storage: 2Gi
                 cni:
@@ -184,6 +185,7 @@ spec:
                       memory: 100Mi
                       ephemeral-storage: 1Gi
                     limits:
+                      cpu: 500m
                       memory: 100Mi
                       ephemeral-storage: 2Gi
                 initResources:
