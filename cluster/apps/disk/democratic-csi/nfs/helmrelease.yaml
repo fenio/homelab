@@ -61,7 +61,7 @@ spec:
             memory: 50Mi
             ephemeral-storage: 1Gi
           limits:
-            cpu: 900m
+            cpu: 950m
             memory: 100Mi
             ephemeral-storage: 2Gi
     csiProxy:
@@ -133,7 +133,7 @@ spec:
             memory: 100Mi
             ephemeral-storage: 1Gi
           limits:
-            cpu: 900m
+            cpu: 950m
             memory: 200Mi
             ephemeral-storage: 5Gi
       driverRegistrar:
