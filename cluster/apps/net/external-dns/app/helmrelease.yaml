@@ -35,6 +35,7 @@ spec:
         memory: 50Mi
         ephemeral-storage: 1Gi
       limits:
+        cpu: 100m
         memory: 100Mi
         ephemeral-storage: 5Gi
     provider: cloudflare

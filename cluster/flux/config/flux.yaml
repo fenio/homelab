@@ -61,7 +61,7 @@ spec:
                       memory: 180Mi
                       ephemeral-storage: 1Gi
                     limits:
-                      cpu: null
+                      cpu: 200m
                       memory: 250Mi
                       ephemeral-storage: 2Gi
       target:
@@ -84,7 +84,7 @@ spec:
                       memory: 400Mi
                       ephemeral-storage: 1Gi
                     limits:
-                      cpu: null
+                      cpu: 200m
                       memory: 1Gi
                       ephemeral-storage: 2Gi
       target:

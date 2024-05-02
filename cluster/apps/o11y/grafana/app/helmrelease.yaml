@@ -45,6 +45,7 @@ spec:
             memory: 100Mi
             ephemeral-storage: 1Gi
           limits:
+            cpu: 200m
             memory: 300Mi
             ephemeral-storage: 5Gi
     env:
@@ -62,6 +63,7 @@ spec:
         memory: 200Mi
         ephemeral-storage: 1Gi
       limits:
+        cpu: 200m
         memory: 200Mi
         ephemeral-storage: 2Gi
     downloadDashboards:
@@ -71,6 +73,7 @@ spec:
           memory: 200Mi
           ephemeral-storage: 1Gi
         limits:
+          cpu: 200m
           memory: 200Mi
           ephemeral-storage: 2Gi
     rbac:

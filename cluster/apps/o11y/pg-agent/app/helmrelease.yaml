@@ -42,6 +42,7 @@ spec:
                 memory: 50Mi
                 ephemeral-storage: 1Gi
               limits:
+                cpu: 200m
                 memory: 50Mi
                 ephemeral-storage: 5Gi
             securityContext:
