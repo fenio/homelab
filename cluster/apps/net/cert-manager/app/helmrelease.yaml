@@ -57,7 +57,7 @@ spec:
           ephemeral-storage: 1Gi
         limits:
           cpu: 100m
-          memory: 100Mi
+          memory: 200Mi
           ephemeral-storage: 2Gi
     webhook:
       image:
