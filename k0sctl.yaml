@@ -77,10 +77,11 @@ spec:
                         enabled: true
                     resources:
                       requests:
-                        cpu: 50m
+                        cpu: 10m
                         memory: 100Mi
                         ephemeral-storage: 1Gi
                       limits:
+                        cpu: 100m
                         memory: 100Mi
                         ephemeral-storage: 2Gi
                   ui:
@@ -91,10 +92,11 @@ spec:
                         pullPolicy: Always
                       resources:
                         requests:
-                          cpu: 50m
+                          cpu: 10m
                           memory: 100Mi
                           ephemeral-storage: 1Gi
                         limits:
+                          cpu: 100m
                           memory: 100Mi
                           ephemeral-storage: 2Gi
                       securityContext:
@@ -106,10 +108,11 @@ spec:
                         pullPolicy: Always
                       resources:
                         requests:
-                          cpu: 50m
+                          cpu: 10m
                           memory: 100Mi
                           ephemeral-storage: 1Gi
                         limits:
+                          cpu: 100m
                           memory: 100Mi
                           ephemeral-storage: 2Gi
                       securityContext:
@@ -137,10 +140,11 @@ spec:
                       enabled: true
                   resources:
                     requests:
-                      cpu: 50m
+                      cpu: 10m
                       memory: 100Mi
                       ephemeral-storage: 1Gi
                     limits:
+                      cpu: 100m
                       memory: 100Mi
                       ephemeral-storage: 2Gi
                 ipam:
@@ -160,6 +164,7 @@ spec:
                     memory: 400Mi
                     ephemeral-storage: 1Gi
                   limits:
+                    cpu: 200m
                     memory: 400Mi
                     ephemeral-storage: 2Gi
                 cgroup:
