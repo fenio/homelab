@@ -27,7 +27,7 @@ spec:
               accessMode: ReadWriteOnce
               size: 5Gi
         containers:
-          app:
+          qbittorrent:
             image:
               repository: ghcr.io/onedr0p/qbittorrent
               tag: "4.6.4"
@@ -81,7 +81,7 @@ spec:
                 cpu: 200m
                 memory: 500Mi
           vuetorrent:
-            dependsOn: app
+            dependsOn: qbittorrent
             image:
               repository: registry.k8s.io/git-sync/git-sync
               tag: v4.2.2
@@ -98,7 +98,7 @@ spec:
                 cpu: 10m
                 memory: 100Mi
     service:
-      app:
+      qbittorrent:
         controller: qbittorrent
         ports:
           http:
@@ -115,7 +115,7 @@ spec:
             port: *bittorrentPort
             protocol: TCP
     ingress:
-      app:
+      qbittorrent:
         className: private
         annotations:
           gethomepage.dev/enabled: "true"
@@ -129,7 +129,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: qbittorrent
                   port: http
         tls: [hosts: [*host]]
     persistence:

@@ -17,7 +17,7 @@ spec:
       smartctl-exporter:
         type: daemonset
         containers:
-          app:
+          smartctl:
             image:
               repository: quay.io/prometheuscommunity/smartctl-exporter
               tag: v0.12.0
@@ -48,7 +48,7 @@ spec:
                     path: /
               readiness: *probes
     service:
-      app:
+      smartctl:
         controller: smartctl-exporter
         ports:
           http:
@@ -62,7 +62,7 @@ spec:
           - path: /host/dev
             readOnly: true
     serviceMonitor:
-      main:
+      smartctl:
         enabled: true
         serviceName: smartctl-exporter
         endpoints:

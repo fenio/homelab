@@ -19,10 +19,10 @@ spec:
 #        prometheus.io/scrape: 'true'
 #        prometheus.io/port: '8080'
     controllers:
-      main:
+      pg-agent:
         strategy: RollingUpdate
         containers:
-          main:
+          pg-agent:
             image:
               repository: ghcr.io/coroot/coroot-pg-agent
               tag: latest
@@ -54,14 +54,14 @@ spec:
 #              name: http
 #              protocol: TCP
     service:
-      main:
-        controller: main
+      pg-agent:
+        controller: pg-agent
         ports:
           http:
             enabled: true
             port: 8080
     serviceMonitor:
-      main:
+      pg-agent:
         enabled: true
         serviceName: pg-agent
         endpoints:
