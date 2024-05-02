@@ -94,6 +94,7 @@ spec:
           memory: 200Mi
           ephemeral-storage: 1Gi
         limits:
+          cpu: 200m
           memory: 250Mi
           ephemeral-storage: 2Gi
     defaultBackend:
@@ -113,6 +114,7 @@ spec:
           memory: 30Mi
           ephemeral-storage: 1Gi
         limits:
+          cpu: 100m
           memory: 35Mi
           ephemeral-storage: 2Gi
       extraEnvs:
