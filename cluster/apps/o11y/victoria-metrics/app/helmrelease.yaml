@@ -96,7 +96,8 @@ spec:
           memory: 100Mi
           ephemeral-storage: 1Gi
         limits:
-          memory: 200Mi
+          cpu: 100m
+          memory: 150Mi
           ephemeral-storage: 2Gi
     vmsingle:
       spec:
@@ -110,7 +111,7 @@ spec:
             memory: 1.5G
             ephemeral-storage: 1Gi
           limits:
-            cpu: null
+            cpu: 700m
             memory: 1.8G
             ephemeral-storage: 2Gi
       ingress:
@@ -136,6 +137,7 @@ spec:
             memory: 100Mi
             ephemeral-storage: 1Gi
           limits:
+            cpu: 200m
             memory: 100Mi
             ephemeral-storage: 2Gi
     vmagent:
@@ -154,6 +156,7 @@ spec:
             memory: 200Mi
             ephemeral-storage: 1Gi
           limits:
+            cpu: 200m
             memory: 300Mi
             ephemeral-storage: 2Gi
       ingress:
@@ -178,7 +181,7 @@ spec:
             memory: 100Mi
             ephemeral-storage: 1Gi
           limits:
-            cpu: null
+            cpu: 200m
             memory: 150Mi
             ephemeral-storage: 2Gi
       config:

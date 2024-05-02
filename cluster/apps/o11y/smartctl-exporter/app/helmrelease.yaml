@@ -35,6 +35,7 @@ spec:
                 memory: 100Mi
                 ephemeral-storage: 1Gi
               limits:
+                cpu: 50m
                 memory: 200Mi
                 ephemeral-storage: 2Gi
             probes:
