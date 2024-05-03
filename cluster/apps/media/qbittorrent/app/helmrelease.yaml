@@ -75,11 +75,13 @@ spec:
               capabilities: {drop: ["ALL"]}
             resources:
               requests:
-                cpu: 20m
-                memory: 100Mi
-              limits:
                 cpu: 200m
+                memory: 100Mi
+                ephemeral-storage: 1Gi
+              limits:
+                cpu: 1
                 memory: 500Mi
+                ephemeral-storage: 2Gi
           vuetorrent:
             dependsOn: qbittorrent
             image:
@@ -94,9 +96,11 @@ spec:
               requests:
                 cpu: 10m
                 memory: 100Mi
+                ephemeral-storage: 1Gi
               limits:
-                cpu: 10m
+                cpu: 200m
                 memory: 100Mi
+                ephemeral-storage: 2Gi
     service:
       qbittorrent:
         controller: qbittorrent
