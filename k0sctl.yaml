@@ -12,7 +12,7 @@ spec:
     role: controller
     files:
     - name: Prometheus CRDs
-      src: prometheus-crds.yaml
+      src: stripped-down-crds.yaml
       dstDir: /var/lib/k0s/manifests/prometheus/
       perm: 0600
     installFlags:
