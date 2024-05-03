@@ -60,7 +60,7 @@ spec:
     role: controller
     files:
     - name: Prometheus CRDs
-      src: prometheus-crds.yaml
+      src: stripped-down-crds.yaml
       dstDir: /var/lib/k0s/manifests/prometheus/
       perm: 0600
     installFlags:
@@ -85,7 +85,7 @@ spec:
       keyPath: ~/.ssh/id_rsa
     role: worker
   k0s:
-    version: 1.29.1+k0s.0
+    version: 1.29.4+k0s.0
     dynamicConfig: false
     config:
       spec:
@@ -101,9 +101,74 @@ spec:
             charts:
             - name: cilium
               chartname: cilium/cilium
-              version: "1.15.0"
-              namespace: kube-system
+              version: "1.15.4"
+              namespace: net
               values: |2
+                hubble:
+                  enabled: true
+                  metrics:
+                    enabled:
+                      - dns:query
+                      - drop
+                      - tcp
+                      - flow
+                      - port-distribution
+                      - icmp
+                      - http
+                    serviceMonitor:
+                      enabled: true
+                  relay:
+                    enabled: true
+                    rollOutPods: true
+                    prometheus:
+                      serviceMonitor:
+                        enabled: true
+                    resources:
+                      requests:
+                        cpu: 10m
+                        memory: 100Mi
+                        ephemeral-storage: 1Gi
+                      limits:
+                        cpu: 200m
+                        memory: 100Mi
+                        ephemeral-storage: 2Gi
+                  ui:
+                    enabled: true
+                    rollOutPods: true
+                    backend:
+                      image:
+                        pullPolicy: Always
+                      resources:
+                        requests:
+                          cpu: 10m
+                          memory: 100Mi
+                          ephemeral-storage: 1Gi
+                        limits:
+                          cpu: 500m
+                          memory: 100Mi
+                          ephemeral-storage: 2Gi
+                      securityContext:
+                        allowPrivilegeEscalation: false
+                        readOnlyRootFilesystem: true
+                        capabilities: {drop: ["ALL"]}
+                    frontend:
+                      image:
+                        pullPolicy: Always
+                      resources:
+                        requests:
+                          cpu: 10m
+                          memory: 100Mi
+                          ephemeral-storage: 1Gi
+                        limits:
+                          cpu: 200m
+                          memory: 100Mi
+                          ephemeral-storage: 2Gi
+                      securityContext:
+                        allowPrivilegeEscalation: false
+                        readOnlyRootFilesystem: true
+                        capabilities: {drop: ["ALL"]}
+                image:
+                  pullPolicy: "Always"
                 bgpControlPlane:
                   enabled: true
                 bgp:
@@ -121,6 +186,15 @@ spec:
                     enabled: true
                     serviceMonitor:
                       enabled: true
+                  resources:
+                    requests:
+                      cpu: 50m
+                      memory: 100Mi
+                      ephemeral-storage: 1Gi
+                    limits:
+                      cpu: 500m
+                      memory: 100Mi
+                      ephemeral-storage: 2Gi
                 ipam:
                   mode: kubernetes
                   operator:
@@ -132,6 +206,45 @@ spec:
                   enabled: true
                   serviceMonitor:
                     enabled: true
+                resources:
+                  requests:
+                    cpu: 100m
+                    memory: 400Mi
+                    ephemeral-storage: 1Gi
+                  limits:
+                    cpu: 1
+                    memory: 400Mi
+                    ephemeral-storage: 2Gi
+                cgroup:
+                  autoMount:
+                    resources:
+                      requests:
+                        cpu: 100m
+                        memory: 100Mi
+                        ephemeral-storage: 1Gi
+                      limits:
+                        cpu: 600m
+                        memory: 100Mi
+                        ephemeral-storage: 2Gi
+                cni:
+                  resources:
+                    requests:
+                      cpu: 100m
+                      memory: 100Mi
+                      ephemeral-storage: 1Gi
+                    limits:
+                      cpu: 800m
+                      memory: 100Mi
+                      ephemeral-storage: 2Gi
+                initResources:
+                  requests:
+                    cpu: 100m
+                    memory: 100Mi
+                    ephemeral-storage: 1Gi
+                  limits:
+                    cpu: 300m
+                    memory: 100Mi
+                    ephemeral-storage: 2Gi
 ```
 
 Once you've got such configuration you just have to run the following command:
@@ -144,39 +257,38 @@ Once you've got such configuration you just have to run the following command:
 ⠀⣿⣿⣿⣿⣟⠋⠀⠀⠀⠀⠀⢸⣿⡇⠀⢰⣾⣿⠀⠀⣿⣿⡇⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀███          ███    ███
 ⠀⣿⣿⡏⠻⣿⣷⣤⡀⠀⠀⠀⠸⠛⠁⠀⠸⠋⠁⠀⠀⣿⣿⡇⠈⠉⠉⠉⠉⠉⠉⠉⠉⢹⣿⣿⠀███          ███    ███
 ⠀⣿⣿⡇⠀⠀⠙⢿⣿⣦⣀⠀⠀⠀⣠⣶⣶⣶⣶⣶⣶⣿⣿⡇⢰⣶⣶⣶⣶⣶⣶⣶⣶⣾⣿⣿⠀█████████    ███    ██████████
-k0sctl v0.17.4 Copyright 2023, k0sctl authors.
+k0sctl v0.17.5 Copyright 2023, k0sctl authors.
 Anonymized telemetry of usage will be sent to the authors.
 By continuing to use k0sctl you agree to these terms:
 https://k0sproject.io/licenses/eula
 INFO ==> Running phase: Connect to hosts
 INFO [ssh] 10.10.20.99:22: connected
-INFO [ssh] 10.10.20.102:22: connected
-INFO [ssh] 10.10.20.103:22: connected
 INFO [ssh] 10.10.20.101:22: connected
+INFO [ssh] 10.10.20.103:22: connected
+INFO [ssh] 10.10.20.102:22: connected
 INFO ==> Running phase: Detect host operating systems
-INFO [ssh] 10.10.20.103:22: is running Debian GNU/Linux 12 (bookworm)
-INFO [ssh] 10.10.20.99:22: is running Debian GNU/Linux 12 (bookworm)
 INFO [ssh] 10.10.20.101:22: is running Debian GNU/Linux 12 (bookworm)
+INFO [ssh] 10.10.20.99:22: is running Debian GNU/Linux 12 (bookworm)
+INFO [ssh] 10.10.20.103:22: is running Debian GNU/Linux 12 (bookworm)
 INFO [ssh] 10.10.20.102:22: is running Debian GNU/Linux 12 (bookworm)
 INFO ==> Running phase: Acquire exclusive host lock
 INFO ==> Running phase: Prepare hosts
-INFO [ssh] 10.10.20.99:22: installing package curl
 INFO ==> Running phase: Gather host facts
 INFO [ssh] 10.10.20.102:22: using node2 as hostname
 INFO [ssh] 10.10.20.103:22: using node3 as hostname
 INFO [ssh] 10.10.20.101:22: using node1 as hostname
 INFO [ssh] 10.10.20.99:22: using master as hostname
-INFO [ssh] 10.10.20.103:22: discovered enp1s0 as private interface
 INFO [ssh] 10.10.20.102:22: discovered enp1s0 as private interface
 INFO [ssh] 10.10.20.101:22: discovered enp1s0 as private interface
+INFO [ssh] 10.10.20.103:22: discovered enp1s0 as private interface
 INFO [ssh] 10.10.20.99:22: discovered ens3 as private interface
 INFO ==> Running phase: Validate hosts
 INFO ==> Running phase: Validate facts
 INFO ==> Running phase: Download k0s on hosts
-INFO [ssh] 10.10.20.103:22: downloading k0s v1.29.1+k0s.0
-INFO [ssh] 10.10.20.101:22: downloading k0s v1.29.1+k0s.0
-INFO [ssh] 10.10.20.102:22: downloading k0s v1.29.1+k0s.0
-INFO [ssh] 10.10.20.99:22: downloading k0s v1.29.1+k0s.0
+INFO [ssh] 10.10.20.101:22: downloading k0s v1.29.4+k0s.0
+INFO [ssh] 10.10.20.102:22: downloading k0s v1.29.4+k0s.0
+INFO [ssh] 10.10.20.103:22: downloading k0s v1.29.4+k0s.0
+INFO [ssh] 10.10.20.99:22: downloading k0s v1.29.4+k0s.0
 INFO ==> Running phase: Upload files to hosts
 INFO [ssh] 10.10.20.99:22: uploading Prometheus CRDs
 INFO ==> Running phase: Install k0s binaries on hosts
@@ -188,28 +300,28 @@ INFO [ssh] 10.10.20.99:22: installing k0s controller
 INFO [ssh] 10.10.20.99:22: waiting for the k0s service to start
 INFO [ssh] 10.10.20.99:22: waiting for kubernetes api to respond
 INFO ==> Running phase: Install workers
-INFO [ssh] 10.10.20.103:22: validating api connection to https://10.10.20.99:6443
 INFO [ssh] 10.10.20.101:22: validating api connection to https://10.10.20.99:6443
+INFO [ssh] 10.10.20.103:22: validating api connection to https://10.10.20.99:6443
 INFO [ssh] 10.10.20.102:22: validating api connection to https://10.10.20.99:6443
 INFO [ssh] 10.10.20.99:22: generating a join token for worker 1
 INFO [ssh] 10.10.20.99:22: generating a join token for worker 2
 INFO [ssh] 10.10.20.99:22: generating a join token for worker 3
-INFO [ssh] 10.10.20.101:22: writing join token
 INFO [ssh] 10.10.20.102:22: writing join token
 INFO [ssh] 10.10.20.103:22: writing join token
-INFO [ssh] 10.10.20.101:22: installing k0s worker
+INFO [ssh] 10.10.20.101:22: writing join token
 INFO [ssh] 10.10.20.102:22: installing k0s worker
 INFO [ssh] 10.10.20.103:22: installing k0s worker
+INFO [ssh] 10.10.20.101:22: installing k0s worker
+INFO [ssh] 10.10.20.101:22: starting service
 INFO [ssh] 10.10.20.102:22: starting service
 INFO [ssh] 10.10.20.103:22: starting service
-INFO [ssh] 10.10.20.101:22: starting service
-INFO [ssh] 10.10.20.103:22: waiting for node to become ready
 INFO [ssh] 10.10.20.101:22: waiting for node to become ready
 INFO [ssh] 10.10.20.102:22: waiting for node to become ready
+INFO [ssh] 10.10.20.103:22: waiting for node to become ready
 INFO ==> Running phase: Release exclusive host lock
 INFO ==> Running phase: Disconnect from hosts
-INFO ==> Finished in 1m42s
-INFO k0s cluster version v1.28.5+k0s.0 is now installed
+INFO ==> Finished in 1m40s
+INFO k0s cluster version v1.29.4+k0s.0 is now installed
 INFO Tip: To access the cluster you can now fetch the admin kubeconfig using:
 INFO      k0sctl kubeconfig
 ```
