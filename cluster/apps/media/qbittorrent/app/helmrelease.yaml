@@ -79,7 +79,6 @@ spec:
                 memory: 100Mi
                 ephemeral-storage: 1Gi
               limits:
-                cpu: 1
                 memory: 1500Mi
                 ephemeral-storage: 2Gi
           vuetorrent:
@@ -98,7 +97,6 @@ spec:
                 memory: 100Mi
                 ephemeral-storage: 1Gi
               limits:
-                cpu: 200m
                 memory: 500Mi
                 ephemeral-storage: 2Gi
     service:

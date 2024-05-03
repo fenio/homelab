@@ -81,7 +81,6 @@ spec:
                         memory: 100Mi
                         ephemeral-storage: 1Gi
                       limits:
-                        cpu: 200m
                         memory: 100Mi
                         ephemeral-storage: 2Gi
                   ui:
@@ -96,7 +95,6 @@ spec:
                           memory: 100Mi
                           ephemeral-storage: 1Gi
                         limits:
-                          cpu: 500m
                           memory: 100Mi
                           ephemeral-storage: 2Gi
                       securityContext:
@@ -112,7 +110,6 @@ spec:
                           memory: 100Mi
                           ephemeral-storage: 1Gi
                         limits:
-                          cpu: 200m
                           memory: 100Mi
                           ephemeral-storage: 2Gi
                       securityContext:
@@ -144,7 +141,6 @@ spec:
                       memory: 100Mi
                       ephemeral-storage: 1Gi
                     limits:
-                      cpu: 500m
                       memory: 100Mi
                       ephemeral-storage: 2Gi
                 ipam:
@@ -164,7 +160,6 @@ spec:
                     memory: 400Mi
                     ephemeral-storage: 1Gi
                   limits:
-                    cpu: 1
                     memory: 400Mi
                     ephemeral-storage: 2Gi
                 cgroup:
@@ -175,7 +170,6 @@ spec:
                         memory: 100Mi
                         ephemeral-storage: 1Gi
                       limits:
-                        cpu: 600m
                         memory: 100Mi
                         ephemeral-storage: 2Gi
                 cni:
@@ -185,7 +179,6 @@ spec:
                       memory: 100Mi
                       ephemeral-storage: 1Gi
                     limits:
-                      cpu: 800m
                       memory: 100Mi
                       ephemeral-storage: 2Gi
                 initResources:
@@ -194,7 +187,6 @@ spec:
                     memory: 100Mi
                     ephemeral-storage: 1Gi
                   limits:
-                    cpu: 300m
                     memory: 100Mi
                     ephemeral-storage: 2Gi
 

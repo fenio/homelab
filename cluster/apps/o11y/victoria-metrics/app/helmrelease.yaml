@@ -50,7 +50,6 @@ spec:
           memory: 100Mi
           ephemeral-storage: 1Gi
         limits:
-          cpu: 200m
           memory: 100Mi
           ephemeral-storage: 2Gi
       operator:
@@ -85,7 +84,6 @@ spec:
           memory: 100Mi
           ephemeral-storage: 1Gi
         limits:
-          cpu: 100m
           memory: 100Mi
           ephemeral-storage: 2Gi
     prometheus-node-exporter:
@@ -98,7 +96,6 @@ spec:
           memory: 100Mi
           ephemeral-storage: 1Gi
         limits:
-          cpu: 800m
           memory: 150Mi
           ephemeral-storage: 2Gi
     vmsingle:
@@ -113,7 +110,6 @@ spec:
             memory: 1.5G
             ephemeral-storage: 1Gi
           limits:
-            cpu: 700m
             memory: 1.8G
             ephemeral-storage: 2Gi
       ingress:
@@ -139,7 +135,6 @@ spec:
             memory: 100Mi
             ephemeral-storage: 1Gi
           limits:
-            cpu: 400m
             memory: 100Mi
             ephemeral-storage: 2Gi
     vmagent:
@@ -158,7 +153,6 @@ spec:
             memory: 200Mi
             ephemeral-storage: 1Gi
           limits:
-            cpu: 800m
             memory: 300Mi
             ephemeral-storage: 2Gi
       ingress:
@@ -183,7 +177,6 @@ spec:
             memory: 100Mi
             ephemeral-storage: 1Gi
           limits:
-            cpu: 200m
             memory: 150Mi
             ephemeral-storage: 2Gi
       config:
