@@ -80,7 +80,7 @@ spec:
                 ephemeral-storage: 1Gi
               limits:
                 cpu: 1
-                memory: 500Mi
+                memory: 1500Mi
                 ephemeral-storage: 2Gi
           vuetorrent:
             dependsOn: qbittorrent
@@ -99,7 +99,7 @@ spec:
                 ephemeral-storage: 1Gi
               limits:
                 cpu: 200m
-                memory: 100Mi
+                memory: 500Mi
                 ephemeral-storage: 2Gi
     service:
       qbittorrent:
