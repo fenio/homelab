@@ -81,7 +81,7 @@ spec:
                         memory: 100Mi
                         ephemeral-storage: 1Gi
                       limits:
-                        cpu: 100m
+                        cpu: 200m
                         memory: 100Mi
                         ephemeral-storage: 2Gi
                   ui:
@@ -96,7 +96,7 @@ spec:
                           memory: 100Mi
                           ephemeral-storage: 1Gi
                         limits:
-                          cpu: 100m
+                          cpu: 200m
                           memory: 100Mi
                           ephemeral-storage: 2Gi
                       securityContext:
@@ -112,7 +112,7 @@ spec:
                           memory: 100Mi
                           ephemeral-storage: 1Gi
                         limits:
-                          cpu: 100m
+                          cpu: 200m
                           memory: 100Mi
                           ephemeral-storage: 2Gi
                       securityContext:
@@ -140,7 +140,7 @@ spec:
                       enabled: true
                   resources:
                     requests:
-                      cpu: 10m
+                      cpu: 50m
                       memory: 100Mi
                       ephemeral-storage: 1Gi
                     limits:
@@ -194,6 +194,7 @@ spec:
                     memory: 100Mi
                     ephemeral-storage: 1Gi
                   limits:
+                    cpu: 300m
                     memory: 100Mi
                     ephemeral-storage: 2Gi
 

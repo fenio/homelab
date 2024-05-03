@@ -268,11 +268,6 @@ spec:
           gnetId: 11454
           revision: 14
           datasource: Prometheus
-        throttling:
-          # renovate: depName="Container CPU Usage vs Throttling Percentage"
-          gnetId: 11848
-          revision: 1
-          datasource: Prometheus
       networking:
         cilium-agent:
           # renovate: depName="Cilium v1.12 Agent Metrics"
