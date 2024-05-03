@@ -44,7 +44,7 @@ spec:
 #                gpu.intel.com/i915: 1
               limits:
                 cpu: 200m
-                memory: 500Mi
+                memory: 800Mi
 #                gpu.intel.com/i915: 1
             probes:
               startup:
