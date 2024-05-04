@@ -41,10 +41,10 @@ spec:
               requests:
                 cpu: 10m
                 memory: 150Mi
-#                gpu.intel.com/i915: 1
+                gpu.intel.com/i915: 1
               limits:
                 memory: 800Mi
-#                gpu.intel.com/i915: 1
+                gpu.intel.com/i915: 1
             probes:
               startup:
                 enabled: true
