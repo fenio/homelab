@@ -39,8 +39,8 @@ spec:
               tag: latest
             resources:
               requests:
-                cpu: 10m
-                memory: 150Mi
+                cpu: 700m
+                memory: 500Mi
                 gpu.intel.com/i915: 1
               limits:
                 memory: 800Mi

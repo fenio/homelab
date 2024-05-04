@@ -75,8 +75,8 @@ spec:
               capabilities: {drop: ["ALL"]}
             resources:
               requests:
-                cpu: 200m
-                memory: 100Mi
+                cpu: 700m
+                memory: 1000Mi
                 ephemeral-storage: 1Gi
               limits:
                 memory: 1800Mi
