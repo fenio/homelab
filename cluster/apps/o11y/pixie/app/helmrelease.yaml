@@ -26,4 +26,4 @@ spec:
   values:
     deployKey: ${PIXIE_KEY}
     clusterName: homelab
-    devCloudNamespace: plc
+    devCloudNamespace: o11y
