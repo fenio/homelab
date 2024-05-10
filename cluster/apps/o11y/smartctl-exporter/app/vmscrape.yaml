@@ -1,9 +1,0 @@
-apiVersion: operator.victoriametrics.com/v1beta1
-kind: VMScrapeConfig
-metadata:
-  name: &name smartctl-exporter
-spec:
-  staticConfigs: [targets: ["10.10.20.100:30000"]]
-  metricsPath: /metrics
-  honorTimestamps: true
-
