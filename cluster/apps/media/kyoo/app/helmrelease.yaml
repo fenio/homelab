@@ -1,0 +1,293 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: &app kyoo
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      meilisearch:
+        containers:
+          app:
+            image:
+              repository: docker.io/getmeili/meilisearch
+              tag: v1.7
+            env:
+              MEILI_ENV: production
+              MEILI_MASTER_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: kyoo-secret
+                    key: MEILI_MASTER_KEY
+            probes:
+              liveness: &searchprobes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: &searchport 7700
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *searchprobes
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 10
+            resources:
+              requests:
+                cpu: 5m
+              limits:
+                memory: 400Mi
+            securityContext: &securityContext
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+        pod: &pod
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            runAsNonRoot: true
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups: [44, 10000, 109]
+
+      rabbitmq:
+        containers:
+          app:
+            image:
+              repository: docker.io/rabbitmq
+              tag: 3-alpine
+            envFrom: &envFrom
+              - secretRef:
+                  name: kyoo-secret
+              - configMapRef:
+                  name: kyoo-config
+            resources:
+              requests:
+                cpu: 5m
+              limits:
+                memory: 300Mi
+            securityContext: *securityContext
+        pod: *pod
+
+      back:
+        strategy: Recreate
+        initContainers:
+          01-migrations:
+            envFrom:
+              - secretRef:
+                  name: kyoo-secret
+            image:
+              repository: ghcr.io/zoriya/kyoo_migrations
+              tag: edge@sha256:29736c7a64b4e02a72a829f759ab735b6afa671b4621a8ed8bd30913d58be244
+        containers:
+          app:
+            image:
+              repository: ghcr.io/zoriya/kyoo_back
+              tag: edge@sha256:e333529a29c9aa1e50b7cf0cced9a563d3338666fd608a3c6d3d4ae17682e09c
+            env:
+              TRANSCODER_URL: http://kyoo-transcoder:7666
+            envFrom: *envFrom
+            resources:
+              requests:
+                cpu: 10m
+                memory: 1Gi
+              limits:
+                cpu: 4000m
+                memory: 8Gi
+            securityContext: *securityContext
+        pod: *pod
+
+      front:
+        replicas: 1
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              repository: ghcr.io/zoriya/kyoo_front
+              tag: edge@sha256:28e3abf98b5a077a1d3d53daa5b8ac3e55b05486915cb03efbe1b587838f2e01
+            envFrom: *envFrom
+            resources:
+              requests:
+                cpu: 5m
+                memory: 100Mi
+              limits:
+                memory: 1Gi
+            securityContext: *securityContext
+        pod: *pod
+
+      scanner:
+        labels:
+          nfsMount: "true"
+        containers:
+          app:
+            image:
+              repository: &scannerimage ghcr.io/zoriya/kyoo_scanner
+              tag: &scannertag edge@sha256:9a512c0e00e797182172edbaf0c707d157637179250bff38f083e9893b2ee81d
+            envFrom: *envFrom
+            resources:
+              requests:
+                cpu: 5m
+              limits:
+                memory: 1Gi
+            securityContext: *securityContext
+        pod: *pod
+
+      matcher:
+        replicas: 1
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              repository: *scannerimage
+              tag: *scannertag
+            args: ["matcher"]
+            envFrom: *envFrom
+            resources:
+              requests:
+                cpu: 5m
+              limits:
+                memory: 400Mi
+            securityContext: *securityContext
+        pod: *pod
+
+      autosync:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/zoriya/kyoo_autosync
+              tag: 4.5.0@sha256:7c55dd5d0ae59ca0b5c6f324d6e188d626cb325ffc48f7ccecce193a6c09dc65
+            envFrom: *envFrom
+            resources:
+              requests:
+                cpu: 5m
+              limits:
+                memory: 100Mi
+            securityContext: *securityContext
+        pod: *pod
+
+      transcoder:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/zoriya/kyoo_transcoder
+              tag: edge@sha256:fcb16a5efa86f6255700c2136c3f05cc360fc103af165e8c826fda6db9a7a2c8
+            envFrom: *envFrom
+            resources:
+              requests:
+                cpu: 10m
+                memory: 500Mi
+              limits:
+                gpu.intel.com/i915: 1
+                memory: 8Gi
+            securityContext: *securityContext
+        pod:
+          nodeSelector:
+            intel.feature.node.kubernetes.io/gpu: "true"
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            runAsNonRoot: true
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups: [44, 10000, 109]
+
+    service:
+      back:
+        controller: back
+        ports:
+          http:
+            port: 5000
+      front:
+        controller: front
+        ports:
+          http:
+            port: 8901
+      rabbitmq:
+        controller: rabbitmq
+        ports:
+          http:
+            port: 5672
+      meilisearch:
+        controller: meilisearch
+        ports:
+          http:
+            port: *searchport
+      transcoder:
+        controller: transcoder
+        ports:
+          http:
+            port: 7666
+
+    ingress:
+      main:
+        className: private
+        hosts:
+          - host: kyoo.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: front
+                  port: http
+              - path: /api
+                pathType: Prefix
+                service:
+                  identifier: back
+                  port: http
+    persistence:
+      kyoo:
+        existingClaim: *app
+        advancedMounts:
+          back:
+            app:
+              - path: /metadata
+      search:
+        existingClaim: kyoo-meilisearch
+        advancedMounts:
+          meilisearch:
+            app:
+              - path: /meili_data
+      transcoder-metadata:
+        existingClaim: kyoo-transcoder-metadata
+        advancedMounts:
+          transcoder:
+            app:
+              - path: /metadata
+      cache:
+        type: emptyDir
+        advancedMounts:
+          transcoder:
+            app:
+              - path: /cache
+      media:
+        type: nfs
+        server: ${NAS_IP:=temp}
+        path: ${SECRET_NFS_DATA:=temp}
+        globalMounts:
+          - path: /data
+            subPath: media
+            readOnly: true
+
