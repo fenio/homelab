@@ -259,7 +259,6 @@ spec:
                   port: http
     persistence:
       kyoo:
-        type: persistentVolumeClaim
         size: 5Gi
         accessMode: ReadWriteOnce
         retain: true
@@ -268,7 +267,9 @@ spec:
             app:
               - path: /metadata
       search:
-        existingClaim: kyoo-meilisearch
+        size: 5Gi
+        accessMode: ReadWriteOnce
+        retain: true
         advancedMounts:
           meilisearch:
             app:
