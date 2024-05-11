@@ -262,6 +262,7 @@ spec:
         size: 5Gi
         accessMode: ReadWriteOnce
         retain: true
+        nameOverride: kyoo
         advancedMounts:
           back:
             app:
