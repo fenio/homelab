@@ -95,8 +95,7 @@ spec:
       back:
         strategy: Recreate
         initContainers:
-
-          init-db:
+          00-init-db:
             image: ghcr.io/onedr0p/postgres-init:16.2
             env:
               - name: INIT_POSTGRES_HOST
