@@ -144,7 +144,8 @@ spec:
                 value: *dbUser
               - name: POSTGRES_PASSWORD
                 value: *dbPass
-              TRANSCODER_URL: http://kyoo-transcoder:7666
+              - name: TRANSCODER_URL 
+                value: http://kyoo-transcoder:7666
             envFrom: *envFrom
             resources:
               requests:
