@@ -180,7 +180,6 @@ spec:
           nfsMount: "true"
         containers:
           app:
-            dependsOn: back
             image:
               repository: &scannerimage ghcr.io/zoriya/kyoo_scanner
               tag: &scannertag edge@sha256:9a512c0e00e797182172edbaf0c707d157637179250bff38f083e9893b2ee81d
