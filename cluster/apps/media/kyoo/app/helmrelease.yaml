@@ -259,7 +259,11 @@ spec:
                   port: http
     persistence:
       kyoo:
-        existingClaim: *app
+        enabled: true
+        type: persistentVolumeClaim
+        size: 5Gi
+        accessMode: ReadWriteOnce
+        retain: true
         advancedMounts:
           back:
             app:
