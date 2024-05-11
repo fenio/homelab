@@ -61,9 +61,9 @@ spec:
               limits:
                 memory: 400Mi
             securityContext: &securityContext
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+#              allowPrivilegeEscalation: true
+#              readOnlyRootFilesystem: true
+#              capabilities: { drop: ["ALL"] }
         pod: &pod
           securityContext:
             runAsUser: 568
