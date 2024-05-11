@@ -260,6 +260,7 @@ spec:
     persistence:
       kyoo:
         enabled: true
+        existingClaim: kyoo
         type: persistentVolumeClaim
         size: 5Gi
         accessMode: ReadWriteOnce
