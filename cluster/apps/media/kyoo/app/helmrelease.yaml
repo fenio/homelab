@@ -176,8 +176,6 @@ spec:
         pod: *pod
 
       scanner:
-        labels:
-          nfsMount: "true"
         containers:
           app:
             image:
@@ -190,7 +188,7 @@ spec:
               limits:
                 memory: 1Gi
 #            securityContext: *securityContext
-        pod: *pod
+#        pod: *pod
 
       matcher:
         replicas: 1
