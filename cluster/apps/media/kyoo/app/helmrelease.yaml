@@ -274,7 +274,9 @@ spec:
             app:
               - path: /meili_data
       transcoder-metadata:
-        existingClaim: kyoo-transcoder-metadata
+        size: 5Gi
+        accessMode: ReadWriteOnce
+        retain: true
         advancedMounts:
           transcoder:
             app:
