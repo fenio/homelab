@@ -294,6 +294,7 @@ spec:
                 service:
                   identifier: back
                   port: http
+        tls: [hosts: [*host]]
     persistence:
       kyoo:
         size: 5Gi
