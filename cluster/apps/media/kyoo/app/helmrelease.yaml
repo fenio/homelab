@@ -283,11 +283,8 @@ spec:
             app:
               - path: /cache
       media:
-        type: nfs
-        server: ${NAS_IP:=temp}
-        path: ${SECRET_NFS_DATA:=temp}
+        enabled: true
+        existingClaim: media
         globalMounts:
-          - path: /data
-            subPath: media
-            readOnly: true
+          - path: /media
 
