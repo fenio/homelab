@@ -189,7 +189,7 @@ spec:
                 cpu: 5m
               limits:
                 memory: 1Gi
-            securityContext: *securityContext
+#            securityContext: *securityContext
         pod: *pod
 
       matcher:
