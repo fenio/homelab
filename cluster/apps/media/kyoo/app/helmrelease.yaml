@@ -95,7 +95,32 @@ spec:
       back:
         strategy: Recreate
         initContainers:
+
+          init-db:
+            image: ghcr.io/onedr0p/postgres-init:16.2
+            env:
+              - name: INIT_POSTGRES_HOST
+                value: &dbHost "postgres-rw.db.svc.cluster.local"
+              - name: INIT_POSTGRES_SUPER_PASS
+                value: "${SECRET_PG_PASSWORD}"
+              - name: INIT_POSTGRES_USER
+                value: &dbUser "kyoo"
+              - name: INIT_POSTGRES_PASS
+                value: &dbPass "${KYOO_PG_PASSWORD}"
+              - name: INIT_POSTGRES_DBNAME
+                value: &dbName kyoo
           01-migrations:
+            env:
+              - name: POSTGRES_SERVER
+                value: *dbHost
+              - name: POSTGRES_PORT
+                value: '5432'
+              - name: POSTGRES_DB
+                value: *dbName
+              - name: POSTGRES_USER
+                value: *dbUser
+              - name: POSTGRES_PASSWORD
+                value: *dbPass
             envFrom:
               - secretRef:
                   name: kyoo-secret
