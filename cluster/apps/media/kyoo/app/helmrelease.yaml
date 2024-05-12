@@ -279,6 +279,11 @@ spec:
     ingress:
       main:
         className: private
+        annotations:
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            rewrite /api/(.*) /$1 break;
+          nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
         hosts:
           - host: &host kyoo.${SECRET_DOMAIN}
             paths:
