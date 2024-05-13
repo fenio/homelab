@@ -37,6 +37,8 @@ spec:
           io.cilium/lb-ipam-ips: "10.10.20.110"
       kind: Deployment
       electionID: "ingress-public-leader"
+      allowSnippetAnnotations: true
+      enableAnnotationValidations: true
       watchIngressWithoutClass: false
       extraArgs:
         default-ssl-certificate: "net/default-certificate"
