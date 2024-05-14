@@ -187,8 +187,8 @@ spec:
                 cpu: 5m
               limits:
                 memory: 1Gi
-            securityContext: *securityContext
-        pod: *pod
+#            securityContext: *securityContext
+#        pod: *pod
 
       matcher:
         replicas: 1
