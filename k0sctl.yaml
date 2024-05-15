@@ -37,7 +37,7 @@ spec:
       keyPath: ~/.ssh/id_rsa
     role: worker
   k0s:
-    version: 1.29.4+k0s.0
+    version: 1.30.0+k0s.0
     dynamicConfig: false
     config:
       spec:
