@@ -190,7 +190,7 @@ spec:
           app:
             image:
               repository: &scannerimage ghcr.io/zoriya/kyoo_scanner
-              tag: &scannertag edge@sha256:78a36825712bd7f25a2bb6ec8a5b918da6fe7f1a73682f70cf818e255a971e0f
+              tag: &scannertag edge@sha256:43ff9296cb17e20f02e7fd73df079999d230d0475341d5b65b5d01e572567b05
             envFrom: *envFrom
             resources:
               requests:
