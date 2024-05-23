@@ -10,6 +10,7 @@ resources:
   - ./cloudnative-pg.yaml
   - ./democratic-csi.yaml
   - ./external-dns.yaml
+  - ./gadget.yaml
   - ./goldilocks.yaml
   - ./grafana.yaml
   - ./homepage.yaml
