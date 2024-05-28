@@ -31,7 +31,7 @@ spec:
     gc:
       resources:
         requests: 
-          cpu: 50m
+          cpu: 20m
           memory: 100Mi
         limits:
           memory: 200Mi
