@@ -8,7 +8,6 @@ spec:
   chart:
     spec:
       chart: goldpinger
-      version: latest
       sourceRef:
         kind: HelmRepository
         name: goldpinger
