@@ -5,6 +5,7 @@ resources:
   - ./coroot/ks.yaml
   - ./flux-webui/ks.yaml
   - ./grafana/ks.yaml
+  - ./goldpinger/ks.yaml
   - ./metrics-server/ks.yaml
   - ./pg-agent/ks.yaml
   - ./smartctl-exporter/ks.yaml

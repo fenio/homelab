@@ -1,0 +1,28 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: goldpinger
+  namespace: o11y
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: goldpinger
+      version: latest
+      sourceRef:
+        kind: HelmRepository
+        name: goldpinger
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+
