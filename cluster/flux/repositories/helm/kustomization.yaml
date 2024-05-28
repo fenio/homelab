@@ -11,7 +11,7 @@ resources:
   - ./democratic-csi.yaml
   - ./external-dns.yaml
   - ./gadget.yaml
-  - ./goldilocks.yaml
+  - ./goldpinger.yaml
   - ./grafana.yaml
   - ./homepage.yaml
   - ./ingress-nginx.yaml
