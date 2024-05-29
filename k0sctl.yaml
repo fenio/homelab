@@ -37,7 +37,7 @@ spec:
       keyPath: ~/.ssh/id_rsa
     role: worker
   k0s:
-    version: 1.30.0+k0s.0
+    version: 1.30.1+k0s.0
     dynamicConfig: false
     config:
       spec:
@@ -53,7 +53,7 @@ spec:
             charts:
             - name: cilium
               chartname: cilium/cilium
-              version: "1.15.4"
+              version: "1.15.5"
               namespace: net
               values: |2
                 hubble:
