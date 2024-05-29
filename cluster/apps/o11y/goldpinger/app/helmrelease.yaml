@@ -24,4 +24,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    serviceMonitor:
+      enabled: true
+    prometheusRule:
+      enabled: true
 
