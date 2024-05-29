@@ -146,7 +146,7 @@ spec:
           cluster: lab
         extraArgs:
           promscrape.dropOriginalLabels: "false"
-          promscrape.maxDroppedTargets: "5000"
+          promscrape.maxDroppedTargets: "10000"
         resources:
           requests:
             cpu: 200m
