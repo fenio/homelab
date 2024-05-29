@@ -20,6 +20,7 @@ spec:
         cpu: 50m
         memory: 100Mi
       limits:
+        cpu: null
         memory: 200Mi
     worker:
       resources:
@@ -27,6 +28,7 @@ spec:
           cpu: 50m
           memory: 100Mi
         limits:
+          cpu: null
           memory: 200Mi
     gc:
       resources:
@@ -34,6 +36,7 @@ spec:
           cpu: 20m
           memory: 100Mi
         limits:
+          cpu: null
           memory: 200Mi
 
 
