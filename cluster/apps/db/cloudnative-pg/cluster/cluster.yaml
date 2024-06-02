@@ -60,7 +60,7 @@ spec:
         s3Credentials:
           accessKeyId:
             name: pg-credentials
-            key: s3-access-key
+            key: S3_ACCESS_KEY
           secretAccessKey:
             name: pg-credentials
-            key: s3-secret-key
+            key: S3_SECRET_KEY
