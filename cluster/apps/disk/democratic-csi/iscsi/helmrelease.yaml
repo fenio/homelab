@@ -1,0 +1,155 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: iscsi
+  namespace: storage
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: democratic-csi
+      version: 0.14.6
+      sourceRef:
+        kind: HelmRepository
+        name: democratic-csi
+        namespace: flux-system
+  values:
+    controller:
+      externalAttacher:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 50Mi
+            ephemeral-storage: 1Gi
+          limits:
+            memory: 200Mi
+            ephemeral-storage: 2Gi
+      externalProvisioner:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 50Mi
+            ephemeral-storage: 1Gi
+          limits:
+            memory: 200Mi
+            ephemeral-storage: 2Gi
+      externalResizer:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 50Mi
+            ephemeral-storage: 1Gi
+          limits:
+            memory: 200Mi
+            ephemeral-storage: 2Gi
+      externalSnapshotter:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 50Mi
+            ephemeral-storage: 1Gi
+          limits:
+            memory: 200Mi
+            ephemeral-storage: 2Gi
+      driver:
+        resources:
+          requests:
+            cpu: 20m
+            memory: 50Mi
+            ephemeral-storage: 1Gi
+          limits:
+            memory: 200Mi
+            ephemeral-storage: 2Gi
+    csiProxy:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 50Mi
+          ephemeral-storage: 1Gi
+        limits:
+          memory: 150Mi
+          ephemeral-storage: 2Gi
+    csiDriver:
+      name: "iscsi"
+    storageClasses:
+    - name: iscsi
+      defaultClass: true
+      reclaimPolicy: Delete
+      volumeBindingMode: Immediate
+      allowVolumeExpansion: true
+      parameters:
+        fsType: ext4
+        detachedVolumesFromSnapshots: "false"
+      mountOptions: []
+      secrets:
+        provisioner-secret:
+        controller-publish-secret:
+        node-stage-secret:
+        node-publish-secret:
+        controller-expand-secret:
+  #  volumeSnapshotClasses:
+  #  - name: iscsi
+  #    parameters:
+  #      detachedSnapshots: "true"
+    driver:
+      config:
+        driver: freenas-api-iscsi
+        instance_id:
+        httpConnection:
+          protocol: http
+          host: ${CONFIG_TRUENAS_IP}
+          port: 80
+          allowInsecure: true
+          apiKey: ${TRUENAS_API_KEY}
+        zfs:
+          datasetParentName: storage/k8s/iscsi/v
+          detachedSnapshotsDatasetParentName: storage/k8s/iscsi/s
+          zvolCompression:
+          zvolDedup:
+          zvolEnableReservation: false
+          zvolBlocksize:
+        iscsi:
+          targetPortal: "${CONFIG_TRUENAS_IP}:3260"
+          interface:
+          namePrefix: csi-
+          nameSuffix: "-clustera"
+          targetGroups:
+            - targetGroupPortalGroup: 11
+              targetGroupInitiatorGroup: 14
+              targetGroupAuthType: None
+              targetGroupAuthGroup:
+          extentInsecureTpc: true
+          extentXenCompat: false
+          extentDisablePhysicalBlocksize: true
+          extentBlocksize: 512
+          extentRpm: "SSD"
+          extentAvailThreshold: 0
+    node:
+      kubeletHostPath: /var/lib/k0s/kubelet
+      driver:
+        resources:
+          requests:
+            cpu: 30m
+            memory: 50Mi
+            ephemeral-storage: 1Gi
+          limits:
+            memory: 200Mi
+            ephemeral-storage: 5Gi
+      driverRegistrar:
+        resources:
+          requests:
+            cpu: 30m
+            memory: 50Mi
+            ephemeral-storage: 1Gi
+          limits:
+            memory: 200Mi
+            ephemeral-storage: 5Gi
+      cleanup:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 50Mi
+            ephemeral-storage: 1Gi
+          limits:
+            memory: 200Mi
+            ephemeral-storage: 5Gi
