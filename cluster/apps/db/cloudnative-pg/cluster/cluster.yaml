@@ -5,6 +5,9 @@ metadata:
   name: postgres
   namespace: db
 spec:
+  bootstrap:
+    recovery:
+      source: &previousCluster postgres
   instances: 3
   imageName: ghcr.io/cloudnative-pg/postgresql:16.3
   primaryUpdateStrategy: unsupervised
@@ -13,7 +16,7 @@ spec:
     name: pg-credentials
   storage:
     size: 20Gi
-    storageClass: nfs
+    storageClass: iscsi
   postgresql:
     parameters:
       max_connections: "300"
@@ -41,7 +44,7 @@ spec:
         maxParallel: 4
       destinationPath: s3://pgsql/
       endpointURL: https://eu-central-1.linodeobjects.com
-      serverName: postgres
+      serverName: postgres-v2
       s3Credentials:
         accessKeyId:
           name: pg-credentials
@@ -50,7 +53,7 @@ spec:
           name: pg-credentials
           key: S3_SECRET_KEY
   externalClusters:
-    - name: previous-cluster
+    - name: *previous-cluster
       barmanObjectStore:
         destinationPath: s3://pgsql/
         endpointURL: https://eu-central-1.linodeobjects.com
