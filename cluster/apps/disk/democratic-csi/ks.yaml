@@ -23,7 +23,7 @@ metadata:
   name: iscsi
   namespace: flux-system
 spec:
-  path: ./cluster/apps/storage/democratic-csi/iscsi
+  path: ./cluster/apps/disk/democratic-csi/iscsi
   sourceRef:
     kind: GitRepository
     name: homelab
