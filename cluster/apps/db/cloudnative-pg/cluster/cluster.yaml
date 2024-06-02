@@ -6,7 +6,7 @@ metadata:
   namespace: db
 spec:
   instances: 3
-  imageName: ghcr.io/cloudnative-pg/postgresql:16.2
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.3
   primaryUpdateStrategy: unsupervised
   enableSuperuserAccess: true
   superuserSecret:
