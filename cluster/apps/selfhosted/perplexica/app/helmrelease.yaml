@@ -51,7 +51,8 @@ spec:
       searxng:
         controller: searxng
         ports:
-          http: 4000
+          http: 
+            port: 4000
       back:
         controller: back
         ports:
