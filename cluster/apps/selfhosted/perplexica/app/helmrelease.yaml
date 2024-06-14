@@ -38,7 +38,7 @@ spec:
           app:
             image: 
               repository: hajowieland/perplexica-frontend
-              tag: latest
+              tag: 0.0.4
       back:
         replicas: 1
         strategy: RollingUpdate
@@ -46,7 +46,7 @@ spec:
           app:
             image: 
               repository: hajowieland/perplexica-backend
-              tag: latest
+              tag: 0.0.2
     service:
       searxng:
         controller: searxng
