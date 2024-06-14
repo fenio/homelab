@@ -49,6 +49,7 @@ spec:
               tag: latest
     service:
       searxng:
+        controller: searxng
         ports:
           http: 4000
       back:
