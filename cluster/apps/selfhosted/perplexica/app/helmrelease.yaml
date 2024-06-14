@@ -82,4 +82,11 @@ spec:
                   port: http
         tls: [hosts: [*host]]
     persistence:
-
+      searxng:
+        size: 5Gi
+        accessMode: ReadWriteOnce
+        retain: true
+        advancedMounts:
+          searxng:
+            app:
+              - path: /etc/searxng
