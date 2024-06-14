@@ -1,9 +1,7 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: &app perplexica
+  name: perplexica
 spec:
   interval: 15m
   chart:
@@ -31,12 +29,25 @@ spec:
             image:
               repository: docker.io/searxng/searxng
               tag: latest
+            volumeMounts:
+              - name: config-volume
+                mountPath: /etc/searxng/limiter.toml
+                subPath: limiter.toml
+        extraVolumes:
+          - name: config-volume
+            projected:
+              sources:
+                - configMap:
+                    name: searxng-config
+                    items:
+                      - key: limiter.toml
+                        path: limiter.toml
       front:
         replicas: 1
         strategy: RollingUpdate
         containers:
           app:
-            image: 
+            image:
               repository: hajowieland/perplexica-frontend
               tag: 0.0.4
       back:
@@ -44,14 +55,14 @@ spec:
         strategy: RollingUpdate
         containers:
           app:
-            image: 
+            image:
               repository: hajowieland/perplexica-backend
               tag: 0.0.2
     service:
       searxng:
         controller: searxng
         ports:
-          http: 
+          http:
             port: 4000
       back:
         controller: back
@@ -68,7 +79,7 @@ spec:
       main:
         className: private
         hosts:
-          - host: &host p.${SECRET_DOMAIN}
+          - host: p.${SECRET_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
@@ -80,7 +91,7 @@ spec:
                 service:
                   identifier: back
                   port: http
-        tls: [hosts: [*host]]
+        tls: [hosts: [p.${SECRET_DOMAIN}]]
     persistence:
       searxng:
         size: 5Gi
@@ -90,3 +101,8 @@ spec:
           searxng:
             app:
               - path: /etc/searxng
+    configMaps:
+      searxng-config:
+        limiter.toml: |
+          [settings]
+          limit_per_minute = 60path: /etc/searxng
