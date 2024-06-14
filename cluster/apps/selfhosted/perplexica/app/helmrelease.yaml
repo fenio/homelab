@@ -29,7 +29,7 @@ spec:
         containers:
           app:
             image:
-              repository: docker.io/searxng/searxng:latest
+              repository: docker.io/searxng/searxng
               tag: latest
       front:
         replicas: 1
