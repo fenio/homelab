@@ -29,19 +29,6 @@ spec:
             image:
               repository: docker.io/searxng/searxng
               tag: latest
-            volumeMounts:
-              - name: config-volume
-                mountPath: /etc/searxng/limiter.toml
-                subPath: limiter.toml
-        extraVolumes:
-          - name: config-volume
-            projected:
-              sources:
-                - configMap:
-                    name: searxng-config
-                    items:
-                      - key: limiter.toml
-                        path: limiter.toml
       front:
         replicas: 1
         strategy: RollingUpdate
@@ -94,17 +81,22 @@ spec:
           - hosts:
               - p.${SECRET_DOMAIN}
     persistence:
-      searxng:
-        size: 5Gi
-        accessMode: ReadWriteOnce
-        retain: true
+      config:
+        type: configMap
+        name: searxng-config
         advancedMounts:
           searxng:
             app:
-              - path: /etc/searxng
-    configMaps:
-      searxng-config:
-        limiter.toml: |
-          [settings]
-          limit_per_minute = 60
+              - path: /etc/searxng/settings.yml
+                subPath: settings.yml
+                readOnly: true
+              - path: /etc/searxng/limiter.toml
+                subPath: limiter.toml
+                readOnly: true
 
+      tmp:
+        type: emptyDir
+        advancedMounts:
+          app:
+            app:
+              - path: /etc/searxng
