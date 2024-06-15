@@ -49,13 +49,13 @@ spec:
               repository: hajowieland/perplexica-backend
               tag: 0.0.2
             env: 
-              SEARXNG_API_URL: http://perplexica-searxng:4000
+              SEARXNG_API_URL: http://perplexica-searxng:8080
     service:
       searxng:
         controller: searxng
         ports:
           http:
-            port: 4000
+            port: 8080
       back:
         controller: back
         ports:
