@@ -5,3 +5,10 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
 #  - ./config.yaml
+configMapGenerator:
+  - name: searxng-config
+    files:
+      - settings.yml=./settings.yaml
+      - limiter.toml=./limiter.toml
+generatorOptions:
+  disableNameSuffixHash: true
