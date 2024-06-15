@@ -35,8 +35,8 @@ spec:
         containers:
           app:
             image:
-              repository: ceramicwhite/perplexica
-              tag: latest-frontend
+              repository: bfenski/perplexica-frontend
+              tag: latest
             env: 
               NEXT_PUBLIC_API_URL: http://perplexica-back:3001/api
               NEXT_PUBLIC_WS_URL: ws://perplexica-back:3001
@@ -46,8 +46,8 @@ spec:
         containers:
           app:
             image:
-              repository: ceramicwhite/perplexica
-              tag: latest-backend
+              repository: bfenski/perplexica-backend
+              tag: latest
             env: 
               SEARXNG_API_URL: http://perplexica-searxng:8080
     service:
