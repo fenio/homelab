@@ -94,9 +94,4 @@ spec:
                 subPath: limiter.toml
                 readOnly: true
 
-      tmp:
-        type: emptyDir
-        advancedMounts:
-          app:
-            app:
-              - path: /etc/searxng
+
