@@ -38,8 +38,8 @@ spec:
               repository: bfenski/perplexica-frontend
               tag: latest
             env: 
-              NEXT_PUBLIC_API_URL: http://perplexica-back:3001/api
-              NEXT_PUBLIC_WS_URL: ws://perplexica-back:3001
+              NEXT_PUBLIC_API_URL: http://perplexica-back.${SECRET_DOMAIN}:3001/api
+              NEXT_PUBLIC_WS_URL: ws://perplexica-back.${SECRET_DOMAIN}:3001
       back:
         replicas: 1
         strategy: RollingUpdate
@@ -49,7 +49,7 @@ spec:
               repository: bfenski/perplexica-backend
               tag: latest
             env: 
-              SEARXNG_API_URL: http://perplexica-searxng:8080
+              SEARXNG_API_URL: http://perplexica-searxng.${SECRET_DOMAIN}:8080
     service:
       searxng:
         controller: searxng
