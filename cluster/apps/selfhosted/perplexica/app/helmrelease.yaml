@@ -49,7 +49,8 @@ spec:
               repository: bfenski/perplexica-backend
               tag: latest
             env: 
-              SEARXNG_API_URL: http://perplexica-searxng.${SECRET_DOMAIN}:8080
+              SEARXNG_API_URL: http://searxng.${SECRET_DOMAIN}
+              OPENAI_API_KEY: ${OPENAI_API_KEY}
     service:
       searxng:
         controller: searxng
