@@ -13,13 +13,13 @@ resources:
   - ./gadget.yaml
   - ./goldpinger.yaml
   - ./grafana.yaml
+  - ./ha.yaml
   - ./homepage.yaml
   - ./ingress-nginx.yaml
   - ./intel.yaml
   - ./metallb.yaml
   - ./metrics-server.yaml
   - ./node-feature-discovery.yaml
-  - ./pixie.yaml
   - ./pgadmin.yaml
   - ./prometheus.yaml
   - ./reloader.yaml
