@@ -1,0 +1,21 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ishioni/CRDs-catalog/main/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: ha
+  namespace: flux-system
+spec:
+  path: ./cluster/apps/selfhosted/ha/app
+  targetNamespace: selfhosted
+  sourceRef:
+    kind: GitRepository
+    name: homelab
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: &appname ha
+  prune: true
+  wait: false
+  interval: 10m
+  dependsOn:
+    - name: ingress-nginx
