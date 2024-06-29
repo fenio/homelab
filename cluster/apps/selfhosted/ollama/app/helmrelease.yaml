@@ -40,6 +40,7 @@ spec:
               # LIBVA_DRIVER_NAME: i965
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_ORIGINS: "*"
+              OLLAMA_MODELS: /models
             resources:
               requests:
                 cpu: 200m
@@ -54,4 +55,13 @@ spec:
         ports:
           http:
             port: &port 11434
-
+      config:
+        enabled: true
+        type: persistentVolumeClaim
+        size: 50Gi
+        accessMode: ReadWriteOnce
+        retain: true
+        advancedMounts:
+          main:
+            main:
+              - path: /models
