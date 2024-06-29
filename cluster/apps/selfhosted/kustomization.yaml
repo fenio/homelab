@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./ollama/ks.yaml
+  - ./open-webui/ks.yaml
   - ./perplexica/ks.yaml
   - ./searxng/ks.yaml
 
