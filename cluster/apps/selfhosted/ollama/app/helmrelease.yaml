@@ -55,6 +55,7 @@ spec:
         ports:
           http:
             port: &port 11434
+    persistence:
       config:
         enabled: true
         type: persistentVolumeClaim
