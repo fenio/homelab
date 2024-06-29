@@ -33,12 +33,9 @@ spec:
               repository: ghcr.io/ollama-webui/ollama-webui
               tag: main
             env:
-              OLLAMA_API_BASE_URL: http://ollama.default.svc:11434/api
+              OLLAMA_API_BASE_URL: http://ollama:11434/api
               ENABLE_IMAGE_GENERATION: True
               DATA_DIR: /data
-        pod:
-          nodeSelector:
-            kubernetes.io/arch: amd64
     service:
       app:
         controller: ollama-ui
@@ -47,8 +44,6 @@ spec:
             port: 8080
     ingress:
       app:
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         className: private
         hosts:
           - host: chat.${SECRET_DOMAIN}
