@@ -3,17 +3,17 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: ha
+  name: searxng
   namespace: flux-system
 spec:
-  path: ./cluster/apps/selfhosted/ha/app
+  path: ./cluster/apps/selfhosted/searxng/app
   targetNamespace: selfhosted
   sourceRef:
     kind: GitRepository
     name: homelab
   commonMetadata:
     labels:
-      app.kubernetes.io/name: &appname ha
+      app.kubernetes.io/name: &appname searxnga
   prune: true
   wait: false
   interval: 10m

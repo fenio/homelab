@@ -22,13 +22,6 @@ spec:
       retries: 3
   values:
     controllers:
-      searxng:
-        strategy: Recreate
-        containers:
-          app:
-            image:
-              repository: docker.io/searxng/searxng
-              tag: latest
       front:
         replicas: 1
         strategy: RollingUpdate
@@ -52,11 +45,6 @@ spec:
               SEARXNG_API_URL: http://searxng.${SECRET_DOMAIN}
               OPENAI_API_KEY: ${OPENAI_API_KEY}
     service:
-      searxng:
-        controller: searxng
-        ports:
-          http:
-            port: 8080
       back:
         controller: back
         ports:
@@ -86,18 +74,4 @@ spec:
         tls:
           - hosts:
               - p.${SECRET_DOMAIN}
-    persistence:
-      config:
-        type: configMap
-        name: searxng-config
-        advancedMounts:
-          searxng:
-            app:
-              - path: /etc/searxng/settings.yml
-                subPath: settings.yml
-                readOnly: true
-              - path: /etc/searxng/limiter.toml
-                subPath: limiter.toml
-                readOnly: true
-
 
