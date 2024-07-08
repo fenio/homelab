@@ -41,7 +41,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.7
       - name: Renovate
-        uses: renovatebot/github-action@v40.2.1
+        uses: renovatebot/github-action@v40.2.2
         with:
           configurationFile: "${{ env.RENOVATE_CONFIG_FILE }}"
           token: "${{ secrets.RENOVATE_TOKEN }}"
