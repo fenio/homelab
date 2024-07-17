@@ -126,6 +126,6 @@ spec:
           ephemeral-storage: 2Gi
       extraEnvs:
         - name: TEMPLATE_NAME
-          value: matrix
+          value: hacker-terminal
         - name: SHOW_DETAILS
           value: "false"
