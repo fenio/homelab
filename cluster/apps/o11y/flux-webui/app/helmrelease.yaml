@@ -27,6 +27,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    additionalArgs:
+      - --insecure-no-authentication-user=admin
     image:
       pullPolicy: Always
     fullnameOverride: flux-webui
