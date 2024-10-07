@@ -246,6 +246,17 @@ spec:
               repository: ghcr.io/zoriya/kyoo_transcoder
               tag: edge@sha256:742e540b86994cb73718c1dff596430cedd4ffe7ac10e46becc4e1825e7eb357
             envFrom: *envFrom
+            env:
+              - name: POSTGRES_SERVER
+                value: *dbHost
+              - name: POSTGRES_PORT
+                value: '5432'
+              - name: POSTGRES_DB
+                value: *dbName
+              - name: POSTGRES_USER
+                value: *dbUser
+              - name: POSTGRES_PASSWORD
+                value: *dbPass
             resources:
               requests:
                 cpu: 10m
