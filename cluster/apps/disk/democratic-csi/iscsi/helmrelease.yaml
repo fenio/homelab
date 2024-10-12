@@ -102,8 +102,8 @@ spec:
           allowInsecure: true
           apiKey: ${TRUENAS_API_KEY}
         zfs:
-          datasetParentName: storage/k8s/iscsi/v
-          detachedSnapshotsDatasetParentName: storage/k8s/iscsi/s
+          datasetParentName: storage/iscsi/v
+          detachedSnapshotsDatasetParentName: storage/iscsi/s
           zvolCompression:
           zvolDedup:
           zvolEnableReservation: false
