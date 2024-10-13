@@ -3,6 +3,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - ./amd-gpu.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
   - ./certmanager.yaml
@@ -16,10 +17,10 @@ resources:
   - ./ha.yaml
   - ./homepage.yaml
   - ./ingress-nginx.yaml
-  - ./intel.yaml
+#  - ./intel.yaml
   - ./metallb.yaml
   - ./metrics-server.yaml
-  - ./node-feature-discovery.yaml
+#  - ./node-feature-discovery.yaml
   - ./pgadmin.yaml
   - ./prometheus.yaml
   - ./reloader.yaml
