@@ -27,3 +27,5 @@ spec:
   values:
     labeller:
       enabled: true
+    nfd:
+      enabled: true
