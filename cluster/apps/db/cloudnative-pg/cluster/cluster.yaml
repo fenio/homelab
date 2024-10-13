@@ -52,15 +52,15 @@ spec:
         secretAccessKey:
           name: pg-credentials
           key: S3_SECRET_KEY
-  externalClusters:
-    - name: *previous-cluster
-      barmanObjectStore:
-        destinationPath: s3://pgsql/
-        endpointURL: https://eu-central-1.linodeobjects.com
-        s3Credentials:
-          accessKeyId:
-            name: pg-credentials
-            key: S3_ACCESS_KEY
-          secretAccessKey:
-            name: pg-credentials
-            key: S3_SECRET_KEY
+#  externalClusters:
+#    - name: *previous-cluster
+#      barmanObjectStore:
+#        destinationPath: s3://pgsql/
+#        endpointURL: https://eu-central-1.linodeobjects.com
+#        s3Credentials:
+#          accessKeyId:
+#            name: pg-credentials
+#            key: S3_ACCESS_KEY
+#          secretAccessKey:
+#            name: pg-credentials
+#            key: S3_SECRET_KEY
