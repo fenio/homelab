@@ -265,8 +265,6 @@ spec:
                 memory: 8Gi
             securityContext: *securityContext
         pod:
-          nodeSelector:
-            intel.feature.node.kubernetes.io/gpu: "true"
           securityContext:
             runAsUser: 0
             runAsGroup: 0
