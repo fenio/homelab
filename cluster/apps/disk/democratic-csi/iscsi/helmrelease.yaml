@@ -115,7 +115,7 @@ spec:
           nameSuffix: "-clustera"
           targetGroups:
             - targetGroupPortalGroup: 11
-              targetGroupInitiatorGroup: 16
+              targetGroupInitiatorGroup: 17
               targetGroupAuthType: None
               targetGroupAuthGroup:
           extentInsecureTpc: true
