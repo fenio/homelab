@@ -77,10 +77,10 @@ spec:
               requests:
                 cpu: 700m
                 memory: 1000Mi
-                ephemeral-storage: 1Gi
+                ephemeral-storage: 100Mi
               limits:
                 memory: 1800Mi
-                ephemeral-storage: 2Gi
+                ephemeral-storage: 200Mi
           vuetorrent:
             dependsOn: qbittorrent
             image:
@@ -95,10 +95,10 @@ spec:
               requests:
                 cpu: 10m
                 memory: 100Mi
-                ephemeral-storage: 1Gi
+                ephemeral-storage: 100Mi
               limits:
                 memory: 800Mi
-                ephemeral-storage: 2Gi
+                ephemeral-storage: 200Mi
     defaultPodOptions:
       securityContext:
         runAsUser: 0

@@ -79,10 +79,10 @@ spec:
                       requests:
                         cpu: 10m
                         memory: 100Mi
-                        ephemeral-storage: 1Gi
+                        ephemeral-storage: 100Mi
                       limits:
                         memory: 100Mi
-                        ephemeral-storage: 2Gi
+                        ephemeral-storage: 200Mi
                   ui:
                     enabled: true
                     rollOutPods: true
@@ -93,10 +93,10 @@ spec:
                         requests:
                           cpu: 10m
                           memory: 100Mi
-                          ephemeral-storage: 1Gi
+                          ephemeral-storage: 100Mi
                         limits:
                           memory: 100Mi
-                          ephemeral-storage: 2Gi
+                          ephemeral-storage: 200Mi
                       securityContext:
                         allowPrivilegeEscalation: false
                         readOnlyRootFilesystem: true
@@ -108,10 +108,10 @@ spec:
                         requests:
                           cpu: 10m
                           memory: 100Mi
-                          ephemeral-storage: 1Gi
+                          ephemeral-storage: 100Mi
                         limits:
                           memory: 100Mi
-                          ephemeral-storage: 2Gi
+                          ephemeral-storage: 200Mi
                       securityContext:
                         allowPrivilegeEscalation: false
                         readOnlyRootFilesystem: true
@@ -139,10 +139,10 @@ spec:
                     requests:
                       cpu: 50m
                       memory: 100Mi
-                      ephemeral-storage: 1Gi
+                      ephemeral-storage: 100Mi
                     limits:
                       memory: 100Mi
-                      ephemeral-storage: 2Gi
+                      ephemeral-storage: 200Mi
                 ipam:
                   mode: kubernetes
                   operator:
@@ -158,36 +158,36 @@ spec:
                   requests:
                     cpu: 100m
                     memory: 400Mi
-                    ephemeral-storage: 1Gi
+                    ephemeral-storage: 100Mi
                   limits:
                     memory: 400Mi
-                    ephemeral-storage: 2Gi
+                    ephemeral-storage: 200Mi
                 cgroup:
                   autoMount:
                     resources:
                       requests:
                         cpu: 100m
                         memory: 100Mi
-                        ephemeral-storage: 1Gi
+                        ephemeral-storage: 100Mi
                       limits:
                         memory: 100Mi
-                        ephemeral-storage: 2Gi
+                        ephemeral-storage: 200Mi
                 cni:
                   resources:
                     requests:
                       cpu: 100m
                       memory: 100Mi
-                      ephemeral-storage: 1Gi
+                      ephemeral-storage: 100Mi
                     limits:
                       memory: 100Mi
-                      ephemeral-storage: 2Gi
+                      ephemeral-storage: 200Mi
                 initResources:
                   requests:
                     cpu: 100m
                     memory: 100Mi
-                    ephemeral-storage: 1Gi
+                    ephemeral-storage: 100Mi
                   limits:
                     memory: 100Mi
-                    ephemeral-storage: 2Gi
+                    ephemeral-storage: 200Mi
 
 

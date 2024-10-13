@@ -59,10 +59,10 @@ spec:
                     requests:
                       cpu: 80m
                       memory: 180Mi
-                      ephemeral-storage: 1Gi
+                      ephemeral-storage: 100Mi
                     limits:
                       memory: 250Mi
-                      ephemeral-storage: 2Gi
+                      ephemeral-storage: 200Mi
       target:
         kind: Deployment
         name: (kustomize-controller|source-controller|notification-controller|image-reflector-controller|image-automation-controller)
@@ -81,10 +81,10 @@ spec:
                     requests:
                       cpu: 100m
                       memory: 400Mi
-                      ephemeral-storage: 1Gi
+                      ephemeral-storage: 100Mi
                     limits:
                       memory: 1Gi
-                      ephemeral-storage: 2Gi
+                      ephemeral-storage: 200Mi
       target:
         kind: Deployment
         name: helm-controller

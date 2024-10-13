@@ -43,10 +43,10 @@ spec:
           requests:
             cpu: 50m
             memory: 100Mi
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 100Mi
           limits:
             memory: 300Mi
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 200Mi
     env:
       GF_DATABASE_NAME: *dbname
       GF_DATABASE_HOST: *dbHost
@@ -61,19 +61,19 @@ spec:
       requests:
         cpu: 50m
         memory: 200Mi
-        ephemeral-storage: 1Gi
+        ephemeral-storage: 100Mi
       limits:
         memory: 200Mi
-        ephemeral-storage: 2Gi
+        ephemeral-storage: 200Mi
     downloadDashboards:
       resources:
         requests:
           cpu: 50m
           memory: 200Mi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 200Mi
-          ephemeral-storage: 2Gi
+          ephemeral-storage: 200Mi
     rbac:
       pspEnabled: false
     persistence:
@@ -121,10 +121,10 @@ spec:
         requests:
           cpu: 10m
           memory: 120Mi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 150Mi
-          ephemeral-storage: 2Gi
+          ephemeral-storage: 200Mi
       datasources:
         enabled: true
         searchNamespace: ALL

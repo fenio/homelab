@@ -33,9 +33,9 @@ spec:
           requests:
             cpu: 30m
             memory: 50Mi
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 100Mi
           limits:
             memory: 100Mi
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 200Mi
         image:
           pullPolicy: Always

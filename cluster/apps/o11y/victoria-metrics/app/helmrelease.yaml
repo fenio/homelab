@@ -48,10 +48,10 @@ spec:
         requests:
           cpu: 20m
           memory: 100Mi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 100Mi
-          ephemeral-storage: 2Gi
+          ephemeral-storage: 200Mi
       operator:
         disable_prometheus_converter: false
     fullnameOverride: vm
@@ -82,10 +82,10 @@ spec:
         requests:
           cpu: 10m
           memory: 100Mi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 100Mi
-          ephemeral-storage: 2Gi
+          ephemeral-storage: 200Mi
     prometheus-node-exporter:
       fullnameOverride: node-exporter
       image:
@@ -94,10 +94,10 @@ spec:
         requests:
           cpu: 10m
           memory: 100Mi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 150Mi
-          ephemeral-storage: 2Gi
+          ephemeral-storage: 200Mi
     vmsingle:
       spec:
         extraArgs:
@@ -108,10 +108,10 @@ spec:
           requests:
             cpu: 400m
             memory: 1.5G
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 100Mi
           limits:
             memory: 2G
-            ephemeral-storage: 2Gi
+            ephemeral-storage: 200Mi
       ingress:
         ingressClassName: private
         enabled: true
@@ -133,10 +133,10 @@ spec:
           requests:
             cpu: 50m
             memory: 100Mi
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 100Mi
           limits:
             memory: 100Mi
-            ephemeral-storage: 2Gi
+            ephemeral-storage: 200Mi
     vmagent:
       spec:
         replicaCount: 1
@@ -151,10 +151,10 @@ spec:
           requests:
             cpu: 200m
             memory: 200Mi
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 100Mi
           limits:
             memory: 300Mi
-            ephemeral-storage: 2Gi
+            ephemeral-storage: 200Mi
       ingress:
         ingressClassName: private
         enabled: true
@@ -175,10 +175,10 @@ spec:
           requests:
             cpu: 10m
             memory: 100Mi
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 100Mi
           limits:
             memory: 150Mi
-            ephemeral-storage: 2Gi
+            ephemeral-storage: 200Mi
       config:
         global:
           resolve_timeout: 5m

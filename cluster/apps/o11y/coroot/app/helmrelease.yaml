@@ -30,10 +30,10 @@ spec:
         requests:
           cpu: 150m
           memory: 1Gi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 1.2Gi
-          ephemeral-storage: 2Gi
+          ephemeral-storage: 200Mi
       ingress:
         enabled: true
         className: private
@@ -50,10 +50,10 @@ spec:
         requests:
           cpu: 10m
           memory: 100Mi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 300Mi
-          ephemeral-storage: 2Gi
+          ephemeral-storage: 200Mi
     prometheus:
       enabled: false
       kubeStateMetrics:
@@ -73,10 +73,10 @@ spec:
         requests:
           cpu: 400m
           memory: 800Mi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 1Gi
-          ephemeral-storage: 2Gi
+          ephemeral-storage: 200Mi
       securityContext:
         capabilities: 
           add: ["CAP_IPC_LOCK"]
@@ -85,18 +85,18 @@ spec:
         requests:
           cpu: 200m
           memory: 500Mi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 1.2Gi
-          ephemeral-storage: 2Gi
+          ephemeral-storage: 200Mi
     opentelemetry-collector:
       resources:
         requests:
           cpu: 50m
           memory: 200Mi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 500Mi
-          ephemeral-storage: 2Gi
+          ephemeral-storage: 200Mi
 
 

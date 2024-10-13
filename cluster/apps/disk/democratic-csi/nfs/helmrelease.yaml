@@ -19,55 +19,55 @@ spec:
           requests:
             cpu: 10m
             memory: 50M
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 100Mi
           limits:
             memory: 100Mi
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 200Mi
       externalProvisioner:
         resources:
           requests:
             cpu: 10m
             memory: 50M
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 100Mi
           limits:
             memory: 100M
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 200Mi
       externalResizer:
         resources:
           requests:
             cpu: 10m
             memory: 50Mi
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 100Mi
           limits:
             memory: 100Mi
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 200Mi
       externalSnapshotter:
         resources:
           requests:
             cpu: 10m
             memory: 30Mi
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 100Mi
           limits:
             memory: 100Mi
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 200Mi
       driver:
         resources:
           requests:
             cpu: 10m
             memory: 50Mi
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 100Mi
           limits:
             memory: 100Mi
-            ephemeral-storage: 2Gi
+            ephemeral-storage: 200Mi
     csiProxy:
       resources:
         requests:
           cpu: 10m
           memory: 100Mi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 100Mi
-          ephemeral-storage: 5Gi
+          ephemeral-storage: 200Mi
     csiDriver:
       name: "nfs"
     storageClasses:
@@ -125,26 +125,26 @@ spec:
           requests:
             cpu: 30m
             memory: 100Mi
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 100Mi
           limits:
             memory: 200Mi
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 200Mi
       driverRegistrar:
         resources:
           requests:
             cpu: 10m
             memory: 100Mi
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 100Mi
           limits:
             memory: 200Mi
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 200Mi
       cleanup:
         resources:
           requests:
             cpu: 10m
             memory: 100Mi
-            ephemeral-storage: 1Gi
+            ephemeral-storage: 100Mi
           limits:
             memory: 200Mi
-            ephemeral-storage: 5Gi
+            ephemeral-storage: 200Mi
       kubeletHostPath: /var/lib/k0s/kubelet

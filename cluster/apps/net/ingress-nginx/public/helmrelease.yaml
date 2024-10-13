@@ -94,10 +94,10 @@ spec:
         requests:
           cpu: 50m
           memory: 200Mi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 250Mi
-          ephemeral-storage: 2Gi
+          ephemeral-storage: 200Mi
     defaultBackend:
 #      containerSecurityContext:
 #        allowPrivilegeEscalation: false
@@ -113,10 +113,10 @@ spec:
         requests:
           cpu: 15m
           memory: 30Mi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 35Mi
-          ephemeral-storage: 2Gi
+          ephemeral-storage: 200Mi
       extraEnvs:
         - name: TEMPLATE_NAME
           value: hacker-terminal

@@ -33,10 +33,10 @@ spec:
       requests:
         cpu: 10m
         memory: 50Mi
-        ephemeral-storage: 1Gi
+        ephemeral-storage: 100Mi
       limits:
         memory: 100Mi
-        ephemeral-storage: 5Gi
+        ephemeral-storage: 200Mi
     provider: cloudflare
     serviceMonitor:
       enabled: true

@@ -42,10 +42,10 @@ spec:
       requests:
         cpu: 10m
         memory: 50Mi
-        ephemeral-storage: 1Gi
+        ephemeral-storage: 100Mi
       limits:
         memory: 150Mi
-        ephemeral-storage: 2Gi
+        ephemeral-storage: 200Mi
     cainjector:
       image:
         pullPolicy: "Always"
@@ -53,10 +53,10 @@ spec:
         requests:
           cpu: 10m
           memory: 100Mi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 200Mi
-          ephemeral-storage: 2Gi
+          ephemeral-storage: 200Mi
     webhook:
       image:
         pullPolicy: "Always"
@@ -64,7 +64,7 @@ spec:
         requests:
           cpu: 10m
           memory: 100Mi
-          ephemeral-storage: 1Gi
+          ephemeral-storage: 100Mi
         limits:
           memory: 100Mi
-          ephemeral-storage: 2Gi
+          ephemeral-storage: 200Mi
