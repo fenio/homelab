@@ -79,7 +79,7 @@ spec:
                 memory: 1000Mi
                 ephemeral-storage: 100Mi
               limits:
-                memory: 1800Mi
+                memory: 2800Mi
                 ephemeral-storage: 200Mi
           vuetorrent:
             dependsOn: qbittorrent
@@ -97,7 +97,7 @@ spec:
                 memory: 100Mi
                 ephemeral-storage: 100Mi
               limits:
-                memory: 800Mi
+                memory: 1Gi
                 ephemeral-storage: 200Mi
     defaultPodOptions:
       securityContext:
