@@ -26,6 +26,7 @@ spec:
     keepHistory: false
   values:
     corootCE:
+      enabled: true
       resources:
         requests:
           cpu: 150m
@@ -59,6 +60,10 @@ spec:
       kubeStateMetrics:
         enabled: false
       server:
+        enabled: false
+      nodeExporter:
+        enabled: false
+      pushgateway:
         enabled: false
     existingPrometheus:
       enabled: true
