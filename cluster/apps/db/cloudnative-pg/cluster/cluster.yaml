@@ -5,9 +5,9 @@ metadata:
   name: postgres
   namespace: db
 spec:
-  bootstrap:
-    recovery:
-      source: &previous-cluster postgres
+#  bootstrap:
+#    recovery:
+#      source: &previous-cluster postgres
   instances: 3
   imageName: ghcr.io/cloudnative-pg/postgresql:16.3
   primaryUpdateStrategy: unsupervised
