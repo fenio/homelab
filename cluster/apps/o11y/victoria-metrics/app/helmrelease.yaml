@@ -102,6 +102,7 @@ spec:
       spec:
         extraArgs:
           maxLabelsPerTimeseries: "80"
+          maxLabelValueLen: "8192"
         image:
           pullPolicy: Always
         resources:
