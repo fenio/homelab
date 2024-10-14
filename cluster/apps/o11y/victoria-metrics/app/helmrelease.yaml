@@ -135,7 +135,7 @@ spec:
             memory: 100Mi
             ephemeral-storage: 100Mi
           limits:
-            memory: 100Mi
+            memory: 200Mi
             ephemeral-storage: 200Mi
     vmagent:
       spec:
