@@ -44,6 +44,7 @@ spec:
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_ORIGINS: "*"
               OLLAMA_MODELS: /models
+              HSA_OVERRIDE_GFX_VERSION: "11.0.0"
             securityContext:
               privileged: true
             resources:
