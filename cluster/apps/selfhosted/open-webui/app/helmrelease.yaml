@@ -34,8 +34,6 @@ spec:
               tag: main
             env:
               OLLAMA_API_BASE_URL: http://ollama:11434/api
-              ENABLE_IMAGE_GENERATION: True
-              DATA_DIR: /data
     service:
       app:
         controller: ollama-ui
