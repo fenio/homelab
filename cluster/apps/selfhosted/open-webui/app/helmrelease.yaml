@@ -33,7 +33,7 @@ spec:
               repository: ghcr.io/open-webui/open-webui
               tag: main
             env:
-              OLLAMA_API_BASE_URL: http://ollama:11434/api
+              OLLAMA_API_BASE_URL: http://ollama:11434
     service:
       app:
         controller: ollama-ui
