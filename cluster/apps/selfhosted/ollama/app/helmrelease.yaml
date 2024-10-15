@@ -44,6 +44,8 @@ spec:
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_ORIGINS: "*"
               OLLAMA_MODELS: /models
+            securityContext:
+              privileged: true
             resources:
               requests:
                 cpu: 200m
