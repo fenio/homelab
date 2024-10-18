@@ -51,7 +51,7 @@ spec:
           ephemeral-storage: 100Mi
         limits:
           memory: 100Mi
-          ephemeral-storage: 200Mi
+          ephemeral-storage: 500Mi
       operator:
         disable_prometheus_converter: false
     fullnameOverride: vm
@@ -85,7 +85,7 @@ spec:
           ephemeral-storage: 100Mi
         limits:
           memory: 100Mi
-          ephemeral-storage: 200Mi
+          ephemeral-storage: 500Mi
     prometheus-node-exporter:
       fullnameOverride: node-exporter
       image:
@@ -97,7 +97,7 @@ spec:
           ephemeral-storage: 100Mi
         limits:
           memory: 150Mi
-          ephemeral-storage: 200Mi
+          ephemeral-storage: 500Mi
     vmsingle:
       spec:
         extraArgs:
@@ -112,7 +112,7 @@ spec:
             ephemeral-storage: 100Mi
           limits:
             memory: 2.5G
-            ephemeral-storage: 200Mi
+            ephemeral-storage: 500Mi
       ingress:
         ingressClassName: private
         enabled: true
@@ -137,7 +137,7 @@ spec:
             ephemeral-storage: 100Mi
           limits:
             memory: 200Mi
-            ephemeral-storage: 200Mi
+            ephemeral-storage: 500Mi
     vmagent:
       spec:
         replicaCount: 1
@@ -155,7 +155,7 @@ spec:
             ephemeral-storage: 100Mi
           limits:
             memory: 400Mi
-            ephemeral-storage: 200Mi
+            ephemeral-storage: 500Mi
       ingress:
         ingressClassName: private
         enabled: true
@@ -179,7 +179,7 @@ spec:
             ephemeral-storage: 100Mi
           limits:
             memory: 150Mi
-            ephemeral-storage: 200Mi
+            ephemeral-storage: 500Mi
       config:
         global:
           resolve_timeout: 5m
