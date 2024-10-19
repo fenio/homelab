@@ -5,6 +5,7 @@ metadata:
   namespace: o11y
 spec:
   interval: 15m
+  timeout: 15m
   chart:
     spec:
       chart: victoria-metrics-k8s-stack
