@@ -19,4 +19,4 @@ spec:
   interval: 10m
   dependsOn:
     - name: ingress-nginx
-    - name: iscsi
+    - name: nfs

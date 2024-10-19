@@ -16,7 +16,7 @@ spec:
     name: pg-credentials
   storage:
     size: 20Gi
-    storageClass: iscsi
+    storageClass: nfs
   postgresql:
     parameters:
       max_connections: "300"
