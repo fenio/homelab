@@ -128,8 +128,6 @@ spec:
         tls: [hosts: [*host]]
     vmalert:
       spec:
-        args:
-          - '--external.url=http://am.${SECRET_DOMAIN}'
         replicaCount: 1
         image:
           pullPolicy: Always
@@ -173,6 +171,7 @@ spec:
         tls: [hosts: [*host]]
     alertmanager:
       spec:
+        externalURL: "http://am.${SECRET_DOMAIN}"
         image:
           pullPolicy: Always
         resources:
