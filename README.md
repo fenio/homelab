@@ -22,6 +22,7 @@ And if you have working k8s cluster and you just want to start using Flux to dep
 Few words about my HW setup. Here's a picture of it:
 
 ![lab](https://github.com/fenio/dumb-provisioner/blob/main/IMG_0891.jpeg)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffenio%2Fhomelab.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffenio%2Fhomelab?ref=badge_shield)
 
 NAS runs TrueNAS Scale and it's installed manually as I don't expect it to be reinstalled too often.
 K8S related stuff like Dell Wyse terminals and master node which is running on NAS as a VM are being reinstalled from time to time so I had to figure out some way to do it easily.
@@ -533,3 +534,7 @@ Public key: age1g8nxh9vntdtkjmsav07ytqetpuh2524a7e98f6a77rulu4rzvgwstyvhru
 secret/sops-age created
 
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffenio%2Fhomelab.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffenio%2Fhomelab?ref=badge_large)
