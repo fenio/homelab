@@ -9,4 +9,4 @@ resources:
 #  - ./node-feature-discovery/ks.yaml
   - ./replicator/ks.yaml
   - ./reloader/ks.yaml
-  - ./konnectivity-agent/konnectivity-agent.yaml
+#  - ./konnectivity-agent/konnectivity-agent.yaml
