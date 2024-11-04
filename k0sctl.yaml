@@ -81,7 +81,7 @@ spec:
                         memory: 100Mi
                         ephemeral-storage: 100Mi
                       limits:
-                        memory: 100Mi
+                        memory: 200Mi
                         ephemeral-storage: 200Mi
                   ui:
                     enabled: true
@@ -95,7 +95,7 @@ spec:
                           memory: 100Mi
                           ephemeral-storage: 100Mi
                         limits:
-                          memory: 100Mi
+                          memory: 200Mi
                           ephemeral-storage: 200Mi
                       securityContext:
                         allowPrivilegeEscalation: false
@@ -110,7 +110,7 @@ spec:
                           memory: 100Mi
                           ephemeral-storage: 100Mi
                         limits:
-                          memory: 100Mi
+                          memory: 200Mi
                           ephemeral-storage: 200Mi
                       securityContext:
                         allowPrivilegeEscalation: false
@@ -141,7 +141,7 @@ spec:
                       memory: 100Mi
                       ephemeral-storage: 100Mi
                     limits:
-                      memory: 100Mi
+                      memory: 200Mi
                       ephemeral-storage: 200Mi
                 ipam:
                   mode: kubernetes
@@ -160,7 +160,7 @@ spec:
                     memory: 400Mi
                     ephemeral-storage: 100Mi
                   limits:
-                    memory: 400Mi
+                    memory: 600Mi
                     ephemeral-storage: 200Mi
                 cgroup:
                   autoMount:
@@ -170,7 +170,7 @@ spec:
                         memory: 100Mi
                         ephemeral-storage: 100Mi
                       limits:
-                        memory: 100Mi
+                        memory: 200Mi
                         ephemeral-storage: 200Mi
                 cni:
                   resources:
@@ -179,7 +179,7 @@ spec:
                       memory: 100Mi
                       ephemeral-storage: 100Mi
                     limits:
-                      memory: 100Mi
+                      memory: 200Mi
                       ephemeral-storage: 200Mi
                 initResources:
                   requests:
@@ -187,7 +187,7 @@ spec:
                     memory: 100Mi
                     ephemeral-storage: 100Mi
                   limits:
-                    memory: 100Mi
+                    memory: 200Mi
                     ephemeral-storage: 200Mi
 
 
