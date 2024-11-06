@@ -28,6 +28,11 @@ spec:
   values:
     corootCE:
       enabled: true
+      bootstrap:
+        refreshInterval: 15s
+        clickhouse:
+          database: default
+          username: default
       resources:
         requests:
           cpu: 150m
