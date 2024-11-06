@@ -95,14 +95,4 @@ spec:
         limits:
           memory: 1.2Gi
           ephemeral-storage: 200Mi
-    opentelemetry-collector:
-      resources:
-        requests:
-          cpu: 50m
-          memory: 200Mi
-          ephemeral-storage: 100Mi
-        limits:
-          memory: 500Mi
-          ephemeral-storage: 200Mi
-
 
