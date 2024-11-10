@@ -57,6 +57,66 @@ spec:
               namespace: net
               values: |2
                 namespaceOverride: "net"
+                hubble:
+                  enabled: true
+                  metrics:
+                    enabled:
+                      - dns:query
+                      - drop
+                      - tcp
+                      - flow
+                      - port-distribution
+                      - icmp
+                      - http
+                    serviceMonitor:
+                      enabled: true
+                  relay:
+                    enabled: true
+                    rollOutPods: true
+                    prometheus:
+                      serviceMonitor:
+                        enabled: true
+                    resources:
+                      requests:
+                        cpu: 10m
+                        memory: 100Mi
+                        ephemeral-storage: 100Mi
+                      limits:
+                        memory: 200Mi
+                        ephemeral-storage: 200Mi
+                  ui:
+                    enabled: true
+                    rollOutPods: true
+                    backend:
+                      image:
+                        pullPolicy: Always
+                      resources:
+                        requests:
+                          cpu: 10m
+                          memory: 100Mi
+                          ephemeral-storage: 100Mi
+                        limits:
+                          memory: 200Mi
+                          ephemeral-storage: 200Mi
+                      securityContext:
+                        allowPrivilegeEscalation: false
+                        readOnlyRootFilesystem: true
+                        capabilities: {drop: ["ALL"]}
+                    frontend:
+                      image:
+                        pullPolicy: Always
+                      resources:
+                        requests:
+                          cpu: 10m
+                          memory: 100Mi
+                          ephemeral-storage: 100Mi
+                        limits:
+                          memory: 200Mi
+                          ephemeral-storage: 200Mi
+                      securityContext:
+                        allowPrivilegeEscalation: false
+                        readOnlyRootFilesystem: true
+                        capabilities: {drop: ["ALL"]}
                 image:
                   pullPolicy: "Always"
                 bgpControlPlane:
@@ -66,12 +126,24 @@ spec:
                 kubeProxyReplacement: true
                 k8sServiceHost: 10.10.20.99
                 k8sServicePort: 6443
+                encryption:
+                  enabled: true
+                  type: wireguard
+                  nodeEncryption: true
                 operator:
                   replicas: 1
                   prometheus:
                     enabled: true
                     serviceMonitor:
                       enabled: true
+                  resources:
+                    requests:
+                      cpu: 50m
+                      memory: 100Mi
+                      ephemeral-storage: 100Mi
+                    limits:
+                      memory: 200Mi
+                      ephemeral-storage: 200Mi
                 ipam:
                   mode: kubernetes
                   operator:
@@ -83,4 +155,38 @@ spec:
                   enabled: true
                   serviceMonitor:
                     enabled: true
-
+                resources:
+                  requests:
+                    cpu: 100m
+                    memory: 400Mi
+                    ephemeral-storage: 100Mi
+                  limits:
+                    memory: 600Mi
+                    ephemeral-storage: 200Mi
+                cgroup:
+                  autoMount:
+                    resources:
+                      requests:
+                        cpu: 100m
+                        memory: 100Mi
+                        ephemeral-storage: 100Mi
+                      limits:
+                        memory: 200Mi
+                        ephemeral-storage: 200Mi
+                cni:
+                  resources:
+                    requests:
+                      cpu: 100m
+                      memory: 100Mi
+                      ephemeral-storage: 100Mi
+                    limits:
+                      memory: 200Mi
+                      ephemeral-storage: 200Mi
+                initResources:
+                  requests:
+                    cpu: 100m
+                    memory: 100Mi
+                    ephemeral-storage: 100Mi
+                  limits:
+                    memory: 200Mi
+                    ephemeral-storage: 200Mi
