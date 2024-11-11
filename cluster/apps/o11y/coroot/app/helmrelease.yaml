@@ -26,13 +26,13 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    corootCE:
-      enabled: true
-      bootstrap:
-        refreshInterval: 15s
-        clickhouse:
-          database: default
-          username: default
+#    corootCE:
+#      enabled: true
+#      bootstrap:
+#        refreshInterval: 15s
+#        clickhouse:
+#          database: default
+#          username: default
 #      resources:
 #        requests:
 #          cpu: 150m
@@ -41,17 +41,17 @@ spec:
 #        limits:
 #          memory: 1.2Gi
 #          ephemeral-storage: 200Mi
-      ingress:
-        enabled: true
-        className: private
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-        hosts:
-          - host: &host coroot.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                pathType: Prefix
-        tls: [hosts: [*host]] 
+#      ingress:
+#        enabled: true
+#        className: private
+#        annotations:
+#          cert-manager.io/cluster-issuer: "letsencrypt-production"
+#        hosts:
+#          - host: &host coroot.${SECRET_DOMAIN}
+#            paths:
+#              - path: /
+#                pathType: Prefix
+#        tls: [hosts: [*host]] 
 #    corootClusterAgent:
 #      resources:
 #        requests:
