@@ -90,7 +90,7 @@ spec:
           ephemeral-storage: 200Mi
       securityContext:
         capabilities: 
-          add: ["CAP_IPC_LOCK"]
+          add: ["CAP_IPC_LOCK","CAP_SYS_NICE","CAP_NET_ADMIN"]
     node-agent:
       resources:
         requests:
