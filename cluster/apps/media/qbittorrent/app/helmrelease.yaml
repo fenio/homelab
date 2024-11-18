@@ -31,7 +31,7 @@ spec:
           qbittorrent:
             image:
               repository: ghcr.io/onedr0p/qbittorrent
-              tag: "5.0.1"
+              tag: "5.0.2"
             env:
               TZ: ${CONFIG_TIMEZONE}
               QBITTORRENT__PORT: &port 1080
