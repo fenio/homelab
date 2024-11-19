@@ -33,10 +33,6 @@ spec:
       replicaCount: 1
       service:
         type: LoadBalancer
-        ports:
-          dns: 53
-        targetPorts:
-          dns: 53
         annotations:
           io.cilium/lb-ipam-ips: "10.10.20.109"
       image:
@@ -101,10 +97,6 @@ spec:
         limits:
           memory: 400Mi
           ephemeral-storage: 200Mi
-    tcp:
-      "53": net/dnsmasq:9553
-    udp:
-      "53": net/dnsmasq:9553
     defaultBackend:
       enabled: true
 #      containerSecurityContext:
