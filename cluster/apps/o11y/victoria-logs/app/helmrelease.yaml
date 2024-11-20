@@ -50,7 +50,7 @@ spec:
             path: /
             port: http
         tls: [hosts: [*host]]
-    fluent-bit:
+    vector:
       enabled: true
       resources:
         requests:
