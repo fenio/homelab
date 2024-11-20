@@ -122,3 +122,6 @@ spec:
           value: hacker-terminal
         - name: SHOW_DETAILS
           value: "false"
+        - name: SEND_SAME_HTTP_CODE
+          value: "true"
+
