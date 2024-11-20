@@ -44,6 +44,7 @@ spec:
         gethomepage.dev/group: Infrastructure
         gethomepage.dev/name: Flux
         gethomepage.dev/icon: git.svg
+        gethomepage.dev/pod-selector: ""
       hosts:
         - host: &host "flux.${SECRET_DOMAIN}"
           paths:
