@@ -43,6 +43,7 @@ spec:
           gethomepage.dev/group: Infrastructure
           gethomepage.dev/name: VictoriaLogs
           gethomepage.dev/icon: si-victoriametrics
+          gethomepage.dev/pod-selector: ""
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
           - name: &host "l.${SECRET_DOMAIN}"
