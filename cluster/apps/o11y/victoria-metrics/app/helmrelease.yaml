@@ -217,6 +217,7 @@ spec:
           gethomepage.dev/group: Infrastructure
           gethomepage.dev/name: VM AlertManager
           gethomepage.dev/icon: si-victoriametrics
+          gethomepage.dev/pod-selector: ""
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
           - &host am.${SECRET_DOMAIN}
