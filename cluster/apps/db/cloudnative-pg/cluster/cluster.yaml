@@ -9,7 +9,7 @@ spec:
 #    recovery:
 #      source: &previous-cluster postgres
   instances: 3
-  imageName: ghcr.io/cloudnative-pg/postgresql:16.3
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.5
   primaryUpdateStrategy: unsupervised
   enableSuperuserAccess: true
   superuserSecret:
