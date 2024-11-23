@@ -34,24 +34,24 @@ spec:
     limits:
       memory: 1.2Gi
       ephemeral-storage: 200Mi
-  backup:
-    retentionPolicy: 7d
-    barmanObjectStore:
-      data:
-        compression: bzip2
-      wal:
-        compression: bzip2
-        maxParallel: 4
-      destinationPath: s3://pgsql/
-      endpointURL: https://eu-central-1.linodeobjects.com
-      serverName: postgres-v2
-      s3Credentials:
-        accessKeyId:
-          name: pg-credentials
-          key: S3_ACCESS_KEY
-        secretAccessKey:
-          name: pg-credentials
-          key: S3_SECRET_KEY
+#  backup:
+#    retentionPolicy: 7d
+#    barmanObjectStore:
+#      data:
+#        compression: bzip2
+#      wal:
+#        compression: bzip2
+#        maxParallel: 4
+#      destinationPath: s3://pgsql/
+#      endpointURL: https://eu-central-1.linodeobjects.com
+#      serverName: postgres-v2
+#      s3Credentials:
+#        accessKeyId:
+#          name: pg-credentials
+#          key: S3_ACCESS_KEY
+#        secretAccessKey:
+#          name: pg-credentials
+#          key: S3_SECRET_KEY
 #  externalClusters:
 #    - name: *previous-cluster
 #      barmanObjectStore:
