@@ -6,4 +6,4 @@ resources:
   - ./cluster.yaml
   - ./prometheusrule.yaml
 #  - ./podmonitor.yaml
-  - ./scheduledbackup.yaml
+#  - ./scheduledbackup.yaml
