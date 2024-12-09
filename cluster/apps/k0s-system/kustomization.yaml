@@ -5,5 +5,5 @@ kind: Kustomization
 metadata:
   name: pushgateway
 resources:
-  - ./namespace.yaml
-  - ./k0s-pushgateway/pushgateway.yaml
+#  - ./namespace.yaml
+#  - ./k0s-pushgateway/pushgateway.yaml
