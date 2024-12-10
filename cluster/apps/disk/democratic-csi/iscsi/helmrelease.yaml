@@ -127,6 +127,7 @@ spec:
           extentAvailThreshold: 0
     node:
  #     kubeletHostPath: /var/lib/k0s/kubelet
+      hostPID: true
       driver:
         resources:
           requests:
