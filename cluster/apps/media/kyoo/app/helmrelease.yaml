@@ -330,6 +330,7 @@ spec:
       kyoo:
         size: 5Gi
         accessMode: ReadWriteOnce
+        storageClass: iscsi
         retain: true
         nameOverride: kyoo
         advancedMounts:
@@ -339,6 +340,7 @@ spec:
       search:
         size: 5Gi
         accessMode: ReadWriteOnce
+        storageClass: iscsi
         retain: true
         advancedMounts:
           meilisearch:
