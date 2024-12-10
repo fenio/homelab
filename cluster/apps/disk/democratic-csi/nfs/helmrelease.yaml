@@ -148,4 +148,4 @@ spec:
           limits:
             memory: 200Mi
             ephemeral-storage: 200Mi
-      kubeletHostPath: /var/lib/k0s/kubelet
+#      kubeletHostPath: /var/lib/k0s/kubelet
