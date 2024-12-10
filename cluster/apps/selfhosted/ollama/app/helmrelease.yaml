@@ -45,8 +45,6 @@ spec:
               OLLAMA_ORIGINS: "*"
               OLLAMA_MODELS: /models
               HSA_OVERRIDE_GFX_VERSION: "11.0.0"
-            securityContext:
-              privileged: true
             resources:
               requests:
                 cpu: 200m
