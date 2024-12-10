@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
   - ./flux.yaml
-  - ./k0s.yaml
+#  - ./k0s.yaml
 #  - ./pg-agent.yaml
