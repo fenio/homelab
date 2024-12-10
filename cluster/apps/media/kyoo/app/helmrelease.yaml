@@ -347,6 +347,7 @@ spec:
       transcoder-metadata:
         size: 5Gi
         accessMode: ReadWriteOnce
+        storageClass: iscsi
         retain: true
         advancedMounts:
           transcoder:
