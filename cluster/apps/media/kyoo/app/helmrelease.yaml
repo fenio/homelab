@@ -134,7 +134,7 @@ spec:
                   name: kyoo-secret
             image:
               repository: ghcr.io/zoriya/kyoo_migrations
-              tag: edge@sha256:ed7e45b0eab0a476b9a4ac86718cb1cbb899c80723a8c1ffc98aab13c893ff52
+              tag: edge@sha256:df74c60b68a08ab28ca6c5391bde95602aacf4e56205c54a6daafbb688ab3dda
         containers:
           app:
             image:
