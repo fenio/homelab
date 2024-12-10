@@ -173,7 +173,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_front
-              tag: edge@sha256:70104abdfdcb670e85cd0749b278995b61a31937beab46af3f06a6aeef0258e4
+              tag: edge@sha256:935f71be6017f87f94467d2c78d4f7957bca468a9ad9c1f5ce0ab73673c0345f
             envFrom: *envFrom
             resources:
               requests:
