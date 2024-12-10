@@ -18,5 +18,5 @@ spec:
   wait: false
   interval: 10m
   dependsOn:
-    - name: nfs
+    - name: iscsi
     - name: ingress-nginx

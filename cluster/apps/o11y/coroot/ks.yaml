@@ -14,5 +14,5 @@ spec:
   retryInterval: 1m
   timeout: 5m
   dependsOn:
-    - name: nfs
+    - name: iscsi
     - name: victoria-metrics
