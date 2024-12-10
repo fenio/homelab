@@ -24,7 +24,7 @@ spec:
             - name: config
               globalMounts:
                 - path: /config
-              storageClass: nfs
+              storageClass: iscsi
               accessMode: ReadWriteOnce
               size: 5Gi
         containers:
