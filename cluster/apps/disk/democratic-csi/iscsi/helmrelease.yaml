@@ -74,7 +74,7 @@ spec:
       name: "iscsi"
     storageClasses:
     - name: iscsi
-      defaultClass: false
+      defaultClass: true
       reclaimPolicy: Delete
       volumeBindingMode: Immediate
       allowVolumeExpansion: true
