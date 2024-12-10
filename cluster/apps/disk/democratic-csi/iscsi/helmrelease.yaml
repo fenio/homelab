@@ -126,7 +126,7 @@ spec:
           extentRpm: "SSD"
           extentAvailThreshold: 0
     node:
-      kubeletHostPath: /var/lib/k0s/kubelet
+ #     kubeletHostPath: /var/lib/k0s/kubelet
       driver:
         resources:
           requests:
