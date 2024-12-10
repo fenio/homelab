@@ -136,6 +136,8 @@ spec:
           limits:
             memory: 200Mi
             ephemeral-storage: 200Mi
+        iscsiDirHostPath: /usr/local/etc/iscsi
+        iscsiDirHostPathType: ""        
       driverRegistrar:
         resources:
           requests:
