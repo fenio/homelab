@@ -81,8 +81,7 @@ spec:
         fsType: nfs
         detachedVolumesFromSnapshots: "false"
       mountOptions:
-      - noatime
-      - nfsvers=3
+        ["nfsvers=4.2", "nconnect=8", "hard", "noatime", "nodiratime"]
       secrets:
         provisioner-secret:
         controller-publish-secret:
