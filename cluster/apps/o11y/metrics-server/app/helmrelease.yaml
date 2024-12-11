@@ -25,6 +25,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    args:
+      - --kubelet-insecure-tls
     image:
       pullPolicy: Always
     resources:
