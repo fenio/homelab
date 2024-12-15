@@ -8,8 +8,8 @@ spec:
   timeout: 15m
   chart:
     spec:
-      chart: coroot
-      version: 0.16.10
+      chart: coroot-ce
+      version: 0.2.0
       sourceRef:
         kind: HelmRepository
         name: coroot
