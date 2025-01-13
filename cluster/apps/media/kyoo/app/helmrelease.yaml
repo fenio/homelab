@@ -139,7 +139,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_back
-              tag: edge@sha256:1c2fbf21ab6b19699aa55421ebd3ae7bfe2169a2dcb418bcf7f5c2464bdfde25
+              tag: edge@sha256:6b81b8512fba330451184b20ab6f0e920ad4de9f0259fb6b47ee3933122970ca
             env:
               - name: POSTGRES_SERVER
                 value: *dbHost
