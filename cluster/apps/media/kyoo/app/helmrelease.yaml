@@ -245,7 +245,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zoriya/kyoo_transcoder
-              tag: edge@sha256:36b7302e7927fd7d457352f87dc3b4978f6fa3b613c8848430569e4b2a286999
+              tag: edge@sha256:fbb8260d6df3a7411561c318c01f04b6ca1ae3cf2a9b4a43272e5743eb98366c
             envFrom: *envFrom
             env:
               - name: POSTGRES_SERVER
