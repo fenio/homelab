@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,12 +21,12 @@ spec:
         component: pushgateway
     spec:
       containers:
-      - name: prometheus-pushgateway
-        resources:
-          requests:
-            cpu: 15m
-            memory: 100Mi
-            ephemeral-storage: 100Mi
-          limits:
-            memory: 100Mi
-            ephemeral-storage: 200Mi
+        - name: prometheus-pushgateway
+          resources:
+            requests:
+              cpu: 15m
+              memory: 100Mi
+              ephemeral-storage: 100Mi
+            limits:
+              memory: 100Mi
+              ephemeral-storage: 200Mi

@@ -1,3 +1,4 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -90,7 +91,7 @@ spec:
           ephemeral-storage: 200Mi
       securityContext:
         capabilities:
-          add: ["CAP_IPC_LOCK","CAP_SYS_NICE","CAP_NET_ADMIN"]
+          add: ["CAP_IPC_LOCK", "CAP_SYS_NICE", "CAP_NET_ADMIN"]
     node-agent:
       resources:
         requests:

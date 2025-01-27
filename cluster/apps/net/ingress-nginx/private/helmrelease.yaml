@@ -1,3 +1,4 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -26,10 +27,10 @@ spec:
     keepHistory: false
   values:
     controller:
-#      containerSecurityContext:
-#        allowPrivilegeEscalation: false
-#        readOnlyRootFilesystem: true
-#        capabilities: {drop: ["ALL"]}
+      # containerSecurityContext:
+      #   allowPrivilegeEscalation: false
+      #   readOnlyRootFilesystem: true
+      #   capabilities: {drop: ["ALL"]}
       replicaCount: 1
       service:
         type: LoadBalancer
@@ -99,10 +100,6 @@ spec:
           ephemeral-storage: 200Mi
     defaultBackend:
       enabled: true
-#      containerSecurityContext:
-#        allowPrivilegeEscalation: false
-#        readOnlyRootFilesystem: true
-#        capabilities: {drop: ["ALL"]}
       image:
         repository: ghcr.io/tarampampam/error-pages
         tag: 3.3.1

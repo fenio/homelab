@@ -1,3 +1,4 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -31,7 +32,7 @@ spec:
           - name: INIT_POSTGRES_SUPER_PASS
             value: "${SECRET_PG_PASSWORD}"
           - name: INIT_POSTGRES_USER
-            value:  &dbUser "grafana"
+            value: &dbUser "grafana"
           - name: INIT_POSTGRES_PASS
             value: &dbPass "${GRAFANA_PG_PASSWORD}"
           - name: INIT_POSTGRES_DBNAME

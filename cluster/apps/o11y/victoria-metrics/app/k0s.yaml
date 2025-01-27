@@ -1,3 +1,4 @@
+---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -5,7 +6,7 @@ metadata:
   namespace: k0s-system
 spec:
   endpoints:
-  - port: http
+    - port: http
   selector:
     matchLabels:
       app: k0s-observability

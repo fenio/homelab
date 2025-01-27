@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -18,16 +19,16 @@ spec:
         k8s-app: konnectivity-agent
     spec:
       containers:
-      - name: konnectivity-agent
-        imagePullPolicy: Always
-        resources:
-          requests:
-            cpu: 15m
-            memory: 100Mi
-            ephemeral-storage: 100Mi
-          limits:
-            memory: 100Mi
-            ephemeral-storage: 200Mi
-        securityContext:
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
+        - name: konnectivity-agent
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 15m
+              memory: 100Mi
+              ephemeral-storage: 100Mi
+            limits:
+              memory: 100Mi
+              ephemeral-storage: 200Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true

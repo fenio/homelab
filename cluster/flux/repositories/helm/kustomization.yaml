@@ -17,10 +17,10 @@ resources:
   - ./ha.yaml
   - ./homepage.yaml
   - ./ingress-nginx.yaml
-#  - ./intel.yaml
+  #  - ./intel.yaml
   - ./metallb.yaml
   - ./metrics-server.yaml
-#  - ./node-feature-discovery.yaml
+  #  - ./node-feature-discovery.yaml
   - ./pgadmin.yaml
   - ./prometheus.yaml
   - ./reloader.yaml

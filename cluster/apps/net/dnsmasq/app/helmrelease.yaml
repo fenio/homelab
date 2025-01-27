@@ -1,3 +1,4 @@
+---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ishioni/CRDs-catalog/main/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
@@ -38,13 +39,13 @@ spec:
               DNSMASQ__GROUP: nobody
             command: ['/bin/bash', '-c']
             args:
-            - |
-              echo port=$DNSMASQ__PORT > /etc/dnsmasq/dnsmasq.conf && \
-              echo address=$DNSMASQ__ADDRESS >> /etc/dnsmasq/dnsmasq.conf && \
-              echo user=$DNSMASQ__USER >> /etc/dnsmasq/dnsmasq.conf && \
-              echo group=$DNSMASQ__GROUP >> /etc/dnsmasq/dnsmasq.conf && \
-              echo "log-queries" >> /etc/dnsmasq/dnsmasq.conf && \
-              cat /etc/dnsmasq/dnsmasq.conf
+              - |
+                echo port=$DNSMASQ__PORT > /etc/dnsmasq/dnsmasq.conf && \
+                echo address=$DNSMASQ__ADDRESS >> /etc/dnsmasq/dnsmasq.conf && \
+                echo user=$DNSMASQ__USER >> /etc/dnsmasq/dnsmasq.conf && \
+                echo group=$DNSMASQ__GROUP >> /etc/dnsmasq/dnsmasq.conf && \
+                echo "log-queries" >> /etc/dnsmasq/dnsmasq.conf && \
+                cat /etc/dnsmasq/dnsmasq.conf
             resources:
               requests:
                 cpu: 10m

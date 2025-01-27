@@ -1,3 +1,4 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -14,10 +15,10 @@ spec:
         namespace: flux-system
   interval: 30m
   values:
-#    defaultPodOptions:
-#      annotations:
-#        prometheus.io/scrape: 'true'
-#        prometheus.io/port: '8080'
+    #    defaultPodOptions:
+    #      annotations:
+    #        prometheus.io/scrape: 'true'
+    #        prometheus.io/port: '8080'
     controllers:
       pg-agent:
         strategy: RollingUpdate
@@ -48,10 +49,6 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
               capabilities: {drop: ["ALL"]}
-#            ports:
-#            - containerPort: 8080
-#              name: http
-#              protocol: TCP
     service:
       pg-agent:
         controller: pg-agent

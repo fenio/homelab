@@ -1,3 +1,4 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -72,26 +73,22 @@ spec:
     csiDriver:
       name: "nfs"
     storageClasses:
-    - name: nfs
-      defaultClass: false
-      reclaimPolicy: Delete
-      volumeBindingMode: Immediate
-      allowVolumeExpansion: true
-      parameters:
-        fsType: nfs
-        detachedVolumesFromSnapshots: "false"
-      mountOptions:
-        ["nfsvers=4.2", "nconnect=8", "hard", "noatime", "nodiratime"]
-      secrets:
-        provisioner-secret:
-        controller-publish-secret:
-        node-stage-secret:
-        node-publish-secret:
-        controller-expand-secret:
-  #  volumeSnapshotClasses:
-  #  - name: nfs
-  #    parameters:
-  #      detachedSnapshots: "true"
+      - name: nfs
+        defaultClass: false
+        reclaimPolicy: Delete
+        volumeBindingMode: Immediate
+        allowVolumeExpansion: true
+        parameters:
+          fsType: nfs
+          detachedVolumesFromSnapshots: "false"
+        mountOptions:
+          ["nfsvers=4.2", "nconnect=8", "hard", "noatime", "nodiratime"]
+        secrets:
+          provisioner-secret:
+          controller-publish-secret:
+          node-stage-secret:
+          node-publish-secret:
+          controller-expand-secret:
     driver:
       config:
         driver: freenas-api-nfs

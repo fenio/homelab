@@ -88,15 +88,6 @@ spec:
           http:
             port: 80
             targetPort: *port
-#      utptcp:
-#        type: LoadBalancer
-#        controller: main
-#        ports:
-#          utptcp:
-#            enabled: true
-#            port: *peerport
-#            protocol: TCP
-#            targetPort: *peerport
     persistence:
       downloads:
         enabled: true

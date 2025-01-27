@@ -1,3 +1,4 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -73,25 +74,21 @@ spec:
     csiDriver:
       name: "iscsi"
     storageClasses:
-    - name: iscsi
-      defaultClass: true
-      reclaimPolicy: Delete
-      volumeBindingMode: Immediate
-      allowVolumeExpansion: true
-      parameters:
-        fsType: ext4
-        detachedVolumesFromSnapshots: "false"
-      mountOptions: []
-      secrets:
-        provisioner-secret:
-        controller-publish-secret:
-        node-stage-secret:
-        node-publish-secret:
-        controller-expand-secret:
-  #  volumeSnapshotClasses:
-  #  - name: iscsi
-  #    parameters:
-  #      detachedSnapshots: "true"
+      - name: iscsi
+        defaultClass: true
+        reclaimPolicy: Delete
+        volumeBindingMode: Immediate
+        allowVolumeExpansion: true
+        parameters:
+          fsType: ext4
+          detachedVolumesFromSnapshots: "false"
+        mountOptions: []
+        secrets:
+          provisioner-secret:
+          controller-publish-secret:
+          node-stage-secret:
+          node-publish-secret:
+          controller-expand-secret:
     driver:
       config:
         driver: freenas-api-iscsi
@@ -126,7 +123,7 @@ spec:
           extentRpm: "SSD"
           extentAvailThreshold: 0
     node:
- #     kubeletHostPath: /var/lib/k0s/kubelet
+      # kubeletHostPath: /var/lib/k0s/kubelet
       hostPID: true
       driver:
         resources:
