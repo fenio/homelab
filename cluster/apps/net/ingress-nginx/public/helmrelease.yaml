@@ -124,4 +124,3 @@ spec:
           value: "false"
         - name: SEND_SAME_HTTP_CODE
           value: "true"
-

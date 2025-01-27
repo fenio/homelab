@@ -120,7 +120,7 @@ spec:
         annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Infrastructure
-          gethomepage.dev/name: VM 
+          gethomepage.dev/name: VM
           gethomepage.dev/icon: si-victoriametrics
           gethomepage.dev/pod-selector: ""
           cert-manager.io/cluster-issuer: "letsencrypt-production"
@@ -208,7 +208,7 @@ spec:
                 bot_token: ${TELEGRAM_TOKEN}
                 chat_id: ${TELEGRAM_CHATID}
                 send_resolved: true
-                api_url: https://api.telegram.org         
+                api_url: https://api.telegram.org
       ingress:
         ingressClassName: private
         enabled: true

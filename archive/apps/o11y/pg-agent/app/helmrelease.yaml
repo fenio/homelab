@@ -32,7 +32,7 @@ spec:
                 value: '0.0.0.0:8080'
               - name: PGUSER
                 value: "postgres"
-              - name: PGPASSWORD 
+              - name: PGPASSWORD
                 value: "${SECRET_PG_PASSWORD}"
               - name: DSN
                 value: postgresql://$(PGUSER):$(PGPASSWORD)@postgres-ro.db.svc.cluster.local:5432/postgres

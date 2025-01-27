@@ -26,4 +26,3 @@ spec:
   uninstall:
     keepHistory: false
   values:
-

@@ -302,7 +302,7 @@ spec:
         smartctl-dashboard:
           gnetId: 20204
           revision: 1
-          datasource: 
+          datasource:
             - { name: DS_PROMETHEUS, value: Prometheus }
       system:
         node-exporter:

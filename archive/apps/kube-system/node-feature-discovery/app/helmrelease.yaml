@@ -16,7 +16,7 @@ spec:
   interval: 30m
   values:
     resources:
-      requests: 
+      requests:
         cpu: 50m
         memory: 100Mi
       limits:
@@ -24,7 +24,7 @@ spec:
         memory: 200Mi
     worker:
       resources:
-        requests: 
+        requests:
           cpu: 50m
           memory: 100Mi
         limits:
@@ -32,11 +32,9 @@ spec:
           memory: 200Mi
     gc:
       resources:
-        requests: 
+        requests:
           cpu: 20m
           memory: 100Mi
         limits:
           cpu: null
           memory: 200Mi
-
-

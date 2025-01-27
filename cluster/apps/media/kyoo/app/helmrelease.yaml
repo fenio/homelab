@@ -103,7 +103,7 @@ spec:
         strategy: Recreate
         initContainers:
           00-init-db:
-            image: 
+            image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 16.6
             env:
@@ -151,7 +151,7 @@ spec:
                 value: *dbUser
               - name: POSTGRES_PASSWORD
                 value: *dbPass
-              - name: TRANSCODER_URL 
+              - name: TRANSCODER_URL
                 value: http://kyoo-transcoder:7666
             envFrom: *envFrom
             resources:
@@ -366,4 +366,3 @@ spec:
         existingClaim: media
         globalMounts:
           - path: /media
-

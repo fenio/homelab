@@ -28,4 +28,3 @@ spec:
       enabled: true
     prometheusRule:
       enabled: true
-

@@ -62,5 +62,3 @@ spec:
               - path: /etc/searxng/limiter.toml
                 subPath: limiter.toml
                 readOnly: true
-
-
