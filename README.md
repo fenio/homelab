@@ -332,7 +332,7 @@ And after less than 2 minutes you should end up with working cluster with Cilium
 ❯ ~ k0sctl kubeconfig > ~/.kube/config
 
 [☸ lab:default]
-❯ ~ kubectl get nodes
+❯ ~ make nodes
 NAME    STATUS   ROLES    AGE     VERSION
 node1   Ready    <none>   2m10s   v1.29.1+k0s
 node2   Ready    <none>   2m16s   v1.29.1+k0s
@@ -473,7 +473,7 @@ All of the above in one shot using init.sh:
 
 ```sh
 [☸ lab:default] [ main]
-❯ ~/homelab ./init.sh
+❯ ~/homelab make init
 namespace/flux-system serverside-applied
 resourcequota/critical-pods serverside-applied
 customresourcedefinition.apiextensions.k8s.io/alerts.notification.toolkit.fluxcd.io serverside-applied
