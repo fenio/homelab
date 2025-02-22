@@ -37,7 +37,7 @@ spec:
           main:
             image:
               repository: docker.io/ollama/ollama
-              tag: 0.5.11-rocm
+              tag: 0.5.12-rocm
             env:
               TZ: ${TIMEZONE}
               # LIBVA_DRIVER_NAME: i965
