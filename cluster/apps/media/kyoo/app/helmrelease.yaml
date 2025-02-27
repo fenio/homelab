@@ -105,7 +105,7 @@ spec:
           00-init-db:
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: 16.6
+              tag: 16.8
             env:
               - name: INIT_POSTGRES_HOST
                 value: &dbHost "postgres-rw.db.svc.cluster.local"
