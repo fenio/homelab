@@ -54,6 +54,10 @@ spec:
             memory: 200Mi
             ephemeral-storage: 200Mi
       driver:
+        image:
+        registry: docker.io/democraticcsi/democratic-csi
+        tag: latest
+        pullPolicy: Always
         resources:
           requests:
             cpu: 20m
@@ -126,6 +130,10 @@ spec:
       # kubeletHostPath: /var/lib/k0s/kubelet
       hostPID: true
       driver:
+        image:
+          registry: docker.io/democraticcsi/democratic-csi
+          tag: latest
+          pullPolicy: Always
         resources:
           requests:
             cpu: 30m
