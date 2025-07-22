@@ -55,9 +55,9 @@ spec:
             ephemeral-storage: 200Mi
       driver:
         image:
-        registry: docker.io/democraticcsi/democratic-csi
-        tag: next
-        pullPolicy: Always
+          registry: docker.io/democraticcsi/democratic-csi
+          tag: next
+          pullPolicy: Always
         resources:
           requests:
             cpu: 20m

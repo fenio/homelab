@@ -53,6 +53,10 @@ spec:
             memory: 100Mi
             ephemeral-storage: 200Mi
       driver:
+        image:
+          registry: docker.io/democraticcsi/democratic-csi
+          tag: next
+          pullPolicy: always
         resources:
           requests:
             cpu: 10m
@@ -90,9 +94,6 @@ spec:
           node-publish-secret:
           controller-expand-secret:
     driver:
-      image:
-        registry: docker.io/democraticcsi/democratic-csi
-        tag: latest
       config:
         driver: freenas-api-nfs
         instance_id:
@@ -123,7 +124,8 @@ spec:
       driver:
         image:
           registry: docker.io/democraticcsi/democratic-csi
-          tag: latest
+          tag: next
+          pullPolicy: always
         resources:
           requests:
             cpu: 30m
