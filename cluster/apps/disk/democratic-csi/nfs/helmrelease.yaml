@@ -56,7 +56,7 @@ spec:
         image:
           registry: docker.io/democraticcsi/democratic-csi
           tag: next
-          pullPolicy: always
+          pullPolicy: Always
         resources:
           requests:
             cpu: 10m
@@ -125,7 +125,7 @@ spec:
         image:
           registry: docker.io/democraticcsi/democratic-csi
           tag: next
-          pullPolicy: always
+          pullPolicy: Always
         resources:
           requests:
             cpu: 30m
