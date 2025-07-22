@@ -56,7 +56,7 @@ spec:
       driver:
         image:
         registry: docker.io/democraticcsi/democratic-csi
-        tag: latest
+        tag: next
         pullPolicy: Always
         resources:
           requests:
@@ -132,7 +132,7 @@ spec:
       driver:
         image:
           registry: docker.io/democraticcsi/democratic-csi
-          tag: latest
+          tag: next
           pullPolicy: Always
         resources:
           requests:

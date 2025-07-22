@@ -90,6 +90,9 @@ spec:
           node-publish-secret:
           controller-expand-secret:
     driver:
+      image:
+        registry: docker.io/democraticcsi/democratic-csi
+        tag: latest
       config:
         driver: freenas-api-nfs
         instance_id:
@@ -118,6 +121,9 @@ spec:
           shareMapallGroup: ""
     node:
       driver:
+        image:
+          registry: docker.io/democraticcsi/democratic-csi
+          tag: latest
         resources:
           requests:
             cpu: 30m
