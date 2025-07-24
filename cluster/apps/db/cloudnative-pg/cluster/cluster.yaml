@@ -15,9 +15,10 @@ spec:
   superuserSecret:
     name: pg-credentials
   storage:
-    size: 20Gi
+    size: 30Gi
     storageClass: iscsi
   postgresql:
+    shared_preload_libraries: [pg_stat_statements]
     parameters:
       max_connections: "300"
       work_mem: 128MB
