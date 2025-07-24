@@ -27,33 +27,14 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    corootCE:
+    ingress:
       enabled: true
-      bootstrap:
-        refreshInterval: 15s
-        clickhouse:
-          database: default
-          username: default
-      resources:
-        requests:
-          cpu: 150m
-          memory: 1Gi
-          ephemeral-storage: 100Mi
-        limits:
-          memory: 1.2Gi
-          ephemeral-storage: 200Mi
-      ingress:
-        enabled: true
-        className: private
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-        hosts:
-          - host: &host coroot.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                pathType: ImplementationSpecific
-        tls: [hosts: [*host]]
-    corootClusterAgent:
+      className: private
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+      host: &host coroot.${SECRET_DOMAIN}
+      tls: [hosts: [*host]]
+    clusterAgent:
       resources:
         requests:
           cpu: 10m
@@ -62,24 +43,8 @@ spec:
         limits:
           memory: 300Mi
           ephemeral-storage: 200Mi
-    prometheus:
-      enabled: false
-      kubeStateMetrics:
-        enabled: false
-      server:
-        enabled: false
-      nodeExporter:
-        enabled: false
-      pushgateway:
-        enabled: false
-    existingPrometheus:
-      enabled: true
-      service:
-        serviceName: vmsingle-vm
-        servicePort: 8429
-        serviceNamespace: o11y
-      node-agent-podmonitor:
-        enabled: true
+    externalPrometheus:
+      url: http://vmsingle-vm.o11y.svc.cluster.local:8429
     clickhouse:
       resources:
         requests:
@@ -89,9 +54,6 @@ spec:
         limits:
           memory: 1Gi
           ephemeral-storage: 200Mi
-      securityContext:
-        capabilities:
-          add: ["CAP_IPC_LOCK", "CAP_SYS_NICE", "CAP_NET_ADMIN"]
     node-agent:
       resources:
         requests:

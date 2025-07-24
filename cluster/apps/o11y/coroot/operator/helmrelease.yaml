@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: coroot-operator
-      version: 0.2.2
+      version: 0.4.2
       sourceRef:
         kind: HelmRepository
         name: coroot

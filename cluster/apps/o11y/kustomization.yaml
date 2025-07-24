@@ -3,7 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./namespace.yaml
-  # - ./coroot/ks.yaml
+  - ./coroot/ks.yaml
   - ./flux-webui/ks.yaml
   - ./grafana/ks.yaml
   - ./goldpinger/ks.yaml
