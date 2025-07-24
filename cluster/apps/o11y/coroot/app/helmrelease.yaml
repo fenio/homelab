@@ -33,7 +33,10 @@ spec:
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
       host: &host coroot.${SECRET_DOMAIN}
-      tls: [hosts: [*host]]
+      tls:
+        hosts:
+          - *host
+        secretName: coroot-tls
     clusterAgent:
       resources:
         requests:
