@@ -34,16 +34,6 @@ spec:
               tag: "5.2.10-0.15.5"
             env:
               TZ: ${CONFIG_TIMEZONE}
-            probes:
-              liveness:
-                enabled: true
-              readiness:
-                enabled: true
-              startup:
-                enabled: true
-                spec:
-                  failureThreshold: 30
-                  periodSeconds: 5
             resources:
               requests:
                 cpu: 700m
@@ -57,7 +47,7 @@ spec:
         controller: rutorrent
         ports:
           http:
-            port: 80
+            port: 8080
     ingress:
       rutorrent:
         className: private
