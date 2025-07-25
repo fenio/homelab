@@ -1,0 +1,22 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ishioni/CRDs-catalog/main/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: rutorrent
+  namespace: flux-system
+spec:
+  path: ./cluster/apps/media/rutorrent/app
+  targetNamespace: media
+  sourceRef:
+    kind: GitRepository
+    name: homelab
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: &appname rutorrent
+  prune: true
+  wait: false
+  interval: 10m
+  dependsOn:
+    - name: iscsi
+    - name: ingress-nginx
