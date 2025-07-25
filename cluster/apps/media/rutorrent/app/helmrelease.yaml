@@ -82,8 +82,11 @@ spec:
         existingClaim: media
         globalMounts:
           - path: /downloads
-            subPath: Downloads
       addons:
         type: emptyDir
         globalMounts:
-          - path: /addons
+          - path: /passwd
+      data:
+        type: emptyDir
+        globalMounts:
+          - path: /data
