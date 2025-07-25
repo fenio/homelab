@@ -17,7 +17,7 @@ spec:
   timeout: 15m
   values:
     controllers:
-      qbittorrent:
+      rutorrent:
         type: statefulset
         statefulset:
           volumeClaimTemplates:
@@ -67,17 +67,8 @@ spec:
           http:
             port: 80
     ingress:
-      qbittorrent:
+      rutorrent:
         className: private
-        annotations:
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Media
-          gethomepage.dev/name: QBittorrent
-          gethomepage.dev/icon: qbittorrent.svg
-          gethomepage.dev/widget.type: qbittorrent
-          gethomepage.dev/widget.url: http://qbittorrent.media:1080
-          gethomepage.dev/widget.username: admin
-          gethomepage.dev/widget.password: ${QBITTORRENT_PASSWORD}
         hosts:
           - host: &host ru.${SECRET_DOMAIN}
             paths:
