@@ -48,6 +48,17 @@ spec:
         ports:
           http:
             port: 8080
+      bittorrent:
+        controller: rutorrent
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: 10.10.20.108
+        externalTrafficPolicy: Local
+        ports:
+          bittorrent:
+            enabled: true
+            port: 50000
+            protocol: TCP
     ingress:
       rutorrent:
         className: private
