@@ -21,11 +21,11 @@ data:
   services.yaml: |
     - Automation:
         - Home Assistant:
-            href: http://10.10.10.102:8123
+            href: http://10.10.10.200:8123
             icon: home-assistant.svg
             widget:
               type: homeassistant
-              url: http://10.10.10.102:8123
+              url: http://10.10.10.200:8123
               key: ${HA_TOKEN}
     - Infrastructure:
         - TrueNAS:
