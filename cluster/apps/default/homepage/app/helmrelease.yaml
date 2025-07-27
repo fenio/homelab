@@ -28,6 +28,7 @@ spec:
               pullPolicy: Always
             env:
               TZ: Europe/Warsaw
+              HOMEPAGE_ALLOWED_HOSTS: h.${SECRET_DOMAIN}
             resources:
               requests:
                 cpu: 15m
