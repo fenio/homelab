@@ -51,7 +51,7 @@ data:
             description: NAS
             widget:
               type: diskstation
-              url: https://10.10.10.100:5001
+              url: http://10.10.10.100:5001
               username: fenio
               password: ${SYNOLOGY_PASSWORD}
   settings.yaml: |
