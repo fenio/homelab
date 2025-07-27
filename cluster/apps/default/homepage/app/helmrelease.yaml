@@ -29,6 +29,7 @@ spec:
             env:
               TZ: Europe/Warsaw
               HOMEPAGE_ALLOWED_HOSTS: h.${SECRET_DOMAIN}
+              HOMEPAGE_PROXY_DISABLE_IPV6: true
             resources:
               requests:
                 cpu: 15m
