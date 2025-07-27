@@ -17,6 +17,7 @@ resources:
   - ./homepage.yaml
   - ./ingress-nginx.yaml
   #  - ./intel.yaml
+  - ./kyoo.yaml
   - ./metallb.yaml
   - ./metrics-server.yaml
   #  - ./node-feature-discovery.yaml
