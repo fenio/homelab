@@ -3,6 +3,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
   name: kyoo
+  namespace: flux-system
 spec:
   interval: 5m
   layerSelector:
