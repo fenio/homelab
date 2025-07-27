@@ -1,366 +1,149 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app kyoo
 spec:
   interval: 15m
-  timeout: 15m
-  chart:
-    spec:
-      chart: app-template
-      version: 3.7.3
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: kyoo
   install:
     createNamespace: true
     remediation:
-      retries: 3
+      retries: -1
   upgrade:
     remediation:
-      strategy: rollback
       retries: 3
   values:
-    controllers:
+    global:
       meilisearch:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        containers:
-          app:
-            image:
-              repository: docker.io/getmeili/meilisearch
-              tag: v1.15
-            env:
-              MEILI_ENV: production
-              MEILI_MASTER_KEY:
-                valueFrom:
-                  secretKeyRef:
-                    name: kyoo-secret
-                    key: MEILI_MASTER_KEY
-            probes:
-              liveness: &searchprobes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /health
-                    port: &searchport 7700
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *searchprobes
-              startup:
-                enabled: true
-                spec:
-                  failureThreshold: 30
-                  periodSeconds: 10
-            resources:
-              requests:
-                cpu: 5m
-              limits:
-                memory: 400Mi
-            securityContext: &securityContext
-              allowPrivilegeEscalation: true
-              readOnlyRootFilesystem: false
-              # capabilities: { drop: ["ALL"] }
-        pod: &pod
-          securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            runAsNonRoot: false
-            fsGroup: 0
-            fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [44, 105]
-
+        infra:
+          existingSecret: &secret kyoo-secret
+        kyoo_back:
+          masterkeyKey: MEILI_MASTER_KEY
+          existingSecret: *secret
+      postgres:
+        infra:
+          user: kyoo-all
+        kyoo_back:
+          host: &host postgres-rw.db.svc.cluster.local
+          port: &port 5432
+          database: kyoo_back
+          kyoo_migrations: &psql_secret
+            userKey: postgres
+            passwordKey: SECRET_PG_PASSWORD
+            existingSecret: *secret
+          kyoo_back: *psql_secret
+        kyoo_transcoder:
+          host: *host
+          port: *port
+          database: kyoo_transcoder
+          sslmode: require
+          kyoo_transcoder: *psql_secret
       rabbitmq:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        containers:
-          app:
-            image:
-              repository: docker.io/rabbitmq
-              tag: 4-alpine
-            envFrom: &envFrom
-              - secretRef:
-                  name: kyoo-secret
-              - configMapRef:
-                  name: kyoo-config
-            resources:
-              requests:
-                cpu: 5m
-              limits:
-                memory: 300Mi
-            securityContext: *securityContext
-        pod: *pod
+        infra:
+          passwordKey: RABBITMQ_PASS
+          keyErlangCookie: RABBITMQ_COOKIE
+          existingSecret: *secret
+        kyoo_autosync: &rabbit
+          userKey: RABBITMQ_USER
+          passwordKey: RABBITMQ_PASS
+          existingSecret: *secret
+        kyoo_back: *rabbit
+        kyoo_matcher: *rabbit
+        kyoo_scanner: *rabbit
+    kyoo:
+      address: https://kyoo.${SECRET_DOMAIN}
+      transcoderAcceleration: vaapi # hardware acceleration profile (valid values: disabled, vaapi, qsv, nvidia)
+      apikey:
+        existingSecret: *secret
+        apikeyKey: KYOO_API_KEY
+    media:
+      volumeMounts:
+        - mountPath: &path /media
+          name: media
+          readOnly: true
+      baseMountPath: *path
 
-      back:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        strategy: Recreate
-        initContainers:
-          00-init-db:
-            image:
-              repository: ghcr.io/onedr0p/postgres-init
-              tag: 17.4
-            env:
-              - name: INIT_POSTGRES_HOST
-                value: &dbHost "postgres-rw.db.svc.cluster.local"
-              - name: INIT_POSTGRES_SUPER_PASS
-                value: "${SECRET_PG_PASSWORD}"
-              - name: INIT_POSTGRES_USER
-                value: &dbUser "kyoo"
-              - name: INIT_POSTGRES_PASS
-                value: &dbPass "${KYOO_PG_PASSWORD}"
-              - name: INIT_POSTGRES_DBNAME
-                value: &dbName kyoo
-          01-migrations:
-            env:
-              - name: POSTGRES_SERVER
-                value: *dbHost
-              - name: POSTGRES_PORT
-                value: '5432'
-              - name: POSTGRES_DB
-                value: *dbName
-              - name: POSTGRES_USER
-                value: *dbUser
-              - name: POSTGRES_PASSWORD
-                value: *dbPass
-            envFrom:
-              - secretRef:
-                  name: kyoo-secret
-            image:
-              repository: ghcr.io/zoriya/kyoo_migrations
-              tag: edge@sha256:32cba400963b1a511540a51581f34cd2eab5264e2817c258a09744ab81543e9e
-        containers:
-          app:
-            image:
-              repository: ghcr.io/zoriya/kyoo_back
-              tag: edge@sha256:7a0a4baf022ce27796261475c654049c5dd9bc981d9c0074b5427fd104ea20ac
-            env:
-              - name: POSTGRES_SERVER
-                value: *dbHost
-              - name: POSTGRES_PORT
-                value: '5432'
-              - name: POSTGRES_DB
-                value: *dbName
-              - name: POSTGRES_USER
-                value: *dbUser
-              - name: POSTGRES_PASSWORD
-                value: *dbPass
-              - name: TRANSCODER_URL
-                value: http://kyoo-transcoder:7666
-            envFrom: *envFrom
-            resources:
-              requests:
-                cpu: 10m
-                memory: 1Gi
-              limits:
-                cpu: 4000m
-                memory: 8Gi
-            securityContext: *securityContext
-        pod: *pod
+    contentdatabase:
+      tmdb:
+        apikeyKey: THEMOVIEDB_APIKEY
+        existingSecret: *secret
 
-      front:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        replicas: 1
-        strategy: RollingUpdate
-        containers:
-          app:
-            image:
-              repository: ghcr.io/zoriya/kyoo_front
-              tag: edge@sha256:818b1968e339f79f0dc480001785eae7377f129d21f6d0013b725761349c9851
-            envFrom: *envFrom
-            resources:
-              requests:
-                cpu: 5m
-                memory: 100Mi
-              limits:
-                memory: 1Gi
-            securityContext: *securityContext
-        pod: *pod
+    autosync:
+      kyoo_autosync:
+        resources:
+          requests:
+            cpu: 5m
+            memory: 20Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
 
-      scanner:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        containers:
-          app:
-            image:
-              repository: &scannerimage ghcr.io/zoriya/kyoo_scanner
-              tag: &scannertag edge@sha256:083eb8b861366ccfe9f8bc04944d788ac107cf87f2f3b0fe216a1c03fdd15b22
-            envFrom: *envFrom
-            resources:
-              requests:
-                cpu: 5m
-              limits:
-                memory: 1Gi
+    back:
+      kyoo_back:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 1Gi
+          limits:
+            cpu: 4000m
+            memory: 8Gi
+      persistence:
+        existingClaim: *app
 
-      matcher:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        replicas: 1
-        strategy: RollingUpdate
-        containers:
-          app:
-            image:
-              repository: *scannerimage
-              tag: *scannertag
-            args: ["matcher"]
-            envFrom: *envFrom
-            resources:
-              requests:
-                cpu: 5m
-              limits:
-                memory: 400Mi
-            securityContext: *securityContext
-        pod: *pod
+    front:
+      kyoo_front:
+        resources:
+          requests:
+            cpu: 20m
+            memory: 50Mi
+          limits:
+            cpu: 1
+            memory: 500Mi
 
-      autosync:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        containers:
-          app:
-            image:
-              repository: ghcr.io/zoriya/kyoo_autosync
-              tag: 4.7.1@sha256:fbba58ddb1a60466c641b5d3673299a4bb0e60d90ed2162eca551d3fcbd62c4b
-            envFrom: *envFrom
-            resources:
-              requests:
-                cpu: 5m
-              limits:
-                memory: 100Mi
-            securityContext: *securityContext
-        pod: *pod
+    matcher:
+      kyoo_matcher:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 50Mi
+          limits:
+            cpu: 1
+            memory: 500Mi
 
-      transcoder:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        containers:
-          app:
-            image:
-              repository: ghcr.io/zoriya/kyoo_transcoder
-              tag: edge@sha256:560c576c11b401c76f3d1608d0c742b9972ee03e850691040203d0a0c8918d57
-            envFrom: *envFrom
-            env:
-              - name: POSTGRES_SERVER
-                value: *dbHost
-              - name: POSTGRES_PORT
-                value: '5432'
-              - name: POSTGRES_DB
-                value: *dbName
-              - name: POSTGRES_USER
-                value: *dbUser
-              - name: POSTGRES_PASSWORD
-                value: *dbPass
-            resources:
-              requests:
-                cpu: 10m
-                memory: 500Mi
-              limits:
-                memory: 8Gi
-            securityContext: *securityContext
-        pod:
-          securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            runAsNonRoot: false
-            fsGroup: 0
-            fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [44, 105]
+    scanner:
+      kyoo_scanner:
+        resources:
+          requests:
+            cpu: 5m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 1Gi
 
-    service:
-      back:
-        controller: back
-        ports:
-          http:
-            port: 5000
-      front:
-        controller: front
-        ports:
-          http:
-            port: 8901
-      rabbitmq:
-        controller: rabbitmq
-        ports:
-          http:
-            port: 5672
-      meilisearch:
-        controller: meilisearch
-        ports:
-          http:
-            port: *searchport
-      transcoder:
-        controller: transcoder
-        ports:
-          http:
-            port: 7666
+    transcoder:
+      kyoo_transcoder:
+        resources:
+          requests:
+            cpu: 100m
+            memory: 500Mi
+          limits:
+            cpu: 1
+            memory: 8Gi
 
-    ingress:
-      main:
-        className: private
-        annotations:
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Media
-          gethomepage.dev/name: Kyoo
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            rewrite /api/(.*) /$1 break;
-          nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
-          nginx.ingress.kubernetes.io/proxy-body-size: "0"
-        hosts:
-          - host: &host kyoo.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: front
-                  port: http
-              - path: /api
-                pathType: Prefix
-                service:
-                  identifier: back
-                  port: http
-        tls: [hosts: [*host]]
-    persistence:
-      kyoo:
-        size: 5Gi
-        accessMode: ReadWriteOnce
-        storageClass: iscsi
-        retain: true
-        nameOverride: kyoo
-        advancedMounts:
-          back:
-            app:
-              - path: /metadata
-      search:
-        size: 5Gi
-        accessMode: ReadWriteOnce
-        storageClass: iscsi
-        retain: true
-        advancedMounts:
-          meilisearch:
-            app:
-              - path: /meili_data
-      transcoder-metadata:
-        size: 5Gi
-        accessMode: ReadWriteOnce
-        storageClass: iscsi
-        retain: true
-        advancedMounts:
-          transcoder:
-            app:
-              - path: /metadata
-      cache:
-        type: emptyDir
-        advancedMounts:
-          transcoder:
-            app:
-              - path: /cache
-      media:
-        enabled: true
-        existingClaim: media
-        globalMounts:
-          - path: /media
+    meilisearch:
+      enabled: true
+    rabbitmq:
+      enabled: true
+
+
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+#    ingress:
+#      main:
+#        annotations:
+#          nginx.ingress.kubernetes.io/configuration-snippet: |
+#            rewrite /api/(.*) /$1 break;
+#          nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
+#          nginx.ingress.kubernetes.io/proxy-body-size: "0"
