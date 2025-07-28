@@ -30,133 +30,35 @@ spec:
     remediation:
       retries: 3
   values:
-    global:
-      meilisearch:
-        infra:
-          existingSecret: &secret kyoo-secret
-        kyoo_back:
-          masterkeyKey: MEILI_MASTER_KEY
-          existingSecret: *secret
-      postgres:
-        infra:
-          user: kyoo-all
-        kyoo_back:
-          host: &host postgres-rw.db.svc.cluster.local
-          port: &port 5432
-          database: kyoo_back
-          kyoo_migrations: &psql_secret
-            userKey: postgres
-            passwordKey: SECRET_PG_PASSWORD
-            existingSecret: *secret
-          kyoo_back: *psql_secret
-        kyoo_transcoder:
-          host: *host
-          port: *port
-          database: kyoo_transcoder
-          sslmode: require
-          kyoo_transcoder: *psql_secret
-      rabbitmq:
-        infra:
-          passwordKey: RABBITMQ_PASS
-          keyErlangCookie: RABBITMQ_COOKIE
-          existingSecret: *secret
-        kyoo_autosync: &rabbit
-          userKey: RABBITMQ_USER
-          passwordKey: RABBITMQ_PASS
-          existingSecret: *secret
-        kyoo_back: *rabbit
-        kyoo_matcher: *rabbit
-        kyoo_scanner: *rabbit
     kyoo:
       address: https://kyoo.${SECRET_DOMAIN}
-      transcoderAcceleration: vaapi # hardware acceleration profile (valid values: disabled, vaapi, qsv, nvidia)
-      apikey:
-        existingSecret: *secret
-        apikeyKey: KYOO_API_KEY
-    media:
-      volumeMounts:
-        - mountPath: &path /media
-          name: media
-          readOnly: true
-      baseMountPath: *path
-
-    contentdatabase:
-      tmdb:
-        apikeyKey: THEMOVIEDB_APIKEY
-        existingSecret: *secret
-
-    autosync:
-      kyoo_autosync:
-        resources:
-          requests:
-            cpu: 5m
-            memory: 20Mi
-          limits:
-            cpu: 100m
-            memory: 100Mi
-
-    back:
-      kyoo_back:
-        resources:
-          requests:
-            cpu: 10m
-            memory: 1Gi
-          limits:
-            cpu: 4000m
-            memory: 8Gi
-
-    front:
-      kyoo_front:
-        resources:
-          requests:
-            cpu: 20m
-            memory: 50Mi
-          limits:
-            cpu: 1
-            memory: 500Mi
-
-    matcher:
-      kyoo_matcher:
-        resources:
-          requests:
-            cpu: 50m
-            memory: 50Mi
-          limits:
-            cpu: 1
-            memory: 500Mi
-
-    scanner:
-      kyoo_scanner:
-        resources:
-          requests:
-            cpu: 5m
-            memory: 100Mi
-          limits:
-            cpu: 100m
-            memory: 1Gi
-
-    transcoder:
-      kyoo_transcoder:
-        resources:
-          requests:
-            cpu: 100m
-            memory: 500Mi
-          limits:
-            cpu: 1
-            memory: 8Gi
-
     meilisearch:
+      enabled: true
+    postgresql:
       enabled: true
     rabbitmq:
       enabled: true
-
-
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
-#    ingress:
-#      main:
-#        annotations:
-#          nginx.ingress.kubernetes.io/configuration-snippet: |
-#            rewrite /api/(.*) /$1 break;
-#          nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
-#          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    extraObjects:
+      - apiVersion: v1
+        kind: Secret
+        metadata:
+          name: bigsecret
+        type: Opaque
+        stringData:
+          kyoo_apikeys: yHXWGsjfjE6sy6UxavqmTUYxgCFYek
+          MEILI_MASTER_KEY: barkLike8SuperDucks
+          postgres_user: kyoo_all
+          postgres_password: watchSomething4me
+          rabbitmq_user: kyoo_all
+          rabbitmq_password: youAreAmazing2
+          rabbitmq_cookie: mmmGoodCookie
+      - kind: PersistentVolumeClaim
+        apiVersion: v1
+        metadata:
+          name: media
+        spec:
+          accessModes:
+            - "ReadOnlyMany"
+          resources:
+            requests:
+              storage: "3Gi"
