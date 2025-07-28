@@ -52,3 +52,6 @@ spec:
           rabbitmq_user: kyoo_all
           rabbitmq_password: youAreAmazing2
           rabbitmq_cookie: mmmGoodCookie
+          tmdb_apikey: dupa
+          tvdb_apikey: dupa
+          tvdb_pin: dupa
