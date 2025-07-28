@@ -7,5 +7,5 @@ resources:
   # - ./jellyfin/ks.yaml
   - ./kyoo/ks.yaml
   - ./rutorrent/ks.yaml
-  - ./qbittorrent/ks.yaml
+  # - ./qbittorrent/ks.yaml
   - ./pvc

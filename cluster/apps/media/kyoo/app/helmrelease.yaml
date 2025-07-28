@@ -52,13 +52,3 @@ spec:
           rabbitmq_user: kyoo_all
           rabbitmq_password: youAreAmazing2
           rabbitmq_cookie: mmmGoodCookie
-      - kind: PersistentVolumeClaim
-        apiVersion: v1
-        metadata:
-          name: media
-        spec:
-          accessModes:
-            - "ReadOnlyMany"
-          resources:
-            requests:
-              storage: "3Gi"
