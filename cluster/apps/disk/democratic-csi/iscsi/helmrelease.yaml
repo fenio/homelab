@@ -103,6 +103,7 @@ spec:
           port: 80
           allowInsecure: true
           apiKey: ${TRUENAS_API_KEY}
+          apiVersion: 2
         zfs:
           datasetParentName: storage/iscsi/v
           detachedSnapshotsDatasetParentName: storage/iscsi/s
