@@ -55,9 +55,9 @@ spec:
           tmdb_apikey: dupa
           tvdb_apikey: dupa
           tvdb_pin: dupa
-    ingress:
-      enabled: true
-      hostName: "kyoo.${SECRET_DOMAIN}"
-      tls:
-        enabled: true
-        secretName: "kyoo-tls"
+#    ingress:
+#      enabled: true
+#      hostName: "kyoo.${SECRET_DOMAIN}"
+#      tls:
+#        enabled: true
+#        secretName: "kyoo-tls"
