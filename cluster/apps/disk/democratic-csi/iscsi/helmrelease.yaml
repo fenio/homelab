@@ -58,7 +58,6 @@ spec:
           registry: docker.io/democraticcsi/democratic-csi
           tag: next
           pullPolicy: Always
-        logLevel: debug
         resources:
           requests:
             cpu: 20m
