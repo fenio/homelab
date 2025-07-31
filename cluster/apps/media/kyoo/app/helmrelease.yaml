@@ -58,3 +58,6 @@ spec:
     ingress:
       enabled: true
       hostName: "kyoo.${SECRET_DOMAIN}"
+      tls:
+        enabled: true
+        secretName: "kyoo-tls"
