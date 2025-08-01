@@ -53,6 +53,7 @@ spec:
           MEILI_MASTER_KEY: barkLike8SuperDucks
           postgres_user: kyoo_all
           postgres_password: watchSomething4me
+          POSTGRES_PASSWORD: watchSomething4me
           rabbitmq_user: kyoo_all
           rabbitmq_password: youAreAmazing2
           rabbitmq_cookie: mmmGoodCookie
