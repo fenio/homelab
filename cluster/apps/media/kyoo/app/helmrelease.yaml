@@ -31,7 +31,7 @@ spec:
       retries: 3
   values:
     kyoo:
-      address: https://kyoo.${SECRET_DOMAIN}
+      address: "https://kyoo.${SECRET_DOMAIN}"
     meilisearch:
       enabled: true
     postgresql:
