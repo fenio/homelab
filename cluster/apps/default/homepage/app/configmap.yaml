@@ -34,8 +34,9 @@ data:
             description: NAS
             widget:
               type: truenas
-              url: https://10.10.20.100
+              url: http://10.10.20.100
               key: ${TRUENAS_API_KEY}
+              enablePools: true
         - Mikrotik:
             href: http://10.10.10.1:680
             icon: mikrotik.png
