@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.31.0-standalone-strict/all.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.31.0-standalone-strict/all.json
 # IMPORTANT: This file is not tracked by flux and should never be. Its
 # purpose is to only install the Flux components and CRDs into your cluster.
 ---

@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.31.0-standalone-strict/all.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.31.0-standalone-strict/all.json
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -42,7 +42,7 @@ rules:
       - list
       - patch # to allow force reconciling by adding an annotation
 ---
-# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.31.0-standalone-strict/all.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.31.0-standalone-strict/all.json
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
