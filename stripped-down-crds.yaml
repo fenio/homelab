@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.31.0-standalone-strict/all.json
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -5264,6 +5265,7 @@ spec:
     served: true
     storage: true
 ---
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.31.0-standalone-strict/all.json
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -9273,6 +9275,7 @@ spec:
         statusReplicasPath: .status.replicas
       status: {}
 ---
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.31.0-standalone-strict/all.json
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -9862,6 +9865,7 @@ spec:
     served: true
     storage: true
 ---
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.31.0-standalone-strict/all.json
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -10481,6 +10485,7 @@ spec:
     served: true
     storage: true
 ---
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.31.0-standalone-strict/all.json
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -15382,6 +15387,7 @@ spec:
         statusReplicasPath: .status.shards
       status: {}
 ---
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.31.0-standalone-strict/all.json
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -21360,6 +21366,7 @@ spec:
         statusReplicasPath: .status.shards
       status: {}
 ---
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.31.0-standalone-strict/all.json
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -21451,6 +21458,7 @@ spec:
     served: true
     storage: true
 ---
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.31.0-standalone-strict/all.json
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -27675,6 +27683,7 @@ spec:
     served: true
     storage: true
 ---
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.31.0-standalone-strict/all.json
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -28277,6 +28286,7 @@ spec:
     served: true
     storage: true
 ---
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.31.0-standalone-strict/all.json
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
