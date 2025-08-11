@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=../../../../.schemas/any.json
 general:
   # Debug mode, only for development. Is overwritten by ${SEARXNG_DEBUG}
   debug: false

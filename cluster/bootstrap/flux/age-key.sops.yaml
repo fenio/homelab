@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../.schemas/any.json
 apiVersion: v1
 data:
     age.agekey: ENC[AES256_GCM,data:+/fU63GEXinpgJbFFwttJlQT1jF1pEshtnb0mVT52hVDGtD6EDyB0DDDQ97M5+ROj2X+ImA+EuF6g5fZO0rmdZj6fht8kXGW6KKIFeeZLan+xPf4nhI/0DYGVZIVxOlSwlzWfYi3I1JrYE9UdZSHl9FjSHi5UBAM/V2BTY1CKkFkudUb+4je/zlfddRW8+GIoOFjGFrPdn/tVCo6yIdKYqGRiS8okVBPTIcpTvsFi46PvwE2LHvwgQTUFahyeHHb4W2mFq4nW5t4RHsrUMdA7M/f3dGf5UABvwewTgDoOD1lwrp94vpod84KHsDTsHD5GTJwVwxG4ytCJBtf,iv:mWIv5OmZo25w7KrGckQhaAU0wi+CIh9PFyuIK5/0NCM=,tag:Uf8wClxQVuFbPAXF1x4Wgg==,type:str]
