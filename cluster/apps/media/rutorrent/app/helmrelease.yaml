@@ -10,7 +10,7 @@ spec:
       chart: app-template
       version: 3.7.3
       sourceRef:
-        kind: HelmRepository
+        kind: OCIRepository
         name: bjw-s
         namespace: flux-system
   interval: 30m
