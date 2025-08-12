@@ -4,7 +4,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./amd-gpu.yaml
-  - ./bjw-s.yaml
   - ./certmanager.yaml
   - ./coroot.yaml
   - ./cloudnative-pg.yaml
@@ -16,14 +15,11 @@ resources:
   - ./ha.yaml
   - ./homepage.yaml
   - ./ingress-nginx.yaml
-  #  - ./kyoo.yaml
   - ./metallb.yaml
   - ./metrics-server.yaml
-  #  - ./node-feature-discovery.yaml
   - ./pgadmin.yaml
   - ./prometheus.yaml
   - ./reloader.yaml
   - ./replicator.yaml
   - ./snapshotter.yaml
   - ./victoriametrics.yaml
-  - ./weaveworks.yaml
