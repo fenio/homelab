@@ -9,3 +9,5 @@ spec:
   type: oci
   interval: 5m
   url: oci://ghcr.io/weaveworks/charts
+  ref:
+    tag: 4.0.36
