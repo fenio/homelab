@@ -6,8 +6,11 @@ metadata:
   name: weaveworks
   namespace: flux-system
 spec:
-  type: oci
   interval: 5m
   url: oci://ghcr.io/weaveworks/charts/weave-gitops
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
   ref:
     tag: 4.0.36
+
