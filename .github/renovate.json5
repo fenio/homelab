@@ -80,7 +80,6 @@
         "ghcr.io/cloudnative-pg/postgresql",
       ],
       automerge: false,
-      requireManualApproval: true,
     },
     {
       description: "Limit concurrent updates for media applications",
