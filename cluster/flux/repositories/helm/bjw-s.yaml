@@ -6,10 +6,8 @@ metadata:
   name: bjw-s
   namespace: flux-system
 spec:
+  type: oci
   interval: 5m
-  layerSelector:
-    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
-    operation: copy
   url: oci://ghcr.io/bjw-s-labs/helm/app-template
   ref:
     tag: 4.2.0

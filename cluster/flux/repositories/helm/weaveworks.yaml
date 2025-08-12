@@ -8,9 +8,6 @@ metadata:
 spec:
   type: oci
   interval: 5m
-  layerSelector:
-    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
-    operation: copy
   url: oci://ghcr.io/weaveworks/charts/weave-gitops
   ref:
     tag: 4.0.36
