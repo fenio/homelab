@@ -5,14 +5,18 @@ kind: HelmRelease
 metadata:
   name: rutorrent
 spec:
-  chart:
-    spec:
-      chart: app-template
-      version: 3.7.3
-      sourceRef:
-        kind: OCIRepository
-        name: bjw-s
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  # chart:
+  #   spec:
+  #     chart: app-template
+  #     version: 3.7.3
+  #     sourceRef:
+  #       kind: OCIRepository
+  #       name: bjw-s
+  #       namespace: flux-system
   interval: 30m
   timeout: 15m
   values:
