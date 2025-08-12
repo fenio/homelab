@@ -6,14 +6,11 @@ metadata:
   name: flux-webui
   namespace: o11y
 spec:
-  interval: 15m
-  chart:
-    spec:
-      chart: weave-gitops
-      sourceRef:
-        kind: HelmRepository
-        name: weaveworks
-        namespace: flux-system
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: weaveworks
+    namespace: flux-system
   dependsOn:
     - name: ingress-nginx
       namespace: net
