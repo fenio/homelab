@@ -8,5 +8,3 @@ metadata:
 spec:
   interval: 5m
   url: oci://ghcr.io/bjw-s/helm
-  ref:
-    tag: 0.34.0
