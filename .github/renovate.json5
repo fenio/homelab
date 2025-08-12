@@ -9,14 +9,88 @@
     "local>fenio/homelab//.github/renovate/grafanaDashboards.json5",
     "local>fenio/homelab//.github/renovate/groups.json5",
     "local>fenio/homelab//.github/renovate/managers.json5",
+    "local>fenio/homelab//.github/renovate/security.json5",
+    "local>fenio/homelab//.github/renovate/oci.json5",
   ],
+  // Better scheduling for homelab environment
+  schedule: ["before 6am on monday", "before 6am on wednesday", "before 6am on friday"],
+  timezone: "Europe/Warsaw",
+  
+  // Security and stability settings
+  vulnerabilityAlerts: {
+    enabled: true,
+    schedule: ["at any time"],
+  },
+  
+  // Dependency dashboard for better overview
+  dependencyDashboard: true,
+  dependencyDashboardTitle: "🤖 Renovate Dependency Dashboard",
+  
+  // Better PR settings
+  prHourlyLimit: 2,
+  prConcurrentLimit: 10,
+  branchConcurrentLimit: 5,
+  
+  // Ignore patterns for stability
   ignoreDeps: [
+    // Flux components - managed separately
     "ghcr.io/fluxcd/helm-controller",
     "ghcr.io/fluxcd/image-automation-controller",
     "ghcr.io/fluxcd/image-reflector-controller",
     "ghcr.io/fluxcd/kustomize-controller",
     "ghcr.io/fluxcd/notification-controller",
     "ghcr.io/fluxcd/source-controller",
+    // Critical infrastructure - manual updates only
+    "ghcr.io/ingress-nginx/controller",
+    "ghcr.io/cert-manager/cert-manager-controller",
+    "ghcr.io/cert-manager/cert-manager-cainjector",
+    "ghcr.io/cert-manager/cert-manager-webhook",
+    // Database components - careful updates
+    "ghcr.io/cloudnative-pg/postgresql",
+    "ghcr.io/cloudnative-pg/cloudnative-pg",
   ],
-  ignorePaths: ["archive/**"],
+  
+  ignorePaths: [
+    "archive/**",
+    "cluster/bootstrap/**", // Bootstrap files should be updated manually
+    ".github/workflows/renovate.yaml", // Self-referencing
+  ],
+  
+  // Global package rules for better control
+  packageRules: [
+    {
+      description: "Disable major updates for critical infrastructure",
+      matchPackageNames: [
+        "ingress-nginx/ingress-nginx",
+        "cert-manager/cert-manager",
+        "cloudnative-pg/cloudnative-pg",
+        "flux/flux",
+        "flux/helm-controller",
+        "flux/kustomize-controller",
+        "flux/notification-controller",
+        "flux/source-controller",
+      ],
+      matchUpdateTypes: ["major"],
+      enabled: false,
+    },
+    {
+      description: "Require manual approval for database updates",
+      matchPackageNames: [
+        "cloudnative-pg/cloudnative-pg",
+        "ghcr.io/cloudnative-pg/postgresql",
+      ],
+      automerge: false,
+      requireManualApproval: true,
+    },
+    {
+      description: "Limit concurrent updates for media applications",
+      matchPackageNames: [
+        "ghcr.io/onedr0p/sonarr-develop",
+        "ghcr.io/onedr0p/lidarr-develop", 
+        "ghcr.io/onedr0p/readarr-develop",
+        "ghcr.io/zoriya/helm-charts/kyoo",
+      ],
+      prConcurrentLimit: 1,
+    },
+  ],
 }
