@@ -4,7 +4,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./amd-gpu.yaml
-  - ./bitnami.yaml
   - ./bjw-s.yaml
   - ./certmanager.yaml
   - ./coroot.yaml
@@ -17,7 +16,6 @@ resources:
   - ./ha.yaml
   - ./homepage.yaml
   - ./ingress-nginx.yaml
-  #  - ./intel.yaml
   #  - ./kyoo.yaml
   - ./metallb.yaml
   - ./metrics-server.yaml
