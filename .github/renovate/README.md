@@ -27,7 +27,7 @@ This directory contains the Renovate configuration for the homelab repository. T
 - Vulnerability alerts are processed immediately
 
 ### Auto-Merge Strategy
-- **Critical Infrastructure**: Manual approval required for all updates
+- **Critical Infrastructure**: Manual approval required (automerge: false)
 - **Applications**: Auto-merge for minor/patch updates, manual for major
 - **Security Updates**: Auto-merge for applications, manual for infrastructure
 - **Digest Updates**: Auto-merge for all Docker images
@@ -44,8 +44,8 @@ This directory contains the Renovate configuration for the homelab repository. T
 
 ### Security Controls
 - Vulnerability alerts enabled for all packages
-- Critical infrastructure requires manual approval
-- Database updates require manual approval
+- Critical infrastructure requires manual approval (automerge: false)
+- Database updates require manual approval (automerge: false)
 - Security patches are prioritized
 
 ### Ignored Dependencies

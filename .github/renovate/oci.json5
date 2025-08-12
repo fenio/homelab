@@ -6,7 +6,6 @@
       matchDatasources: ["helm"],
       matchPackagePatterns: ["^ghcr\\.io/.*/helm-charts/.*"],
       automerge: false,
-      requireManualApproval: true,
       separateMinorPatch: true,
     },
     {
@@ -23,7 +22,6 @@
       matchDatasources: ["docker"],
       matchPackagePatterns: ["^ghcr\\.io/fluxcd/.*"],
       automerge: false,
-      requireManualApproval: true,
       separateMinorPatch: true,
     },
     {
