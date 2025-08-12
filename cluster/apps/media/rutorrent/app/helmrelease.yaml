@@ -6,7 +6,7 @@ metadata:
   name: rutorrent
 spec:
   chartRef:
-    kind: OCIRepository
+    kind: HelmChart
     name: app-template
     namespace: flux-system
   # chart:
