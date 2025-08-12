@@ -6,7 +6,6 @@ metadata:
   name: weaveworks
   namespace: flux-system
 spec:
-  type: oci
   interval: 5m
   url: oci://ghcr.io/weaveworks/charts
   ref:
