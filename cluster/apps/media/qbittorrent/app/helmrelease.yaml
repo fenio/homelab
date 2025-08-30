@@ -120,7 +120,9 @@ spec:
                 service:
                   identifier: qbittorrent
                   port: http
-        tls: [hosts: [*host]]
+        tls:
+          - hosts:
+              - *host
     persistence:
       downloads:
         enabled: true
