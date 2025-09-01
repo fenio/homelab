@@ -111,8 +111,6 @@ spec:
           gethomepage.dev/icon: qbittorrent.svg
           gethomepage.dev/widget.type: qbittorrent
           gethomepage.dev/widget.url: http://qbittorrent.media:1080
-          gethomepage.dev/widget.username: admin
-          gethomepage.dev/widget.password: "${QBITTORRENT_PASSWORD}"
         hosts:
           - host: q.${SECRET_DOMAIN}
             paths:
