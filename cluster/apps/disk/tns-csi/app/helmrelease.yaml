@@ -15,7 +15,31 @@ spec:
         kind: GitRepository
         name: tns-csi
         namespace: flux-system
-  valuesFrom:
-    - kind: ConfigMap
-      name: tns-csi-values
-      valuesKey: values.yaml
+  values:
+    truenas:
+      url: "wss://${CONFIG_TRUENAS_IP}:443/api/current"
+      existingSecret: "tns-csi-credentials"
+    
+    image:
+      repository: bfenski/tns-csi
+      pullPolicy: IfNotPresent
+      tag: "latest"
+    
+    controller:
+      replicas: 1
+      logLevel: 4
+    
+    storageClasses:
+      nfs:
+        enabled: true
+        name: tns-csi-nfs
+        isDefault: true
+        pool: "storage"
+        server: "${CONFIG_TRUENAS_IP}"
+      nvmeof:
+        enabled: false
+    
+    rbac:
+      create: true
+    
+    namespace: kube-system

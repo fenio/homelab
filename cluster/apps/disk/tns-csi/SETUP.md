@@ -6,13 +6,12 @@ This document guides you through integrating the TNS CSI driver into your homela
 
 The following files have been created in your homelab repository:
 
-1. **Git Repository**: `cluster/flux/repositories/helm/tns-csi.yaml`
-   - Adds the TNS CSI repository from GitHub to Flux (charts are deployed directly from source)
+1. **Git Repository**: `cluster/flux/repositories/git/tns-csi.yaml`
+   - Adds the TNS CSI repository from GitHub to Flux
 
 2. **TNS CSI Application**:
-   - `cluster/apps/disk/tns-csi/app/helmrelease.yaml` - Helm release configuration
+   - `cluster/apps/disk/tns-csi/app/helmrelease.yaml` - Helm release with values
    - `cluster/apps/disk/tns-csi/app/kustomization.yaml` - Kustomization for the app
-   - `cluster/apps/disk/tns-csi/app/values.yaml` - Helm values (uses environment variables)
    - `cluster/apps/disk/tns-csi/ks.yaml` - Flux Kustomization for deployment
 
 3. **Updated**: `cluster/apps/disk/kustomization.yaml`
@@ -85,17 +84,16 @@ storageClasses:
     isDefault: true  # Set as default storage class
 ```
 
-## Step 4: Add Git Repository to Kustomization
+## Step 4: Git Repository Configuration
 
-Update `cluster/flux/repositories/helm/kustomization.yaml` to include the tns-csi repository:
+The Git repository is already configured in `cluster/flux/repositories/git/tns-csi.yaml` and included in `cluster/flux/repositories/git/kustomization.yaml`. Flux will automatically:
 
-```yaml
-resources:
-  - tns-csi.yaml
-  # ... other repositories
-```
+1. Clone the TNS CSI repository from GitHub
+2. Track changes on the `main` branch
+3. Check for updates every 10 minutes
+4. Deploy the Helm chart from `charts/tns-csi-driver`
 
-Note: Since the TNS CSI driver is in early development and hasn't had an official release yet, the Helm chart is deployed directly from the main branch of the GitHub repository. Once a release is made and published to a Helm registry, this can be changed to use the published chart.
+No additional configuration is needed.
 
 ## Step 5: Deploy via Flux
 

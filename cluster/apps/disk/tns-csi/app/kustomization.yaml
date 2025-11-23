@@ -5,7 +5,3 @@ kind: Kustomization
 namespace: kube-system
 resources:
   - helmrelease.yaml
-configMapGenerator:
-  - name: tns-csi-values
-    files:
-      - values.yaml=values.yaml
