@@ -18,6 +18,7 @@ spec:
   values:
     truenas:
       existingSecret: "tns-csi-credentials"
+      url: ""
     
     image:
       repository: bfenski/tns-csi
