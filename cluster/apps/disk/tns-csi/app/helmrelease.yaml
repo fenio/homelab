@@ -12,7 +12,7 @@ spec:
     spec:
       chart: tns-csi-driver
       sourceRef:
-        kind: HelmRepository
+        kind: OCIRepository
         name: tns-csi
         namespace: flux-system
   valuesFrom:
