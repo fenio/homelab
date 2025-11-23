@@ -1,0 +1,95 @@
+---
+# TrueNAS CSI Driver values
+# Reference: https://github.com/fenio/tns-csi
+
+# TrueNAS connection settings
+truenas:
+  # TrueNAS API URL (WebSocket endpoint)
+  # Format: wss://YOUR-TRUENAS-IP:PORT/api/current
+  url: "wss://${CONFIG_TRUENAS_IP}:443/api/current"
+  
+  # Use existing secret containing TrueNAS credentials
+  # Secret should contain keys: 'url' and 'api-key'
+  existingSecret: "tns-csi-credentials"
+
+# Image configuration
+image:
+  repository: bfenski/tns-csi
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+# CSI Driver name
+csiDriverName: tns.csi.io
+
+# Controller configuration
+controller:
+  replicas: 1
+  logLevel: 4
+  
+  metrics:
+    enabled: true
+    port: 8080
+    service:
+      enabled: true
+      type: ClusterIP
+    serviceMonitor:
+      enabled: false
+
+# Node plugin configuration
+node:
+  logLevel: 4
+
+# Storage class configuration
+storageClasses:
+  # NFS storage class
+  nfs:
+    enabled: true
+    name: tns-csi-nfs
+    isDefault: true
+    # Storage pool name on TrueNAS
+    pool: "storage"
+    # TrueNAS server IP/hostname for NFS mounts
+    server: "${CONFIG_TRUENAS_IP}"
+    # Optional: Parent dataset (defaults to pool name if not specified)
+    parentDataset: ""
+    # Reclaim policy: Delete or Retain
+    reclaimPolicy: Delete
+    # Volume binding mode: Immediate or WaitForFirstConsumer
+    volumeBindingMode: Immediate
+    # Allow volume expansion
+    allowVolumeExpansion: true
+    # Mount options for NFS
+    mountOptions: []
+    # Additional parameters
+    parameters: {}
+  
+  # NVMe-oF storage class (disabled by default)
+  nvmeof:
+    enabled: false
+    name: tns-csi-nvmeof
+    isDefault: false
+    pool: "storage"
+    server: "${CONFIG_TRUENAS_IP}"
+    parentDataset: ""
+    transport: "tcp"
+    port: "4420"
+    fsType: "ext4"
+    reclaimPolicy: Delete
+    volumeBindingMode: WaitForFirstConsumer
+    allowVolumeExpansion: true
+    mountOptions: []
+    parameters: {}
+
+# Snapshot support
+snapshots:
+  enabled: false
+  volumeSnapshotClass:
+    create: true
+    deletionPolicy: Delete
+
+# Namespace where the CSI driver will be deployed
+namespace: kube-system
+
+# RBAC configuration
+rbac:
+  create: true

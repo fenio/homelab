@@ -1,0 +1,21 @@
+---
+# yaml-language-server: $schema=https://datreeio.github.io/CRDs-catalog/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tns-csi
+  namespace: kube-system
+spec:
+  interval: 5m
+  timeout: 15m
+  chart:
+    spec:
+      chart: tns-csi-driver
+      sourceRef:
+        kind: HelmRepository
+        name: tns-csi
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: tns-csi-values
+      valuesKey: values.yaml
