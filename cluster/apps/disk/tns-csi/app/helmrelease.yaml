@@ -17,7 +17,6 @@ spec:
         namespace: flux-system
   values:
     truenas:
-      url: "wss://${CONFIG_TRUENAS_IP}:443/api/current"
       existingSecret: "tns-csi-credentials"
     
     image:
@@ -35,7 +34,7 @@ spec:
         name: tns-csi-nfs
         isDefault: true
         pool: "storage"
-        server: "${CONFIG_TRUENAS_IP}"
+        server: "10.10.20.100"
       nvmeof:
         enabled: false
     
