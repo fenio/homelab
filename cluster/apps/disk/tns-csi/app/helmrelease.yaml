@@ -10,9 +10,9 @@ spec:
   timeout: 15m
   chart:
     spec:
-      chart: tns-csi-driver
+      chart: charts/tns-csi-driver
       sourceRef:
-        kind: OCIRepository
+        kind: GitRepository
         name: tns-csi
         namespace: flux-system
   valuesFrom:

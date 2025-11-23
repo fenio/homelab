@@ -1,10 +1,12 @@
 ---
-# yaml-language-server: $schema=https://datreeio.github.io/CRDs-catalog/source.toolkit.fluxcd.io/ocirepository_v1beta2.json
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: OCIRepository
+# yaml-language-server: $schema=https://datreeio.github.io/CRDs-catalog/source.toolkit.fluxcd.io/gitrepository_v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
 metadata:
   name: tns-csi
   namespace: flux-system
 spec:
   interval: 10m
-  url: oci://ghcr.io/fenio/charts/tns-csi-driver
+  url: https://github.com/fenio/tns-csi.git
+  ref:
+    branch: main

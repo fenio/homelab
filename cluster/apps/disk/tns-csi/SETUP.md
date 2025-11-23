@@ -6,8 +6,8 @@ This document guides you through integrating the TNS CSI driver into your homela
 
 The following files have been created in your homelab repository:
 
-1. **OCI Repository**: `cluster/flux/repositories/helm/tns-csi.yaml`
-   - Adds the TNS CSI Helm chart (published as OCI registry to GHCR) to Flux
+1. **Git Repository**: `cluster/flux/repositories/helm/tns-csi.yaml`
+   - Adds the TNS CSI repository from GitHub to Flux (charts are deployed directly from source)
 
 2. **TNS CSI Application**:
    - `cluster/apps/disk/tns-csi/app/helmrelease.yaml` - Helm release configuration
@@ -85,7 +85,7 @@ storageClasses:
     isDefault: true  # Set as default storage class
 ```
 
-## Step 4: Add OCI Repository to Kustomization
+## Step 4: Add Git Repository to Kustomization
 
 Update `cluster/flux/repositories/helm/kustomization.yaml` to include the tns-csi repository:
 
@@ -94,6 +94,8 @@ resources:
   - tns-csi.yaml
   # ... other repositories
 ```
+
+Note: Since the TNS CSI driver is in early development and hasn't had an official release yet, the Helm chart is deployed directly from the main branch of the GitHub repository. Once a release is made and published to a Helm registry, this can be changed to use the published chart.
 
 ## Step 5: Deploy via Flux
 
