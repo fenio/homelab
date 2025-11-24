@@ -6,11 +6,11 @@ The driver was failing with "websocket: bad handshake" errors due to incorrect T
 
 ### Solution
 
-**TrueNAS Scale API requires unencrypted WebSocket connection over HTTP:**
-- Protocol: `ws://` (not `wss://`)
-- Port: `80` (not `443`)
+**TrueNAS Scale API should use encrypted WebSocket connection with certificate verification disabled:**
+- Protocol: `wss://` (encrypted WebSocket)
+- Port: `443` (HTTPS)
 
-The driver **already has InsecureSkipVerify enabled** for `wss://` connections, but your TrueNAS doesn't expose the WebSocket API over HTTPS with a valid certificate.
+The driver **already has InsecureSkipVerify enabled** for `wss://` connections in `pkg/tnsapi/client.go`, which allows secure encryption in transit while working around self-signed certificate issues.
 
 ## Updating the Secret
 
@@ -25,7 +25,7 @@ kubectl delete secret -n kube-system tns-csi-credentials
 # Create new secret with correct URL
 kubectl create secret generic tns-csi-credentials \
   -n kube-system \
-  --from-literal=url='ws://10.10.20.100:80/api/current' \
+  --from-literal=url='wss://10.10.20.100:443/api/current' \
   --from-literal=api-key='YOUR_TRUENAS_API_KEY'
 ```
 
@@ -43,7 +43,7 @@ kubectl delete pod -n kube-system -l app.kubernetes.io/name=tns-csi-driver
 To make this permanent and managed through Flux, add the URL to your encrypted secrets. Update your `cluster-secrets.sops.yaml`:
 
 ```yaml
-TNS_URL: "ws://10.10.20.100:80/api/current"
+TNS_URL: "wss://10.10.20.100:443/api/current"
 TNS_API_KEY: "your-api-key"
 ```
 
