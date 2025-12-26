@@ -60,5 +60,5 @@ spec:
           memory: 100Mi
           ephemeral-storage: 100Mi
         limits:
-          memory: 1300Mi
+          memory: 1600Mi
           ephemeral-storage: 300Mi
