@@ -46,13 +46,7 @@ spec:
       enabled: false
 
     rabbitmq:
-      enabled: true
-      auth:
-        username: kyoo
-        existingPasswordSecret: kyoo
-        existingSecretPasswordKey: RABBITMQ_PASSWORD
-        existingErlangSecret: kyoo
-        existingSecretErlangKey: RABBITMQ_COOKIE
+      enabled: false
 
     global:
       meilisearch:
@@ -89,6 +83,8 @@ spec:
             passwordKey: PG_PASSWORD
             existingSecret: kyoo
       rabbitmq:
+        host: kyoo-rabbitmq
+        port: 5672
         infra:
           passwordKey: RABBITMQ_PASSWORD
           keyErlangCookie: RABBITMQ_COOKIE
