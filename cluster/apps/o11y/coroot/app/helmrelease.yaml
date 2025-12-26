@@ -53,10 +53,10 @@ spec:
       resources:
         requests:
           cpu: 400m
-          memory: 800Mi
+          memory: 1Gi
           ephemeral-storage: 100Mi
         limits:
-          memory: 1.2Gi
+          memory: 3Gi
           ephemeral-storage: 200Mi
     node-agent:
       resources:
