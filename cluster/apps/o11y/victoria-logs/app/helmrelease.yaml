@@ -35,7 +35,7 @@ spec:
           memory: 100Mi
           ephemeral-storage: 100Mi
         limits:
-          memory: 500Mi
+          memory: 1Gi
           ephemeral-storage: 200Mi
       ingress:
         enabled: true
@@ -62,57 +62,5 @@ spec:
           memory: 100Mi
           ephemeral-storage: 100Mi
         limits:
-          memory: 2Gi
+          memory: 3Gi
           ephemeral-storage: 300Mi
-      customConfig:
-        data_dir: /vector-data-dir
-        api:
-          enabled: false
-          address: 0.0.0.0:8686
-          playground: true
-        sources:
-          k8s:
-            type: kubernetes_logs
-            # Exclude high-volume log sources to reduce memory usage
-            exclude_paths_glob_patterns:
-              - "**/kube-apiserver-*/**"
-              - "**/kube-controller-manager-*/**"
-              - "**/kube-scheduler-*/**"
-              - "**/cilium-*/**"
-              - "**/hubble-*/**"
-          internal_metrics:
-            type: internal_metrics
-        transforms:
-          parser:
-            type: remap
-            inputs: [k8s]
-            source: |
-              .log = parse_json(.message) ?? .message
-              del(.message)
-        sinks:
-          exporter:
-            type: prometheus_exporter
-            address: 0.0.0.0:9090
-            inputs: [internal_metrics]
-          vlogs:
-            type: elasticsearch
-            inputs: [parser]
-            mode: bulk
-            api_version: v8
-            compression: gzip
-            healthcheck:
-              enabled: false
-            # Add buffer limits to prevent unbounded memory growth
-            buffer:
-              type: memory
-              max_events: 5000
-            batch:
-              max_bytes: 1048576
-              timeout_secs: 1
-            request:
-              headers:
-                VL-Time-Field: timestamp
-                VL-Stream-Fields: stream,kubernetes.pod_name,kubernetes.container_name,kubernetes.pod_namespace
-                VL-Msg-Field: message,msg,_msg,log.msg,log.message,log
-                AccountID: "0"
-                ProjectID: "0"
