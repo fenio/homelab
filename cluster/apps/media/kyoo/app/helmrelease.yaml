@@ -40,6 +40,10 @@ spec:
     # Global postgres configuration - external CNPG cluster
     global:
       postgres:
+        infra:
+          user: kyoo
+          passwordKey: PG_PASSWORD
+          existingSecret: kyoo
         shared:
           host: postgres-rw.db.svc.cluster.local
           port: 5432
@@ -70,11 +74,15 @@ spec:
             existingSecret: kyoo
             apikeyKey: SCANNER_APIKEY
 
-    # Content database (TMDB)
+    # Content database (TMDB/TVDB)
     contentdatabase:
       tmdb:
         existingSecret: kyoo
         apikeyKey: TMDB_API_KEY
+      tvdb:
+        existingSecret: kyoo
+        apikeyKey: TVDB_API_KEY
+        pinKey: TVDB_PIN
 
     # Media volumes configuration
     media:
