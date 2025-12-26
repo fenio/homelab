@@ -31,48 +31,108 @@ spec:
     remediation:
       retries: 3
   values:
-    # Disable built-in subcharts
-    postgres:
-      enabled: false
-    traefikproxy:
+    # Enable required subcharts (meilisearch & rabbitmq are needed)
+    meilisearch:
+      enabled: true
+      environment:
+        MEILI_ENV: production
+      auth:
+        existingMasterKeySecret: kyoo
+      persistence:
+        enabled: true
+        size: 3Gi
+
+    postgresql:
       enabled: false
 
-    # Global postgres configuration - external CNPG cluster
+    rabbitmq:
+      enabled: true
+      auth:
+        username: kyoo
+        existingPasswordSecret: kyoo
+        existingSecretPasswordKey: RABBITMQ_PASSWORD
+        existingErlangSecret: kyoo
+        existingSecretErlangKey: RABBITMQ_COOKIE
+
+    # Global configuration
     global:
+      # MeiliSearch configuration
+      meilisearch:
+        proto: http
+        host: kyoo-meilisearch
+        port: 7700
+        infra:
+          existingSecret: kyoo
+        kyoo_back:
+          masterkeyKey: MEILI_MASTER_KEY
+          existingSecret: kyoo
+
+      # PostgreSQL configuration - external CNPG cluster
       postgres:
         infra:
           user: kyoo
           passwordKey: PG_PASSWORD
           existingSecret: kyoo
-        shared:
+        kyoo_back:
           host: postgres-rw.db.svc.cluster.local
           port: 5432
-          existingSecret: kyoo
-          userKey: PG_USER
-          passwordKey: PG_PASSWORD
-        kyoo_api:
-          database: kyoo_api
-          sslmode: disable
-        kyoo_auth:
-          database: kyoo_auth
-          sslmode: disable
-        kyoo_scanner:
-          database: kyoo_scanner
-          sslmode: disable
+          database: kyoo_back
+          kyoo_migrations:
+            userKey: PG_USER
+            passwordKey: PG_PASSWORD
+            existingSecret: kyoo
+          kyoo_back:
+            userKey: PG_USER
+            passwordKey: PG_PASSWORD
+            existingSecret: kyoo
         kyoo_transcoder:
+          host: postgres-rw.db.svc.cluster.local
+          port: 5432
           database: kyoo_transcoder
+          schema: disabled
           sslmode: disable
+          kyoo_transcoder:
+            userKey: PG_USER
+            passwordKey: PG_PASSWORD
+            existingSecret: kyoo
+
+      # RabbitMQ configuration
+      rabbitmq:
+        host: kyoo-rabbitmq
+        port: 5672
+        infra:
+          passwordKey: RABBITMQ_PASSWORD
+          keyErlangCookie: RABBITMQ_COOKIE
+          existingSecret: kyoo
+        kyoo_autosync:
+          userKey: RABBITMQ_USER
+          passwordKey: RABBITMQ_PASSWORD
+          existingSecret: kyoo
+        kyoo_back:
+          userKey: RABBITMQ_USER
+          passwordKey: RABBITMQ_PASSWORD
+          existingSecret: kyoo
+        kyoo_matcher:
+          userKey: RABBITMQ_USER
+          passwordKey: RABBITMQ_PASSWORD
+          existingSecret: kyoo
+        kyoo_scanner:
+          userKey: RABBITMQ_USER
+          passwordKey: RABBITMQ_PASSWORD
+          existingSecret: kyoo
 
     # Kyoo application settings
     kyoo:
       address: "https://kyoo.${SECRET_DOMAIN}"
+      requireAccountVerification: true
+      defaultPermissions: "overall.read,overall.play"
+      unloggedPermissions: ""
+      languages: "en"
       transcoderAcceleration: vaapi
       transcoderPreset: fast
-      auth:
-        apikeys:
-          scanner:
-            existingSecret: kyoo
-            apikeyKey: SCANNER_APIKEY
+      apikey:
+        existingSecret: kyoo
+        apikeyKey: KYOO_APIKEYS
 
     # Content database (TMDB/TVDB)
     contentdatabase:
@@ -96,8 +156,8 @@ spec:
           readOnly: true
       baseMountPath: /media
 
-    # API deployment with init container for database setup
-    api:
+    # Back deployment with init container for database setup
+    back:
       extraInitContainers:
         - name: init-db
           image: postgres:17
@@ -126,27 +186,18 @@ spec:
                 psql -c "CREATE USER kyoo WITH PASSWORD '${KYOO_PG_PASS}'"
 
               echo "Creating databases if not exist..."
-              for db in kyoo_api kyoo_auth kyoo_scanner kyoo_transcoder; do
+              for db in kyoo_back kyoo_transcoder; do
                 psql -tc "SELECT 1 FROM pg_database WHERE datname='$db'" | grep -q 1 || \
                   psql -c "CREATE DATABASE $db OWNER kyoo"
               done
 
-              echo "Setting up kyoo_api schema and pg_trgm extension..."
-              psql -d kyoo_api -c "CREATE SCHEMA IF NOT EXISTS kyoo AUTHORIZATION kyoo"
-              psql -d kyoo_api -c "CREATE EXTENSION IF NOT EXISTS pg_trgm SCHEMA kyoo"
-              psql -d kyoo_api -c "ALTER ROLE kyoo IN DATABASE kyoo_api SET search_path TO kyoo"
-
-              echo "Setting up kyoo_auth schema..."
-              psql -d kyoo_auth -c "CREATE SCHEMA IF NOT EXISTS keibi AUTHORIZATION kyoo"
-              psql -d kyoo_auth -c "ALTER ROLE kyoo IN DATABASE kyoo_auth SET search_path TO keibi"
-
-              echo "Setting up kyoo_scanner schema..."
-              psql -d kyoo_scanner -c "CREATE SCHEMA IF NOT EXISTS scanner AUTHORIZATION kyoo"
-              psql -d kyoo_scanner -c "ALTER ROLE kyoo IN DATABASE kyoo_scanner SET search_path TO scanner"
+              echo "Setting up kyoo_back schema..."
+              psql -d kyoo_back -c "CREATE SCHEMA IF NOT EXISTS data AUTHORIZATION kyoo"
+              psql -d kyoo_back -c "ALTER ROLE kyoo IN DATABASE kyoo_back SET search_path TO \"\$user\", public"
 
               echo "Setting up kyoo_transcoder schema..."
-              psql -d kyoo_transcoder -c "CREATE SCHEMA IF NOT EXISTS gocoder AUTHORIZATION kyoo"
-              psql -d kyoo_transcoder -c "ALTER ROLE kyoo IN DATABASE kyoo_transcoder SET search_path TO gocoder"
+              psql -d kyoo_transcoder -c "CREATE SCHEMA IF NOT EXISTS data AUTHORIZATION kyoo"
+              psql -d kyoo_transcoder -c "ALTER ROLE kyoo IN DATABASE kyoo_transcoder SET search_path TO \"\$user\", data"
 
               echo "Database initialization complete!"
 
