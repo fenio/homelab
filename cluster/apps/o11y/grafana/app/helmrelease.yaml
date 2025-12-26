@@ -131,7 +131,7 @@ spec:
       datasources:
         enabled: true
         searchNamespace: ALL
-        initDatasources: true
+        initDatasources: false
         labelValue: ""
       dashboards:
         enabled: true
