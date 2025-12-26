@@ -31,7 +31,7 @@ spec:
     remediation:
       retries: 3
   values:
-    # Enable required subcharts (meilisearch & rabbitmq are needed)
+    # Use all built-in subcharts for now to test basic deployment
     meilisearch:
       enabled: true
       environment:
@@ -43,7 +43,16 @@ spec:
         size: 3Gi
 
     postgresql:
-      enabled: false
+      enabled: true
+      auth:
+        username: kyoo
+        existingSecret: kyoo
+        secretKeys:
+          adminPasswordKey: PG_PASSWORD
+          userPasswordKey: PG_PASSWORD
+      primary:
+        persistence:
+          size: 3Gi
 
     rabbitmq:
       enabled: true
@@ -54,29 +63,20 @@ spec:
         existingErlangSecret: kyoo
         existingSecretErlangKey: RABBITMQ_COOKIE
 
-    # Global configuration
+    # Global configuration - use defaults for subcharts
     global:
-      # MeiliSearch configuration
       meilisearch:
-        proto: http
-        host: kyoo-meilisearch
-        port: 7700
         infra:
           existingSecret: kyoo
         kyoo_back:
           masterkeyKey: MEILI_MASTER_KEY
           existingSecret: kyoo
-
-      # PostgreSQL configuration - external CNPG cluster
       postgres:
         infra:
           user: kyoo
           passwordKey: PG_PASSWORD
           existingSecret: kyoo
         kyoo_back:
-          host: postgres-rw.db.svc.cluster.local
-          port: 5432
-          database: kyoo_back
           kyoo_migrations:
             userKey: PG_USER
             passwordKey: PG_PASSWORD
@@ -86,20 +86,11 @@ spec:
             passwordKey: PG_PASSWORD
             existingSecret: kyoo
         kyoo_transcoder:
-          host: postgres-rw.db.svc.cluster.local
-          port: 5432
-          database: kyoo_transcoder
-          schema: disabled
-          sslmode: disable
           kyoo_transcoder:
             userKey: PG_USER
             passwordKey: PG_PASSWORD
             existingSecret: kyoo
-
-      # RabbitMQ configuration
       rabbitmq:
-        host: kyoo-rabbitmq
-        port: 5672
         infra:
           passwordKey: RABBITMQ_PASSWORD
           keyErlangCookie: RABBITMQ_COOKIE
@@ -121,20 +112,12 @@ spec:
           passwordKey: RABBITMQ_PASSWORD
           existingSecret: kyoo
 
-    # Kyoo application settings
     kyoo:
       address: "https://kyoo.${SECRET_DOMAIN}"
-      requireAccountVerification: true
-      defaultPermissions: "overall.read,overall.play"
-      unloggedPermissions: ""
-      languages: "en"
-      transcoderAcceleration: vaapi
-      transcoderPreset: fast
       apikey:
         existingSecret: kyoo
         apikeyKey: KYOO_APIKEYS
 
-    # Content database (TMDB/TVDB)
     contentdatabase:
       tmdb:
         existingSecret: kyoo
@@ -144,7 +127,6 @@ spec:
         apikeyKey: TVDB_API_KEY
         pinKey: TVDB_PIN
 
-    # Media volumes configuration
     media:
       volumes:
         - name: media
@@ -156,59 +138,6 @@ spec:
           readOnly: true
       baseMountPath: /media
 
-    # Back deployment with init container for database setup
-    back:
-      extraInitContainers:
-        - name: init-db
-          image: ghcr.io/onedr0p/postgres-init:17.4
-          env:
-            - name: INIT_POSTGRES_HOST
-              value: postgres-rw.db.svc.cluster.local
-            - name: INIT_POSTGRES_SUPER_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: pg-credentials
-                  key: password
-            - name: INIT_POSTGRES_USER
-              value: kyoo
-            - name: INIT_POSTGRES_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: kyoo
-                  key: PG_PASSWORD
-            - name: INIT_POSTGRES_DBNAME
-              value: kyoo_back
-        - name: init-db-transcoder
-          image: ghcr.io/onedr0p/postgres-init:17.4
-          env:
-            - name: INIT_POSTGRES_HOST
-              value: postgres-rw.db.svc.cluster.local
-            - name: INIT_POSTGRES_SUPER_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: pg-credentials
-                  key: password
-            - name: INIT_POSTGRES_USER
-              value: kyoo
-            - name: INIT_POSTGRES_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: kyoo
-                  key: PG_PASSWORD
-            - name: INIT_POSTGRES_DBNAME
-              value: kyoo_transcoder
-
-    # Transcoder with AMD GPU access
-    transcoder:
-      kyoo_transcoder:
-        extraEnv:
-          - name: GOCODER_VAAPI_RENDERER
-            value: /dev/dri/renderD128
-        resources:
-          limits:
-            amd.com/gpu: 1
-
-    # Ingress configuration
     ingress:
       enabled: true
       ingressClassName: private
