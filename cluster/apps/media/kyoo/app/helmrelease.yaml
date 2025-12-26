@@ -31,7 +31,6 @@ spec:
     remediation:
       retries: 3
   values:
-    # Use all built-in subcharts for now to test basic deployment
     meilisearch:
       enabled: true
       environment:
@@ -42,17 +41,9 @@ spec:
         enabled: true
         size: 3Gi
 
+    # Disable built-in postgresql - use external CNPG
     postgresql:
-      enabled: true
-      auth:
-        username: kyoo
-        existingSecret: kyoo
-        secretKeys:
-          adminPasswordKey: PG_PASSWORD
-          userPasswordKey: PG_PASSWORD
-      primary:
-        persistence:
-          size: 3Gi
+      enabled: false
 
     rabbitmq:
       enabled: true
@@ -63,7 +54,6 @@ spec:
         existingErlangSecret: kyoo
         existingSecretErlangKey: RABBITMQ_COOKIE
 
-    # Global configuration - use defaults for subcharts
     global:
       meilisearch:
         infra:
@@ -77,6 +67,9 @@ spec:
           passwordKey: PG_PASSWORD
           existingSecret: kyoo
         kyoo_back:
+          host: postgres-rw.db.svc.cluster.local
+          port: 5432
+          database: kyoo_back
           kyoo_migrations:
             userKey: PG_USER
             passwordKey: PG_PASSWORD
@@ -86,6 +79,11 @@ spec:
             passwordKey: PG_PASSWORD
             existingSecret: kyoo
         kyoo_transcoder:
+          host: postgres-rw.db.svc.cluster.local
+          port: 5432
+          database: kyoo_transcoder
+          schema: disabled
+          sslmode: disable
           kyoo_transcoder:
             userKey: PG_USER
             passwordKey: PG_PASSWORD
@@ -114,6 +112,8 @@ spec:
 
     kyoo:
       address: "https://kyoo.${SECRET_DOMAIN}"
+      transcoderAcceleration: vaapi
+      transcoderPreset: fast
       apikey:
         existingSecret: kyoo
         apikeyKey: KYOO_APIKEYS
@@ -143,3 +143,17 @@ spec:
       ingressClassName: private
       host: "kyoo.${SECRET_DOMAIN}"
       tls: true
+
+    # Transcoder configuration for AMD GPU (VAAPI)
+    transcoder:
+      kyoo_transcoder:
+        resources:
+          limits:
+            amd.com/gpu: 1
+        extraVolumeMounts:
+          - name: dri
+            mountPath: /dev/dri
+      extraVolumes:
+        - name: dri
+          hostPath:
+            path: /dev/dri
