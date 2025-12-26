@@ -13,10 +13,11 @@ spec:
     name: homelab
   commonMetadata:
     labels:
-      app.kubernetes.io/name: &appname kyoo
+      app.kubernetes.io/name: kyoo
   prune: true
   wait: false
   interval: 10m
   dependsOn:
     - name: iscsi
     - name: ingress-nginx
+    - name: cloudnative-pg-cluster

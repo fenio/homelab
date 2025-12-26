@@ -17,7 +17,7 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app kyoo
+  name: kyoo
 spec:
   interval: 15m
   chartRef:
@@ -31,18 +31,128 @@ spec:
     remediation:
       retries: 3
   values:
+    # Disable built-in subcharts
+    postgres:
+      enabled: false
+    traefikproxy:
+      enabled: false
+
+    # Global postgres configuration - external CNPG cluster
+    global:
+      postgres:
+        shared:
+          host: postgres-rw.db.svc.cluster.local
+          port: 5432
+          existingSecret: kyoo
+          userKey: PG_USER
+          passwordKey: PG_PASSWORD
+        kyoo_api:
+          database: kyoo_api
+          sslmode: disable
+        kyoo_auth:
+          database: kyoo_auth
+          sslmode: disable
+        kyoo_scanner:
+          database: kyoo_scanner
+          sslmode: disable
+        kyoo_transcoder:
+          database: kyoo_transcoder
+          sslmode: disable
+
+    # Kyoo application settings
     kyoo:
       address: "https://kyoo.${SECRET_DOMAIN}"
-    meilisearch:
-      enabled: true
-    postgresql:
-      enabled: true
-      shared:
-        secretKeys:
-          adminPasswordKey: "POSTGRES_PASSWORD"
-          userPasswordKey: "POSTGRES_PASSWORD"
-    rabbitmq:
-      enabled: true
+      transcoderAcceleration: vaapi
+      transcoderPreset: fast
+      auth:
+        apikeys:
+          scanner:
+            existingSecret: kyoo
+            apikeyKey: SCANNER_APIKEY
+
+    # Content database (TMDB)
+    contentdatabase:
+      tmdb:
+        existingSecret: kyoo
+        apikeyKey: TMDB_API_KEY
+
+    # Media volumes configuration
+    media:
+      volumes:
+        - name: media
+          persistentVolumeClaim:
+            claimName: media
+      volumeMounts:
+        - mountPath: /media
+          name: media
+          readOnly: true
+      baseMountPath: /media
+
+    # API deployment with init container for database setup
+    api:
+      extraInitContainers:
+        - name: init-db
+          image: postgres:17
+          env:
+            - name: PGHOST
+              value: postgres-rw.db.svc.cluster.local
+            - name: PGUSER
+              value: postgres
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pg-credentials
+                  key: password
+            - name: KYOO_PG_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: kyoo
+                  key: PG_PASSWORD
+          command:
+            - sh
+            - -c
+            - |
+              set -e
+              echo "Creating kyoo user if not exists..."
+              psql -tc "SELECT 1 FROM pg_roles WHERE rolname='kyoo'" | grep -q 1 || \
+                psql -c "CREATE USER kyoo WITH PASSWORD '${KYOO_PG_PASS}'"
+
+              echo "Creating databases if not exist..."
+              for db in kyoo_api kyoo_auth kyoo_scanner kyoo_transcoder; do
+                psql -tc "SELECT 1 FROM pg_database WHERE datname='$db'" | grep -q 1 || \
+                  psql -c "CREATE DATABASE $db OWNER kyoo"
+              done
+
+              echo "Setting up kyoo_api schema and pg_trgm extension..."
+              psql -d kyoo_api -c "CREATE SCHEMA IF NOT EXISTS kyoo AUTHORIZATION kyoo"
+              psql -d kyoo_api -c "CREATE EXTENSION IF NOT EXISTS pg_trgm SCHEMA kyoo"
+              psql -d kyoo_api -c "ALTER ROLE kyoo IN DATABASE kyoo_api SET search_path TO kyoo"
+
+              echo "Setting up kyoo_auth schema..."
+              psql -d kyoo_auth -c "CREATE SCHEMA IF NOT EXISTS keibi AUTHORIZATION kyoo"
+              psql -d kyoo_auth -c "ALTER ROLE kyoo IN DATABASE kyoo_auth SET search_path TO keibi"
+
+              echo "Setting up kyoo_scanner schema..."
+              psql -d kyoo_scanner -c "CREATE SCHEMA IF NOT EXISTS scanner AUTHORIZATION kyoo"
+              psql -d kyoo_scanner -c "ALTER ROLE kyoo IN DATABASE kyoo_scanner SET search_path TO scanner"
+
+              echo "Setting up kyoo_transcoder schema..."
+              psql -d kyoo_transcoder -c "CREATE SCHEMA IF NOT EXISTS gocoder AUTHORIZATION kyoo"
+              psql -d kyoo_transcoder -c "ALTER ROLE kyoo IN DATABASE kyoo_transcoder SET search_path TO gocoder"
+
+              echo "Database initialization complete!"
+
+    # Transcoder with AMD GPU access
+    transcoder:
+      kyoo_transcoder:
+        extraEnv:
+          - name: GOCODER_VAAPI_RENDERER
+            value: /dev/dri/renderD128
+        resources:
+          limits:
+            amd.com/gpu: 1
+
+    # Ingress configuration
     ingress:
       enabled: true
       ingressClassName: private
