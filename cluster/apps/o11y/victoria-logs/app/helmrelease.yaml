@@ -52,6 +52,8 @@ spec:
             path: /
             port: http
         tls: [hosts: [*host]]
+      persistentVolume:
+        size: 100Gi
     vector:
       enabled: true
       resources:
