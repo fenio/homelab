@@ -76,7 +76,7 @@ spec:
 
                 # Configure RSS feeds using secret
                 mkdir -p "$RSS_DIR"
-                echo "{\"${PTE_RSS}\": {\"title\": \"PTE\", \"uid\": \"{a1b2c3d4-e5f6-7890-abcd-ef1234567890}\"}}" > "$FEEDS_FILE"
+                echo "{\"PTE\": {\"uid\": \"{a1b2c3d4-e5f6-7890-abcd-ef1234567890}\", \"url\": \"${PTE_RSS}\"}}" > "$FEEDS_FILE"
 
                 echo "Config updated:"
                 cat "$CONFIG_FILE"
