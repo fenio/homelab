@@ -131,6 +131,9 @@ spec:
       kyoo_front:
         image:
           tag: edge
+        extraEnv:
+          - name: KYOO_URL
+            value: "https://kyoo.${SECRET_DOMAIN}/api"
 
     scanner:
       kyoo_scanner:
