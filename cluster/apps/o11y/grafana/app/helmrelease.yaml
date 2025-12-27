@@ -153,7 +153,7 @@ spec:
           - name: Prometheus
             type: prometheus
             access: proxy
-            url: http://vmsingle-vm.o11y.svc.cluster.local:8429
+            url: http://vmsingle-vm.o11y.svc.cluster.local:8428
             isDefault: true
           - name: Alertmanager
             type: alertmanager
