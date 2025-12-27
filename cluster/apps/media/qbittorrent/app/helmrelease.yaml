@@ -52,21 +52,42 @@ spec:
             args:
               - |
                 CONFIG_FILE="/config/qBittorrent/qBittorrent.conf"
+                RSS_DIR="/config/qBittorrent/rss"
+                FEEDS_FILE="$RSS_DIR/feeds.json"
+
+                # Create config file if it doesn't exist
                 if [ ! -f "$CONFIG_FILE" ]; then
                   mkdir -p /config/qBittorrent
                   echo "[Preferences]" > "$CONFIG_FILE"
                 fi
-                # Ensure WebUI section exists and update settings
+
+                # Ensure [Preferences] section exists
                 if ! grep -q "^\[Preferences\]" "$CONFIG_FILE"; then
                   echo "[Preferences]" >> "$CONFIG_FILE"
                 fi
+
                 # Remove existing WebUI alternate settings if present
                 sed -i '/^WebUI\\AlternativeUIEnabled=/d' "$CONFIG_FILE"
                 sed -i '/^WebUI\\RootFolder=/d' "$CONFIG_FILE"
-                # Add the settings under [Preferences]
+
+                # Add the WebUI settings under [Preferences]
                 sed -i '/^\[Preferences\]/a WebUI\\AlternativeUIEnabled=true\nWebUI\\RootFolder=/addons/VueTorrent' "$CONFIG_FILE"
+
+                # Configure RSS feeds
+                mkdir -p "$RSS_DIR"
+                cat > "$FEEDS_FILE" << 'EOF'
+                {
+                  "https://example.com/rss/feed": {
+                    "title": "Example Feed",
+                    "uid": "{12345678-1234-1234-1234-123456789abc}"
+                  }
+                }
+                EOF
+
                 echo "Config updated:"
                 cat "$CONFIG_FILE"
+                echo "RSS feeds configured:"
+                cat "$FEEDS_FILE"
         containers:
           qbittorrent:
             image:
@@ -82,13 +103,6 @@ spec:
                     resource: limits.memory
                     containerName: qbittorrent
                     divisor: 1Mi
-              QBT_Preferences__WebUI__AlternativeUIEnabled: true
-              QBT_Preferences__WebUI__AuthSubnetWhitelistEnabled: true
-              QBT_Preferences__WebUI__AuthSubnetWhitelist: |-
-                10.244.0.0/16
-              QBT_Preferences__WebUI__LocalHostAuth: false
-              QBT_Preferences__WebUI__RootFolder: /addons/VueTorrent
-              QBT_Preferences__WebUI__UseUPNP: false
               QBT_BitTorrent__Session__Interface: eth0
               QBT_BitTorrent__Session__InterfaceAddress:
                 valueFrom:
