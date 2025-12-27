@@ -41,6 +41,32 @@ spec:
               limits:
                 memory: 1Gi
                 ephemeral-storage: 200Mi
+          config:
+            dependsOn: vuetorrent
+            image:
+              repository: docker.io/library/alpine
+              tag: 3.21.2
+            command:
+              - /bin/sh
+              - -c
+            args:
+              - |
+                CONFIG_FILE="/config/qBittorrent/qBittorrent.conf"
+                if [ ! -f "$CONFIG_FILE" ]; then
+                  mkdir -p /config/qBittorrent
+                  echo "[Preferences]" > "$CONFIG_FILE"
+                fi
+                # Ensure WebUI section exists and update settings
+                if ! grep -q "^\[Preferences\]" "$CONFIG_FILE"; then
+                  echo "[Preferences]" >> "$CONFIG_FILE"
+                fi
+                # Remove existing WebUI alternate settings if present
+                sed -i '/^WebUI\\AlternativeUIEnabled=/d' "$CONFIG_FILE"
+                sed -i '/^WebUI\\RootFolder=/d' "$CONFIG_FILE"
+                # Add the settings under [Preferences]
+                sed -i '/^\[Preferences\]/a WebUI\\AlternativeUIEnabled=true\nWebUI\\RootFolder=/addons/VueTorrent' "$CONFIG_FILE"
+                echo "Config updated:"
+                cat "$CONFIG_FILE"
         containers:
           qbittorrent:
             image:
