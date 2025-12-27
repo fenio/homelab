@@ -185,6 +185,22 @@ spec:
         extraEnv:
           - name: LIBRARY_IGNORE_PATTERN
             value: ".*\\.!qB$"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: main
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: main
+          initialDelaySeconds: 10
+          periodSeconds: 15
+          timeoutSeconds: 10
+          failureThreshold: 5
       extraInitContainers:
         - name: init-db
           image: ghcr.io/onedr0p/postgres-init:17.4
