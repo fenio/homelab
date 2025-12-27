@@ -95,10 +95,11 @@ spec:
       baseMountPath: /media
 
     ingress:
-      enabled: true
-      ingressClassName: private
-      host: "kyoo.${SECRET_DOMAIN}"
-      tls: true
+      enabled: false
+
+    # Disable built-in traefik proxy - use direct ingress routing
+    traefikproxy:
+      enabled: false
 
     # Transcoder configuration for AMD GPU (VAAPI)
     transcoder:

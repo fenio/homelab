@@ -1,0 +1,105 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kyoo
+  namespace: media
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/auth-url: "http://kyoo-auth.media.svc.cluster.local:4568/auth/jwt"
+    nginx.ingress.kubernetes.io/auth-response-headers: "Authorization"
+    nginx.ingress.kubernetes.io/auth-snippet: |
+      proxy_set_header X-Api-Key $http_x_api_key;
+      proxy_set_header Cookie $http_cookie;
+spec:
+  ingressClassName: private
+  tls:
+    - hosts:
+        - "kyoo.${SECRET_DOMAIN}"
+  rules:
+    - host: "kyoo.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: kyoo-api
+                port:
+                  number: 3567
+          - path: /swagger
+            pathType: Prefix
+            backend:
+              service:
+                name: kyoo-api
+                port:
+                  number: 3567
+          - path: /video
+            pathType: Prefix
+            backend:
+              service:
+                name: kyoo-transcoder
+                port:
+                  number: 7666
+          - path: /scanner
+            pathType: Prefix
+            backend:
+              service:
+                name: kyoo-scanner
+                port:
+                  number: 4389
+---
+# Auth and well-known don't need auth middleware
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kyoo-auth
+  namespace: media
+spec:
+  ingressClassName: private
+  tls:
+    - hosts:
+        - "kyoo.${SECRET_DOMAIN}"
+  rules:
+    - host: "kyoo.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /auth
+            pathType: Prefix
+            backend:
+              service:
+                name: kyoo-auth
+                port:
+                  number: 4568
+          - path: /.well-known
+            pathType: Prefix
+            backend:
+              service:
+                name: kyoo-auth
+                port:
+                  number: 4568
+---
+# Frontend - catch-all, no auth needed
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kyoo-front
+  namespace: media
+spec:
+  ingressClassName: private
+  tls:
+    - hosts:
+        - "kyoo.${SECRET_DOMAIN}"
+  rules:
+    - host: "kyoo.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kyoo-front
+                port:
+                  number: 8901
