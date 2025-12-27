@@ -128,6 +128,18 @@ spec:
         ports:
           http:
             port: 1080
+      bittorrent:
+        controller: qbittorrent
+        type: LoadBalancer
+        annotations:
+          lbipam.cilium.io/ips: 10.10.20.105
+        ports:
+          bittorrent-tcp:
+            port: 50413
+            protocol: TCP
+          bittorrent-udp:
+            port: 50413
+            protocol: UDP
     ingress:
       qbittorrent:
         className: private
