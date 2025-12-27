@@ -74,6 +74,19 @@ spec:
                 # Add the WebUI settings under [Preferences]
                 sed -i '/^\[Preferences\]/a WebUI\\AlternativeUIEnabled=true\nWebUI\\RootFolder=/addons/VueTorrent\nWebUI\\Port=1080' "$CONFIG_FILE"
 
+                # Add [RSS] section if it doesn't exist
+                if ! grep -q "^\[RSS\]" "$CONFIG_FILE"; then
+                  echo "" >> "$CONFIG_FILE"
+                  echo "[RSS]" >> "$CONFIG_FILE"
+                fi
+
+                # Remove existing RSS processing settings if present
+                sed -i '/^AutoDownloader\\EnableProcessing=/d' "$CONFIG_FILE"
+                sed -i '/^Session\\EnableProcessing=/d' "$CONFIG_FILE"
+
+                # Add RSS processing settings under [RSS]
+                sed -i '/^\[RSS\]/a AutoDownloader\\EnableProcessing=true\nSession\\EnableProcessing=true' "$CONFIG_FILE"
+
                 # Configure RSS feeds using secret
                 mkdir -p "$RSS_DIR"
                 echo "{\"PTE\": {\"uid\": \"{a1b2c3d4-e5f6-7890-abcd-ef1234567890}\", \"url\": \"$${PTE_RSS}\"}}" > "$FEEDS_FILE"
