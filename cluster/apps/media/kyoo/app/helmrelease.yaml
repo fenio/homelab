@@ -64,7 +64,6 @@ spec:
 
     kyoo:
       address: "https://kyoo.${SECRET_DOMAIN}"
-      middlewareRootURL: "https://kyoo.${SECRET_DOMAIN}"
       transcoderAcceleration: vaapi
       transcoderPreset: fast
       auth:
@@ -94,12 +93,13 @@ spec:
           readOnly: true
       baseMountPath: /media
 
+    # Disable chart's ingress - we'll create our own pointing to traefik proxy
     ingress:
       enabled: false
 
-    # Disable built-in traefik proxy - use direct ingress routing
+    # Enable built-in traefik proxy - handles all auth middleware internally
     traefikproxy:
-      enabled: false
+      enabled: true
 
     # Transcoder configuration for AMD GPU (VAAPI)
     transcoder:
@@ -132,9 +132,6 @@ spec:
       kyoo_front:
         image:
           tag: edge
-        extraEnv:
-          - name: KYOO_URL
-            value: "https://kyoo.${SECRET_DOMAIN}/api"
 
     scanner:
       kyoo_scanner:
