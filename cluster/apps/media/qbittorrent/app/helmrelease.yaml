@@ -78,9 +78,58 @@ spec:
                 mkdir -p "$RSS_DIR"
                 echo "{\"PTE\": {\"uid\": \"{a1b2c3d4-e5f6-7890-abcd-ef1234567890}\", \"url\": \"$${PTE_RSS}\"}}" > "$FEEDS_FILE"
 
+                # Configure RSS auto-download rules
+                cat > "$RSS_DIR/download_rules.json" << 'RULES_EOF'
+                {
+                    "Autodownload": {
+                        "addPaused": false,
+                        "affectedFeeds": [
+                            "RSS_URL_PLACEHOLDER"
+                        ],
+                        "assignedCategory": "",
+                        "enabled": true,
+                        "episodeFilter": "",
+                        "ignoreDays": 0,
+                        "lastMatch": "",
+                        "mustContain": "",
+                        "mustNotContain": "",
+                        "previouslyMatchedEpisodes": [],
+                        "priority": 0,
+                        "savePath": "/downloads",
+                        "smartFilter": false,
+                        "torrentContentLayout": "Original",
+                        "torrentParams": {
+                            "add_to_top_of_queue": false,
+                            "category": "",
+                            "content_layout": "Original",
+                            "download_limit": 0,
+                            "download_path": "",
+                            "inactive_seeding_time_limit": -2,
+                            "operating_mode": "AutoManaged",
+                            "ratio_limit": -2,
+                            "save_path": "/downloads",
+                            "seeding_time_limit": -2,
+                            "share_limit_action": "Default",
+                            "skip_checking": false,
+                            "ssl_certificate": "",
+                            "ssl_dh_params": "",
+                            "ssl_private_key": "",
+                            "stop_condition": "None",
+                            "stopped": false,
+                            "tags": [],
+                            "upload_limit": 0,
+                            "use_auto_tmm": false,
+                            "use_download_path": false
+                        },
+                        "useRegex": false
+                    }
+                }
+                RULES_EOF
+                sed -i "s|RSS_URL_PLACEHOLDER|$${PTE_RSS}|g" "$RSS_DIR/download_rules.json"
+
                 echo "Config updated:"
                 cat "$CONFIG_FILE"
-                echo "RSS feeds configured"
+                echo "RSS feeds and auto-download rules configured"
             env:
               PTE_RSS:
                 valueFrom:
