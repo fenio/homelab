@@ -100,6 +100,8 @@ spec:
     # Transcoder configuration for AMD GPU (VAAPI)
     transcoder:
       kyoo_transcoder:
+        image:
+          tag: edge
         resources:
           limits:
             amd.com/gpu: 1
@@ -110,3 +112,24 @@ spec:
         - name: dri
           hostPath:
             path: /dev/dri
+
+    # Use edge tag for all images
+    api:
+      kyoo_api:
+        image:
+          tag: edge
+
+    auth:
+      kyoo_auth:
+        image:
+          tag: edge
+
+    front:
+      kyoo_front:
+        image:
+          tag: edge
+
+    scanner:
+      kyoo_scanner:
+        image:
+          tag: edge
