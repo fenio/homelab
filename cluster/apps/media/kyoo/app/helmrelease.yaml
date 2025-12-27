@@ -101,7 +101,7 @@ spec:
     traefikproxy:
       enabled: true
 
-    # API - init container creates database and pg_trgm extension
+    # API - init containers: 1) create database, 2) create pg_trgm extension
     api:
       kyoo_api:
         image:
@@ -126,13 +126,30 @@ spec:
                   key: PG_PASSWORD
             - name: INIT_POSTGRES_DBNAME
               value: kyoo_api
-          volumeMounts:
-            - name: init-sql
-              mountPath: /initdb
-      extraVolumes:
-        - name: init-sql
-          configMap:
-            name: kyoo-init-sql
+        # Create pg_trgm extension as superuser (required for full-text search)
+        - name: init-extensions
+          image: ghcr.io/onedr0p/postgres-init:17.4
+          env:
+            - name: PGHOST
+              value: postgres-rw.db.svc.cluster.local
+            - name: PGUSER
+              value: postgres
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pg-credentials
+                  key: password
+            - name: PGDATABASE
+              value: kyoo_api
+          command:
+            - /bin/bash
+            - -c
+            - |
+              until pg_isready; do echo "Waiting for postgres..."; sleep 1; done
+              echo "Creating schema and extension..."
+              psql -c "CREATE SCHEMA IF NOT EXISTS kyoo;"
+              psql -c "CREATE EXTENSION IF NOT EXISTS pg_trgm SCHEMA kyoo;"
+              echo "Done."
 
     # Auth - init container creates database
     auth:
