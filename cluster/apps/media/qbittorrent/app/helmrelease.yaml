@@ -69,9 +69,10 @@ spec:
                 # Remove existing WebUI alternate settings if present
                 sed -i '/^WebUI\\AlternativeUIEnabled=/d' "$CONFIG_FILE"
                 sed -i '/^WebUI\\RootFolder=/d' "$CONFIG_FILE"
+                sed -i '/^WebUI\\Port=/d' "$CONFIG_FILE"
 
                 # Add the WebUI settings under [Preferences]
-                sed -i '/^\[Preferences\]/a WebUI\\AlternativeUIEnabled=true\nWebUI\\RootFolder=/addons/VueTorrent' "$CONFIG_FILE"
+                sed -i '/^\[Preferences\]/a WebUI\\AlternativeUIEnabled=true\nWebUI\\RootFolder=/addons/VueTorrent\nWebUI\\Port=1080' "$CONFIG_FILE"
 
                 # Configure RSS feeds
                 mkdir -p "$RSS_DIR"
