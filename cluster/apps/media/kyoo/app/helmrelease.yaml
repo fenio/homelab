@@ -10,7 +10,7 @@ spec:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
   ref:
-    tag: 4.7.1
+    tag: master
   url: oci://ghcr.io/zoriya/helm-charts/kyoo
 ---
 # yaml-language-server: $schema=https://datreeio.github.io/CRDs-catalog/helm.toolkit.fluxcd.io/helmrelease_v2.json
@@ -31,88 +31,45 @@ spec:
     remediation:
       retries: 3
   values:
-    meilisearch:
-      enabled: true
-      environment:
-        MEILI_ENV: production
-      auth:
-        existingMasterKeySecret: kyoo
-      persistence:
-        enabled: true
-        size: 3Gi
-
     # Disable built-in postgresql - use external CNPG
-    postgresql:
-      enabled: false
-
-    rabbitmq:
+    postgres:
       enabled: false
 
     global:
-      meilisearch:
-        infra:
-          existingSecret: kyoo
-        kyoo_back:
-          masterkeyKey: MEILI_MASTER_KEY
-          existingSecret: kyoo
       postgres:
         infra:
           user: kyoo
           passwordKey: PG_PASSWORD
           existingSecret: kyoo
-        kyoo_back:
+        shared:
           host: postgres-rw.db.svc.cluster.local
           port: 5432
-          database: kyoo_back
-          kyoo_migrations:
-            userKey: PG_USER
-            passwordKey: PG_PASSWORD
-            existingSecret: kyoo
-          kyoo_back:
-            userKey: PG_USER
-            passwordKey: PG_PASSWORD
-            existingSecret: kyoo
-        kyoo_transcoder:
-          host: postgres-rw.db.svc.cluster.local
-          port: 5432
-          database: kyoo_transcoder
-          schema: disabled
+          existingSecret: kyoo
+          userKey: PG_USER
+          passwordKey: PG_PASSWORD
+        kyoo_api:
+          database: kyoo_api
           sslmode: disable
-          kyoo_transcoder:
-            userKey: PG_USER
-            passwordKey: PG_PASSWORD
-            existingSecret: kyoo
-      rabbitmq:
-        host: kyoo-rabbitmq
-        port: 5672
-        infra:
-          passwordKey: RABBITMQ_PASSWORD
-          keyErlangCookie: RABBITMQ_COOKIE
-          existingSecret: kyoo
-        kyoo_autosync:
-          userKey: RABBITMQ_USER
-          passwordKey: RABBITMQ_PASSWORD
-          existingSecret: kyoo
-        kyoo_back:
-          userKey: RABBITMQ_USER
-          passwordKey: RABBITMQ_PASSWORD
-          existingSecret: kyoo
-        kyoo_matcher:
-          userKey: RABBITMQ_USER
-          passwordKey: RABBITMQ_PASSWORD
-          existingSecret: kyoo
+        kyoo_auth:
+          database: kyoo_auth
+          sslmode: disable
         kyoo_scanner:
-          userKey: RABBITMQ_USER
-          passwordKey: RABBITMQ_PASSWORD
-          existingSecret: kyoo
+          database: kyoo_scanner
+          sslmode: disable
+        kyoo_transcoder:
+          database: kyoo_transcoder
+          sslmode: disable
 
     kyoo:
       address: "https://kyoo.${SECRET_DOMAIN}"
       transcoderAcceleration: vaapi
       transcoderPreset: fast
-      apikey:
-        existingSecret: kyoo
-        apikeyKey: KYOO_APIKEYS
+      auth:
+        apikeys:
+          scanner:
+            existingSecret: kyoo
+            apikeyKey: SCANNER_APIKEY
+            claims: '{"permissions": ["core.read", "core.write"]}'
 
     contentdatabase:
       tmdb:

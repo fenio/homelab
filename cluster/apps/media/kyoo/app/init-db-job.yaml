@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: kyoo-init-db
+  name: kyoo-init-db-api
   namespace: media
 spec:
   ttlSecondsAfterFinished: 300
@@ -28,7 +28,69 @@ spec:
                   name: kyoo
                   key: PG_PASSWORD
             - name: INIT_POSTGRES_DBNAME
-              value: kyoo_back
+              value: kyoo_api
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kyoo-init-db-auth
+  namespace: media
+spec:
+  ttlSecondsAfterFinished: 300
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:17.4
+          env:
+            - name: INIT_POSTGRES_HOST
+              value: postgres-rw.db.svc.cluster.local
+            - name: INIT_POSTGRES_SUPER_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: pg-credentials
+                  key: password
+            - name: INIT_POSTGRES_USER
+              value: kyoo
+            - name: INIT_POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: kyoo
+                  key: PG_PASSWORD
+            - name: INIT_POSTGRES_DBNAME
+              value: kyoo_auth
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kyoo-init-db-scanner
+  namespace: media
+spec:
+  ttlSecondsAfterFinished: 300
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:17.4
+          env:
+            - name: INIT_POSTGRES_HOST
+              value: postgres-rw.db.svc.cluster.local
+            - name: INIT_POSTGRES_SUPER_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: pg-credentials
+                  key: password
+            - name: INIT_POSTGRES_USER
+              value: kyoo
+            - name: INIT_POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: kyoo
+                  key: PG_PASSWORD
+            - name: INIT_POSTGRES_DBNAME
+              value: kyoo_scanner
 ---
 apiVersion: batch/v1
 kind: Job
