@@ -91,24 +91,10 @@ spec:
         containers:
           qbittorrent:
             image:
-              repository: ghcr.io/onedr0p/qbittorrent
-              tag: "5.0.4"
+              repository: ghcr.io/home-operations/qbittorrent
+              tag: 5.1.4
             env:
               TZ: ${CONFIG_TIMEZONE}
-              QBITTORRENT__PORT: &port 1080
-              QBITTORRENT__BT_PORT: &bittorrentPort 50413
-              QBT_Application__MemoryWorkingSetLimit:
-                valueFrom:
-                  resourceFieldRef:
-                    resource: limits.memory
-                    containerName: qbittorrent
-                    divisor: 1Mi
-              QBT_BitTorrent__Session__Interface: eth0
-              QBT_BitTorrent__Session__InterfaceAddress:
-                valueFrom:
-                  fieldRef:
-                    fieldPath: status.podIP
-              QBT_BitTorrent__Session__InterfaceName: eth0
             probes:
               liveness:
                 enabled: true
@@ -140,7 +126,7 @@ spec:
         controller: qbittorrent
         ports:
           http:
-            port: *port
+            port: 8080
     ingress:
       qbittorrent:
         className: private
@@ -150,7 +136,7 @@ spec:
           gethomepage.dev/name: QBittorrent
           gethomepage.dev/icon: qbittorrent.svg
           gethomepage.dev/widget.type: qbittorrent
-          gethomepage.dev/widget.url: http://qbittorrent.media:1080
+          gethomepage.dev/widget.url: http://qbittorrent.media:8080
         hosts:
           - host: q.${SECRET_DOMAIN}
             paths:
