@@ -66,6 +66,16 @@ spec:
                   echo "[Preferences]" >> "$CONFIG_FILE"
                 fi
 
+                # Ensure [BitTorrent] section exists
+                if ! grep -q "^\[BitTorrent\]" "$CONFIG_FILE"; then
+                  echo "" >> "$CONFIG_FILE"
+                  echo "[BitTorrent]" >> "$CONFIG_FILE"
+                fi
+
+                # Enable .!qB extension for incomplete files
+                sed -i '/^Session\\IncompleteExtension=/d' "$CONFIG_FILE"
+                sed -i '/^\[BitTorrent\]/a Session\\IncompleteExtension=true' "$CONFIG_FILE"
+
                 # Remove existing WebUI alternate settings if present
                 sed -i '/^WebUI\\AlternativeUIEnabled=/d' "$CONFIG_FILE"
                 sed -i '/^WebUI\\RootFolder=/d' "$CONFIG_FILE"

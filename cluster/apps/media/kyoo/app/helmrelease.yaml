@@ -182,6 +182,9 @@ spec:
       kyoo_scanner:
         image:
           tag: edge
+        extraEnv:
+          - name: LIBRARY_IGNORE_PATTERN
+            value: ".*\\.!qB$"
       extraInitContainers:
         - name: init-db
           image: ghcr.io/onedr0p/postgres-init:17.4
