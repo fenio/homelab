@@ -23,6 +23,24 @@ spec:
               storageClass: iscsi
               accessMode: ReadWriteOnce
               size: 5Gi
+        initContainers:
+          vuetorrent:
+            image:
+              repository: registry.k8s.io/git-sync/git-sync
+              tag: v4.5.0
+            args:
+              - --repo=https://github.com/WDaan/VueTorrent
+              - --ref=latest-release
+              - --root=/addons
+              - --one-time
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100Mi
+                ephemeral-storage: 100Mi
+              limits:
+                memory: 1Gi
+                ephemeral-storage: 200Mi
         containers:
           qbittorrent:
             image:
@@ -72,24 +90,6 @@ spec:
                 ephemeral-storage: 100Mi
               limits:
                 memory: 2800Mi
-                ephemeral-storage: 200Mi
-          vuetorrent:
-            dependsOn: qbittorrent
-            image:
-              repository: registry.k8s.io/git-sync/git-sync
-              tag: v4.5.0
-            args:
-              - --repo=https://github.com/WDaan/VueTorrent
-              - --ref=latest-release
-              - --period=86400s
-              - --root=/addons
-            resources:
-              requests:
-                cpu: 10m
-                memory: 100Mi
-                ephemeral-storage: 100Mi
-              limits:
-                memory: 1Gi
                 ephemeral-storage: 200Mi
     defaultPodOptions:
       securityContext:
