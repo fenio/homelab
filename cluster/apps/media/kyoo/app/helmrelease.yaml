@@ -25,9 +25,11 @@ spec:
     name: kyoo
   install:
     createNamespace: true
+    timeout: 10m
     remediation:
       retries: -1
   upgrade:
+    timeout: 10m
     remediation:
       retries: 3
   values:
