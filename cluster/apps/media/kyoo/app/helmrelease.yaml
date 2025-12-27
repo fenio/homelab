@@ -64,6 +64,7 @@ spec:
 
     kyoo:
       address: "https://kyoo.${SECRET_DOMAIN}"
+      middlewareRootURL: "https://kyoo.${SECRET_DOMAIN}"
       transcoderAcceleration: vaapi
       transcoderPreset: fast
       auth:
