@@ -74,21 +74,26 @@ spec:
                 # Add the WebUI settings under [Preferences]
                 sed -i '/^\[Preferences\]/a WebUI\\AlternativeUIEnabled=true\nWebUI\\RootFolder=/addons/VueTorrent\nWebUI\\Port=1080' "$CONFIG_FILE"
 
-                # Configure RSS feeds
+                # Configure RSS feeds using secret
                 mkdir -p "$RSS_DIR"
-                cat > "$FEEDS_FILE" << 'EOF'
+                cat > "$FEEDS_FILE" << EOF
                 {
-                  "https://example.com/rss/feed": {
-                    "title": "Example Feed",
-                    "uid": "{12345678-1234-1234-1234-123456789abc}"
+                  "${PTE_RSS}": {
+                    "title": "PTE",
+                    "uid": "{a1b2c3d4-e5f6-7890-abcd-ef1234567890}"
                   }
                 }
                 EOF
 
                 echo "Config updated:"
                 cat "$CONFIG_FILE"
-                echo "RSS feeds configured:"
-                cat "$FEEDS_FILE"
+                echo "RSS feeds configured"
+            env:
+              PTE_RSS:
+                valueFrom:
+                  secretKeyRef:
+                    name: kyoo
+                    key: PTE_RSS
         containers:
           qbittorrent:
             image:
