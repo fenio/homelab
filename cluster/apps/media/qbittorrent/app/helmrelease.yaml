@@ -94,9 +94,10 @@ spec:
                 # Remove existing RSS processing settings if present
                 sed -i '/^AutoDownloader\\EnableProcessing=/d' "$CONFIG_FILE"
                 sed -i '/^Session\\EnableProcessing=/d' "$CONFIG_FILE"
+                sed -i '/^Session\\RefreshInterval=/d' "$CONFIG_FILE"
 
                 # Add RSS processing settings under [RSS]
-                sed -i '/^\[RSS\]/a AutoDownloader\\EnableProcessing=true\nSession\\EnableProcessing=true' "$CONFIG_FILE"
+                sed -i '/^\[RSS\]/a AutoDownloader\\EnableProcessing=true\nSession\\EnableProcessing=true\nSession\\RefreshInterval=5' "$CONFIG_FILE"
 
                 # Configure RSS feeds using secret
                 mkdir -p "$RSS_DIR"
@@ -180,10 +181,10 @@ spec:
                   httpGet:
                     path: /
                     port: 1080
-                  initialDelaySeconds: 10
-                  periodSeconds: 10
-                  timeoutSeconds: 5
-                  failureThreshold: 3
+                  initialDelaySeconds: 30
+                  periodSeconds: 30
+                  timeoutSeconds: 10
+                  failureThreshold: 5
               readiness:
                 enabled: true
                 custom: true
@@ -191,10 +192,10 @@ spec:
                   httpGet:
                     path: /
                     port: 1080
-                  initialDelaySeconds: 5
-                  periodSeconds: 10
-                  timeoutSeconds: 5
-                  failureThreshold: 3
+                  initialDelaySeconds: 10
+                  periodSeconds: 15
+                  timeoutSeconds: 10
+                  failureThreshold: 5
               startup:
                 enabled: true
                 custom: true
