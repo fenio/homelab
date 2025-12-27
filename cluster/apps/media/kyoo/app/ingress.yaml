@@ -8,13 +8,6 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      # API, video, scanner, swagger need auth
-      set $auth_needed "";
-      if ($uri ~* "^/(api|video|scanner|swagger)") {
-        set $auth_needed "yes";
-      }
 spec:
   ingressClassName: private
   tls:
@@ -24,50 +17,48 @@ spec:
     - host: "kyoo.${SECRET_DOMAIN}"
       http:
         paths:
-          # More specific paths first
-          - path: /api(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /api
+            pathType: Prefix
             backend:
               service:
                 name: kyoo-api
                 port:
                   number: 3567
-          - path: /swagger(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /swagger
+            pathType: Prefix
             backend:
               service:
                 name: kyoo-api
                 port:
                   number: 3567
-          - path: /video(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /video
+            pathType: Prefix
             backend:
               service:
                 name: kyoo-transcoder
                 port:
                   number: 7666
-          - path: /scanner(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /scanner
+            pathType: Prefix
             backend:
               service:
                 name: kyoo-scanner
                 port:
                   number: 4389
-          - path: /auth(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /auth
+            pathType: Prefix
             backend:
               service:
                 name: kyoo-auth
                 port:
                   number: 4568
-          - path: /.well-known(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /.well-known
+            pathType: Prefix
             backend:
               service:
                 name: kyoo-auth
                 port:
                   number: 4568
-          # Frontend catch-all last
           - path: /
             pathType: Prefix
             backend:
