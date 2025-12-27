@@ -101,7 +101,92 @@ spec:
     traefikproxy:
       enabled: true
 
-    # Transcoder configuration for AMD GPU (VAAPI)
+    # API - init container creates database and pg_trgm extension
+    api:
+      kyoo_api:
+        image:
+          tag: edge
+      extraInitContainers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:17.4
+          env:
+            - name: INIT_POSTGRES_HOST
+              value: postgres-rw.db.svc.cluster.local
+            - name: INIT_POSTGRES_SUPER_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: pg-credentials
+                  key: password
+            - name: INIT_POSTGRES_USER
+              value: kyoo
+            - name: INIT_POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: kyoo
+                  key: PG_PASSWORD
+            - name: INIT_POSTGRES_DBNAME
+              value: kyoo_api
+          volumeMounts:
+            - name: init-sql
+              mountPath: /initdb
+      extraVolumes:
+        - name: init-sql
+          configMap:
+            name: kyoo-init-sql
+
+    # Auth - init container creates database
+    auth:
+      kyoo_auth:
+        image:
+          tag: edge
+      extraInitContainers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:17.4
+          env:
+            - name: INIT_POSTGRES_HOST
+              value: postgres-rw.db.svc.cluster.local
+            - name: INIT_POSTGRES_SUPER_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: pg-credentials
+                  key: password
+            - name: INIT_POSTGRES_USER
+              value: kyoo
+            - name: INIT_POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: kyoo
+                  key: PG_PASSWORD
+            - name: INIT_POSTGRES_DBNAME
+              value: kyoo_auth
+
+    # Scanner - init container creates database
+    scanner:
+      kyoo_scanner:
+        image:
+          tag: edge
+      extraInitContainers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:17.4
+          env:
+            - name: INIT_POSTGRES_HOST
+              value: postgres-rw.db.svc.cluster.local
+            - name: INIT_POSTGRES_SUPER_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: pg-credentials
+                  key: password
+            - name: INIT_POSTGRES_USER
+              value: kyoo
+            - name: INIT_POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: kyoo
+                  key: PG_PASSWORD
+            - name: INIT_POSTGRES_DBNAME
+              value: kyoo_scanner
+
+    # Transcoder - init container creates database, plus GPU config
     transcoder:
       kyoo_transcoder:
         image:
@@ -112,28 +197,33 @@ spec:
         extraVolumeMounts:
           - name: dri
             mountPath: /dev/dri
+      extraInitContainers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:17.4
+          env:
+            - name: INIT_POSTGRES_HOST
+              value: postgres-rw.db.svc.cluster.local
+            - name: INIT_POSTGRES_SUPER_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: pg-credentials
+                  key: password
+            - name: INIT_POSTGRES_USER
+              value: kyoo
+            - name: INIT_POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: kyoo
+                  key: PG_PASSWORD
+            - name: INIT_POSTGRES_DBNAME
+              value: kyoo_transcoder
       extraVolumes:
         - name: dri
           hostPath:
             path: /dev/dri
 
-    # Use edge tag for all images
-    api:
-      kyoo_api:
-        image:
-          tag: edge
-
-    auth:
-      kyoo_auth:
-        image:
-          tag: edge
-
+    # Frontend - no database needed
     front:
       kyoo_front:
-        image:
-          tag: edge
-
-    scanner:
-      kyoo_scanner:
         image:
           tag: edge
