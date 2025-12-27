@@ -1,9 +1,9 @@
 ---
-# Protected paths - need auth via /auth/jwt
+# Protected paths - need auth via /auth/jwt (API, video, scanner, swagger)
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kyoo-protected
+  name: kyoo-api
   namespace: media
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
@@ -49,11 +49,11 @@ spec:
                 port:
                   number: 4389
 ---
-# Unprotected paths - auth service and frontend
+# Auth service paths - no external auth needed
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kyoo
+  name: kyoo-auth
   namespace: media
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
@@ -80,6 +80,24 @@ spec:
                 name: kyoo-auth
                 port:
                   number: 4568
+---
+# Frontend - no auth needed (frontend handles auth via API calls)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kyoo-front
+  namespace: media
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+spec:
+  ingressClassName: private
+  tls:
+    - hosts:
+        - "kyoo.${SECRET_DOMAIN}"
+  rules:
+    - host: "kyoo.${SECRET_DOMAIN}"
+      http:
+        paths:
           - path: /
             pathType: Prefix
             backend:
