@@ -70,9 +70,10 @@ spec:
                 sed -i '/^WebUI\\AlternativeUIEnabled=/d' "$CONFIG_FILE"
                 sed -i '/^WebUI\\RootFolder=/d' "$CONFIG_FILE"
                 sed -i '/^WebUI\\Port=/d' "$CONFIG_FILE"
+                sed -i '/^WebUI\\Password_PBKDF2=/d' "$CONFIG_FILE"
 
                 # Add the WebUI settings under [Preferences]
-                sed -i '/^\[Preferences\]/a WebUI\\AlternativeUIEnabled=true\nWebUI\\RootFolder=/addons/VueTorrent\nWebUI\\Port=1080' "$CONFIG_FILE"
+                sed -i '/^\[Preferences\]/a WebUI\\AlternativeUIEnabled=true\nWebUI\\RootFolder=/addons/VueTorrent\nWebUI\\Port=1080\nWebUI\\Password_PBKDF2="'"$${QBITTORRENT_PASSWORD_HASH}"'"' "$CONFIG_FILE"
 
                 # Add [RSS] section if it doesn't exist
                 if ! grep -q "^\[RSS\]" "$CONFIG_FILE"; then
@@ -149,6 +150,11 @@ spec:
                   secretKeyRef:
                     name: kyoo
                     key: PTE_RSS
+              QBITTORRENT_PASSWORD_HASH:
+                valueFrom:
+                  secretKeyRef:
+                    name: kyoo
+                    key: QBITTORRENT_PASSWORD_HASH
         containers:
           qbittorrent:
             image:
