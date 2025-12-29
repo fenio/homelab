@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: kubernetes-replicator
-      version: 2.12.1
+      version: 2.12.2
       sourceRef:
         kind: HelmRepository
         name: replicator
