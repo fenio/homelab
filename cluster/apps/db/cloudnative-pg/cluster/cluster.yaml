@@ -16,7 +16,7 @@ spec:
   superuserSecret:
     name: pg-credentials
   storage:
-    size: 30Gi
+    size: 50Gi
     storageClass: iscsi
   postgresql:
     shared_preload_libraries: [pg_stat_statements]
