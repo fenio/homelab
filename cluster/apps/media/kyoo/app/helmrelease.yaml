@@ -108,7 +108,7 @@ spec:
           tag: edge
       extraInitContainers:
         - name: init-db
-          image: ghcr.io/onedr0p/postgres-init:17.4
+          image: ghcr.io/home-operations/postgres-init:18.1
           env:
             - name: INIT_POSTGRES_HOST
               value: postgres-rw.db.svc.cluster.local
@@ -128,7 +128,7 @@ spec:
               value: kyoo_api
         # Create pg_trgm extension as superuser (required for full-text search)
         - name: init-extensions
-          image: ghcr.io/onedr0p/postgres-init:17.4
+          image: ghcr.io/home-operations/postgres-init:18.1
           env:
             - name: PGHOST
               value: postgres-rw.db.svc.cluster.local
@@ -158,7 +158,7 @@ spec:
           tag: edge
       extraInitContainers:
         - name: init-db
-          image: ghcr.io/onedr0p/postgres-init:17.4
+          image: ghcr.io/home-operations/postgres-init:18.1
           env:
             - name: INIT_POSTGRES_HOST
               value: postgres-rw.db.svc.cluster.local
@@ -203,7 +203,7 @@ spec:
           failureThreshold: 5
       extraInitContainers:
         - name: init-db
-          image: ghcr.io/onedr0p/postgres-init:17.4
+          image: ghcr.io/home-operations/postgres-init:18.1
           env:
             - name: INIT_POSTGRES_HOST
               value: postgres-rw.db.svc.cluster.local
@@ -235,7 +235,7 @@ spec:
             mountPath: /dev/dri
       extraInitContainers:
         - name: init-db
-          image: ghcr.io/onedr0p/postgres-init:17.4
+          image: ghcr.io/home-operations/postgres-init:18.1
           env:
             - name: INIT_POSTGRES_HOST
               value: postgres-rw.db.svc.cluster.local
