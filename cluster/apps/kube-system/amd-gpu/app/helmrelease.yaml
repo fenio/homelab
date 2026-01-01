@@ -30,6 +30,7 @@ spec:
     labeller:
       enabled: true
     nfd:
-      enabled: false
+      enabled: true
+    node_selector_enabled: true
     securityContext:
       allowPrivilegeEscalation: true
