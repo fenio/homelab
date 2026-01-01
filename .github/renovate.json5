@@ -84,9 +84,6 @@
     {
       description: "Limit concurrent updates for media applications",
       matchPackageNames: [
-        "ghcr.io/onedr0p/sonarr-develop",
-        "ghcr.io/onedr0p/lidarr-develop", 
-        "ghcr.io/onedr0p/readarr-develop",
         "ghcr.io/zoriya/helm-charts/kyoo",
       ],
       prConcurrentLimit: 1,
