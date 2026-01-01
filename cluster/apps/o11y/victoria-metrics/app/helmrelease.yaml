@@ -104,7 +104,7 @@ spec:
     vmsingle:
       spec:
         extraArgs:
-          maxLabelsPerTimeseries: "100"
+          maxLabelsPerTimeseries: "150"
           maxLabelValueLen: "8192"
         image:
           pullPolicy: Always
