@@ -45,7 +45,7 @@ spec:
             dependsOn: vuetorrent
             image:
               repository: docker.io/library/alpine
-              tag: 3.21.2
+              tag: 3.23.2
             command:
               - /bin/sh
               - -c
