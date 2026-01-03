@@ -3,17 +3,17 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: dms
+  name: minidlna
   namespace: flux-system
 spec:
-  path: ./cluster/apps/media/dms/app
+  path: ./cluster/apps/media/minidlna/app
   targetNamespace: media
   sourceRef:
     kind: GitRepository
     name: homelab
   commonMetadata:
     labels:
-      app.kubernetes.io/name: &appname dms
+      app.kubernetes.io/name: &appname minidlna
   prune: true
   wait: false
   interval: 10m

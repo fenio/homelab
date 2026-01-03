@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: dms
+  name: minidlna
 spec:
   chartRef:
     kind: OCIRepository
@@ -13,7 +13,7 @@ spec:
   timeout: 15m
   values:
     controllers:
-      dms:
+      minidlna:
         type: deployment
         initContainers:
           setup-multicast:
@@ -31,16 +31,16 @@ spec:
               capabilities:
                 add: ["NET_ADMIN"]
         containers:
-          dms:
+          minidlna:
             image:
               repository: docker.io/vladgh/minidlna
               tag: latest
             env:
               MINIDLNA_MEDIA_DIR: /media
-              MINIDLNA_FRIENDLY_NAME: "Homelab DLNA"
+              MINIDLNA_FRIENDLY_NAME: "DLNA"
               MINIDLNA_INOTIFY: "yes"
               MINIDLNA_NETWORK_INTERFACE: enp3s0
-              MINIDLNA_NOTIFY_INTERVAL: "60"
+              MINIDLNA_NOTIFY_INTERVAL: "30"
             securityContext:
               privileged: true
             resources:
@@ -53,8 +53,8 @@ spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
     service:
-      dms:
-        controller: dms
+      minidlna:
+        controller: minidlna
         ports:
           http:
             port: 8200
