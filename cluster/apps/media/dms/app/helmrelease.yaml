@@ -32,10 +32,12 @@ spec:
                 memory: 512Mi
     service:
       dms:
+        type: NodePort
         controller: dms
         ports:
           http:
             port: 8200
+            nodePort: 30820
     persistence:
       media:
         enabled: true
