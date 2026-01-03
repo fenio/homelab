@@ -15,6 +15,21 @@ spec:
     controllers:
       dms:
         type: deployment
+        initContainers:
+          setup-multicast:
+            image:
+              repository: docker.io/library/busybox
+              tag: latest
+            command:
+              - /bin/sh
+              - -c
+              - |
+                ip route add 224.0.0.0/4 dev enp3s0 || true
+                echo "Multicast route added"
+            securityContext:
+              privileged: true
+              capabilities:
+                add: ["NET_ADMIN"]
         containers:
           dms:
             image:
