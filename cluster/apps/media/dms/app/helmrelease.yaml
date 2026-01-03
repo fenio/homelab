@@ -26,11 +26,7 @@ spec:
               - -friendlyName
               - "Homelab DMS"
             securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
-              capabilities:
-                add: ["NET_RAW", "NET_BIND_SERVICE"]
-                drop: ["ALL"]
+              privileged: true
             resources:
               requests:
                 cpu: 50m
