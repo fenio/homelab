@@ -41,6 +41,9 @@ spec:
               MINIDLNA_INOTIFY: "yes"
               MINIDLNA_NETWORK_INTERFACE: enp3s0
               MINIDLNA_NOTIFY_INTERVAL: "30"
+              MINIDLNA_MODEL_NAME: "Windows Media Connect"
+              MINIDLNA_ROOT_CONTAINER: "B"
+              MINIDLNA_STRICT_DLNA: "yes"
             securityContext:
               privileged: true
             resources:
