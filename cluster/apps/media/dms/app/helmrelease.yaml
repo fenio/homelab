@@ -25,6 +25,8 @@ spec:
               - /media
               - -friendlyName
               - "Homelab DMS"
+              - -ifname
+              - enp3s0
             securityContext:
               privileged: true
             resources:
