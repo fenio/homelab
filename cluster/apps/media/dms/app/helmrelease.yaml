@@ -1,0 +1,60 @@
+---
+# yaml-language-server: $schema=https://datreeio.github.io/CRDs-catalog/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: dms
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  interval: 30m
+  timeout: 15m
+  values:
+    controllers:
+      dms:
+        type: deployment
+        containers:
+          dms:
+            image:
+              repository: ghcr.io/anacrolix/dms
+              tag: latest
+            args:
+              - -path
+              - /media
+              - -friendlyName
+              - "Homelab DMS"
+              - -ifname
+              - eth0
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+    defaultPodOptions:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+    service:
+      dms:
+        controller: dms
+        ports:
+          http:
+            port: 1338
+    persistence:
+      media:
+        enabled: true
+        existingClaim: media
+        globalMounts:
+          - path: /media
+            readOnly: true
