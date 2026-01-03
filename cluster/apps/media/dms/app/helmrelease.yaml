@@ -18,7 +18,7 @@ spec:
         containers:
           dms:
             image:
-              repository: ghcr.io/anacrolix/dms
+              repository: ghcr.io/fenio/dms
               tag: latest
             args:
               - -path
