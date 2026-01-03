@@ -33,15 +33,13 @@ spec:
         containers:
           dms:
             image:
-              repository: ghcr.io/fenio/dms
+              repository: docker.io/vladgh/minidlna
               tag: latest
-            args:
-              - -path
-              - /media
-              - -friendlyName
-              - "Homelab DMS"
-              - -ifname
-              - enp3s0
+            env:
+              MINIDLNA_MEDIA_DIR: /media
+              MINIDLNA_FRIENDLY_NAME: "Homelab DLNA"
+              MINIDLNA_INOTIFY: "yes"
+              MINIDLNA_NETWORK_INTERFACE: enp3s0
             securityContext:
               privileged: true
             resources:
@@ -58,7 +56,7 @@ spec:
         controller: dms
         ports:
           http:
-            port: 1338
+            port: 8200
     persistence:
       media:
         enabled: true
