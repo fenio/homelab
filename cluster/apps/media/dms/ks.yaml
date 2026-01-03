@@ -1,0 +1,19 @@
+---
+# yaml-language-server: $schema=https://datreeio.github.io/CRDs-catalog/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: dms
+  namespace: flux-system
+spec:
+  path: ./cluster/apps/media/dms/app
+  targetNamespace: media
+  sourceRef:
+    kind: GitRepository
+    name: homelab
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: &appname dms
+  prune: true
+  wait: false
+  interval: 10m
