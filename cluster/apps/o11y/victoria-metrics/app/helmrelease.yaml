@@ -158,7 +158,7 @@ spec:
             memory: 200Mi
             ephemeral-storage: 100Mi
           limits:
-            memory: 400Mi
+            memory: 500Mi
             ephemeral-storage: 500Mi
       ingress:
         ingressClassName: private
