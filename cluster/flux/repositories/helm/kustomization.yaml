@@ -22,4 +22,5 @@ resources:
   - ./reloader.yaml
   - ./replicator.yaml
   - ./snapshotter.yaml
+  - ./tns-csi.yaml
   - ./victoriametrics.yaml

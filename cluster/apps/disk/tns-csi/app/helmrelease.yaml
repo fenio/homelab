@@ -10,25 +10,26 @@ spec:
   timeout: 15m
   chart:
     spec:
-      chart: charts/tns-csi-driver
+      chart: tns-csi-driver
+      version: "0.8.0"
       sourceRef:
-        kind: GitRepository
+        kind: HelmRepository
         name: tns-csi
         namespace: flux-system
   values:
     truenas:
       existingSecret: "tns-csi-credentials"
       url: ""
-    
+
     image:
       repository: bfenski/tns-csi
       pullPolicy: IfNotPresent
-      tag: "latest"
-    
+      tag: "v0.8.0"
+
     controller:
       replicas: 1
-      logLevel: 4
-    
+      logLevel: 2
+
     storageClasses:
       nfs:
         enabled: true
@@ -38,8 +39,8 @@ spec:
         server: "10.10.20.100"
       nvmeof:
         enabled: false
-    
+
     rbac:
       create: true
-    
+
     namespace: kube-system
