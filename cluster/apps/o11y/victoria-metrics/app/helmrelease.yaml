@@ -132,6 +132,7 @@ spec:
     vmalert:
       spec:
         replicaCount: 1
+        externalURL: "https://vmalert.${SECRET_DOMAIN}"
         image:
           pullPolicy: Always
         resources:
@@ -142,6 +143,19 @@ spec:
           limits:
             memory: 200Mi
             ephemeral-storage: 500Mi
+      ingress:
+        ingressClassName: private
+        enabled: true
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Infrastructure
+          gethomepage.dev/name: VM Alert
+          gethomepage.dev/icon: si-victoriametrics
+          gethomepage.dev/pod-selector: ""
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+        hosts:
+          - &host vmalert.${SECRET_DOMAIN}
+        tls: [hosts: [*host]]
     vmagent:
       spec:
         replicaCount: 1
