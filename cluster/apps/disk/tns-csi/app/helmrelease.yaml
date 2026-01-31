@@ -43,7 +43,10 @@ spec:
         pool: "storage"
         server: "10.10.20.100"
       nvmeof:
-        enabled: false
+        enabled: true
+        name: tns-csi-nvmeof
+        pool: "storage"
+        server: "10.10.20.100"
 
     rbac:
       create: true
