@@ -1,17 +1,54 @@
+# Adopted media NFS volume (migrated from democratic-csi to tns-csi-nfs)
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/persistentvolumeclaim.json
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
+  annotations:
+    tns-csi.io/dataset: storage/nfs/v/pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
+  labels:
+    app.kubernetes.io/managed-by: kubectl-tns-csi
+    tns-csi.io/adopted: "true"
+spec:
+  capacity:
+    storage: 1000Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: tns-csi-nfs
+  mountOptions:
+    - nconnect=8
+    - hard
+    - noatime
+    - nodiratime
+  csi:
+    driver: tns.csi.io
+    volumeHandle: pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
+    volumeAttributes:
+      protocol: nfs
+      datasetID: storage/nfs/v/pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
+      datasetName: storage/nfs/v/pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
+      server: 10.10.20.100
+      share: /mnt/storage/nfs/v/pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
+  claimRef:
+    name: media
+    namespace: media
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: media
   namespace: media
+  annotations:
+    tns-csi.io/dataset: storage/nfs/v/pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
+  labels:
+    app.kubernetes.io/managed-by: kubectl-tns-csi
+    tns-csi.io/adopted: "true"
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 1000Gi
-  storageClassName: nfs
-  nfs:
-    mountOptions: [nfsvers=4.2, nconnect=8, hard, noatime, nodiratime]
-  persistentVolumeReclaimPolicy: Retain
+  storageClassName: tns-csi-nfs
+  volumeName: pv-pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
