@@ -29,6 +29,8 @@ spec:
   values:
     fullnameOverride: vl
     server:
+      podSecurityContext:
+        fsGroupChangePolicy: OnRootMismatch
       resources:
         requests:
           cpu: 20m
