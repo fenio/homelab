@@ -37,6 +37,11 @@ spec:
         isDefault: true
         pool: "storage"
         server: "10.10.20.100"
+      iscsi:
+        enabled: true
+        name: tns-csi-iscsi
+        pool: "storage"
+        server: "10.10.20.100"
       nvmeof:
         enabled: false
 
