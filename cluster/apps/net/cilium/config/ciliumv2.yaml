@@ -7,6 +7,9 @@ spec:
   families:
     - afi: ipv4
       safi: unicast
+      advertisements:
+        matchLabels:
+          advertise: bgp
 ---
 apiVersion: cilium.io/v2
 kind: CiliumBGPClusterConfig
@@ -45,6 +48,9 @@ metadata:
 spec:
   advertisements:
     - advertisementType: "Service"
+      service:
+        addresses:
+          - LoadBalancerIP
       selector:
         matchExpressions:
           - { key: somekey, operator: NotIn, values: ["never-used-value"] }
