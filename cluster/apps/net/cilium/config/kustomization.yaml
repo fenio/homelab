@@ -5,4 +5,5 @@ kind: Kustomization
 namespace: net
 resources:
   - ./ciliumloadbalancerippool.yaml
-  - ./ciliumbgppeeringpolicy.yaml
+#  - ./ciliumbgppeeringpolicy.yaml
+  - ./ciliumv2.yaml
