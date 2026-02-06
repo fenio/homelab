@@ -1,0 +1,161 @@
+# Adoption manifests for PostgreSQL volumes (db namespace)
+# Migrated from democratic-csi (iscsi) to tns-csi-iscsi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-pvc-8939fd63-235a-4715-8de6-bb11c7063a77
+  annotations:
+    tns-csi.io/dataset: storage/iscsi/v/pvc-8939fd63-235a-4715-8de6-bb11c7063a77
+  labels:
+    app.kubernetes.io/managed-by: kubectl-tns-csi
+    tns-csi.io/adopted: "true"
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: tns-csi-iscsi
+  csi:
+    driver: tns.csi.io
+    volumeHandle: pvc-8939fd63-235a-4715-8de6-bb11c7063a77
+    volumeAttributes:
+      protocol: iscsi
+      datasetID: storage/iscsi/v/pvc-8939fd63-235a-4715-8de6-bb11c7063a77
+      datasetName: storage/iscsi/v/pvc-8939fd63-235a-4715-8de6-bb11c7063a77
+      iscsiIQN: iqn.2005-10.org.freenas.ctl:csi-pvc-8939fd63-235a-4715-8de6-bb11c7063a77-clustera
+      server: 10.10.20.100
+      iscsiTargetID: "498"
+      iscsiExtentID: "591"
+  claimRef:
+    name: postgres-2
+    namespace: db
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-2
+  namespace: db
+  annotations:
+    tns-csi.io/dataset: storage/iscsi/v/pvc-8939fd63-235a-4715-8de6-bb11c7063a77
+  labels:
+    app.kubernetes.io/managed-by: kubectl-tns-csi
+    tns-csi.io/adopted: "true"
+    cnpg.io/cluster: postgres
+    cnpg.io/instanceName: postgres-2
+    cnpg.io/pvcRole: PG_DATA
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: tns-csi-iscsi
+  volumeName: pv-pvc-8939fd63-235a-4715-8de6-bb11c7063a77
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-pvc-b6568a4d-7890-4017-9921-118d374f5879
+  annotations:
+    tns-csi.io/dataset: storage/iscsi/v/pvc-b6568a4d-7890-4017-9921-118d374f5879
+  labels:
+    app.kubernetes.io/managed-by: kubectl-tns-csi
+    tns-csi.io/adopted: "true"
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: tns-csi-iscsi
+  csi:
+    driver: tns.csi.io
+    volumeHandle: pvc-b6568a4d-7890-4017-9921-118d374f5879
+    volumeAttributes:
+      protocol: iscsi
+      datasetID: storage/iscsi/v/pvc-b6568a4d-7890-4017-9921-118d374f5879
+      datasetName: storage/iscsi/v/pvc-b6568a4d-7890-4017-9921-118d374f5879
+      iscsiIQN: iqn.2005-10.org.freenas.ctl:csi-pvc-b6568a4d-7890-4017-9921-118d374f5879-clustera
+      server: 10.10.20.100
+      iscsiTargetID: "525"
+      iscsiExtentID: "618"
+  claimRef:
+    name: postgres-4
+    namespace: db
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-4
+  namespace: db
+  annotations:
+    tns-csi.io/dataset: storage/iscsi/v/pvc-b6568a4d-7890-4017-9921-118d374f5879
+  labels:
+    app.kubernetes.io/managed-by: kubectl-tns-csi
+    tns-csi.io/adopted: "true"
+    cnpg.io/cluster: postgres
+    cnpg.io/instanceName: postgres-4
+    cnpg.io/pvcRole: PG_DATA
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: tns-csi-iscsi
+  volumeName: pv-pvc-b6568a4d-7890-4017-9921-118d374f5879
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-pvc-3d859503-1724-4ace-b5ff-a09834b14327
+  annotations:
+    tns-csi.io/dataset: storage/iscsi/v/pvc-3d859503-1724-4ace-b5ff-a09834b14327
+  labels:
+    app.kubernetes.io/managed-by: kubectl-tns-csi
+    tns-csi.io/adopted: "true"
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: tns-csi-iscsi
+  csi:
+    driver: tns.csi.io
+    volumeHandle: pvc-3d859503-1724-4ace-b5ff-a09834b14327
+    volumeAttributes:
+      protocol: iscsi
+      datasetID: storage/iscsi/v/pvc-3d859503-1724-4ace-b5ff-a09834b14327
+      datasetName: storage/iscsi/v/pvc-3d859503-1724-4ace-b5ff-a09834b14327
+      iscsiIQN: iqn.2005-10.org.freenas.ctl:csi-pvc-3d859503-1724-4ace-b5ff-a09834b14327-clustera
+      server: 10.10.20.100
+      iscsiTargetID: "526"
+      iscsiExtentID: "619"
+  claimRef:
+    name: postgres-5
+    namespace: db
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-5
+  namespace: db
+  annotations:
+    tns-csi.io/dataset: storage/iscsi/v/pvc-3d859503-1724-4ace-b5ff-a09834b14327
+  labels:
+    app.kubernetes.io/managed-by: kubectl-tns-csi
+    tns-csi.io/adopted: "true"
+    cnpg.io/cluster: postgres
+    cnpg.io/instanceName: postgres-5
+    cnpg.io/pvcRole: PG_DATA
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: tns-csi-iscsi
+  volumeName: pv-pvc-3d859503-1724-4ace-b5ff-a09834b14327
