@@ -28,6 +28,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    authBootstrapAdminPassword: ${COROOT_ADMIN_PASSWORD}
     ingress:
       enabled: true
       className: private
