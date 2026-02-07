@@ -18,6 +18,6 @@ spec:
   wait: false
   interval: 10m
   dependsOn:
-    - name: iscsi
+    - name: tns-csi
     - name: ingress-nginx
     - name: cloudnative-pg-cluster
