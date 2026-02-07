@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv-pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
+  name: pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
   annotations:
     tns-csi.io/dataset: storage/nfs/v/pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
   labels:
@@ -51,4 +51,4 @@ spec:
     requests:
       storage: 1000Gi
   storageClassName: tns-csi-nfs
-  volumeName: pv-pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
+  volumeName: pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
