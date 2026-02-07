@@ -4,7 +4,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv-pvc-ddaff1f7-1f7d-4e71-97ba-ea30b493921c
+  name: pvc-ddaff1f7-1f7d-4e71-97ba-ea30b493921c
   annotations:
     tns-csi.io/dataset: storage/iscsi/v/pvc-ddaff1f7-1f7d-4e71-97ba-ea30b493921c
   labels:
@@ -49,12 +49,12 @@ spec:
     requests:
       storage: 8Gi
   storageClassName: tns-csi-iscsi
-  volumeName: pv-pvc-ddaff1f7-1f7d-4e71-97ba-ea30b493921c
+  volumeName: pvc-ddaff1f7-1f7d-4e71-97ba-ea30b493921c
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv-pvc-f4ae9e8b-6023-41f3-ace0-e5e290c350b6
+  name: pvc-f4ae9e8b-6023-41f3-ace0-e5e290c350b6
   annotations:
     tns-csi.io/dataset: storage/iscsi/v/pvc-f4ae9e8b-6023-41f3-ace0-e5e290c350b6
   labels:
@@ -99,4 +99,4 @@ spec:
     requests:
       storage: 3Gi
   storageClassName: tns-csi-iscsi
-  volumeName: pv-pvc-f4ae9e8b-6023-41f3-ace0-e5e290c350b6
+  volumeName: pvc-f4ae9e8b-6023-41f3-ace0-e5e290c350b6
