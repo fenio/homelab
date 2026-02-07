@@ -49,7 +49,11 @@ spec:
           ephemeral-storage: 200Mi
     externalPrometheus:
       url: http://vmsingle-vm.o11y.svc.cluster.local:8428
+    storage:
+      className: tns-csi-nvmeof
     clickhouse:
+      storage:
+        className: tns-csi-nvmeof
       resources:
         requests:
           cpu: 400m
