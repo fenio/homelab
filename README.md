@@ -44,6 +44,72 @@ This is home to my personal Kubernetes lab cluster running on [Talos Linux](http
 
 </details>
 
+<details>
+<summary><h2 style="display: inline-block; margin: 0;">Components</h2></summary>
+
+### Networking (`net`)
+
+| Component | Description |
+| --------- | ----------- |
+| [Cilium](https://cilium.io/) | eBPF-based CNI with kube-proxy replacement, Wireguard encryption, and Hubble observability |
+| [ingress-nginx](https://kubernetes.github.io/ingress-nginx/) | Ingress controllers for public and private traffic |
+| [cert-manager](https://cert-manager.io/) | Automatic TLS certificates via Let's Encrypt |
+| [external-dns](https://github.com/kubernetes-sigs/external-dns) | Automatic DNS record management via Cloudflare |
+
+### Storage (`disk`)
+
+| Component | Description |
+| --------- | ----------- |
+| [tns-csi](https://github.com/fenio/tns-csi) | TrueNAS CSI driver providing NFS, iSCSI, and NVMe-oF storage classes |
+| [snapshot-controller](https://github.com/kubernetes-csi/external-snapshotter) | Volume snapshot support |
+
+### Database (`db`)
+
+| Component | Description |
+| --------- | ----------- |
+| [CloudNative-PG](https://cloudnative-pg.io/) | PostgreSQL operator and cluster |
+
+### Observability (`o11y`)
+
+| Component | Description |
+| --------- | ----------- |
+| [VictoriaMetrics](https://victoriametrics.com/) | Metrics storage, vmagent, vmalert, and alertmanager |
+| [VictoriaLogs](https://docs.victoriametrics.com/victorialogs/) | Log aggregation with Vector collection |
+| [Grafana](https://grafana.com/) | Dashboards and visualization |
+| [Coroot](https://coroot.com/) | Application performance monitoring with ClickHouse backend |
+| [Goldpinger](https://github.com/bloomberg/goldpinger) | Cluster network connectivity monitoring |
+| [smartctl-exporter](https://github.com/prometheus-community/smartctl_exporter) | Disk S.M.A.R.T. health metrics |
+| [metrics-server](https://github.com/kubernetes-sigs/metrics-server) | Kubernetes resource metrics |
+| [Flux Web UI](https://github.com/fluxcd/webui) | Web dashboard for Flux CD |
+
+### Media (`media`)
+
+| Component | Description |
+| --------- | ----------- |
+| [Kyoo](https://github.com/zoriya/kyoo) | Media server with transcoding and metadata management |
+| [qBittorrent](https://www.qbittorrent.org/) | BitTorrent client with VueTorrent WebUI |
+| [DMS](https://github.com/anacrolix/dms) | DLNA/UPnP media server |
+
+### Self-hosted (`selfhosted`)
+
+| Component | Description |
+| --------- | ----------- |
+| [Ollama](https://ollama.com/) | Local LLM runtime with ROCm GPU support |
+| [Open WebUI](https://github.com/open-webui/open-webui) | ChatGPT-like interface for Ollama |
+| [Perplexica](https://github.com/ItzCrazyKns/Perplexica) | AI-powered search engine |
+| [SearXNG](https://github.com/searxng/searxng) | Privacy-focused meta search engine |
+
+### System (`kube-system`, `default`)
+
+| Component | Description |
+| --------- | ----------- |
+| [AMD GPU device plugin](https://github.com/ROCm/k8s-device-plugin) | ROCm GPU support for AI workloads |
+| [Reloader](https://github.com/stakater/Reloader) | Auto-restart pods on ConfigMap/Secret changes |
+| [Replicator](https://github.com/mittwald/kubernetes-replicator) | Cross-namespace secret and configmap replication |
+| [Homepage](https://gethomepage.dev/) | Personal dashboard |
+
+</details>
+
 ## Installing the cluster from scratch
 
 ### Prerequisites
