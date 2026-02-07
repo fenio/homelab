@@ -20,7 +20,7 @@ spec:
             - name: config
               globalMounts:
                 - path: /config
-              storageClass: iscsi
+              storageClass: tns-csi-iscsi
               accessMode: ReadWriteOnce
               size: 5Gi
         initContainers:

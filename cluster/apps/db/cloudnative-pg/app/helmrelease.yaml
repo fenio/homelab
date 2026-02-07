@@ -19,7 +19,7 @@ spec:
         name: cloudnative-pg
         namespace: flux-system
   dependsOn:
-    - name: iscsi
+    - name: tns-csi
       namespace: disk
   maxHistory: 3
   install:
