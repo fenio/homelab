@@ -34,7 +34,6 @@ spec:
       nfs:
         enabled: true
         name: tns-csi-nfs
-        isDefault: true
         pool: "storage"
         server: "10.10.20.100"
       iscsi:
@@ -45,6 +44,7 @@ spec:
       nvmeof:
         enabled: true
         name: tns-csi-nvmeof
+        isDefault: true
         pool: "storage"
         server: "10.10.20.100"
 
