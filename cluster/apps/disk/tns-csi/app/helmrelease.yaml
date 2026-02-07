@@ -4,7 +4,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: tns-csi
-  namespace: kube-system
+  namespace: disk
 spec:
   interval: 5m
   timeout: 15m
@@ -18,9 +18,9 @@ spec:
         namespace: flux-system
   values:
     truenas:
-      existingSecret: "tns-csi-credentials"
+      url: "wss://${CONFIG_TRUENAS_IP}:1443/api/current"
+      apiKey: ${TRUENAS_API_KEY}
       skipTLSVerify: true
-      url: ""
 
     image:
       repository: bfenski/tns-csi
@@ -51,4 +51,4 @@ spec:
     rbac:
       create: true
 
-    namespace: kube-system
+    namespace: disk
