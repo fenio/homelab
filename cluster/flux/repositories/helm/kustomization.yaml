@@ -7,7 +7,6 @@ resources:
   - ./certmanager.yaml
   - ./coroot.yaml
   - ./cloudnative-pg.yaml
-  - ./democratic-csi.yaml
   - ./external-dns.yaml
   - ./gadget.yaml
   - ./goldpinger.yaml

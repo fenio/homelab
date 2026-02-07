@@ -1,4 +1,3 @@
-# Adopted media NFS volume (migrated from democratic-csi to tns-csi-nfs)
 ---
 apiVersion: v1
 kind: PersistentVolume

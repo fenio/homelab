@@ -69,7 +69,6 @@
       description: "Storage and CSI group",
       groupName: "Storage and CSI",
       matchPackageNames: [
-        "democratic-csi/democratic-csi",
         "snapshot-controller",
         "snapshot-validation-webhook",
       ],
