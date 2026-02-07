@@ -1,0 +1,89 @@
+kind: Cluster
+name: homelab
+kubernetes:
+  version: v1.35.0
+talos:
+  version: v1.12.2
+patches:
+  - idOverride: 200-homelab
+    annotations:
+      name: ""
+    inline:
+      cluster:
+        allowSchedulingOnControlPlanes: true
+        network:
+          cni:
+            name: none
+        proxy:
+          disabled: true
+---
+kind: ControlPlane
+machines:
+  - 03000200-0400-0500-0006-000700080009
+  - 03000200-4000-5000-0060-007000800100
+  - 5c006b9c-b4bb-0000-0000-000000000000
+---
+kind: Workers
+---
+kind: Machine
+name: 03000200-0400-0500-0006-000700080009
+patches:
+  - idOverride: static-ip-101
+    annotations:
+      name: ""
+    inline:
+      machine:
+        network:
+          hostname: node1
+          interfaces:
+            - addresses:
+                - 10.10.20.101/28
+              interface: enp1s0
+              routes:
+                - gateway: 10.10.20.97
+                  network: 0.0.0.0/0
+          nameservers:
+            - 1.1.1.1
+            - 8.8.8.8
+---
+kind: Machine
+name: 03000200-4000-5000-0060-007000800100
+patches:
+  - idOverride: static-ip-102
+    annotations:
+      name: ""
+    inline:
+      machine:
+        network:
+          hostname: node2
+          interfaces:
+            - addresses:
+                - 10.10.20.102/28
+              interface: enp1s0
+              routes:
+                - gateway: 10.10.20.97
+                  network: 0.0.0.0/0
+          nameservers:
+            - 1.1.1.1
+            - 8.8.8.8
+---
+kind: Machine
+name: 5c006b9c-b4bb-0000-0000-000000000000
+patches:
+  - idOverride: static-ip-103
+    annotations:
+      name: ""
+    inline:
+      machine:
+        network:
+          hostname: node3
+          interfaces:
+            - addresses:
+                - 10.10.20.103/28
+              interface: enp3s0
+              routes:
+                - gateway: 10.10.20.97
+                  network: 0.0.0.0/0
+          nameservers:
+            - 1.1.1.1
+            - 8.8.8.8

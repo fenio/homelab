@@ -1,0 +1,4 @@
+providerRegex: |
+  ^(node\d+|powernode)$
+
+bypassDnsResolution: true

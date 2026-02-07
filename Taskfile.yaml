@@ -1,0 +1,68 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+vars:
+  TALOS_DIR: "{{.ROOT_DIR}}/talos"
+  CLUSTER_NAME: homelab
+  TALOS_ISO_PATH: /tmp/talos.iso
+  CLUSTER_TEMPLATE_PATH: "{{.ROOT_DIR}}/talos/homelab.yaml"
+
+includes:
+  flux:
+    dir: .taskfiles/flux
+    taskfile: .taskfiles/flux
+  format:
+    dir: .taskfiles/format
+    taskfile: .taskfiles/format
+  precommit:
+    dir: .taskfiles/precommit
+    taskfile: .taskfiles/precommit
+  talos:
+    dir: .taskfiles/talos
+    taskfile: .taskfiles/talos
+
+tasks:
+  default:
+    silent: true
+    cmds: ["task -l"]
+
+  bootstrap:
+    desc: "Run the full cluster provisioning"
+    cmds:
+      - task: download-iso
+      - task: template-sync
+      - task: kubeconfig
+      - task: helmfile-apply
+
+  download-iso:
+    desc: "Download Talos ISO with specific extensions and kernel args"
+    cmds:
+      - omnictl download iso --arch amd64 --secureboot --extensions amdgpu,amd-ucode,i915,intel-ice-firmware,intel-ucode,iscsi-tools,realtek-firmware --extra-kernel-args -lockdown,lockdown=integrity,mitigations=off --output {{.TALOS_ISO_PATH}}
+    status:
+      - test -f {{.TALOS_ISO_PATH}}
+
+  template-sync:
+    desc: "Sync the cluster template to Omni"
+    cmds:
+      - omnictl cluster template sync -f {{.CLUSTER_TEMPLATE_PATH}}
+
+  kubeconfig:
+    desc: "Get kubeconfig for the cluster"
+    cmds:
+      - omnictl kubeconfig -c {{.CLUSTER_NAME}}
+
+  helmfile-apply:
+    desc: "Apply helmfile (cilium, flux-operator, flux-instance)"
+    cmds:
+      - helmfile --quiet --file {{.TALOS_DIR}}/helmfile.yaml apply --skip-diff-on-install --suppress-diff
+
+  deps:
+    desc: Initialize workstation dependencies with Brew
+    cmds:
+      - brew bundle {{.CLI_ARGS}}
+    preconditions:
+      - sh: command -v brew
+        msg: |
+          Homebrew is not installed. Using MacOS, Linux or WSL?
+          Head over to https://brew.sh to get up and running.

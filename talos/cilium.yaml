@@ -1,0 +1,144 @@
+hubble:
+  enabled: true
+  metrics:
+    enabled:
+      - dns:query
+      - drop
+      - tcp
+      - flow
+      - port-distribution
+      - icmp
+      - http
+    serviceMonitor:
+      enabled: true
+  relay:
+    enabled: true
+    rollOutPods: true
+    prometheus:
+      serviceMonitor:
+        enabled: true
+        trustCRDsExist: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+        ephemeral-storage: 100Mi
+      limits:
+        memory: 200Mi
+        ephemeral-storage: 200Mi
+  ui:
+    enabled: true
+    rollOutPods: true
+    backend:
+      image:
+        pullPolicy: Always
+      resources:
+        requests:
+          cpu: 10m
+          memory: 100Mi
+          ephemeral-storage: 100Mi
+        limits:
+          memory: 200Mi
+          ephemeral-storage: 200Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities: {drop: ["ALL"]}
+    frontend:
+      image:
+        pullPolicy: Always
+      resources:
+        requests:
+          cpu: 10m
+          memory: 100Mi
+          ephemeral-storage: 100Mi
+        limits:
+          memory: 200Mi
+          ephemeral-storage: 200Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities: {drop: ["ALL"]}
+image:
+  pullPolicy: "Always"
+bgpControlPlane:
+  enabled: true
+bgp:
+  enabled: false
+kubeProxyReplacement: true
+k8sServiceHost: localhost
+k8sServicePort: 7445
+encryption:
+  enabled: true
+  type: wireguard
+  nodeEncryption: true
+operator:
+  replicas: 1
+  prometheus:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  resources:
+    requests:
+      cpu: 50m
+      memory: 100Mi
+      ephemeral-storage: 100Mi
+    limits:
+      memory: 200Mi
+      ephemeral-storage: 200Mi
+ipam:
+  mode: kubernetes
+  operator:
+    clusterPoolIPv4PodCIDR: 10.20.0.0/16
+    clusterPoolIPv4MaskSize: 24
+bpf:
+  masquerade: true
+  hostLegacyRouting: true
+bandwidthManager:
+  enabled: false
+  bbr: true
+prometheus:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    trustCRDsExist: true
+resources:
+  requests:
+    cpu: 100m
+    memory: 400Mi
+    ephemeral-storage: 100Mi
+  limits:
+    memory: 600Mi
+    ephemeral-storage: 200Mi
+cgroup:
+  autoMount:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+        ephemeral-storage: 100Mi
+      limits:
+        memory: 200Mi
+        ephemeral-storage: 200Mi
+cni:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mi
+      ephemeral-storage: 100Mi
+    limits:
+      memory: 200Mi
+      ephemeral-storage: 200Mi
+initResources:
+  requests:
+    cpu: 100m
+    memory: 100Mi
+    ephemeral-storage: 100Mi
+  limits:
+    memory: 200Mi
+    ephemeral-storage: 200Mi
+securityContext:
+  privileged: true
+  capabilities:
+    ciliumAgent: [CHOWN, KILL, NET_ADMIN, NET_RAW, IPC_LOCK, SYS_ADMIN, SYS_RESOURCE, DAC_OVERRIDE, FOWNER, SETGID, SETUID]
+    cleanCiliumState: [NET_ADMIN, SYS_ADMIN, SYS_RESOURCE]

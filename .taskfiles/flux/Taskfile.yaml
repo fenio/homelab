@@ -1,0 +1,57 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+  bootstrap:
+    desc: Bootstrap Flux into the cluster
+    cmds:
+      # Install SOPS age key
+      - kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=$SOPS_AGE_KEY_FILE --dry-run=client -o yaml | kubectl apply -f -
+      # Install secrets and configmaps
+      - sops --decrypt {{.ROOT_DIR}}/cluster/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f -
+      - kubectl apply --server-side --filename {{.ROOT_DIR}}/cluster/flux/vars/cluster-settings.yaml
+    preconditions:
+      - sh: command -v sops
+        msg: "sops is not installed"
+      - sh: test -n "$SOPS_AGE_KEY_FILE"
+        msg: "SOPS_AGE_KEY_FILE is not set"
+      - sh: test -f "$SOPS_AGE_KEY_FILE"
+        msg: "SOPS_AGE_KEY_FILE does not exist"
+      - test -f {{.ROOT_DIR}}/cluster/flux/vars/cluster-secrets.sops.yaml
+      - test -f {{.ROOT_DIR}}/cluster/flux/vars/cluster-settings.yaml
+
+  ks-suspend:
+    desc: Suspend all Flux Kustomizations
+    cmds:
+      - |
+        flux get ks --all-namespaces --no-header | awk '{print $1, $2}' \
+          | xargs -n2 bash -c 'flux -n $0 suspend ks $1'
+
+  ks-resume:
+    desc: Resume all Flux Kustomizations
+    cmds:
+      - |
+        flux get ks --all-namespaces --no-header | awk '{print $1, $2}' \
+          | xargs -n2 bash -c 'flux -n $0 resume ks $1'
+
+  hr-suspend:
+    desc: Suspend all Flux HelmReleases
+    cmds:
+      - |
+        flux get hr --all-namespaces --no-header | awk '{print $1, $2}' \
+          | xargs -n2 bash -c 'flux -n $0 suspend hr $1'
+
+  hr-resume:
+    desc: Resume all Flux HelmReleases
+    cmds:
+      - |
+        flux get hr --all-namespaces --no-header | awk '{print $1, $2}' \
+          | xargs -n2 bash -c 'flux -n $0 resume hr $1'
+
+  hr-reconcile:
+    desc: Reconcile all Flux HelmReleases
+    cmds:
+      - |
+        flux get hr --all-namespaces --no-header | awk '{print $1, $2}' \
+          | xargs -n2 bash -c 'flux -n $0 reconcile hr $1 --force'

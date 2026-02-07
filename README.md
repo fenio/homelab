@@ -75,14 +75,14 @@ Boot all three nodes from this ISO. They will register with Omni automatically.
 
 ### Step 2: Apply cluster template via Omni
 
-The cluster is defined in `~/talos/homelab.yaml`. This template configures:
+The cluster is defined in [`talos/homelab.yaml`](./talos/homelab.yaml). This template configures:
 - 3-node control plane (no dedicated workers, scheduling on control planes enabled)
 - No built-in CNI (Cilium installed separately)
 - kube-proxy disabled (Cilium replaces it)
 - Static IPs for each node
 
 ```sh
-omnictl cluster template sync -f ~/talos/homelab.yaml
+omnictl cluster template sync -f talos/homelab.yaml
 ```
 
 Wait for all nodes to join and become ready in Omni.
@@ -107,7 +107,7 @@ Nodes will be `NotReady` until Cilium is installed.
 
 ### Step 4: Install base components with helmfile
 
-From the `~/talos/talos` directory, helmfile installs components in order:
+[`helmfile`](./talos/helmfile.yaml) installs components in order:
 
 1. **prometheus-operator-crds** - CRDs needed by ServiceMonitors
 2. **cilium** - CNI with kube-proxy replacement, Wireguard, Hubble
@@ -115,8 +115,7 @@ From the `~/talos/talos` directory, helmfile installs components in order:
 4. **flux-instance** - Flux deployment pointing to this Git repository
 
 ```sh
-cd ~/talos/talos
-helmfile --file helmfile.yaml apply --skip-diff-on-install --suppress-diff
+helmfile --file talos/helmfile.yaml apply --skip-diff-on-install --suppress-diff
 ```
 
 This will take a few minutes. After completion, nodes should become `Ready`:
@@ -176,13 +175,20 @@ All kustomizations should eventually show `Ready: True`. The dependency chain en
 
 ### Automated alternative
 
-If you have [task](https://taskfile.dev/) installed, steps 1-4 can be run with a single command from the `~/talos` directory:
+If you have [task](https://taskfile.dev/) installed, steps 1-4 can be run with a single command from the repo root:
 
 ```sh
-task
+task bootstrap
 ```
 
-This runs: download-iso -> template-export -> template-sync -> kubeconfig -> helmfile-apply
+This runs: download-iso -> template-sync -> kubeconfig -> helmfile-apply
+
+Step 5 (Flux secrets) can also be automated:
+
+```sh
+export SOPS_AGE_KEY_FILE=~/AGE/sops-key.txt
+task flux:bootstrap
+```
 
 ## AGE / SOPS secrets
 

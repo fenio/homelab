@@ -1,0 +1,109 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+vars:
+  TALOS_DIR: "{{.ROOT_DIR}}/talos"
+
+tasks:
+  bootstrap:
+    desc: Bootstrap Talos
+    summary: |
+      Args:
+        cluster: Cluster to run command against (default: talos)
+        controller: Controller node to run command against (required)
+    prompt: Bootstrap Talos on the '{{.cluster}}' cluster... continue?
+    cmds:
+      - task: bootstrap-etcd
+        vars: &vars
+          cluster: '{{.cluster | default "talos"}}'
+          controller: "{{.controller}}"
+      - task: fetch-kubeconfig
+        vars: *vars
+      - task: bootstrap-integrations
+        vars: *vars
+    requires:
+      vars:
+        - controller
+
+  bootstrap-etcd:
+    desc: Bootstrap Etcd
+    cmd: until talosctl --nodes {{.controller}} -e e.0f.ee --talosconfig={{.TALOS_DIR}}/clusterconfig/talosconfig bootstrap; do sleep 10; done
+    requires:
+      vars:
+        - cluster
+        - controller
+
+  bootstrap-integrations:
+    desc: Bootstrap core integrations needed for Talos
+    cmds:
+      - until kubectl --context admin@{{.cluster}} wait --for=condition=Ready nodes --all --timeout=600s; do sleep 10; done
+      - helmfile --kube-context admin@{{.cluster}} --file {{.TALOS_DIR}}/helmfile.yaml sync --skip-diff-on-install --suppress-diff
+      - until kubectl --context admin@{{.cluster}} wait --for=condition=Ready nodes --all --timeout=600s; do sleep 10; done
+    requires:
+      vars:
+        - cluster
+    preconditions:
+      - which helmfile
+      - sh: kubectl config get-contexts admin@{{.cluster}}
+        msg: "Kubectl context {{.cluster}} not found"
+      - test -f {{.TALOS_DIR}}/helmfile.yaml
+
+  fetch-kubeconfig:
+    desc: Fetch kubeconfig from Talos controllers
+    cmd: |
+      talosctl --context {{.cluster}} kubeconfig --nodes {{.controller}} \
+          --force --force-context-name {{.cluster}} {{.TALOS_DIR}}/{{.cluster}}
+    requires:
+      vars:
+        - cluster
+    preconditions:
+      - talosctl config get-contexts | grep {{.cluster}}
+
+  apply-clusterconfig:
+    desc: Apply clusterconfig for a Talos cluster
+    vars:
+      CLUSTERCONFIG_FILES:
+        sh: gfind {{.TALOS_DIR}}/clusterconfig -type f -name '*.yaml' -printf '%f\n'
+    cmds:
+      - for:
+          var: CLUSTERCONFIG_FILES
+        task: _apply-machineconfig
+        vars:
+          cluster: "{{ .cluster }}"
+          filename: "{{.ITEM}}"
+          hostname: |-
+            {{ trimPrefix (printf "%s-" .cluster) .ITEM | trimSuffix ".yaml" }}
+          insecure: '{{ .insecure | default "false" }}'
+          dry_run: "{{ .dry_run }}"
+    requires:
+      vars:
+        - cluster
+    preconditions:
+      - test -d {{.TALOS_DIR}}/clusterconfig
+
+  _apply-machineconfig:
+    internal: true
+    desc: Apply a single Talos machineConfig to a Talos node
+    cmds:
+      - talosctl apply-config -e 10.10.20.101
+        {{ if eq "true" .insecure }} --insecure {{ end }}
+        --nodes "{{.hostname}}"
+        --file "{{.TALOS_DIR}}/clusterconfig/{{.filename}}"
+        --talosconfig "{{.TALOS_DIR}}/clusterconfig/talosconfig"
+        {{ if eq "true" .dry_run }}--dry-run{{ end }}
+    requires:
+      vars:
+        - cluster
+        - hostname
+        - filename
+        - insecure
+    preconditions:
+      - test -f {{.TALOS_DIR}}/clusterconfig/{{.filename}}
+
+  _wait_for_health:
+    internal: true
+    desc: Wait for services in cluster to be healthy
+    cmds:
+      # Ensure CloudNative-PG cluster has 3 ready instances
+      - kubectl -n database wait --for jsonpath='{.status.readyInstances}'='3' --timeout {{ .TIMEOUT | default "30s" }} cluster postgres-16
