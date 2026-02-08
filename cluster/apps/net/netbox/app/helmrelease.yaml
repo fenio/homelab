@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: netbox
-      version: 5.0.0-beta.131
+      version: 7.4.5
       sourceRef:
         kind: HelmRepository
         name: netbox
@@ -18,6 +18,8 @@ spec:
     - name: ingress-nginx
       namespace: net
     - name: cloudnative-pg
+      namespace: db
+    - name: dragonfly
       namespace: db
   interval: 30m
   timeout: 15m
@@ -33,7 +35,7 @@ spec:
       password: "${NETBOX_ADMIN_PASSWORD}"
       apiToken: "${NETBOX_API_TOKEN}"
 
-    extraInitContainers:
+    initContainers:
       - name: init-db
         image: ghcr.io/home-operations/postgres-init:18.1
         env:
@@ -70,13 +72,21 @@ spec:
       username: *dbUser
       password: *dbPass
 
-    # -- Disable bundled Valkey, use Dragonfly in db namespace
+    # -- Disable bundled Valkey, use Dragonfly
     valkey:
       enabled: false
-    externalRedis:
-      host: dragonfly.db.svc.cluster.local
-      port: 6379
-      password: "${DRAGONFLY_PASSWORD}"
+
+    tasksDatabase:
+      host: &redisHost "dragonfly.db.svc.cluster.local"
+      port: &redisPort 6379
+      password: &redisPass "${DRAGONFLY_PASSWORD}"
+      database: 0
+
+    cachingDatabase:
+      host: *redisHost
+      port: *redisPort
+      password: *redisPass
+      database: 1
 
     # -- Service
     service:
@@ -86,7 +96,7 @@ spec:
     # -- Ingress
     ingress:
       enabled: true
-      ingressClassName: private
+      className: "private"
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
       hosts:
@@ -94,7 +104,9 @@ spec:
           paths:
             - path: /
               pathType: Prefix
-      tls: [hosts: [*host]]
+      tls:
+        - hosts:
+            - *host
 
     # -- Persistence for media files
     persistence:
@@ -104,37 +116,25 @@ spec:
       size: 1Gi
 
     # -- Resources
-    resourcesPreset: "none"
     resources:
       requests:
         cpu: 250m
         memory: 512Mi
       limits:
-        cpu: 1000m
         memory: 1Gi
 
     # -- Background worker
     worker:
       enabled: true
       replicaCount: 1
-      resourcesPreset: "none"
       resources:
         requests:
           cpu: 100m
           memory: 256Mi
         limits:
-          cpu: 500m
           memory: 512Mi
 
     # -- Housekeeping CronJob
     housekeeping:
       enabled: true
       schedule: "0 3 * * *"
-      resourcesPreset: "none"
-      resources:
-        requests:
-          cpu: 100m
-          memory: 128Mi
-        limits:
-          cpu: 250m
-          memory: 256Mi
