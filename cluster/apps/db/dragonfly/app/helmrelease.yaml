@@ -31,7 +31,7 @@ spec:
         memory: 512Mi
 
     extraArgs:
-      - --requirepass=${DRAGONFLY_PASSWORD}
+      - "--requirepass=${DRAGONFLY_PASSWORD}"
 
     service:
       type: ClusterIP
