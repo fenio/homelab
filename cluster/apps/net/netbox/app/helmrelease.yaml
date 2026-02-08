@@ -115,7 +115,10 @@ spec:
       accessMode: ReadWriteOnce
       size: 1Gi
 
-    # -- Probes (Wyse 5070 is slow, needs longer timeouts)
+    # -- Probes
+    # Chart's default liveness probe checks port 8081 (nginx-status) but
+    # NetBox v4.5+ uses granian, not NGINX Unit - port 8081 doesn't exist.
+    # Override liveness to use the same /login/ endpoint on port 8080.
     startupProbe:
       enabled: true
       initialDelaySeconds: 10
@@ -123,15 +126,20 @@ spec:
       timeoutSeconds: 5
       failureThreshold: 60
     livenessProbe:
-      enabled: true
-      periodSeconds: 10
+      enabled: false
+    customLivenessProbe:
+      httpGet:
+        path: /login/
+        port: http
+      initialDelaySeconds: 0
+      periodSeconds: 30
       timeoutSeconds: 5
-      failureThreshold: 5
+      failureThreshold: 3
     readinessProbe:
       enabled: true
       periodSeconds: 10
       timeoutSeconds: 5
-      failureThreshold: 5
+      failureThreshold: 3
 
     # -- Resources
     resources:
