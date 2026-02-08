@@ -26,14 +26,14 @@ spec:
     resources:
       requests:
         cpu: 100m
-        memory: 256Mi
-      limits:
         memory: 512Mi
+      limits:
+        memory: 768Mi
 
     extraArgs:
       - "--requirepass=${DRAGONFLY_PASSWORD}"
       - "--proactor_threads=2"
-      - "--maxmemory=384mb"
+      - "--maxmemory=512mb"
 
     service:
       type: ClusterIP
