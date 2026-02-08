@@ -1,0 +1,152 @@
+---
+# yaml-language-server: $schema=https://datreeio.github.io/CRDs-catalog/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: netbox
+  namespace: net
+spec:
+  chart:
+    spec:
+      chart: netbox
+      version: 5.0.0-beta.131
+      sourceRef:
+        kind: HelmRepository
+        name: netbox
+        namespace: flux-system
+  dependsOn:
+    - name: ingress-nginx
+      namespace: net
+    - name: cloudnative-pg
+      namespace: db
+  interval: 30m
+  timeout: 15m
+  values:
+    image:
+      pullPolicy: IfNotPresent
+
+    replicaCount: 1
+
+    superuser:
+      name: admin
+      email: admin@${SECRET_DOMAIN}
+      password: "${NETBOX_ADMIN_PASSWORD}"
+      apiToken: "${NETBOX_API_TOKEN}"
+
+    extraInitContainers:
+      - name: init-db
+        image: ghcr.io/home-operations/postgres-init:18.1
+        env:
+          - name: INIT_POSTGRES_HOST
+            value: &dbHost "postgres-rw.db.svc.cluster.local"
+          - name: INIT_POSTGRES_SUPER_PASS
+            value: "${SECRET_PG_PASSWORD}"
+          - name: INIT_POSTGRES_USER
+            value: &dbUser "netbox"
+          - name: INIT_POSTGRES_PASS
+            value: &dbPass "${NETBOX_PG_PASSWORD}"
+          - name: INIT_POSTGRES_DBNAME
+            value: &dbName "netbox"
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          capabilities: {drop: ["ALL"]}
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+            ephemeral-storage: 100Mi
+          limits:
+            memory: 500Mi
+            ephemeral-storage: 200Mi
+
+    # -- External PostgreSQL (CNPG)
+    postgresql:
+      enabled: false
+    externalDatabase:
+      host: *dbHost
+      port: 5432
+      database: *dbName
+      username: *dbUser
+      password: *dbPass
+
+    # -- Bundled Valkey (Redis)
+    valkey:
+      enabled: true
+      auth:
+        enabled: true
+        password: "${NETBOX_VALKEY_PASSWORD}"
+      master:
+        resourcesPreset: "none"
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            memory: 128Mi
+        persistence:
+          enabled: true
+          size: 1Gi
+      replica:
+        replicaCount: 0
+
+    # -- Service
+    service:
+      type: ClusterIP
+      port: 80
+
+    # -- Ingress
+    ingress:
+      enabled: true
+      ingressClassName: private
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+      hosts:
+        - host: &host "n.${SECRET_DOMAIN}"
+          paths:
+            - path: /
+              pathType: Prefix
+      tls: [hosts: [*host]]
+
+    # -- Persistence for media files
+    persistence:
+      enabled: true
+      storageClass: ""
+      accessMode: ReadWriteOnce
+      size: 1Gi
+
+    # -- Resources
+    resourcesPreset: "none"
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+
+    # -- Background worker
+    worker:
+      enabled: true
+      replicaCount: 1
+      resourcesPreset: "none"
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi
+
+    # -- Housekeeping CronJob
+    housekeeping:
+      enabled: true
+      schedule: "0 3 * * *"
+      resourcesPreset: "none"
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 250m
+          memory: 256Mi

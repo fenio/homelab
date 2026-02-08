@@ -1,0 +1,20 @@
+---
+# yaml-language-server: $schema=https://datreeio.github.io/CRDs-catalog/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: netbox
+  namespace: flux-system
+spec:
+  path: ./cluster/apps/net/netbox/app
+  sourceRef:
+    kind: GitRepository
+    name: homelab
+  prune: true
+  wait: true
+  interval: 5m
+  retryInterval: 1m
+  timeout: 5m
+  dependsOn:
+    - name: cloudnative-pg-cluster
+    - name: ingress-nginx
