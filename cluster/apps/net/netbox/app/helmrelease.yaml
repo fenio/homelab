@@ -102,10 +102,10 @@ spec:
       hosts:
         - host: &host "n.${SECRET_DOMAIN}"
           paths:
-            - path: /
-              pathType: Prefix
+            - /
       tls:
-        - hosts:
+        - secretName: netbox-tls
+          hosts:
             - *host
 
     # -- Persistence for media files
