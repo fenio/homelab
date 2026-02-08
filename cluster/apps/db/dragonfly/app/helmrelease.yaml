@@ -32,6 +32,8 @@ spec:
 
     extraArgs:
       - "--requirepass=${DRAGONFLY_PASSWORD}"
+      - "--proactor_threads=2"
+      - "--maxmemory=384mb"
 
     service:
       type: ClusterIP
