@@ -70,25 +70,13 @@ spec:
       username: *dbUser
       password: *dbPass
 
-    # -- Bundled Valkey (Redis)
+    # -- Disable bundled Valkey, use Dragonfly in db namespace
     valkey:
-      enabled: true
-      auth:
-        enabled: true
-        password: "${NETBOX_VALKEY_PASSWORD}"
-      master:
-        resourcesPreset: "none"
-        resources:
-          requests:
-            cpu: 50m
-            memory: 64Mi
-          limits:
-            memory: 128Mi
-        persistence:
-          enabled: true
-          size: 1Gi
-      replica:
-        replicaCount: 0
+      enabled: false
+    externalRedis:
+      host: dragonfly.db.svc.cluster.local
+      port: 6379
+      password: "${DRAGONFLY_PASSWORD}"
 
     # -- Service
     service:

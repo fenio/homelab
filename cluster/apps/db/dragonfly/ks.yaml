@@ -3,10 +3,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: netbox
+  name: dragonfly
   namespace: flux-system
 spec:
-  path: ./cluster/apps/net/netbox/app
+  path: ./cluster/apps/db/dragonfly/app
   sourceRef:
     kind: GitRepository
     name: homelab
@@ -15,7 +15,3 @@ spec:
   interval: 5m
   retryInterval: 1m
   timeout: 5m
-  dependsOn:
-    - name: cloudnative-pg-cluster
-    - name: dragonfly
-    - name: ingress-nginx
