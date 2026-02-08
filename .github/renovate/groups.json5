@@ -4,18 +4,18 @@
     {
       description: "Flux group",
       groupName: "Flux",
-      matchPackagePatterns: ["flux"],
+      matchPackageNames: ["/flux/"],
       matchDatasources: ["docker", "github-tags"],
       versioning: "semver",
       group: {commitMessageTopic: "{{{groupName}}}"},
       separateMinorPatch: true,
     },
     {
-      description: "External-Sapshotter group",
+      description: "External Snapshotter group",
       groupName: "External Snapshotter",
-      matchPackagePatterns: [
-        "snapshot-controller",
-        "snapshot-validation-webhook",
+      matchPackageNames: [
+        "/snapshot-controller/",
+        "/snapshot-validation-webhook/",
       ],
       group: {commitMessageTopic: "{{{groupName}}}"},
       separateMinorPatch: true,
@@ -61,16 +61,6 @@
         "ghcr.io/open-webui/open-webui",
         "ghcr.io/ollama/ollama",
         "ghcr.io/searxng/searxng",
-      ],
-      group: {commitMessageTopic: "{{{groupName}}}"},
-      separateMinorPatch: true,
-    },
-    {
-      description: "Storage and CSI group",
-      groupName: "Storage and CSI",
-      matchPackageNames: [
-        "snapshot-controller",
-        "snapshot-validation-webhook",
       ],
       group: {commitMessageTopic: "{{{groupName}}}"},
       separateMinorPatch: true,

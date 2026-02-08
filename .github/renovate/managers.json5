@@ -8,27 +8,11 @@
   kubernetes: {
     fileMatch: ["cluster/.+\\.ya?ml$"],
   },
-  dockerfile: {
-    fileMatch: ["Dockerfile", "dockerfile", "Dockerfile\\..*"],
-  },
-  docker: {
-    fileMatch: [
-      "cluster/.+\\.ya?ml$",
-      "docker-compose\\.ya?ml$",
-      "compose\\.ya?ml$",
-    ],
-  },
   helm: {
     fileMatch: ["cluster/.+\\.ya?ml$"],
   },
   "github-actions": {
     fileMatch: ["\\.github/workflows/.+\\.ya?ml$"],
-  },
-  npm: {
-    fileMatch: ["package\\.json$", "package-lock\\.json$"],
-  },
-  pip: {
-    fileMatch: ["requirements\\.txt$", "pyproject\\.toml$", "setup\\.py$"],
   },
   regex: {
     fileMatch: ["cluster/.+\\.ya?ml$"],
