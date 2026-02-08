@@ -115,6 +115,24 @@ spec:
       accessMode: ReadWriteOnce
       size: 1Gi
 
+    # -- Probes (Wyse 5070 is slow, needs longer timeouts)
+    startupProbe:
+      enabled: true
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 60
+    livenessProbe:
+      enabled: true
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
+    readinessProbe:
+      enabled: true
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
+
     # -- Resources
     resources:
       requests:
