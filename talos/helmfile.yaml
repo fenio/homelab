@@ -18,7 +18,7 @@ releases:
         value: "1.34"
     namespace: o11y
     chart: prometheus-community/prometheus-operator-crds
-    version: 26.0.1
+    version: 27.0.0
 
   - name: cilium
     namespace: net
