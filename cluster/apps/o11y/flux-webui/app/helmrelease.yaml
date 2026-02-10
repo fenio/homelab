@@ -30,7 +30,7 @@ spec:
       - --insecure-no-authentication-user=admin
     image:
       pullPolicy: Always
-      tag: v0.39.0-rc.2
+      tag: v0.39.1-rc.1
     fullnameOverride: flux-webui
     adminUser:
       create: true
