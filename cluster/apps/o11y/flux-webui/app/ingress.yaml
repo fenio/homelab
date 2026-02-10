@@ -24,4 +24,4 @@ spec:
               service:
                 name: flux-operator
                 port:
-                  number: 8080
+                  number: 9080
