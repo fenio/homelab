@@ -37,7 +37,7 @@ spec:
 
     initContainers:
       - name: init-db
-        image: ghcr.io/home-operations/postgres-init:18.1
+        image: ghcr.io/home-operations/postgres-init:18.2
         env:
           - name: INIT_POSTGRES_HOST
             value: &dbHost "postgres-rw.db.svc.cluster.local"
