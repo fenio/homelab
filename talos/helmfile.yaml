@@ -24,7 +24,7 @@ releases:
     namespace: net
     createNamespace: false
     chart: cilium/cilium
-    version: 1.19.0
+    version: 1.19.1
     values:
       - cilium.yaml
     needs: ["o11y/prometheus-operator-crds"]
