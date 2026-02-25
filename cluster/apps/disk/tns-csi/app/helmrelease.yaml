@@ -32,19 +32,19 @@ spec:
       logLevel: 2
 
     storageClasses:
-      nfs:
+      - name: tns-csi-nfs
         enabled: true
-        name: tns-csi-nfs
+        protocol: nfs
         pool: "storage"
         server: "10.10.20.100"
-      iscsi:
+      - name: tns-csi-iscsi
         enabled: true
-        name: tns-csi-iscsi
+        protocol: iscsi
         pool: "storage"
         server: "10.10.20.100"
-      nvmeof:
+      - name: tns-csi-nvmeof
         enabled: true
-        name: tns-csi-nvmeof
+        protocol: nvmeof
         isDefault: true
         pool: "storage"
         server: "10.10.20.100"
