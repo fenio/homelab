@@ -11,7 +11,7 @@ spec:
   chart:
     spec:
       chart: tns-csi-driver
-      version: "0.12.3"
+      version: "0.16.0"
       sourceRef:
         kind: HelmRepository
         name: tns-csi
@@ -24,12 +24,24 @@ spec:
 
     image:
       repository: bfenski/tns-csi
-      tag: "v0.15.0"
+      tag: "v0.16.0"
       pullPolicy: IfNotPresent
 
     controller:
       replicas: 1
       logLevel: 2
+      dashboard:
+        enabled: true
+        ingress:
+          enabled: true
+          className: private
+          annotations:
+            cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hosts:
+            - "tns.${SECRET_DOMAIN}"
+          tls:
+            - hosts:
+                - "tns.${SECRET_DOMAIN}"
 
     storageClasses:
       - name: tns-csi-nfs
