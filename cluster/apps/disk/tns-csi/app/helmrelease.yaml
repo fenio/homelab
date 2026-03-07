@@ -37,6 +37,7 @@ spec:
           className: private
           annotations:
             cert-manager.io/cluster-issuer: "letsencrypt-production"
+            nginx.ingress.kubernetes.io/app-root: /dashboard
           hosts:
             - host: "tns.${SECRET_DOMAIN}"
               paths:
