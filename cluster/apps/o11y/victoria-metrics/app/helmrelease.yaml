@@ -106,6 +106,8 @@ spec:
         extraArgs:
           maxLabelsPerTimeseries: "150"
           maxLabelValueLen: "8192"
+          search.maxConcurrentRequests: "32"
+          search.maxQueueDuration: "30s"
         image:
           pullPolicy: Always
         resources:
