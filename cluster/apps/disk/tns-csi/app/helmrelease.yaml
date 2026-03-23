@@ -24,7 +24,7 @@ spec:
 
     image:
       repository: bfenski/tns-csi
-      tag: "v0.17.3"
+      tag: "v0.17.4"
       pullPolicy: IfNotPresent
 
     controller:
