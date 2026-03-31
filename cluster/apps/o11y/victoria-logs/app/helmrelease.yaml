@@ -37,7 +37,7 @@ spec:
           memory: 100Mi
           ephemeral-storage: 100Mi
         limits:
-          memory: 1Gi
+          memory: 1.2Gi
           ephemeral-storage: 200Mi
       ingress:
         enabled: true
@@ -64,5 +64,5 @@ spec:
           memory: 100Mi
           ephemeral-storage: 100Mi
         limits:
-          memory: 4Gi
+          memory: 4.2Gi
           ephemeral-storage: 300Mi

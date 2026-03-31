@@ -87,7 +87,7 @@ spec:
           memory: 100Mi
           ephemeral-storage: 100Mi
         limits:
-          memory: 100Mi
+          memory: 150Mi
           ephemeral-storage: 500Mi
     prometheus-node-exporter:
       fullnameOverride: node-exporter
