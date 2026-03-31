@@ -108,7 +108,7 @@ resources:
     memory: 400Mi
     ephemeral-storage: 100Mi
   limits:
-    memory: 600Mi
+    memory: 700Mi
     ephemeral-storage: 200Mi
 cgroup:
   autoMount:
