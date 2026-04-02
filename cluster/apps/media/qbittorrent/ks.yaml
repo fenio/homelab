@@ -18,5 +18,5 @@ spec:
   wait: false
   interval: 10m
   dependsOn:
-    - name: tns-csi
+    - name: nasty-csi
     - name: ingress-nginx

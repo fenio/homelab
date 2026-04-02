@@ -51,10 +51,10 @@ spec:
     externalPrometheus:
       url: http://vmsingle-vm.o11y.svc.cluster.local:8428
     storage:
-      className: tns-csi-nvmeof
+      className: nasty-nvmeof
     clickhouse:
       storage:
-        className: tns-csi-nvmeof
+        className: nasty-nvmeof
       resources:
         requests:
           cpu: 400m

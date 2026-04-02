@@ -16,7 +16,7 @@ spec:
         namespace: flux-system
   kubeConfig:
     secretRef:
-      name: truenas-cluster
+      name: nasty-cluster
   targetNamespace: default
   storageNamespace: default
   values:

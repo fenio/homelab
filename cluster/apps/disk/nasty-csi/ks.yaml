@@ -3,10 +3,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: tns-csi
+  name: nasty-csi
   namespace: flux-system
 spec:
-  path: ./cluster/apps/disk/tns-csi/app
+  path: ./cluster/apps/disk/nasty-csi/app
   sourceRef:
     kind: GitRepository
     name: homelab

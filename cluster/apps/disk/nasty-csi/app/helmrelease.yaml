@@ -3,29 +3,28 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: tns-csi
+  name: nasty-csi
   namespace: disk
 spec:
   interval: 5m
   timeout: 15m
   chart:
     spec:
-      chart: tns-csi-driver
-      version: "0.17.3"
+      chart: ./
       sourceRef:
-        kind: HelmRepository
-        name: tns-csi
+        kind: GitRepository
+        name: nasty-chart
         namespace: flux-system
   values:
-    truenas:
-      url: "wss://${CONFIG_TRUENAS_IP}:1443/api/current"
-      apiKey: ${TRUENAS_API_KEY}
+    nasty:
+      url: "wss://${CONFIG_NASTY_IP}/ws"
+      apiKey: ${NASTY_API_KEY}
       skipTLSVerify: true
 
     image:
-      repository: bfenski/tns-csi
-      tag: "v0.17.4"
-      pullPolicy: IfNotPresent
+      repository: ghcr.io/nasty-project/nasty-csi
+      tag: "latest"
+      pullPolicy: Always
 
     controller:
       replicas: 1
@@ -39,32 +38,35 @@ spec:
             cert-manager.io/cluster-issuer: "letsencrypt-production"
             nginx.ingress.kubernetes.io/app-root: /dashboard
           hosts:
-            - host: "tns.${SECRET_DOMAIN}"
+            - host: "nasty.${SECRET_DOMAIN}"
               paths:
                 - path: /
                   pathType: Prefix
           tls:
             - hosts:
-                - "tns.${SECRET_DOMAIN}"
-              secretName: tns-csi-dashboard-tls
+                - "nasty.${SECRET_DOMAIN}"
+              secretName: nasty-csi-dashboard-tls
 
     storageClasses:
-      - name: tns-csi-nfs
+      - name: nasty-nfs
         enabled: true
         protocol: nfs
-        pool: "storage"
-        server: "10.10.20.100"
-      - name: tns-csi-iscsi
+        filesystem: "first"
+        server: "${CONFIG_NASTY_IP}"
+      - name: nasty-iscsi
         enabled: true
         protocol: iscsi
-        pool: "storage"
-        server: "10.10.20.100"
-      - name: tns-csi-nvmeof
+        filesystem: "first"
+        server: "${CONFIG_NASTY_IP}"
+      - name: nasty-nvmeof
         enabled: true
         protocol: nvmeof
         isDefault: true
-        pool: "storage"
-        server: "10.10.20.100"
+        filesystem: "first"
+        server: "${CONFIG_NASTY_IP}"
+
+    snapshots:
+      enabled: true
 
     rbac:
       create: true

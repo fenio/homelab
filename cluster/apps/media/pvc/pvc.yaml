@@ -4,17 +4,17 @@ kind: PersistentVolume
 metadata:
   name: pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
   annotations:
-    tns-csi.io/dataset: storage/pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
+    nasty-csi.io/dataset: storage/pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
   labels:
-    app.kubernetes.io/managed-by: kubectl-tns-csi
-    tns-csi.io/adopted: "true"
+    app.kubernetes.io/managed-by: kubectl-nasty-csi
+    nasty-csi.io/adopted: "true"
 spec:
   capacity:
     storage: 1000Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: tns-csi-nfs
+  storageClassName: nasty-nfs
   mountOptions:
     - nconnect=8
     - hard
@@ -39,15 +39,15 @@ metadata:
   name: media
   namespace: media
   annotations:
-    tns-csi.io/dataset: storage/pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
+    nasty-csi.io/dataset: storage/pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
   labels:
-    app.kubernetes.io/managed-by: kubectl-tns-csi
-    tns-csi.io/adopted: "true"
+    app.kubernetes.io/managed-by: kubectl-nasty-csi
+    nasty-csi.io/adopted: "true"
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 1000Gi
-  storageClassName: tns-csi-nfs
+  storageClassName: nasty-nfs
   volumeName: pvc-fc1abc3a-dd41-4bfb-9f36-77763af19292
