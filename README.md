@@ -245,7 +245,7 @@ All kustomizations should eventually show `Ready: True`. The dependency chain en
 If you have [task](https://taskfile.dev/) installed, steps 1-4 can be run with a single command from the repo root:
 
 ```sh
-task bootstrap
+task cluster:bootstrap
 ```
 
 This runs: download-iso -> template-sync -> kubeconfig -> helmfile-apply
