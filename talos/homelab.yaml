@@ -1,9 +1,9 @@
 kind: Cluster
 name: homelab
 kubernetes:
-  version: v1.35.2
+  version: v1.35.3
 talos:
-  version: v1.12.4
+  version: v1.12.6
 patches:
   - idOverride: 200-homelab
     annotations:
@@ -34,7 +34,6 @@ patches:
     inline:
       machine:
         network:
-          hostname: node1
           interfaces:
             - addresses:
                 - 10.10.20.101/28
@@ -43,8 +42,11 @@ patches:
                 - gateway: 10.10.20.97
                   network: 0.0.0.0/0
           nameservers:
-            - 1.1.1.1
-            - 8.8.8.8
+            - 10.10.10.200
+  - idOverride: hostname-101
+    annotations:
+      name: ""
+    file: talos/patches/hostname-node1.yaml
 ---
 kind: Machine
 name: 03000200-4000-5000-0060-007000800100
@@ -55,7 +57,6 @@ patches:
     inline:
       machine:
         network:
-          hostname: node2
           interfaces:
             - addresses:
                 - 10.10.20.102/28
@@ -64,8 +65,11 @@ patches:
                 - gateway: 10.10.20.97
                   network: 0.0.0.0/0
           nameservers:
-            - 1.1.1.1
-            - 8.8.8.8
+            - 10.10.10.200
+  - idOverride: hostname-102
+    annotations:
+      name: ""
+    file: talos/patches/hostname-node2.yaml
 ---
 kind: Machine
 name: 5c006b9c-b4bb-0000-0000-000000000000
@@ -76,7 +80,6 @@ patches:
     inline:
       machine:
         network:
-          hostname: node3
           interfaces:
             - addresses:
                 - 10.10.20.103/28
@@ -85,5 +88,8 @@ patches:
                 - gateway: 10.10.20.97
                   network: 0.0.0.0/0
           nameservers:
-            - 1.1.1.1
-            - 8.8.8.8
+            - 10.10.10.200
+  - idOverride: hostname-103
+    annotations:
+      name: ""
+    file: talos/patches/hostname-node3.yaml
