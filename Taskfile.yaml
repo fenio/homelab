@@ -27,8 +27,10 @@ tasks:
     silent: true
     cmds: ["task -l"]
 
+  # --- Cluster creation ---
+
   bootstrap:
-    desc: "Run the full cluster provisioning"
+    desc: "Run the full cluster provisioning (download-iso -> template-sync -> kubeconfig -> helmfile-apply)"
     cmds:
       - task: download-iso
       - task: template-sync
@@ -56,6 +58,8 @@ tasks:
     desc: "Apply helmfile (cilium, flux-operator, flux-instance)"
     cmds:
       - helmfile --quiet --file {{.TALOS_DIR}}/helmfile.yaml apply --skip-diff-on-install --suppress-diff
+
+  # --- Workstation setup ---
 
   deps:
     desc: Initialize workstation dependencies with Brew

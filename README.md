@@ -15,7 +15,7 @@ This is home to my personal Kubernetes lab cluster running on [Talos Linux](http
 | Device                        | Count | OS Disk Size | Data Disk Size | Ram  | Operating System | Purpose           |
 | ----------------------------- | ----- | ------------ | -------------- | ---- | ---------------- | ----------------- |
 | Mikrotik RB4011iGS+5HacQ2HnD | 1     | 512MB        |                | 1GB  | RouterOS 7.13    | Router            |
-| Dell Wyse 5070                | 3     | 16GB         | 128GB          | 12GB | Talos v1.12.2    | Control plane     |
+| Dell Wyse 5070                | 3     | 16GB         | 128GB          | 12GB | Talos v1.12.6    | Control plane     |
 | Odroid H3+                    | 1     | 64GB         | 8x480GB SSD    | 32GB | TrueNAS Scale    | NAS / storage     |
 
 </details>
@@ -23,9 +23,9 @@ This is home to my personal Kubernetes lab cluster running on [Talos Linux](http
 <details>
 <summary><h2 style="display: inline-block; margin: 0;">Cluster architecture</h2></summary>
 
-- **OS**: Talos Linux v1.12.2 (managed via Sidero Omni)
-- **Kubernetes**: v1.35.0
-- **CNI**: Cilium v1.19.0 (kube-proxy replacement, Wireguard encryption, BGP control plane)
+- **OS**: Talos Linux v1.12.6 (managed via Sidero Omni)
+- **Kubernetes**: v1.35.3
+- **CNI**: Cilium v1.19.2 (kube-proxy replacement, Wireguard encryption, BGP control plane)
 - **GitOps**: Flux v2.7.3 (installed via flux-operator)
 - **Secrets**: SOPS with AGE encryption
 - **Storage**: tns-csi (NFS, iSCSI, NVMe-oF) backed by TrueNAS
@@ -114,12 +114,15 @@ This is home to my personal Kubernetes lab cluster running on [Talos Linux](http
 
 ### Prerequisites
 
+A running [Sidero Omni](https://omni.siderolabs.com/) instance is required. Omni manages the Talos lifecycle and provides the Kubernetes API proxy.
+
 Install the following tools on your workstation:
 
 - [omnictl](https://omni.siderolabs.com/docs/reference/cli/) - Sidero Omni CLI
 - [helmfile](https://github.com/helmfile/helmfile) - declarative Helm chart management
 - [helm](https://helm.sh/) - Kubernetes package manager
 - [kubectl](https://kubernetes.io/docs/tasks/tools/) - Kubernetes CLI
+- [cilium](https://docs.cilium.io/en/stable/gettingstarted/k8s-install-default/#install-the-cilium-cli) - Cilium CLI (for status checks)
 - [sops](https://github.com/getsops/sops) - secrets encryption
 - [age](https://github.com/FiloSottile/age) - encryption tool used by SOPS
 - [task](https://taskfile.dev/) - task runner (optional, for automation)
@@ -151,7 +154,7 @@ The cluster is defined in [`talos/homelab.yaml`](./talos/homelab.yaml). This tem
 omnictl cluster template sync -f talos/homelab.yaml
 ```
 
-Wait for all nodes to join and become ready in Omni.
+Wait for all nodes to join Omni. Nodes will remain `NotReady` until Cilium is installed in step 4.
 
 ### Step 3: Get kubeconfig
 
@@ -159,17 +162,15 @@ Wait for all nodes to join and become ready in Omni.
 omnictl kubeconfig -c homelab
 ```
 
-Verify the nodes are ready:
+Verify the nodes are visible (they will be `NotReady` without CNI):
 
 ```sh
 kubectl get nodes
 NAME    STATUS     ROLES           AGE   VERSION
-node1   NotReady   control-plane   1m    v1.35.0
-node2   NotReady   control-plane   1m    v1.35.0
-node3   NotReady   control-plane   1m    v1.35.0
+node1   NotReady   control-plane   1m    v1.35.3
+node2   NotReady   control-plane   1m    v1.35.3
+node3   NotReady   control-plane   1m    v1.35.3
 ```
-
-Nodes will be `NotReady` until Cilium is installed.
 
 ### Step 4: Install base components with helmfile
 
@@ -189,9 +190,9 @@ This will take a few minutes. After completion, nodes should become `Ready`:
 ```sh
 kubectl get nodes
 NAME    STATUS   ROLES           AGE   VERSION
-node1   Ready    control-plane   5m    v1.35.0
-node2   Ready    control-plane   5m    v1.35.0
-node3   Ready    control-plane   5m    v1.35.0
+node1   Ready    control-plane   5m    v1.35.3
+node2   Ready    control-plane   5m    v1.35.3
+node3   Ready    control-plane   5m    v1.35.3
 ```
 
 Verify Cilium is healthy:
