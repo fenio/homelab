@@ -53,6 +53,8 @@ spec:
         protocol: nfs
         filesystem: "first"
         server: "${CONFIG_NASTY_IP}"
+        markAdoptable: "true"
+        adoptExisting: "true"
       - name: nasty-iscsi
         enabled: true
         protocol: iscsi
