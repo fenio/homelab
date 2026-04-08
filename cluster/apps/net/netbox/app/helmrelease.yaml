@@ -151,6 +151,20 @@ spec:
     worker:
       enabled: true
       replicaCount: 1
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - netbox
+                  - key: app.kubernetes.io/component
+                    operator: NotIn
+                    values:
+                      - worker
+              topologyKey: kubernetes.io/hostname
       resources:
         requests:
           cpu: 100m
