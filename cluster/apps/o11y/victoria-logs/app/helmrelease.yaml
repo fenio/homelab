@@ -29,6 +29,13 @@ spec:
   values:
     fullnameOverride: vl
     server:
+      initContainers:
+        - name: remove-stale-lock
+          image: busybox:latest
+          command: ["sh", "-c", "rm -f /storage/flock.lock"]
+          volumeMounts:
+            - name: server-volume
+              mountPath: /storage
       podSecurityContext:
         fsGroupChangePolicy: OnRootMismatch
       resources:

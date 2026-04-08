@@ -103,6 +103,13 @@ spec:
           ephemeral-storage: 500Mi
     vmsingle:
       spec:
+        initContainers:
+          - name: remove-stale-lock
+            image: busybox:latest
+            command: ["sh", "-c", "rm -f /victoria-metrics-data/flock.lock"]
+            volumeMounts:
+              - name: data
+                mountPath: /victoria-metrics-data
         extraArgs:
           maxLabelsPerTimeseries: "150"
           maxLabelValueLen: "8192"
