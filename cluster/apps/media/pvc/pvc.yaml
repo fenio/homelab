@@ -5,6 +5,7 @@ metadata:
   name: media
   namespace: media
   annotations:
+    nasty-csi.io/adoptable: "true"
     kustomize.toolkit.fluxcd.io/ssa: IfNotPresent
 spec:
   accessModes:
