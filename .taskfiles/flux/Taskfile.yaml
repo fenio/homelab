@@ -6,8 +6,6 @@ tasks:
   bootstrap:
     desc: Bootstrap Flux into the cluster
     cmds:
-      # Install SOPS age key
-      - kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=$SOPS_AGE_KEY_FILE --dry-run=client -o yaml | kubectl apply -f -
       # Install secrets and configmaps
       - sops --decrypt {{.ROOT_DIR}}/cluster/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f -
       - kubectl apply --server-side --filename {{.ROOT_DIR}}/cluster/flux/vars/cluster-settings.yaml
