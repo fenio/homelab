@@ -49,10 +49,14 @@ spec:
           - hosts:
               - chat.${SECRET_DOMAIN}
     persistence:
-#      config:
-#        enabled: true
-#        type: nfs
-#        server: 192.168.1.2
-#        path: /volume1/network-storage/ollama/data
-#        globalMounts:
-#          - path: /data
+      data:
+        enabled: true
+        type: persistentVolumeClaim
+        size: 5Gi
+        storageClass: nasty-iscsi
+        accessMode: ReadWriteOnce
+        retain: true
+        advancedMounts:
+          ollama-ui:
+            app:
+              - path: /app/backend/data
