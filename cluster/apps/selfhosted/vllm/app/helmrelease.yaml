@@ -84,7 +84,7 @@ spec:
         enabled: true
         type: persistentVolumeClaim
         size: 50Gi
-        storageClass: iscsi
+        storageClass: nasty-iscsi
         accessMode: ReadWriteOnce
         retain: true
         advancedMounts:
