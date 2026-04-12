@@ -30,8 +30,8 @@ spec:
         containers:
           main:
             image:
-              repository: docker.io/vllm/vllm-openai
-              tag: latest-rocm
+              repository: docker.io/vllm/vllm-openai-rocm
+              tag: v0.17.0
             args:
               - --model
               - unsloth/gemma-4-26B-A4B-it-GGUF
