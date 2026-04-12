@@ -4,8 +4,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./namespace.yaml
-  - ./vllm/ks.yaml
-#  - ./ollama/ks.yaml
-#  - ./open-webui/ks.yaml
+  - ./ollama/ks.yaml
+  - ./open-webui/ks.yaml
+#  - ./vllm/ks.yaml
 #  - ./perplexica/ks.yaml
 #  - ./searxng/ks.yaml

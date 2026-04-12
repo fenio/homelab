@@ -7,14 +7,10 @@ metadata:
   namespace: selfhosted
 spec:
   interval: 30m
-  chart:
-    spec:
-      chart: app-template
-      version: 3.7.3
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
   maxHistory: 2
   install:
     remediation:
@@ -28,7 +24,7 @@ spec:
   values:
     defaultPodOptions:
       nodeSelector:
-        kubernetes.io/hostname: "powernode"
+        kubernetes.io/hostname: "node3"
     controllers:
       main:
         type: deployment
@@ -50,10 +46,10 @@ spec:
               requests:
                 cpu: 200m
                 memory: 4Gi
-                # gpu.intel.com/i915: "1"
+                amd.com/gpu: "1"
               limits:
-                memory: 8Gi
-                # gpu.intel.com/i915: "1"
+                memory: 32Gi
+                amd.com/gpu: "1"
     service:
       main:
         controller: main
@@ -65,7 +61,7 @@ spec:
         enabled: true
         type: persistentVolumeClaim
         size: 50Gi
-        storageClass: iscsi
+        storageClass: nasty-iscsi
         accessMode: ReadWriteOnce
         retain: true
         advancedMounts:
