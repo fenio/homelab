@@ -1,0 +1,97 @@
+---
+# yaml-language-server: $schema=https://datreeio.github.io/CRDs-catalog/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app vllm
+  namespace: selfhosted
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    defaultPodOptions:
+      nodeSelector:
+        kubernetes.io/hostname: "powernode"
+    controllers:
+      main:
+        type: deployment
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: docker.io/vllm/vllm-openai
+              tag: latest-rocm
+            args:
+              - --model
+              - unsloth/gemma-4-26B-A4B-it-GGUF
+              - --tokenizer
+              - google/gemma-4-26b-a4b-it
+              - --dtype
+              - half
+              - --max-model-len
+              - "8192"
+              - --gpu-memory-utilization
+              - "0.90"
+              - --download-dir
+              - /models
+            env:
+              HF_TOKEN: ${HUGGINGFACE}
+              HSA_OVERRIDE_GFX_VERSION: "11.0.0"
+              VLLM_USE_TRITON_FLASH_ATTN: "0"
+            resources:
+              requests:
+                cpu: 500m
+                memory: 16Gi
+                amd.com/gpu: "1"
+              limits:
+                memory: 32Gi
+                amd.com/gpu: "1"
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: &port 8000
+    ingress:
+      main:
+        className: private
+        hosts:
+          - host: vllm.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: *port
+        tls:
+          - hosts:
+              - vllm.${SECRET_DOMAIN}
+    persistence:
+      models:
+        enabled: true
+        type: persistentVolumeClaim
+        size: 50Gi
+        storageClass: iscsi
+        accessMode: ReadWriteOnce
+        retain: true
+        advancedMounts:
+          main:
+            main:
+              - path: /models
