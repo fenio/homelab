@@ -34,11 +34,9 @@ spec:
               tag: v0.19.0
             args:
               - --model
-              - Qwen/Qwen3-Coder-30B-A3B-Instruct
-              - --quantization
-              - fp8
+              - cyankiwi/Qwen3-Coder-30B-A3B-Instruct-AWQ-4bit
               - --max-model-len
-              - "8192"
+              - "32768"
               - --gpu-memory-utilization
               - "0.90"
               - --download-dir
