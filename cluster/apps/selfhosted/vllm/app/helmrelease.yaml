@@ -22,9 +22,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    defaultPodOptions:
-      nodeSelector:
-        kubernetes.io/hostname: "powernode"
     controllers:
       main:
         type: deployment
