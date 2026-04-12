@@ -31,14 +31,12 @@ spec:
           main:
             image:
               repository: docker.io/vllm/vllm-openai-rocm
-              tag: nightly
+              tag: v0.19.0
             args:
               - --model
-              - unsloth/gemma-4-26B-A4B-it-GGUF
-              - --tokenizer
-              - google/gemma-4-26b-a4b-it
-              - --dtype
-              - half
+              - Qwen/Qwen3-Coder-30B-A3B-Instruct
+              - --quantization
+              - fp8
               - --max-model-len
               - "8192"
               - --gpu-memory-utilization
@@ -48,7 +46,6 @@ spec:
             env:
               HF_TOKEN: ${HUGGINGFACE}
               HSA_OVERRIDE_GFX_VERSION: "11.0.0"
-              VLLM_USE_TRITON_FLASH_ATTN: "0"
             resources:
               requests:
                 cpu: 500m
