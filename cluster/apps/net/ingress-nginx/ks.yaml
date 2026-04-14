@@ -17,6 +17,7 @@ spec:
   timeout: 5m
   dependsOn:
     - name: cilium
+    - name: cert-manager-certificate
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -35,3 +36,4 @@ spec:
   timeout: 5m
   dependsOn:
     - name: cilium
+    - name: cert-manager-certificate
