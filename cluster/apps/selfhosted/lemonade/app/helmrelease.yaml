@@ -88,11 +88,11 @@ spec:
       models:
         enabled: true
         type: persistentVolumeClaim
-        size: 50Gi
-        storageClass: nasty-iscsi
+        size: 300Gi
+        storageClass: nasty-nvmeof
         accessMode: ReadWriteOnce
         retain: true
         advancedMounts:
           main:
             main:
-              - path: /root/.cache/huggingface
+              - path: /root/.cache
