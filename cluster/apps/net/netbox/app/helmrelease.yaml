@@ -111,6 +111,7 @@ spec:
     # -- Persistence for media files
     persistence:
       enabled: true
+      storageClass: nasty-nfs
       size: 1Gi
 
     # -- Probes

@@ -103,6 +103,8 @@ spec:
           ephemeral-storage: 500Mi
     vmsingle:
       spec:
+        storage:
+          storageClassName: nasty-nfs
         initContainers:
           - name: remove-stale-lock
             image: busybox:latest
