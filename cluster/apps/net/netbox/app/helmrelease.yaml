@@ -112,7 +112,7 @@ spec:
     persistence:
       enabled: true
       storageClass: nasty-nfs
-      size: 1Gi
+      size: 5Gi
 
     # -- Probes
     # Chart's default liveness probe checks port 8081 (nginx-status) but

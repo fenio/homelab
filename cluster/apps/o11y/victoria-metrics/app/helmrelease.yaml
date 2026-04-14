@@ -105,6 +105,9 @@ spec:
       spec:
         storage:
           storageClassName: nasty-nfs
+          resources:
+            requests:
+              storage: 100Gi
         initContainers:
           - name: remove-stale-lock
             image: busybox:latest

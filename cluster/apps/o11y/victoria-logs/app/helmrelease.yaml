@@ -63,7 +63,7 @@ spec:
         tls: [hosts: [*host]]
       persistentVolume:
         storageClassName: nasty-nfs
-        size: 100Gi
+        size: 200Gi
     vector:
       enabled: true
       resources:
