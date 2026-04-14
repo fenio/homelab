@@ -22,9 +22,8 @@
     schedule: ["at any time"],
   },
   
-  // Dependency dashboard for better overview
-  dependencyDashboard: true,
-  dependencyDashboardTitle: "🤖 Renovate Dependency Dashboard",
+  // Dependency dashboard disabled - not used
+  dependencyDashboard: false,
   
   // Better PR settings
   prHourlyLimit: 2,
