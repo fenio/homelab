@@ -89,7 +89,7 @@ spec:
         enabled: true
         type: persistentVolumeClaim
         size: 300Gi
-        storageClass: nasty-nvmeof
+        storageClass: nasty-nfs
         accessMode: ReadWriteOnce
         retain: true
         advancedMounts:
