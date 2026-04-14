@@ -5,8 +5,5 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./lemonade/ks.yaml
-#  - ./ollama/ks.yaml
-#  - ./open-webui/ks.yaml
-#  - ./vllm/ks.yaml
 #  - ./perplexica/ks.yaml
 #  - ./searxng/ks.yaml
