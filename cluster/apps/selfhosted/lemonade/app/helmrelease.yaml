@@ -75,7 +75,7 @@ spec:
       main:
         className: private
         hosts:
-          - host: chat.${SECRET_DOMAIN}
+          - host: ai.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
