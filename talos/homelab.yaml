@@ -1,7 +1,7 @@
 kind: Cluster
 name: homelab
 kubernetes:
-  version: v1.35.3
+  version: v1.35.4
 talos:
   version: v1.12.6
 patches:
