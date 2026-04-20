@@ -63,6 +63,14 @@ spec:
         server: "${CONFIG_NASTY_IP}"
         parameters:
           commentTemplate: "{{ .PVCNamespace }}/{{ .PVCName }}"
+      - name: media-nfs
+        enabled: true
+        protocol: nfs
+        filesystem: "first"
+        server: "${CONFIG_NASTY_IP}"
+        dataReplicas: "1"
+        parameters:
+          commentTemplate: "{{ .PVCNamespace }}/{{ .PVCName }}"
       - name: nasty-nvmeof
         enabled: true
         protocol: nvmeof
