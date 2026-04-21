@@ -69,6 +69,7 @@ spec:
         filesystem: "first"
         server: "${CONFIG_NASTY_IP}"
         dataReplicas: "1"
+        adoptExisting: "true"
         parameters:
           commentTemplate: "{{ .PVCNamespace }}/{{ .PVCName }}"
       - name: nasty-nvmeof
