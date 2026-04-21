@@ -30,6 +30,10 @@ spec:
   values:
     victoria-metrics-operator:
       nameOverride: operator
+      crds:
+        cleanup:
+          image:
+            repository: bitnami/kubectl
       env:
         - name: VM_VMSINGLEDEFAULT_CONFIGRELOADERCPU
           value: 100m
