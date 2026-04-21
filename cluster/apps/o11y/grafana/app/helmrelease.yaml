@@ -214,15 +214,6 @@ spec:
             allowUiUpdates: true
             options:
               path: /var/lib/grafana/dashboards/system
-          - name: "victoria-metrics"
-            orgId: 1
-            folder: "VictoriaMetrics"
-            type: file
-            disableDeletion: false
-            editable: true
-            allowUiUpdates: true
-            options:
-              path: /var/lib/grafana/dashboards/vm
     dashboards:
       flux:
         flux-control-plane:
@@ -233,36 +224,6 @@ spec:
           revision: 1
           datasource: Prometheus
       kubernetes:
-        api-server:
-          # renovate: depName="Kubernetes / System / API Server"
-          gnetId: 15761
-          revision: 20
-          datasource: Prometheus
-        coredns:
-          # renovate: depName="Kubernetes / System / CoreDNS"
-          gnetId: 15762
-          revision: 22
-          datasource: Prometheus
-        global:
-          # renovate: depName="Kubernetes / Views / Global"
-          gnetId: 15757
-          revision: 43
-          datasource: Prometheus
-        namespaces:
-          # renovate: depName="Kubernetes / Views / Namespaces"
-          gnetId: 15758
-          revision: 44
-          datasource: Prometheus
-        nodes:
-          # renovate: depName="Kubernetes / Views / Nodes"
-          gnetId: 15759
-          revision: 40
-          datasource: Prometheus
-        pods:
-          # renovate: depName="Kubernetes / Views / Pods"
-          gnetId: 15760
-          revision: 37
-          datasource: Prometheus
         volumes:
           # renovate: depName="K8s / Storage / Volumes / Cluster"
           gnetId: 11454
@@ -311,18 +272,4 @@ spec:
           # renovate: depName="Node Exporter"
           gnetId: 11074
           revision: 9
-          datasource: Prometheus
-          # renovate: depName="Node Exporter Full"
-        node-exporter-full:
-          gnetId: 1860
-          revision: 31
-          datasource: Prometheus
-      victoria-metrics:
-        single:
-          gnetId: 10229
-          revision: 31
-          datasource: Prometheus
-        vmagent:
-          gnetId: 12683
-          revision: 14
           datasource: Prometheus

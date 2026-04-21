@@ -9,6 +9,7 @@ metadata:
     gethomepage.dev/group: Infrastructure
     gethomepage.dev/name: Flux
     gethomepage.dev/icon: git.svg
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=flux-operator
 spec:
   ingressClassName: private
   tls:

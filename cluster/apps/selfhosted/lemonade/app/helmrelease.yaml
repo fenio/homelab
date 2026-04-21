@@ -35,6 +35,7 @@ spec:
             image:
               repository: ghcr.io/lemonade-sdk/lemonade-server
               tag: v10.2.0
+            command: ["/opt/lemonade/lemond"]
             env:
               TZ: ${TIMEZONE}
               HSA_OVERRIDE_GFX_VERSION: "11.0.0"

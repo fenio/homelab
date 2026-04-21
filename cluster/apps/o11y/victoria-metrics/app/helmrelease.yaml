@@ -60,6 +60,20 @@ spec:
     fullnameOverride: vm
     grafana:
       enabled: false
+    kubeApiServer:
+      vmScrape:
+        spec:
+          endpoints:
+            - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+              port: https
+              scheme: https
+              tlsConfig:
+                caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+                serverName: kubernetes
+              metricRelabelConfigs:
+                - action: drop
+                  source_labels: [__name__, resource]
+                  regex: "apiserver_request_sli_duration_seconds_bucket;((?!pods|nodes|services|configmaps|secrets|deployments|statefulsets|daemonsets|namespaces|jobs|ingresses|persistentvolumeclaims|endpoints|replicasets).)*$"
     coreDns:
       spec:
         jobLabel: "jobLabel"
@@ -93,6 +107,9 @@ spec:
       fullnameOverride: node-exporter
       image:
         pullPolicy: Always
+      extraArgs:
+        - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)
+        - --collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|erofs|sysfs|tracefs)$
       resources:
         requests:
           cpu: 10m
