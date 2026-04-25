@@ -19,6 +19,16 @@ tasks:
       - test -f {{.ROOT_DIR}}/cluster/flux/vars/cluster-secrets.sops.yaml
       - test -f {{.ROOT_DIR}}/cluster/flux/vars/cluster-settings.yaml
 
+  reconcile-source:
+    desc: flux reconcile source git homelab
+    cmds:
+      - flux reconcile source git homelab
+
+  reconcile-ks:
+    desc: flux reconcile kustomization homelab
+    cmds:
+      - flux reconcile kustomization homelab
+
   ks-suspend:
     desc: Suspend all Flux Kustomizations
     cmds:
