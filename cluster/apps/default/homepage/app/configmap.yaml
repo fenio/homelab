@@ -42,6 +42,16 @@ data:
               url: http://10.10.10.1:680
               username: admin
               password: ${MIKROTIK_PASSWORD}
+        - Omada:
+            href: https://10.10.10.200:8043
+            icon: tp-link.png
+            description: Network Controller
+            widget:
+              type: omada
+              url: https://10.10.10.200:8043
+              username: fenio
+              password: ${OMADA_PASSWORD}
+              site: Home
         - Synology:
             href: http://10.10.10.100
             icon: synology.png
