@@ -76,9 +76,13 @@ spec:
                 caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
                 serverName: kubernetes
               metricRelabelConfigs:
-                - action: drop
-                  source_labels: [__name__, resource]
-                  regex: "apiserver_request_sli_duration_seconds_bucket;((?!pods|nodes|services|configmaps|secrets|deployments|statefulsets|daemonsets|namespaces|jobs|ingresses|persistentvolumeclaims|endpoints|replicasets).)*$"
+                - source_labels: [__name__, resource]
+                  regex: "apiserver_request_sli_duration_seconds_bucket;(pods|nodes|services|configmaps|secrets|deployments|statefulsets|daemonsets|namespaces|jobs|ingresses|persistentvolumeclaims|endpoints|replicasets)"
+                  target_label: __tmp_keep_sli
+                  replacement: "true"
+                - source_labels: [__name__, __tmp_keep_sli]
+                  regex: "apiserver_request_sli_duration_seconds_bucket;"
+                  action: drop
     coreDns:
       spec:
         jobLabel: "jobLabel"
