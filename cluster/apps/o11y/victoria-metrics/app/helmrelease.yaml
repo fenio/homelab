@@ -168,7 +168,8 @@ spec:
     vmalert:
       spec:
         replicaCount: 1
-        externalURL: "https://vmalert.${SECRET_DOMAIN}"
+        extraArgs:
+          external.url: "https://vmalert.${SECRET_DOMAIN}"
         image:
           pullPolicy: Always
         resources:
