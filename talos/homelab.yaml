@@ -1,9 +1,9 @@
 kind: Cluster
 name: homelab
 kubernetes:
-  version: v1.35.4
+  version: v1.36.0
 talos:
-  version: v1.12.7
+  version: v1.13.0
 patches:
   - idOverride: 200-homelab
     annotations:
