@@ -7,6 +7,7 @@ vars:
   CLUSTER_NAME: homelab
   TALOS_ISO_PATH: /tmp/talos.iso
   CLUSTER_TEMPLATE_PATH: "{{.ROOT_DIR}}/talos/homelab.yaml"
+  MEDIA_PRESET: homelab-iso
 
 tasks:
   bootstrap:
@@ -17,12 +18,26 @@ tasks:
       - task: kubeconfig
       - task: helmfile-apply
 
-  download-iso:
-    desc: "Download Talos ISO with specific extensions and kernel args"
+  media-preset:
+    desc: "Create (or refresh) the Omni installation media preset for the homelab ISO"
     cmds:
-      - omnictl download iso --arch amd64 --secureboot --extensions amdgpu,amd-ucode,i915,intel-ice-firmware,intel-ucode,iscsi-tools,realtek-firmware --extra-kernel-args -lockdown,lockdown=integrity,mitigations=off --output {{.TALOS_ISO_PATH}}
-    status:
-      - test -f {{.TALOS_ISO_PATH}}
+      - omnictl media preset delete {{.MEDIA_PRESET}} 2>/dev/null || true
+      - >-
+        omnictl media preset create {{.MEDIA_PRESET}}
+        --arch amd64
+        --secureboot
+        --extensions amdgpu,amd-ucode,i915,intel-ice-firmware,intel-ucode,iscsi-tools,realtek-firmware
+        --extra-kernel-args=-lockdown
+        --extra-kernel-args=lockdown=integrity
+        --extra-kernel-args=mitigations=off
+
+  download-iso:
+    desc: "Download Talos ISO from the homelab media preset"
+    deps:
+      - media-preset
+    cmds:
+      - rm -f {{.TALOS_ISO_PATH}}
+      - omnictl media download {{.MEDIA_PRESET}} --output {{.TALOS_ISO_PATH}}
 
   template-sync:
     desc: "Sync the cluster template to Omni"
