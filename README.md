@@ -15,7 +15,7 @@ This is home to my personal Kubernetes lab cluster running on [Talos Linux](http
 | Device                        | Count | OS Disk Size | Data Disk Size | Ram  | Operating System | Purpose           |
 | ----------------------------- | ----- | ------------ | -------------- | ---- | ---------------- | ----------------- |
 | Mikrotik RB4011iGS+5HacQ2HnD | 1     | 512MB        |                | 1GB  | RouterOS 7.13    | Router            |
-| Dell Wyse 5070                | 3     | 16GB         | 128GB          | 12GB | Talos v1.12.6    | Control plane     |
+| Dell Wyse 5070                | 3     | 16GB         | 128GB          | 12GB | Talos v1.13.3    | Control plane     |
 | Odroid H3+                    | 1     | 64GB         | 8x480GB SSD    | 32GB | TrueNAS Scale    | NAS / storage     |
 
 </details>
@@ -23,8 +23,8 @@ This is home to my personal Kubernetes lab cluster running on [Talos Linux](http
 <details>
 <summary><h2 style="display: inline-block; margin: 0;">Cluster architecture</h2></summary>
 
-- **OS**: Talos Linux v1.12.6 (managed via Sidero Omni)
-- **Kubernetes**: v1.35.3
+- **OS**: Talos Linux v1.13.3 (managed via Sidero Omni)
+- **Kubernetes**: v1.36.1
 - **CNI**: Cilium v1.19.2 (kube-proxy replacement, Wireguard encryption, BGP control plane)
 - **GitOps**: Flux v2.7.3 (installed via flux-operator)
 - **Secrets**: SOPS with AGE encryption
@@ -129,16 +129,21 @@ Install the following tools on your workstation:
 
 ### Step 1: Prepare Talos ISO
 
-Download a custom Talos ISO with required extensions:
+Create an installation media preset in Omni with the required extensions and kernel args, then download an ISO from it:
 
 ```sh
-omnictl download iso \
+omnictl media preset create homelab-iso \
   --arch amd64 \
   --secureboot \
   --extensions amdgpu,amd-ucode,i915,intel-ice-firmware,intel-ucode,iscsi-tools,realtek-firmware \
-  --extra-kernel-args -lockdown,lockdown=integrity,mitigations=off \
-  --output /tmp/talos.iso
+  --extra-kernel-args=-lockdown \
+  --extra-kernel-args=lockdown=integrity \
+  --extra-kernel-args=mitigations=off
+
+omnictl media download homelab-iso --output /tmp/talos.iso
 ```
+
+The three `--extra-kernel-args` flags are intentional — each kernel arg must be passed as a separate flag (the flag is a `stringArray`, not a comma-split list). The leading `-` on `-lockdown` removes Talos's default `lockdown=confidentiality` before adding `lockdown=integrity`.
 
 Boot all three nodes from this ISO. They will register with Omni automatically.
 
@@ -167,9 +172,9 @@ Verify the nodes are visible (they will be `NotReady` without CNI):
 ```sh
 kubectl get nodes
 NAME    STATUS     ROLES           AGE   VERSION
-node1   NotReady   control-plane   1m    v1.35.3
-node2   NotReady   control-plane   1m    v1.35.3
-node3   NotReady   control-plane   1m    v1.35.3
+node1   NotReady   control-plane   1m    v1.36.1
+node2   NotReady   control-plane   1m    v1.36.1
+node3   NotReady   control-plane   1m    v1.36.1
 ```
 
 ### Step 4: Install base components with helmfile
@@ -190,9 +195,9 @@ This will take a few minutes. After completion, nodes should become `Ready`:
 ```sh
 kubectl get nodes
 NAME    STATUS   ROLES           AGE   VERSION
-node1   Ready    control-plane   5m    v1.35.3
-node2   Ready    control-plane   5m    v1.35.3
-node3   Ready    control-plane   5m    v1.35.3
+node1   Ready    control-plane   5m    v1.36.1
+node2   Ready    control-plane   5m    v1.36.1
+node3   Ready    control-plane   5m    v1.36.1
 ```
 
 Verify Cilium is healthy:
