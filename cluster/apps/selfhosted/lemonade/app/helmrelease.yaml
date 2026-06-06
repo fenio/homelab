@@ -30,6 +30,17 @@ spec:
         type: deployment
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          seed-config:
+            image:
+              repository: busybox
+              tag: "1.37"
+            command:
+              - sh
+              - -c
+              - |
+                mkdir -p /root/.cache/lemonade
+                cp /seed/config.json /root/.cache/lemonade/config.json
         containers:
           main:
             image:
@@ -97,13 +108,13 @@ spec:
           main:
             main:
               - path: /root/.cache
+            seed-config:
+              - path: /root/.cache
       config:
         enabled: true
         type: configMap
         name: lemonade-config
         advancedMounts:
           main:
-            main:
-              - subPath: config.json
-                path: /root/.cache/lemonade/config.json
-                readOnly: true
+            seed-config:
+              - path: /seed
