@@ -97,3 +97,13 @@ spec:
           main:
             main:
               - path: /root/.cache
+      config:
+        enabled: true
+        type: configMap
+        name: lemonade-config
+        advancedMounts:
+          main:
+            main:
+              - subPath: config.json
+                path: /root/.cache/lemonade/config.json
+                readOnly: true

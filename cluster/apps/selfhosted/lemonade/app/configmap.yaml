@@ -1,0 +1,15 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/configmap.json
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lemonade-config
+  namespace: selfhosted
+data:
+  config.json: |
+    {
+      "rocm_channel": "nightly",
+      "llamacpp": {
+        "rocm_bin": "b1289"
+      }
+    }
