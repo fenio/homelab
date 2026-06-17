@@ -55,10 +55,10 @@ spec:
       resources:
         requests:
           cpu: 20m
-          memory: 100Mi
+          memory: 150Mi
           ephemeral-storage: 100Mi
         limits:
-          memory: 150Mi
+          memory: 256Mi
           ephemeral-storage: 500Mi
       operator:
         disable_prometheus_converter: false
