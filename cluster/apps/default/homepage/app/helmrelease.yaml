@@ -17,6 +17,10 @@ spec:
         annotations:
           configmap.reloader.stakater.com/reload: &configmap homepage
         strategy: RollingUpdate
+        pod:
+          # app-template v5 defaults this to false; homepage cluster-mode widgets
+          # need the SA token mounted to read nodes/ingresses in-cluster
+          automountServiceAccountToken: true
         containers:
           main:
             image:
