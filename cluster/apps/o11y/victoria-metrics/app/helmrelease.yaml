@@ -30,6 +30,12 @@ spec:
   values:
     victoria-metrics-operator:
       nameOverride: operator
+      # Pull the operator from quay.io instead of the chart default (docker.io).
+      # Fresh anonymous pulls of new tags from registry-1.docker.io intermittently
+      # time out / hit rate limits here, which failed the 0.84.0 helm upgrade
+      # (operator v0.72.0 image) and rolled it back. quay.io mirrors the same image.
+      image:
+        registry: quay.io
       crds:
         cleanup:
           image:
