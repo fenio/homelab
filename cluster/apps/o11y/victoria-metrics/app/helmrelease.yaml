@@ -11,7 +11,7 @@ spec:
   chart:
     spec:
       chart: victoria-metrics-k8s-stack
-      version: 0.83.0
+      version: 0.84.0
       sourceRef:
         kind: HelmRepository
         name: victoriametrics
@@ -55,10 +55,10 @@ spec:
       resources:
         requests:
           cpu: 20m
-          memory: 150Mi
+          memory: 100Mi
           ephemeral-storage: 100Mi
         limits:
-          memory: 256Mi
+          memory: 150Mi
           ephemeral-storage: 500Mi
       operator:
         disable_prometheus_converter: false
