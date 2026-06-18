@@ -87,5 +87,15 @@
       ],
       prConcurrentLimit: 1,
     },
+    {
+      // Observability stack (o11y namespace) updates at any time instead of
+      // waiting for the Mon/Wed/Fri-before-6am window. Bugfix/security releases
+      // here (e.g. the vm-operator metrics deadlock) should land fast, not sit
+      // for up to ~2 days. Scoped by path so it covers every chart under o11y
+      // regardless of datasource/package-name quirks.
+      description: "Observability charts: update at any time",
+      matchFileNames: ["cluster/apps/o11y/**"],
+      schedule: ["at any time"],
+    },
   ],
 }
