@@ -74,6 +74,17 @@ spec:
     coreDns:
       spec:
         jobLabel: "jobLabel"
+    # We don't scrape kube-controller-manager / kube-scheduler (enabled: false
+    # below), so the matching default alert/recording rule groups can only ever
+    # fire false KubeControllerManagerDown / KubeSchedulerDown alerts. Disable them.
+    defaultRules:
+      groups:
+        kubernetesSystemControllerManager:
+          enabled: false   # KubeControllerManagerDown
+        kubernetesSystemScheduler:
+          enabled: false   # KubeSchedulerDown
+        kubeScheduler:
+          enabled: false   # kube-scheduler recording rules
     kubeControllerManager:
       enabled: false
     kubeEtcd:
