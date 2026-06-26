@@ -23,11 +23,14 @@ spec:
     keepHistory: false
   values:
     defaultPodOptions:
+      # Run as root so the explicitly-granted NET_RAW / NET_BIND_SERVICE caps
+      # are effective (k8s can't grant ambient caps to a non-root uid). The
+      # container still drops every other capability below. Discovery needs
+      # raw sockets for ICMP/TCP scans and to bind the SNMP trap listener.
       securityContext:
-        runAsUser: 10001
-        runAsGroup: 10001
-        fsGroup: 10001
-        fsGroupChangePolicy: OnRootMismatch
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
     controllers:
       main:
         type: deployment
@@ -38,6 +41,14 @@ spec:
             image:
               repository: ghcr.io/kobii-git/rackpad
               tag: 1.6.5
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                add:
+                  - NET_RAW          # raw sockets for ICMP / TCP discovery scans
+                  - NET_BIND_SERVICE # bind the SNMP trap listener on a low port
+                drop:
+                  - ALL
             env:
               TZ: ${TIMEZONE}
               PORT: &port 3000
