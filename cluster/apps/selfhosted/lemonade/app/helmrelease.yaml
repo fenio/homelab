@@ -45,7 +45,7 @@ spec:
           main:
             image:
               repository: ghcr.io/lemonade-sdk/lemonade-server
-              tag: v10.8.0
+              tag: v10.8.1
             command: ["/opt/lemonade/lemond", "--host", "0.0.0.0"]
             env:
               TZ: ${TIMEZONE}
