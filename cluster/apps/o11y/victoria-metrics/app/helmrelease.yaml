@@ -78,6 +78,15 @@ spec:
     # below), so the matching default alert/recording rule groups can only ever
     # fire false KubeControllerManagerDown / KubeSchedulerDown alerts. Disable them.
     defaultRules:
+      # RecordingRulesNoData fires whenever a recording rule produces 0 samples
+      # for 30min. The upstream kube-prometheus rule count:up0
+      # (count(up == 0) ...) legitimately yields no samples whenever every scrape
+      # target is healthy, so this severity=info alert is non-actionable noise on
+      # the happy path. Disable the single meta-alert; the other vmalert health
+      # alerts (RecordingRulesError, RemoteWriteErrors, ...) stay enabled.
+      rules:
+        RecordingRulesNoData:
+          enabled: false
       groups:
         kubernetesSystemControllerManager:
           enabled: false   # KubeControllerManagerDown
