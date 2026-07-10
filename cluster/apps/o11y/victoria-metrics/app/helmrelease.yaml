@@ -274,6 +274,20 @@ spec:
                 chat_id: ${TELEGRAM_CHATID}
                 send_resolved: true
                 api_url: https://api.telegram.org
+                # Alertmanager (HTML parse mode) replaces messages over Telegram's
+                # 4096-char limit with an error notice instead of truncating, so
+                # the message template must stay bounded: max 8 alerts listed,
+                # one summary line each.
+                message: |-
+                  {{ if eq .Status "firing" }}🔥 <b>{{ .Alerts.Firing | len }} firing</b>{{ else }}✅ <b>resolved</b>{{ end }}: {{ .GroupLabels.alertname }}
+                  {{- range $i, $a := .Alerts }}
+                  {{- if lt $i 8 }}
+                  • {{ if $a.Annotations.summary }}{{ $a.Annotations.summary }}{{ else }}{{ printf "%.150s" $a.Annotations.description }}{{ end }}
+                  {{- end }}
+                  {{- end }}
+                  {{- if gt (len .Alerts) 8 }}
+                  … {{ len .Alerts }} alerts total, list truncated
+                  {{- end }}
       ingress:
         ingressClassName: private
         enabled: true
