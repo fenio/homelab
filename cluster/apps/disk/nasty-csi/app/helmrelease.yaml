@@ -1,4 +1,18 @@
 ---
+# yaml-language-server: $schema=https://datreeio.github.io/CRDs-catalog/source.toolkit.fluxcd.io/ocirepository_v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: nasty-csi-driver
+spec:
+  interval: 10m
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
+  ref:
+    tag: 0.0.9
+  url: oci://ghcr.io/nasty-project/charts/nasty-csi-driver
+---
 # yaml-language-server: $schema=https://datreeio.github.io/CRDs-catalog/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -8,13 +22,9 @@ metadata:
 spec:
   interval: 5m
   timeout: 15m
-  chart:
-    spec:
-      chart: ./
-      sourceRef:
-        kind: GitRepository
-        name: nasty-chart
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: nasty-csi-driver
   values:
     nasty:
       url: "wss://${CONFIG_NASTY_IP}/ws"
@@ -23,8 +33,6 @@ spec:
 
     image:
       repository: ghcr.io/nasty-project/nasty-csi
-      tag: "latest"
-      pullPolicy: Always
 
     controller:
       replicas: 1
