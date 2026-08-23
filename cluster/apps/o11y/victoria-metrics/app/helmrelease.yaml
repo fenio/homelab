@@ -64,7 +64,7 @@ spec:
           memory: 100Mi
           ephemeral-storage: 100Mi
         limits:
-          memory: 150Mi
+          memory: 200Mi
           ephemeral-storage: 500Mi
       operator:
         disable_prometheus_converter: false
@@ -162,7 +162,7 @@ spec:
             memory: 1.5G
             ephemeral-storage: 100Mi
           limits:
-            memory: 3.5G
+            memory: 4G
             ephemeral-storage: 500Mi
       ingress:
         ingressClassName: private
