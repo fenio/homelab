@@ -25,7 +25,7 @@ spec:
           main:
             image:
               repository: ghcr.io/gethomepage/homepage
-              tag: v2.0.0
+              tag: v2.1.2
               pullPolicy: Always
             env:
               TZ: Europe/Warsaw
