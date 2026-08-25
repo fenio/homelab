@@ -40,7 +40,7 @@ spec:
           main:
             image:
               repository: ghcr.io/kobii-git/rackpad
-              tag: 1.7.3
+              tag: 1.8.0
             securityContext:
               allowPrivilegeEscalation: false
               capabilities:
