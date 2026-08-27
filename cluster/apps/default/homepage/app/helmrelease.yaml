@@ -38,7 +38,7 @@ spec:
                 memory: 100Mi
                 ephemeral-storage: 100Mi
               limits:
-                memory: 200Mi
+                memory: 250Mi
                 ephemeral-storage: 200Mi
             securityContext:
               allowPrivilegeEscalation: false
