@@ -91,6 +91,8 @@ spec:
     ingress:
       main:
         className: private
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "330"
         hosts:
           - host: &host ab.${SECRET_DOMAIN}
             paths:
