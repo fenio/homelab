@@ -3,7 +3,7 @@ name: homelab
 kubernetes:
   version: v1.37.0
 talos:
-  version: v1.14.0
+  version: v1.14.1
 patches:
   - idOverride: 200-homelab
     annotations:
