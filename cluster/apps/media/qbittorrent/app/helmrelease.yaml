@@ -170,7 +170,7 @@ spec:
           qbittorrent:
             image:
               repository: ghcr.io/home-operations/qbittorrent
-              tag: 5.2.3
+              tag: 5.2.4
             env:
               TZ: ${CONFIG_TIMEZONE}
             probes:
