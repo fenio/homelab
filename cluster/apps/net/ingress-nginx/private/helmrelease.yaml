@@ -102,7 +102,7 @@ spec:
       enabled: true
       image:
         repository: ghcr.io/tarampampam/error-pages
-        tag: 4.2.5
+        tag: 4.2.6
         pullPolicy: Always
       replicaCount: 1
       resources:
