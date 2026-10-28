@@ -33,6 +33,8 @@ spec:
 
     image:
       repository: ghcr.io/nasty-project/nasty-csi
+      # Temporary: test nasty-csi main (476b340) before the next release.
+      tag: "latest@sha256:b29c78c41772e6b9595534711611514bf66d342d8859e67f4b519f9947a0f5e5"
 
     controller:
       replicas: 1
